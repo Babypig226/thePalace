@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href=@{/static/assets/css/main.css} />
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+        function sample4_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data
+                            .buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("roadAddress").value = roadAddr;
+                    document.getElementById("jibunAddress").value = data.jibunAddress;
+                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                    if (roadAddr !== '') {
+                        document.getElementById("extraAddress").value = extraRoadAddr;
+                    } else {
+                        document.getElementById("extraAddress").value = '';
+                    }
+                    var guideTextBox = document.getElementById("guide");
+                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                    if (data.autoRoadAddress) {
+                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else if (data.autoJibunAddress) {
+                        var expJibunAddr = data.autoJibunAddress;
+                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else {
+                        guideTextBox.innerHTML = '';
+                        guideTextBox.style.display = 'none';
+                    }
+                }
+            }).open();
+        }
+    </script>
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header.html"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav.html"></nav>
+
+    <!-- Registration Form -->
+    <section id="one" class="wrapper style2">
+        <div class="inner">
+            <div class="box">
+                <div class="image fit">
+                    <img th:src=@{static/images/topbanner7.jpg} alt="" />
+                </div>
+                <div class="content">
+                    <h2 class="align-center">이력서작성</h2>
+                    <hr />
+                    <form action="#" method="get">
+                        <!-- 인적사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>인적사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4" width="5%">
+                                        <label>증명사진</label>
+                                        <img th:src=@{/static/images/resumesample.png} width="220px" height="250px">
+                                        <input type="file" name="appPht">
+                                    </td>
+                                    <td width="10%" valign="top">
+                                        <label for="userName">이름</label>
+                                        <input name="userName" id="name" type="text" placeholder="Name">
+                                    </td>
+                                    <td width="13%" valign="top">
+                                        <label for="userGender">성별</label>
+                                        <input type="radio" id="demo-priority-low" name="demo-priority" checked>
+                                        <label for="demo-priority-low">남</label>
+                                        <input type="radio" id="demo-priority-normal" name="demo-priority">
+                                        <label for="demo-priority-normal">여</label>
+                                    </td>
+                                    <td width="8%" valign="top">
+                                        <label for="userBirth">생년월일</label>
+                                        <input name="userBirth" id="birth" type="date" value="1999-01-01">
+                                    </td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td colspan="5">
+                                        <ul class="actions align-left" style="margin-bottom:1mm">
+                                            <li><label for="userPh1">연락처</label>
+                                                <input name="userPh1" id="contact" type="text"
+                                                    placeholder="010-0000-0000"></li>
+                                            <li><label for="userEmail">Email</label>
+                                                <input name="userEmail" id="birth" type="email" placeholder="Email">
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <label for="userAddr">주소</label>
+                                        <ul class="actions align-left" style="margin-bottom:1mm">
+                                            <li><input type="text" id="postcode" placeholder="우편번호" maxlength="20">
+                                            </li>
+                                            <li><input type="button" class="button" onclick="sample4_execDaumPostcode()"
+                                                    value="우편번호 찾기"></li>
+                                            <li> <input type="text" id="roadAddress" placeholder="도로명주소"></li>
+                                        </ul>
+                                    </td>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <input type="text" id="jibunAddress" placeholder="지번주소">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="detailAddress" placeholder="상세주소">
+                                    </td>
+                                    <td colspan="2">
+                                        <input type="text" id="extraAddress" placeholder="참고항목">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 학력사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>학력사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label>학교구분</label>
+                                        <select>
+                                            <option>고등학교</option>
+                                            <option>대학교(2,3년)</option>
+                                            <option>대학교(4년)</option>
+                                            <option>대학원</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label>학교명</label>
+                                        <input type="text" id="school" placeholder="학교명">
+                                    </td>
+                                    <td>
+                                        <label>입학연월</label>
+                                        <input type="text" id="entrance" data-format-type="month"
+                                            placeholder="2012.03">
+                                    </td>
+                                    <td>
+                                        <label>졸업연월</label>
+                                        <input type="text" id="graduate" data-format-type="month" placeholder="2011.02">
+                                    </td>
+                                    <td align = "right">
+                                        <label>학력추가</label>
+                                        <a class="button">+</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 인턴&대외활동 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>인턴&middot;대외활동</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>활동구분</label>
+                                        <select>
+                                            <option>인턴</option>
+                                            <option>아르바이트</option>
+                                            <option>동아리</option>
+                                            <option>사회활동</option>
+                                            <option>교내활동</option>
+                                            <option>자원봉사</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label>회사/기관/단체명</label>
+
+                                        <input type="text" id="school" placeholder="회사/기관/단체명">
+                                    </td>
+                                    <td>
+                                        <label>시작년월</label>
+                                        <input type="text" id="entrance" data-format-type="month" placeholder="2012.03">
+                                    </td>
+                                    <td>
+                                        <label>종료년월</label>
+                                        <input type="text" id="graduate" data-format-type="month" placeholder="2011.02">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td colspan="4">
+                                        <textarea placeholder="활동내용"></textarea>
+                                    </td>
+                                    <td align = "right">
+                                        <label>활동추가</label>
+                                        <a class="button">+</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+<!-- 경력사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>경력사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>회사명</label>
+                                        <input type = "text" id = "company" placeholder="회사명">
+                                    </td>
+                                    <td>
+                                        <label>부서명</label>
+                                        <input type="text" id="department" placeholder="부서명">
+                                    </td>
+                                    <td>
+                                        <label>입사년월</label>
+                                        <input type="text" id="startdate" data-format-type="month" placeholder="2012.03">
+                                    </td>
+                                    <td>
+                                        <label>퇴사년월</label>
+                                        <input type="text" id="retireddate" data-format-type="month" placeholder="2011.02">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>직급&middot;직책</label>
+                                        <input type = "text" id = "position" placeholder="직급">
+                                    </td>
+                                    <td>
+                                        <label>직무</label>
+                                        <input type="text" id="keyword" placeholder="부서명">
+                                    </td>
+                                    <td></td><td></td><td></td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td colspan="4">
+                                        <textarea placeholder="담당업무"></textarea>
+                                    </td>
+                                    <td align = "right">
+                                        <label>경력추가</label>
+                                        <a class="button">+</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        <!--어학증명-->
+                        <table>
+                            <thead>
+                                <th><h3>어학증명</h3></th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>외국어명</label>
+                                        <input type="text" id="language" placeholder="영어">
+                                    </td>
+                                    <td>
+                                        <label>시험명</label>
+                                        <input type="text" id="certification"  placeholder="토익">
+                                    </td>
+                                    <td>
+                                        <label>급수/점수</label>
+                                        <input type="text" id="grade"  placeholder="880">
+                                    </td>
+                                    <td>
+                                        <label>취득년월</label>
+                                        <input type="text" id="retireddate" data-format-type="month" placeholder="2011.02">
+                                    </td>
+                                    <td align = "right"><label>어학추가</label>
+                                        <a class="button">+</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+        <!--자격증-->
+        <table>
+            <thead>
+                <th><h3>자격증</h3></th>
+            </thead>
+            <tbody>
+                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                    <td>
+                        <label>자격증명</label>
+                        <input type="text" id="certification" placeholder="자격증명">
+                    </td>
+                    <td>
+                        <label>발행처</label>
+                        <input type="text" id="organization"  placeholder="기관명">
+                    </td>
+                    <td>
+                        <label>취득년월</label>
+                                        <input type="text" id="retireddate" data-format-type="month" placeholder="2011.02">
+                    </td>
+                    <td align = "right"><label>자격증 추가</label>
+                        <a class="button">+</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <!--자기소개서-->
+        <h3>자기소개서</h3>
+        <div class = "field">
+            <input type = "text" name = "resume1" placeholder="소제목을 적어주세요. ex)성장배경">
+            <textarea rows = "10"></textarea>
+        </div>
+        <hr/>
+        <div class = "field">
+            <input type = "text" name = "resume2" placeholder="소제목을 적어주세요. ex)성격의 장단점">
+            <textarea rows = "10"></textarea>
+        </div>
+        <hr/>
+        <div class = "field">
+            <input type = "text" name = "resume3" placeholder="소제목을 적어주세요. ex)입사 동기 및 포부">
+            <textarea rows = "10"></textarea>
+        </div>
+        <hr/>
+                        <ul class="actions align-right">
+                            <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                            </li>
+                            <li><input value="미리보기" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                            </li>
+                            <li><input value="작성완료" class="button" type="submit"></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+ 			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+    $(function () {
+        includeLayout();
+    });
+
+    function includeLayout() {
+        var includeArea = $('[data-include]');
+        var self, url;
+        $.each(includeArea, function () {
+            self = $(this);
+            url = self.data("include");
+            self.load(url, function () {
+                self.removeAttr("data-include");
+            });
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+	<head>
+		<title>the Palace</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+	</head>
+	<body>
+
+		<!-- Header -->
+		<header role="header" th:include="thymeleaf/header" id="header">
+			    <a href="#menu" class="toggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="menu" th:include="thymeleaf/nav"></nav>
+
+		<!-- Three -->
+			<section id="three" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/concierge.jpg}" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>숙박운영부</h2>
+										<p>고객응대, 안전교육, 긴급상황대처훈련, 외국어</p>
+									</header>
+									<hr />
+									<div class="align-center">
+										<a href="#" class="button alt">공고확인</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/program.jpg}" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>콘텐츠기획운영부</h2>
+										<p>전통문화, 공예, 체험프로그램</p>
+									</header>
+									<hr />
+									<div class="align-center">
+										<a href="#" class="button alt">공고확인</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					
+				</div>
+			</section>
+		</div>
+		<!-- Footer -->	
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+	<script>
+		$(function () {
+			includeLayout();
+		});
+
+
+		function includeLayout() {
+			var includeArea = $('[data-include]');
+			var self, url;
+			$.each(includeArea, function () {
+				self = $(this);
+				url = self.data("include");
+				self.load(url, function () {
+					self.removeAttr("data-include");
+				});
+			});
+		}
+	</script>
+</html>

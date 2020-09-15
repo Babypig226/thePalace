@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+	<head>
+		<title>the Palace</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" th:href=@{/static/assets/css/main.css} />
+    </head>
+	<body class="subpage">
+
+		<!-- Header -->
+		<header id="header" th:include="thymeleaf/header"></header>
+
+        <!-- Nav -->
+        <nav id="menu" th:include="thymeleaf/nav.html"></nav>
+        
+        <!-- Registration Form -->
+        <section id="one" class="wrapper style2">
+            <div class="inner">
+                <div class="box">
+                    <div class="content">
+                        <h2 id="elements">회원상세정보</h2>
+                        <hr />
+						<div class="row 200%">
+							<div class="6u 12u$(medium)">
+                                <h4>아이디</h4>
+                                <ul class="alt">
+                                    <li>ID</li>
+                                </ul>
+                            </div>
+							<div class="6u 12u$(medium)">
+                                <h4>이름</h4>
+                                <ul class="alt">
+                                    <li>Name</li>
+                                </ul>
+                            </div>
+							<div class="6u 12u$(medium)">
+                                <h4>생년월일</h4>
+                                <ul class="alt">
+                                    <li>1999-01-01</li>
+                                </ul>
+                            </div>
+							<div class="6u 12u$(medium)">
+                                <h4>성별</h4>
+                                <ul class="alt">
+                                    <li>F/M</li>
+                                </ul>
+                            </div>
+                            <div class="6u 12u$(medium)">
+                                <h4>이메일</h4>
+                                <ul class="alt">
+                                    <li>thisisEmail@mail.com</li>
+                                </ul>
+                            </div>
+							<div class="6u 12u$(medium)">
+                                <h4>주소</h4>
+                                <ul class="alt">
+                                    <li>서울특별시 종로구 종로5길</li>
+                                </ul>
+                            </div>
+							<div class="6u 12u$(medium)">
+                                <h4>연락처</h4>
+                                <ul class="alt">
+                                    <li>010-0000-0000</li>
+                                </ul>
+                            </div>
+							<div class="6u 12u$(medium)">
+                                <h4>연락처2</h4>
+                                <ul class="alt">
+                                    <li>010-0000-0000</li>
+                                </ul>
+                            </div>
+                        </div>
+                                <ul class="actions align-right">
+                                    <li><input value="뒤로" onclick="javascript: history.back();" class="button alt" type="button">
+                                    </li>
+                                    <li><input value="탈퇴" class="button" type="submit"></li>
+                                </ul>
+                      
+
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->	
+        <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+	<script>
+		$(function () {
+			includeLayout();
+		});
+		function includeLayout() {
+			var includeArea = $('[data-include]');
+			var self, url;
+			$.each(includeArea, function () {
+				self = $(this);
+				url = self.data("include");
+				self.load(url, function () {
+					self.removeAttr("data-include");
+				});
+			});
+		}
+	</script>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav"></nav>
+
+    <!-- Registration Form -->
+    <section id="one" class="wrapper style2">
+        <div class="inner">
+            <div class="box">
+                <div class="image fit">
+                    <img th:src="@{static/images/topbanner7.jpg}" alt="" />
+                </div>
+                <div class="content">
+                    <h2 class="align-center">이력서 상세보기</h2>
+                    <hr />
+                        <!-- 인적사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>인적사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4" width="5%">
+                                        <label>증명사진</label>
+                                        <img th:src="@{/static/images/resumesample.png}" width="220px" height="250px">
+                                    </td>
+                                    <td width="10%" valign="top">
+                                        <label for="userName">이름</label>
+                                        함성애
+                                    </td>
+                                    <td width="13%" valign="top">
+                                        <label for="userGender">성별</label>
+                                        F
+                                    </td>
+                                    <td width="8%" valign="top">
+                                        <label for="userBirth">생년월일</label>
+                                        1999.99.99
+                                    </td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td colspan="5">
+                                        <ul class="actions align-left" style="margin-bottom:1mm">
+                                            <li><label for="userPh1">연락처</label>
+                                                010-0000-2222</li>
+                                            <li><label for="userEmail">Email</label>
+                                                itsemail@email.com
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <label for="userAddr">주소</label>
+                                        <ul class="actions align-left" style="margin-bottom:1mm">
+                                            <li>Stuelpnagel Strasse 11A Berlin Germany
+                                            </li>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 학력사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>학력사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label>학교구분</label>
+                                        대학원
+                                    </td>
+                                    <td>
+                                        <label>학교명</label>
+                                        솔데스크
+                                    </td>
+                                    <td>
+                                        <label>입학연월</label>
+                                        2020.04
+                                    </td>
+                                    <td>
+                                        <label>졸업연월</label>
+                                       2020.10
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- 인턴&대외활동 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>인턴&middot;대외활동</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>활동구분</label>
+                                       자원봉사
+                                    </td>
+                                    <td>
+                                        <label>회사/기관/단체명</label>
+
+                                       솔데스크
+                                    </td>
+                                    <td>
+                                        <label>시작년월</label>
+                                        2020.04
+                                    </td>
+                                    <td>
+                                        <label>종료년월</label>
+                                       2020.05
+                                    </td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td colspan="4">
+                                        뭐라도 한게 있겠지
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+<!-- 경력사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>경력사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>회사명</label>
+                                        솔데스크
+                                    </td>
+                                    <td>
+                                        <label>부서명</label>
+                                        취업지원부
+                                    </td>
+                                    <td>
+                                        <label>입사년월</label>
+                                        2028.01.01
+                                    </td>
+                                    <td>
+                                        <label>퇴사년월</label>
+                                        2029.12.31
+                                    </td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>직급&middot;직책</label>
+                                        대리
+                                    </td>
+                                    <td>
+                                        <label>직무</label>
+                                        취업지원
+                                    </td>
+                                    <td></td><td></td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td colspan="4">
+                                        이력서첨삭, 기업 지원자 매칭, 이력서 작성법 특강 등을 하는 부서겠지요
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        <!--어학증명-->
+                        <table>
+                            <thead>
+                                <th><h3>어학증명</h3></th>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label>외국어명</label>
+                                        영어
+                                    </td>
+                                    <td>
+                                        <label>시험명</label>
+                                        토익
+                                    </td>
+                                    <td>
+                                        <label>급수/점수</label>
+                                        880
+                                    </td>
+                                    <td>
+                                        <label>취득년월</label>
+                                        2011.02
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        <!--자격증-->
+        <table>
+            <thead>
+                <th><h3>자격증</h3></th>
+            </thead>
+            <tbody>
+                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                    <td>
+                        <label>자격증명</label>
+                        자격증
+                    </td>
+                    <td>
+                        <label>발행처</label>
+                        MySelf
+                    </td>
+                    <td>
+                        <label>취득년월</label>
+                        2020.00
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <!--자기소개서-->
+        <h3>자기소개서</h3>
+        <div class = "field">
+            <h4>성장배경</h4>
+            잘 자랐어요
+        </div>
+        <hr/>
+        <div class = "field">
+            <h4>성격의 장단점</h4>
+            뭐가 있을까요
+        </div>
+        <hr/>
+        <div class = "field">
+            <h4>입사 동기 및 포부</h4>
+            급여만 잘 주면 뭐든
+        </div>
+        <hr/>
+                        <ul class="actions align-right">
+                            <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                            </li>
+                            <li><input value="수정" onclick="javascript: history.back();" class="button"
+                                    type="button">
+                            </li>
+                            <li><input value="삭제" class="button" type="submit"></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+ 			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+    $(function () {
+        includeLayout();
+    });
+
+    function includeLayout() {
+        var includeArea = $('[data-include]');
+        var self, url;
+        $.each(includeArea, function () {
+            self = $(this);
+            url = self.data("include");
+            self.load(url, function () {
+                self.removeAttr("data-include");
+            });
+        });
+    }
+</script>
+
+</html>
