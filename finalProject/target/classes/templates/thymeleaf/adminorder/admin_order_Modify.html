@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구매리스트수정</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/productmain.css" />
+<style type="text/css">
+td{background-color : white;}
+</style>
+</head>
+<body>
+<!-- Header -->
+	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="noticeform"
+						enctype="multipart/form-data">
+						<h2 class="align-center">구매리스트수정</h2>
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+
+							<tr>
+								<td>
+									<div align="center">구매번호</div>
+								</td>
+								<td>137</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">구매일자</div>
+								</td>
+								<td>2020-09-17
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">구매수량</div>
+								</td>
+								<td>13
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">배송유형</div>
+								</td>
+								<td>부재 시 휴대폰 연락 바랍니다
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td>
+									<div align="center">구매일자</div>
+								</td>
+								<td>OFFS23
+								</td>
+							</tr>
+							
+							
+
+							
+	</tr>
+							<tr align="right" >
+									<td colspan="5"><a href="notice_board.html" class="button alt">목록으로</a>
+									<input value="등록" class="button" type="submit"></td>
+								</tr>
+						</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

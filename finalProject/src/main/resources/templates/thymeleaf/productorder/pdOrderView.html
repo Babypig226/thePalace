@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>발주내역 상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/productmain.css" />
+<style type="text/css">
+td {
+	background-color: white;
+}
+
+#pdfoot {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="../Productnav.html"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">발주내역 상세보기</h2>
+
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<div align="center">업체명</div>
+								</td>
+								<td>땡땡공장</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">카테고리</div>
+								</td>
+								<td>사무용품</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									<div align="center">상품코드</div>
+								</td>
+								<td>ABC</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품단가</div>
+								</td>
+								<td>20,000</td>
+							</tr>
+							<tr>
+								<td>
+									<div align="center">발주수량</div>
+								</td>
+								<td>14</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품이미지</div>
+								</td>
+								<td>파일명 :) th 따란 <input type="button" id="btn" value="삭제" /><br />
+								</td>
+							</tr>
+
+							<tr align="center">
+								<td colspan="5" id="pdfoot"><a href="pdOrderModify.html"><input
+										type="button" value="수정" /></a>&nbsp; <a href="pdOrderModify.html"><input
+										type="button" value="삭제" /></a>&nbsp; <a href="pdOrderList.html"><input
+										type="button" value="목록가기" /></a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

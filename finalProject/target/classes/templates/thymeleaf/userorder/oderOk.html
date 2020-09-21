@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주문완료</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/productmain.css" />
+<style type="text/css">
+td {
+	background-color: white;
+}
+
+#orid {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body class="subpage">
+	<!-- Header -->
+	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="../Productnav.html"></nav>
+
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<img alt="" src="../images/order4.png" width="1080" height="200">
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>상품코드</th>
+									<th>상품정보</th>
+									<th>가격</th>
+									<th>수량</th>
+									<th>마일리지</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1357</td>
+									<td>연다인진혜주</td>
+									<td>₩123,456</td>
+									<td>2</td>
+									<td>5point</td>
+								</tr>
+								<tr>
+									<td>2468</td>
+									<td>최윤선함성애</td>
+									<td>₩789,101</td>
+									<td>2</td>
+									<td>5point</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<table>
+							<tr>
+								<td align="center" colspan="5"><font color="gray" size="5">총
+										결제금액 : </font> <font color="black" size="5">원</font></td>
+								<td align="right">적립 마일리지 5point</td>
+							</tr>
+
+
+						</table>
+					</div>
+					<br />
+					<!----------------------------------------------------------->
+					<h2 class="align-center">주문요약정보</h2>
+					<!-- Registration Form -->
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td id="orid">
+									<div align="center">아이디</div>
+								</td>
+								<td id="orid">치킨공주</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">주문일자</div>
+								</td>
+								<td>2020-09-15 18:15</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">입금자명</div>
+								</td>
+								<td>sovenior shop</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									<div align="center">무통장</div>
+								</td>
+								<td><font color="red">458,930원(결제하실 금액)</font></td>
+							</tr>
+
+						</table>
+					</div>
+					<!----------------------------------------------------------->
+					<br />
+					<h2 class="align-center">배송지정보</h2>
+					<hr />
+					<!-- Registration Form -->
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td id="orid">
+									<div align="center">아이디</div>
+								</td>
+								<td id="orid">치킨공주</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">주소</div>
+								</td>
+								<td>서울시 성북구 273-13</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									<div align="center">이메일</div>
+								</td>
+								<td>cksek27@daum.net</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">연락처</div>
+								</td>
+								<td>010-2258-5353</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">배송요청사항</div>
+								</td>
+								<td>배송전 연락 바랍니다</td>
+							</tr>
+						</table>
+					</div>
+					
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td colspan="5" bgcolor="white" align="center">
+								<a href="orderPayment.html"
+									class="button alt">이전</a> 
+								<input type = "submit" value = "결제완료" />
+							</tr>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+
+
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

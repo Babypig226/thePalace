@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<title>강사모집공고작성</title>
+<style type="text/css">
+td {
+	background-color: white;
+}
+</style>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="recruitform"">
+						<h2 class="align-center">강사모집공고작성</h2>
+						<p>▶내용을 입력하신 다음 "등록하기" 버튼을 눌러주세요</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+
+								<tr>
+									<td>
+										<div align="center">모집기간</div>
+									</td>
+
+									<td><input name="tnotice_term" type="date" size="10"
+										maxlength="10" /> ~ <input name="tnotice_term" type="date" size="10"
+										maxlength="10" /> </td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">공고명</div>
+									</td>
+									<td><input name="tnotice_name" type="text"
+										maxlength="30" /></td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">모집상세내용</div>
+									</td>
+									<td><textarea rows="10" cols="90" name = "tnotice_content">
+									</textarea> </td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">공고일 </div>
+									</td>
+									<td><input name="tnotice_date" type="date" maxlength="20" />
+						          </td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">서류전형합격자발표일 </div>
+									</td>
+									<td><input name="tpass_date" type="date" maxlength="20" />
+									</td>
+								</tr>
+								
+								<tr>
+									<td>
+										<div align="center">면접일 </div>
+									</td>
+									<td><input name="tinterview_date" type="date" maxlength="20" />
+									<input name="tpass_date" type="time" maxlength="20" /></td>
+								</tr>
+								
+								<tr>
+									<td>
+										<div align="center">면접장소 </div>
+									</td>
+									<td><input name="tinterview_addr" type="text" maxlength="20" />
+									</td>
+								</tr>
+								
+								<tr>
+									<td>
+										<div align="center">전문분야 </div>
+									</td>
+									<td><input name="pro_filed" type="text" maxlength="20" /></td>
+								</tr>
+
+								<tr align="right">
+									<td colspan="5"><a href="recruitList.html"><input
+											type="button" value="목록" /></a> <input value="등록" class="button"
+										type="submit"></td>
+								</tr>
+
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

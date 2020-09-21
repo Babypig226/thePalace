@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<title>등록희망서</title>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">등록희망서</h2>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>등록희망서번호 </th>
+									<th>등록희망사유</th>
+									<th>프로그램기대효과 </th>
+									<th>학력 </th>
+									<th>자격증 </th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td><a href = "register_wish_detail.html">예절배우기프로그램</a></td>
+									<td>요즘애들싸가지완화효과</td>
+									<td>한양사이버대학교</td>
+									<td>멋있지 운전면허증</td>
+
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>비빔밥만들기체험</td>
+									<td>맛있는건나눠먹어쟈지 암</td>
+									<td>제주대학교</td>
+									<td>양식조리사</td>
+								</tr>
+							</tbody>
+							
+							<tfoot>
+								<tr align="center">
+									<td colspan="3"><a>1</a></td>
+								</tr>
+								<tr align="right">
+										<td colspan="3">
+									<a href="../pgMypage.html"><input type = "button" value="목록"/></a>
+									<a href="register_wish_Write.html"><input type = "button" value="희망서작성"/></a></td>
+									</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

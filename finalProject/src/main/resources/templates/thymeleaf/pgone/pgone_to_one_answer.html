@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<style type="text/css">
+td{background-color : white;}
+</style>
+<title>1:1문의 신청</title>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+
+		<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="pgonereform">
+						<h2 class="align-center">1:1문의 신청 답변</h2>
+						<p>
+							▶문의하실 분야를 선택하신 후 내용을 입력하신 다음 "신청하기 " 버튼을 눌러주세요.<br /> ▶한번 등록한
+							상담내용은 수정이 불가능합니다. 수정을 원하시는 경우, 삭제 후 재등록 하셔야 합니다.
+						</p>
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<div align="center">작성자</div>
+								</td>
+								<td><input name="employee_no" type="text" maxlength="40" /></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">답변변호</div>
+								</td>
+								<td><input name="preply_no" type="text" maxlength="20" /></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">게시판 번호</div>
+								</td>
+								<td><input name="plib_no" type="text" maxlength="20" /></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">고객ID</div>
+								</td>
+								<td>치킨공주</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">답변일</div>
+								</td>
+								<td><input type = "date" name = "preply_date"/></td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">답변내용</div>
+								</td>
+								<td><textarea name="preply_content" cols="50" rows="10"></textarea>
+								</td>
+							</tr>
+
+							<tr align="right" >
+									<td colspan="2"><a href="pgone_to_one_detail.html" class="button alt">목록으로</a>
+									<input type = "submit" value  = "등록" /></td>
+								</tr>
+						</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

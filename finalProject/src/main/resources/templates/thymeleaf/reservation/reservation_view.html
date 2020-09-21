@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<title>예매정보</title>
+</head>
+<body>
+<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+	
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+						<h2 class="align-center">예매정보</h2>
+						
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center">작성자</div>
+								</td>
+								<td bgcolor = "white">여기 th로 해서 따란</td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">비밀번호</div>
+								</td>
+								<td><input type = "password" id = "ntpassword" maxlength="10"/></td>
+							</tr>
+							
+
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center">프로그램명</div>
+								</td>
+								<td bgcolor = "white">연날리기체험</td>
+							</tr>
+							
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center">예약일</div>
+								</td>
+								<td bgcolor = "white">2020-09-14</td>
+							</tr>
+							
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">프로그램 입장시간</div>
+								</td>
+								<td bgcolor = "white">09:00 ~ 10:00
+								</td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">프로그램 퇴장시간</div>
+								</td>
+								<td>13:00 ~ 14:00
+								</td>
+							</tr>
+
+
+							<tr align="center" >
+									<td colspan="5" bgcolor = "white">
+			<a href="noticeDelete.html"><input type = "button" value="예약취소" id = "del" /></a>
+			<a href="notice_board.html"><input type = "button" value="목록" id = "home" /></a>
+		                   </td>
+								</tr>
+						</table>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	
+	
+	
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

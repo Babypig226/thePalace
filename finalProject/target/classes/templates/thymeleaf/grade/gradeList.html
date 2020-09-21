@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<title>평가점수</title>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">평가점수</h2>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>평가번호</th>
+									<th>프로그램번호</th>
+									<th>고객ID</th>
+									<th>고객평가점수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><a href  = "gradeView.html">112</a></td>
+									<td>23465</td>
+									<td>치킨공주</td>
+									<td>A+</td>
+									
+								</tr>
+								<tr>
+									<td><a href  = "#">153</a></td>
+									<td>23465</td>
+									<td>치킨공주</td>
+									<td>B-</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr align="center">
+									<td colspan="4"><a>1</a></td>
+								</tr>
+								<tr align="right">
+									<td colspan="4"><a href="pgMypage.html" class="button alt">목록으로</a>
+									<a href="gradeWrite.html" class="button alt">글쓰기</a></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<title>예매정보</title>
+</head>
+<body>
+<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+	
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="noticeform"
+						enctype="multipart/form-data">
+						<h2 class="align-center">프로그램 예매</h2>
+						<p>
+							▶내용을 입력하신 다음 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
+							가능합니다.
+						</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+								
+								
+								<tr>
+									<td bgcolor="white">
+										<div align="center">프로그램명</div>
+									</td>
+
+
+									<td bgcolor="white"><input name="ntdName" type="text"
+										size="10" maxlength="10" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">비밀번호</div>
+									</td>
+									<td><input name="ntpassword" type="password"
+										maxlength="10" /></td>
+								</tr>
+
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">제 목</div>
+									</td>
+									<td bgcolor="white"><input name="boardSubject" type="text"
+										maxlength="70" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">내 용</div>
+									</td>
+									<td><textarea name="boardContent" cols="50" rows="10"></textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">파일첨부</div>
+									</td>
+									<td bgcolor="white"><input type="file" name="fileUp" /><br />
+										<input type="file" name="fileUp" /></td>
+								</tr>
+
+								<tr align="right">
+									<td colspan="5" bgcolor="white"><a
+										href="notice_board.html" class="button alt">목록으로</a> <input
+										value="등록" class="button" type="submit"></td>
+								</tr>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	
+	
+	
+	
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>최근본상품</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/productmain.css" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+
+
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">최근본상품</h2>
+					<p>
+						▶고객님께서 최근 보신 상품을 모아둔 곳입니다.<br /> 
+						▶최근 본 상품 내역은 15일간 보관되며, 내역 삭제 시 복구되지 않으므로 유의해주시길 바랍니다.
+					</p>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>상품명</th>
+									<th>금액</th>
+									<th>상품이미지</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><a href = "#">나비명함함</a></td>
+									<td>₩35,000</td>
+									<td><img alt="" src="images/ex3.PNG" width="80"></td>
+									
+								</tr>
+								<tr>
+									<td><a href = "#">한지팔각보석함</a></td>
+									<td>₩49,000</td>
+									<td><img alt="" src="images/ex4.PNG" width="80"></td>
+									
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr align = "center">
+									<td colspan="3"><a>1</a></td>
+								</tr>
+								<tr align="right">
+									<td colspan="3"><a href="Mypage.html" class="button alt">목록으로</a>
+									<a href="cart.html" class="button alt">장바구니가기</a>
+									<a href="wishList.html" class="button alt">위시리스트가기</a>
+									 </td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

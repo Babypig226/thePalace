@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+<style type="text/css">
+td{background-color : white;}
+</style>
+
+<title>1:1문의</title>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+
+<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+						<h2 class="align-center">1:1문의 신청 상세보기</h2>
+						
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<div align="center">작성자</div>
+								</td>
+								<td>치킨공주</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">작성일</div>
+								</td>
+								<td>2020-09-20</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">제 목</div>
+								</td>
+								<td>훈민정음펜이 불량이에요ㅠㅠ</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">내 용</div>
+								</td>
+								<td>한국전통공예품 오예 가지고싶어요 ㅠㅠㅠㅠ 넘모 넘모 가지고 싶어요 재고가 왜 없나요 <br/>
+								    여러분들 여기 사이트 나전칠기 사용해보셨어요 대박임 ㅋㅋ
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">프로그램파일첨부</div>
+								</td>
+			<td>
+				파일명 :)  <br/>
+				프로그램번호:) 019312			</td>	
+	</tr>
+
+							<tr align="center" >
+									<td colspan="2">
+			<a href="pgone_to_one_answer.html"><input type = "button" value="답변" id = "pgans" /></a>
+			<a href="pgone_to_one_modify.html"><input type = "button" value="수정" id = "pgonemodify" /></a>
+			<a href="pgone_to_one_delete.html"><input type = "button" value="삭제" id = "pgonedel" /></a>
+			<a href="pgone_to_one.html"><input type = "button" value="목록" id = "pgonehome" /></a>
+		                   </td>
+								</tr>
+						</table>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>
