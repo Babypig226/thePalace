@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>객실 상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/hmain.css" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="Header" data-include="../hheader.html" id="hheader">
+		<a href="#hnav" class="htoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="hnav" data-include="../hnav.html"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="noticeform"
+						enctype="multipart/form-data">
+						<h2 class="align-center">객실 상세보기</h2>
+						<p>
+							▶객실 정보와 사진을 작성 후 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
+							가능합니다.
+						</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>작성자</b>
+										</div>
+									</td>
+									<td bgcolor="white"><input name="roomWriter" type="text"
+										size="10" maxlength="10" value="진팡쭈 " /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>객실명</b>
+										</div>
+									</td>
+									<td bgcolor="white"><input name="roomName" type="text"
+										maxlength="70" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>상세설명</b>
+										</div>
+									</td>
+									<td><textarea name="roomContent" cols="50" rows="10"></textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>객실 파일첨부</b>
+										</div>
+									</td>
+									<td bgcolor="white"><input type="file" name="fileUp" /><br />
+										<input type="file" name="fileUp" /></td>
+								</tr>
+
+								
+
+								<tr align="center">
+									<td colspan="5"> 
+									<a href="noticeModify.html">
+									<input type="button" value="수정완료 " id="modify" /></a> 
+									<a
+			href="noticeDelete.html"><input type="button" value="삭제하기 "
+											id="del" /></a> <a href="roomList.html"><input
+											type="button" value="목록으로 " id="home" /></a>
+									</td>
+								</tr>
+							</table>
+
+
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/house.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

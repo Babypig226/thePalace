@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>프로그램 리스트 </title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+</head>
+
+<body>
+    
+	<!-- Header -->
+	<header role="pgHeader" data-include="pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+	
+	<form action="programInsert.html" method="post" enctype="multipart/form-data">
+	
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">Program List</h2>
+					
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>프로그램 번호 </th>
+									<th>프로그램명 </th>
+									<th>등록일 </th>
+									<th>강사명 </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td><a href = "programView.html">한지부채 만들기 체험</a></td>
+									<td>2020-09-02</td>
+									<td>진팡쭈 </td>	
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr align="center">
+									<td colspan="5"><a>1</a></td>
+								</tr>
+								<tr align="center">
+									<td colspan="5"><a href="houseSupport.html" class="button">목록으로</a>
+									<input value="프로그램 등록하기 " class="button" type="submit"></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</form>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

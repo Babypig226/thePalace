@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>적립금</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/program.css" />
+<style>
+td {
+background-color: white;
+}
+
+table {
+
+}
+</style>
+</head>
+
+<body>
+
+	<!-- Header -->
+	<header role="pgHeader" data-include="pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+
+	<form action="#" method="post" enctype="multipart/form-data">
+
+		<!-- Table -->
+		<section id="one" class="wrapper style2">
+			<div class="inner">
+				<div class="box">
+					<div class="content">
+						<h2 class="align-center">할인쿠폰 현황</h2>
+						<p>
+							▶할인쿠폰은 등록일로부터 한달 이내에 사용하셔야 합니다.<br /> 
+							▶보유한 쿠폰 유효기간이 경과되거나, 서비스 이용계약이 종료되면 소멸합니다.<br />
+							▶"회원"탈퇴 시, 미사용 쿠폰은 즉시 소멸되며, 재가입 이후에도 소멸된 쿠폰은 복원되지 않습니다.<br />
+							▶쿠폰 등록 시 현금처럼 사용하실 수 있습니다.<br />  
+						</p>
+						<p align="right">보유쿠폰 <b>0 </b>장</p>
+						<hr/>
+						
+						<div class="field">
+										<label for="dept">쿠폰등록</label>
+										<div class="field half first">
+											<table>
+											<tr>
+											<td><input type="text" id="couponInsert" placeholder="쿠폰번호 5자리" ></td>
+											<td><input type="button" id="inCoupon" value="등록"></td>
+											</tr>
+											</table>
+										</div>	
+									</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		
+		
+		
+
+
+		<!-- Footer -->
+		<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/program.js"></script>
+	</form>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

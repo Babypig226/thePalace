@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>프로그램 상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="noticeform"
+						enctype="multipart/form-data">
+						<h2 class="align-center">프로그램 상세보기</h2>
+						<p>
+							▶객실 정보와 사진을 작성 후 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
+							가능합니다.
+						</p>
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>프로그램명 </b></div>
+								</td>
+								<td bgcolor = "white"><input name="proName" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>강사명 </b></div>
+								</td>
+								<td bgcolor = "white"><input name="teacherName" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>카테고리</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="proCategory" type="text" maxlength="70" /></td>
+							</tr>
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>최대수강인원</b> </div>
+								</td>
+								<td> 	
+									<select name="dept" id="dept">
+										<option value="">선택</option>
+										<option value="1">5명 </option>
+										<option value="1">10명 </option>
+										<option value="1">20명 </option>
+										<option value="1">25명 </option>
+										<option value="1">30명 </option>
+										<option value="1">35명 </option>
+									</select>
+								</td>
+							</tr>
+	
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>프로그램 설명</b> </div>
+								</td>
+								<td><textarea name="proContent" cols="50" rows="10"></textarea>
+								</td>
+							</tr>
+								
+						
+						<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>프로그램 사진 </b></div>
+								</td>
+								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
+									type="file" name="fileUp" /></td>
+							</tr>
+						
+						
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>사진 첨부</b></div>
+								</td>
+								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
+									type="file" name="fileUp" /></td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>프로그램 주소 </b></div>
+								</td>
+								<td bgcolor = "white"><input name="proAddr" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>이용요금 </b></div>
+								</td>
+								<td bgcolor = "white"><input name="proMoney" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>추가옵션 </b></div>
+								</td>
+								<td bgcolor = "white"><input name="proOption" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>추가 이용요금</b></div>
+								</td>
+								<td bgcolor = "white"><input name="proPlusMoney" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+								
+
+								<tr align="center">
+									<td colspan="5"> 
+									<a href="programModify.html">
+									<input type="button" value="수정하기 " id="modify" /></a> 
+									<a
+			href="programDelete.html"><input type="button" value="삭제하기 "
+											id="del" /></a> <a href="programList.html"><input
+											type="button" value="목록으로 " id="home" /></a>
+									</td>
+								</tr>
+							</table>
+
+
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

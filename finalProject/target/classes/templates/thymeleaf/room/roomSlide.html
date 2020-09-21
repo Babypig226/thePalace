@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../full-page-js/fullpage.min.css" />
+    <link rel="stylesheet" href="../assets/css/houseFullPage.css" />
+    <script src="../full-page-js/fullpage.min.js"></script>
+</head>
+<body>
+    <div id="full-page">
+        
+            <div class="section s0">
+                <h2>이미지좀 떠라 ㅅㅂ</h2>
+            </div>
+
+            <div class="section s1">
+                <h2>Section 1</h2>
+            </div>
+
+            <div class="section s2">
+                <h2>Section 2</h2>
+            </div>
+
+            <div class="section s3">
+                <h2>Section 3</h2>
+            </div>
+
+ 			<div class="section s4">
+                <h2>Section 4</h2>
+            </div>
+            
+             <div class="section s5">
+                <h2>Section 5</h2>
+            </div>
+           
+        </div>
+
+
+    <script>
+        new fullpage('#full-page', {
+        	licenseKey: '',
+        	sectionsColor: ['#ff0000', '#aaaaaa', '#ooooff', '#00ff00', '#0000ff', '#aaaaaa'],
+        	navigation: true,
+        	navigationTooltips: ['기모','','','','','' ],
+        	scrollingSpeed: 1000,
+        	onLeave: function(origin, destination, direction) {
+        		console.log('onLeave');
+        	},
+        	afterLoad: function(origin, destination, direction) {
+        		if(destination.index == 1) {
+        			
+        		}
+        	},
+        });
+    </script>
+</body>
+</html>

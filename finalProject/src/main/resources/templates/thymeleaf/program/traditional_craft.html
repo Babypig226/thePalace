@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>한국전통공예프로그램</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../assets/css/default.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" href="../assets/css/program.css" />
+
+</head>
+<body>
+<!-- Header -->
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
+
+
+	<!-- Banner -->
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1>
+					<a href="interior_supplies.html">체험프로그램</a>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div id="menu-wrapper">
+		<div id="menu" class="container">
+			<ul>
+				<li><a href="#"><font size="4">공예체험프로그램</font></a></li>
+				<li><a href="#"><font size="4">전통문화프로그램</font></a></li>
+				<li><a href="#"><font size="4">투어프로그램</font></a></li>
+				<li><a href="#"><font size="4">피트니스프로그램</font></a></li>
+			</ul>
+		</div>
+	</div>
+
+<section id="three" class="wrapper style2">
+		<div class="inner">
+			<div class="grid-style">
+				<div>
+						<div class="content">
+							<div class="image fit">
+								<img src="../images/program/ceramic1.PNG" alt="" />
+							</div>
+							<header class="align-center">
+								<h2>도자기만들기체험</h2>
+							</header>
+							<hr />
+							<p align="center">
+								우리나라의 고유의 빛깔 아름다운 <br /> 나전칠기를 구경해보세요
+							</p>
+							<div class="align-center">
+								<a href="ipgoList.html" class="button alt">더보기</a>
+							</div>
+						</div>
+				</div>
+
+				<div>
+						<div class="content">
+							<div class="image fit">
+								<img src="../images/program/craft1.PNG" alt="" />
+							</div>
+							<header class="align-center">
+								<h2>한지공예작품만들기체험</h2>
+							</header>
+							<hr />
+							<p align="center">
+								우리나라의 전통공예품과 <br /> 현대가 어우러진 공예품을 구경하세요
+							</p>
+							<div class="align-center">
+								<a href="" class="button alt">더보기</a>
+							</div>
+						</div>
+				</div>
+				
+				<div>
+						<div class="content">
+							<div class="image fit">
+								<img src="../images/program/line1.PNG" alt="" />
+							</div>
+							<header class="align-center">
+								<h2>전통매듭체험</h2>
+							</header>
+							<hr />
+							<p align="center">
+								우리나라의 고유의 빛깔 아름다운 <br /> 나전칠기를 구경해보세요
+							</p>
+							<div class="align-center">
+								<a href="ipgoList.html" class="button alt">더보기</a>
+							</div>
+						</div>
+				</div>
+				
+				<div>
+						<div class="content">
+							<div class="image fit">
+								<img src="../images/program/na1.PNG" alt="" />
+							</div>
+							<header class="align-center">
+								<h2>나전칠기물품만들기체험</h2>
+							</header>
+							<hr />
+							<p align="center">
+								우리나라의 고유의 빛깔 아름다운 <br /> 나전칠기를 구경해보세요
+							</p>
+							<div class="align-center">
+								<a href="ipgoList.html" class="button alt">더보기</a>
+							</div>
+						</div>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+
+	
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>
+	

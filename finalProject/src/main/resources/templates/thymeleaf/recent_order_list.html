@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>최근주문내역</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/productmain.css" />
+</head>
+
+<body>
+
+	<!-- Header -->
+	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">최근주문내역</h2>
+					<p>▶한번 등록한 상담내용은 수정이 불가능합니다. 수정을 원하시는 경우, 삭제 후 재등록 하셔야 합니다.<br/>
+					▶1:1 상담은 24시간 신청가능하며 접수된 내용은 빠른 시간내에 답변을 드리도록 하겠습니다.<br/>
+					▶문의하신 1:1 상담은 고객님의 메일로도 확인하실 수 있습니다.</p>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>주문번호</th>
+									<th>상품명</th>
+									<th>총 구매금액</th>
+									<th>주문일</th>
+									<th>반품/환불</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1357</td>
+									<td>애플워치사고싶다</td>
+									<td>₩520,000</td>
+									<td>2020-09-04</td>
+									<td><a href = "refund.html">반품/환불 접수</a></td>
+								</tr>
+								<tr>
+									<td>2468</td>
+									<td>쩐주당 먹고싶다</td>
+									<td>₩4800</td>
+									<td>2020-09-03</td>
+									<td><a href = "refund.html">반품/환불 접수</a></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr align = "center">
+									<td colspan="5"><a>1</a></td>
+								</tr>
+								
+								<tr align="right">
+									<td colspan="5"><a href="Mypage.html" class="button alt">목록으로</a> </td>
+								</tr>
+							</tfoot>
+						</table>
+						<img alt="" src="images/recent1.png" width="1080" height = "400">
+								
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

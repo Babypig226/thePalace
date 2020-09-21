@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>CSS</title>
+<style type="text/css">
+#myheader {
+	padding: 20px;
+	margin-bottom: 20px;
+	border: none;
+	height : 80px;
+}
+
+#mycontent {
+	width: 900px;
+	height: 820px; padding : 20px;
+	margin-bottom: 20px;
+	float: right;
+	border: none;
+	padding: 20px;
+	border: 2px solid #bcbcbc;
+}
+
+#mysidebar {
+	width: 260px;
+	height: 400px; padding : 20px;
+	margin-bottom: 20px;
+	float: left;
+	border: 2px solid #bcbcbc;
+	padding: 20px;
+}
+
+#myfooter {
+	clear: both;
+	padding: 20px;
+	border: 2px solid #bcbcbc;
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/productmain.css" />
+
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div id="myheader">
+				<p align = "center">
+					<font size="6">program mypage</font>
+				</p>
+			</div>
+			<div id="mycontent">
+			</div>
+			<div id="mysidebar">
+			   <p align = "center">안녕하세요, 윤선띠님<br/>
+			   <img alt="" src="images/logo.png" width = "220" height = "230">
+			   윤선공주님의 <a href = "mileage.html">적립금</a> 및 <a href = "coupon.html">할인쿠폰 </a></p>
+			   </div>
+			   <div id="mysidebar">
+				<p><a href="sign-up/member-detail.html">내정보관리</a></p>  
+				<p><a href="recent_order_list.html">최근주문내역</a></p>  
+				<p><a href="one_to_one.html">1:1문의</a></p> 
+				<p><a href="recent_view.html">최근본상품</a></p> 
+				<p><a href="refund.html">환불/반품</a></p>  
+				<p><a href="cart.html">장바구니</a></p> 
+				<p><a href="wishList.html">위시리스트</a></p>
+			</div>
+			<div id="myfooter">
+						<header class="align-left">
+							<a href="sgdfgdfg.html">고객센터</a>
+							<h2>02-1234-5678</h2>
+							<p>
+								업무시간 AM. 09:00 ~ PM. 06:00<br /> 점심시간 AM. 12:00 ~ PM. 01:00<br />
+								(토 · 일요일, 공휴일 휴무)
+							</p>
+						</header>
+
+					</div>
+				</div>
+			
+		
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입고 작성</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/productmain.css" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="libBoardWrite.lib" method="post" name="boardform"
+						enctype="multipart/form-data">
+						<h2 class="align-center">입고 작성</h2>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td bgcolor="white">
+										<div align="center">업체명</div>
+									</td>
+									<td bgcolor="white"><input name="ipgocompany"
+										id="ipgocompany" type="text" size="10" maxlength="10" /></td>
+								</tr>
+
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">상품분류코드</div>
+									</td>
+									<td><input name="ipgoNum" id="ipgoNum" type="text"
+										maxlength="10" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">입고예정일</div>
+									</td>
+									<td bgcolor="white"><input name="ipgodate" id="ipgodate"
+										type="date" /></td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">상품명</div>
+									</td>
+									<td><input name="goodsName" id="goodsName" type="text"
+										maxlength="20" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+									<div align="center">상품가격</div></td>
+									<td bgcolor="white"><input type="text" name="goodsPrice" id="goodsPrice" />
+									</td>
+								</tr>
+
+								<tr>
+									<td><div align="center">상품재고수량</div></td>
+									<td><input type="text" name="goodsQty" id="goodsQty" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white"><div align="center">상품등록일</div></td>
+									<td bgcolor="white"><input type="date" name="goodsdate" id="goodsdate" />
+									</td>
+								</tr>
+
+								<tr align="right">
+									<td colspan="7"><input type="submit" value="상품등록" /> <input
+										type="reset" value="취소" /> <a href="#"><input
+											type="button" value="뒤로가기" /></a></td>
+								</tr>
+
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+	</form>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

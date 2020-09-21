@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입고대장</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/productmain.css" />
+</head>
+
+<body>
+    
+	<!-- Header -->
+	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+	
+	<form action="#" method="post" enctype="multipart/form-data">
+	
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">입고 대장</h2>
+					
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>업체명</th>
+									<th>상품분류코드</th>
+									<th>입고예정일</th>									
+									<th>상품명</th>
+									<th>상품단가</th>
+									<th>상품재고수량</th>
+									<th>상품등록일 </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>공주공장</td>
+									<td>ABC67</td>
+									<td>2020-09-11</td>
+									<td>민화공책</td>
+									<td>2000</td>
+									<td>3</td>
+									<td>2020-09-13</td>
+									
+									
+								</tr>
+								<tr>
+									<td>공주공장</td>
+									<td>ABC89</td>
+									<td>2020-09-11</td>
+									<td>전통문양메모지</td>
+									<td>2000</td>
+									<td>7</td>
+									<td>2020-09-13</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr align="center">
+									<td colspan="5"><a>1</a></td>
+								</tr>
+								<tr align="right">
+									<td colspan="7"><a href="ipgoForm.html" class="button alt">목록으로</a>
+									<input value="입고등록" class="button" type="submit"></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</form>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

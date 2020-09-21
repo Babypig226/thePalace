@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>고객센터</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/hmain.css" />
+</head>
+<body>
+	<!-- Header -->
+		<header role="header" data-include="hheader.html" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" data-include="hnav.html"></nav>
+	
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<div class="grid-style">
+
+				<div>
+					<div class="box">
+						
+						<div class="content">
+							<header class="align-center">
+								<h2>공지사항</h2>
+							
+							<hr />
+							<p>상품문의 및 매장문의 등 고객님께<br/>
+							공지사항을 알려드립니다</p>
+							<div class="align-center">
+								<a href="noticeList.html" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<div class="box">
+						
+						<div class="content">
+							<header class="align-center">
+								<h2>1:1게시판</h2>
+							
+							<hr />
+							<p>궁금하신점이나 요청하실내용 있으시면 언제든지 문의해 주십시오.<br/>
+							빠르고 정확하게 답변해 드리겠습니다</p>
+							<div class="align-center">
+								<a href="one_to_one.html" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+						</div>
+						</div>
+						
+						
+						<div>
+					<div class="box">
+						
+						<div class="content">
+							<header class="align-center">
+								<h2>오시는길</h2>
+							
+							<hr />
+							<p>스테이궁에 <br/>오시는길을 안내드립니다
+							</p>
+							<div class="align-center">
+								<a href="houseCome.html" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+						</div>
+						</div>
+						
+						<div>
+					<div class="box">
+						<div class="content">
+							<header class="align-center">
+								<h2>자유 게시판</h2>
+							
+							<hr />
+							<p>궁금한게 있으시면 언제든지 물어보세요<br/>
+							스테이궁은 언제든지 활짝 열려있습니다</p>
+							<div class="align-center">
+								<a href="notice/notice_board.html" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+						</div>
+						</div>
+					
+		
+		
+		
+			</div>
+		</div>
+	</section>
+
+
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/house.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

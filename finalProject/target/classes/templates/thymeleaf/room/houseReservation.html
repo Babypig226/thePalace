@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실시간예약</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="assets/css/hmain.css" />
+</head>
+<body>
+		<!-- Header -->
+		<header role="header" data-include="hheader.html" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" data-include="hnav.html"></nav>
+	
+	
+	
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1>실시간예약</h1>
+				<h1>RESERVATION GUIDE</h1>
+			</div>
+		</div>
+	</div>
+	<div id="menu-wrapper">
+		<div id="menu" class="container">
+			<ul>
+				<li><a href="reservationGuide.html"><font size = "4">실시간예약 </font></a></li>
+				<li><a href="guide.html"><font size = "4">예약안내 </font></a></li>
+				<li><a href="structure.html"><font size = "4">객실배치도 </font></a></li>
+				<li><a href="room/roomList.html"><font size = "4">객실등록 -관리자만 보임 </font></a></li>
+			</ul>
+			
+		</div>
+	</div>
+	
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+				<div id = "images">
+					<a href="goodsDetail.html"><img alt="" src="images/office/note5.PNG" width="350" height="400"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#"><img alt="" src="images/office/note6.PNG" width="350" height="400"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#"><img alt="" src="images/office/note9.PNG" width="350" height="400"></a>
+				</div>
+		</div>
+	</section>
+	
+
+	
+	
+
+
+
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

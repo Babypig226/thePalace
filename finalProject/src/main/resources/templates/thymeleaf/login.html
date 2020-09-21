@@ -1,26 +1,24 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-     layout:decorator="layout">
+<html>
 	<head>
 		<title>the Palace</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" th:href=@{/static/assets/css/main.css} />
+		<link rel="stylesheet" href="assets/css/main.css" />
     </head>
 	<body class="subpage">
 
 		<!-- Header -->
-		<header id="header" th:include="thymeleaf/header"></header>
+		<header id="header" data-include="header.html"></header>
 
         <!-- Nav -->
-        <nav id="menu" th:include="thymeleaf/nav"></nav>
+        <nav id="menu" data-include="nav.html"></nav>
 		<!-- One -->
 			<section id="one" class="wrapper style2">
 			    <div class="inner">
 			        <div class="box">
 						<div class="image fit">
-							<img th:src=@{/static/images/image01.jpg} alt="" />
+							<img src="images/image01.jpg" alt="" />
 						</div>
 			            <div class="content">
 			                <form method="post" action="#">
@@ -47,18 +45,18 @@
 			</section>
 
 		<!-- Footer -->	
-		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<footer id="footer" class="wrapper" data-include="footer.html"></footer>
 
 		<!-- Scripts -->
-			<script th:src=@{/static/assets/js/jquery.min.js}></script>
-			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
-			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
-			<script th:src=@{/static/assets/js/skel.min.js}></script>
-			<script th:src=@{/static/assets/js/util.js}></script>
-			<script th:src=@{/static/assets/js/main.js}></script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
-	</body>
-	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+    </body>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
 	<script>
 		$(function () {
 			includeLayout();

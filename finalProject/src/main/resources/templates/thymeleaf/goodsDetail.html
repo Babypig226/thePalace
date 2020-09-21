@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상품 상세페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/productmain.css" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" data-include="Productnav.html"></nav>
+
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<div class="grid-style">
+				<div>
+					<div class="content" align="left">
+						<header class="align-left">
+							<h2>민화공책</h2>
+							<hr />
+							<p>
+							<p>가격 :) 6000원</p>
+							<select name='orderNum' width='150px'>
+								<option value=0>디자인 선택</option>
+								<option>디자인선택</option>
+								<option>호랑이</option>
+								<option>나비</option>
+								<option>호박꽃</option>
+
+							</select><br />
+
+							<div class="number">
+								<p>
+									※주문수량은 최대 10개까지 가능합니다<br /> 주문수량:) <a href="#" id="increase">▲</a>&nbsp;<span
+										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
+								</p>
+							</div>
+							</p>
+							&nbsp;
+							<div class="align-center">
+								<a href="cart.html" class="button alt">장바구니담기</a>&nbsp; <a
+									href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
+									href="#" class="button alt">바로결제</a>&nbsp;
+							</div>
+						</header>
+					</div>
+				</div>
+				<div align="center">
+					<img alt="" src="images/office/note5.PNG" width="500" height="450">
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+
+
+
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/product.js"></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('#decrease').click(function(e) {
+			e.preventDefault();
+			var stat = $('#UpDown').text();
+			var num = parseInt(stat, 10);
+			num--;
+			if (num <= 0) {
+				num = 1;
+			}
+			$('#UpDown').text(num);
+		});
+		$('#increase').click(function(e) {
+			e.preventDefault();
+			var stat = $('#UpDown').text();
+			var num = parseInt(stat, 10);
+			num++;
+
+			if (num > 10) {
+				num = 10;
+			}
+			$('#UpDown').text(num);
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실시간예약</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="assets/css/hmain.css" />
+</head>
+<body>
+		<!-- Header -->
+		<header role="header" data-include="hheader.html" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" data-include="hnav.html"></nav>
+	
+	
+	
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1>실시간 예약 </h1>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+		<div id="menu-wrapper">
+		<div id="menu" class="container">
+			<ul>
+				<li><a href="reservationGuide.html"><font size = "4">실시간예약 </font></a></li>
+				<li><a href="guide.html"><font size = "4">예약안내 </font></a></li>
+				<li><a href="structure.html"><font size = "4">객실배치도 </font></a></li>
+				<li><a href="room/roomList.html"><font size = "4">객실등록 -관리자만 보임 </font></a></li>
+			</ul>
+			
+		</div>
+	</div>
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+				
+					<h2 class="align-center">RESERVATION</h2>
+					<p class="align-center">실시간 예약  </p>
+					
+					
+					<div class="table-wrapper">
+					</div>
+					<section>
+						<div class="box">
+							<div class="content">
+								<p><b><label for="dept">▶선택사항 확인  </label> </b></p>
+								<div class="table-wrapper">
+						<table>
+								<tr>
+									<td><b>객실</b> </td>
+									<td>외송 </td>
+								</tr>	
+								<tr>
+									<td><b>날짜</b>  </td>
+									<td>2020.05.03 ~ 2020.05.04 </td>
+								</tr>
+								<tr>
+									<td><b>숙박인원</b> </td>
+									<td>6명 </td>
+								</tr>
+								<tr>
+									<td><b>가격</b>  </td>
+									<td>200,000원 </td>
+								</tr>
+								
+						</table>
+						<p><b><label for="dept">▶개인정보 입력 </label> </b></p>
+					</div>
+					
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center">이름 </div>
+								</td>
+								<td bgcolor = "white"><input name="ntdName" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">연락처 </div>
+								</td>
+								<td><input name="ntpassword" type="password" maxlength="10" /></td>
+							</tr>
+							
+
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center">비상 연락처 </div>
+								</td>
+								<td bgcolor = "white"><input name="boardSubject" type="text" maxlength="70" /></td>
+							</tr>
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">남기실 말씀 </div>
+								</td>
+								<td><textarea name="boardContent" cols="50" rows="10"></textarea>
+								</td>
+							</tr>
+
+
+						</table>
+						</div>
+					
+					
+					
+					
+								<form action="#" method="post">
+									
+										<div class="field">
+										<p><b><label for="dept">▶결제방법 선택 </label> </b></p>
+										<div class="field half first">
+											<select name="dept" id="dept">
+												<option value="">결제수단 선택 </option>
+												<option value="1">무통장 입금(계좌이체)</option>
+												<option value="1">카카오페이 </option>
+											</select>
+										</div>	
+
+										</div>
+										<div class="number">
+							
+					<label for="dept">환불규정 확인 </label>
+							
+					<p>	
+						√ 예약취소는 온라인에서 직접 예약을 취소하여야 하며, 무통장 입금으로 예약한 고객은 환불 받으실 계좌번호를 기재하여 주시면 <br />
+					 	√ 주말을 제외한 3일 이내에 환불 처리 됩니다.<br />
+						√ 온라인 카드 결제 시 카드 취소 처리기간으로 인해 7일이 소요되며, 취소수수료를 제외한 결제 금액이 부분 취소됩니다.<br />
+						√ 예약된 인원 외 추가 인원 check in 또는 애완동물 동반 입실시 환불없이 예약취소 됩니다.<br />
+						√ 고객님의 사정에 의해 예약을 취소하거나 예약 날짜를 변경할 경우 예약 취소에 해당되며, 아래와 같이 취소 수수료가 적용되어 환불 되므로 <br />
+						√ 신중히 예약하기 바랍니다.<br />
+						√ 예약 당일부터 24시까지는 1일 전이며, 그 이후부터 24시간 경과 시 1일씩 경과하는 것으로 계산합니다.<br />
+						√ 환불규정은 고객님과 펜션의 공정한 계약이므로 동의하신다면 진행하시기 바랍니다.<br />
+						√ 환불은 입금자명으로 되며, 입금 시 송금수수료는 제외한 후 입금됩니다.</p>	
+</div>
+
+					<div class="table-wrapper">
+					
+						<table>
+							<thead>
+								<tr>
+									<th>숙박당일 전날 </th>
+									<th>숙박 1일전 </th>
+									<th>숙박 2일전 </th>
+									<th>숙박 3일전 </th>
+									<th>숙박 4일전 </th>
+									<th>숙박 5일전 </th>
+									<th>숙박 6일전 </th>
+									<th>숙박 7일전 </th>
+									<th>숙박 8일전 </th>
+									<th>숙박 9일전 </th>
+									<th>숙박 10일전 </th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr>
+									<td>환불 불가 </td>
+									<td>환불 불가 </td>
+									<td>10% 환불 </td>
+									<td>20% 환불</td>
+									<td>30% 환불</td>
+									<td>40% 환불</td>
+									<td>50% 환불</td>
+									<td>60% 환불</td>
+									<td>70% 환불</td>
+									<td>80% 환불</td>
+									<td>90% 환불</td>
+								</tr>
+								
+							</tbody>
+						
+						</table>
+				
+
+				</div>
+	</form>
+			</div>
+	
+		</div>
+	
+	</section>
+					
+					
+					
+					<ul class="actions align-center">
+										<li><input value="객실예약 " class="button" type="submit" onclick="location.href='reserve3.html' "></li>
+									</ul>
+					
+									</div>
+		
+							</div>
+						</div>
+					</section>
+					
+				
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/house.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('#decrease').click(function(e) {
+			e.preventDefault();
+			var stat = $('#UpDown').text();
+			var num = parseInt(stat, 10);
+			num--;
+			if (num <= 0) {
+				num = 1;
+			}
+			$('#UpDown').text(num);
+		});
+		$('#increase').click(function(e) {
+			e.preventDefault();
+			var stat = $('#UpDown').text();
+			var num = parseInt(stat, 10);
+			num++;
+
+			if (num > 10) {
+				num = 10;
+			}
+			$('#UpDown').text(num);
+		});
+	});
+</script>
+</html>

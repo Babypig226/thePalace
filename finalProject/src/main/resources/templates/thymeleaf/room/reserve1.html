@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실시간예약</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="assets/css/hmain.css" />
+</head>
+<body>
+		<!-- Header -->
+		<header role="header" data-include="hheader.html" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" data-include="hnav.html"></nav>
+	
+	
+	
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1>실시간 예약 </h1>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+		<div id="menu-wrapper">
+		<div id="menu" class="container">
+			<ul>
+				<li><a href="reservationGuide.html"><font size = "4">실시간예약 </font></a></li>
+				<li><a href="guide.html"><font size = "4">예약안내 </font></a></li>
+				<li><a href="structure.html"><font size = "4">객실배치도 </font></a></li>
+				<li><a href="room/roomList.html"><font size = "4">객실등록 -관리자만 보임 </font></a></li>
+			</ul>
+			
+		</div>
+	</div>
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+				
+					<h2 class="align-center">RESERVATION</h2>
+					<p class="align-center">실시간 예약  </p>
+					
+					
+					<div class="table-wrapper">
+					</div>
+					<section>
+						<div class="box">
+							<div class="content">
+								<p><b>선택한 객실</b> : [외송]</p>
+								<hr />
+								<form action="#" method="post">
+									
+										<div class="field">
+										<label for="dept">기간선택 </label>
+										<div class="field half first">
+											<select name="dept" id="dept">
+												<option value="">머무르실 기간 선택 </option>
+												<option value="1">1박 </option>
+											</select>
+										</div>	
+
+										
+										<div class="number">
+								<p>
+									<label for="dept">인원 </label> <a href="#" id="increase">▲</a>&nbsp;<span
+										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
+								</p>
+						
+							</div>
+							
+							
+		
+					<label for="dept">금액 </label>
+					
+					<div class="table-wrapper">
+						<table>
+								<tr>
+									<td>객실금액 </td>
+									<td>0원 </td>
+								</tr>	
+								<tr>
+									<td>인원추가금액 </td>
+									<td>0원 </td>
+								</tr>
+								<tr>
+									<td>옵션금액 </td>
+									<td>0원 </td>
+								</tr>
+						</table>
+						<p><b><label for="dept">▶총 금액 : 0원  </label> </b></p>
+					</div>
+				</div>
+	</form>
+			</div>
+	
+		</div>
+	
+	</section>
+					
+					
+					<p align="center">기간선택과 인원을 기입하시면 다음 단계로 넘어가실 수 있습니다.</p>
+					<ul class="actions align-center">
+										<li><input value="다음단계 " class="button" type="submit"></li>
+									</ul>
+					
+									</div>
+		
+							</div>
+						</div>
+					</section>
+					
+				
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/house.js"></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('#decrease').click(function(e) {
+			e.preventDefault();
+			var stat = $('#UpDown').text();
+			var num = parseInt(stat, 10);
+			num--;
+			if (num <= 0) {
+				num = 1;
+			}
+			$('#UpDown').text(num);
+		});
+		$('#increase').click(function(e) {
+			e.preventDefault();
+			var stat = $('#UpDown').text();
+			var num = parseInt(stat, 10);
+			num++;
+
+			if (num > 10) {
+				num = 10;
+			}
+			$('#UpDown').text(num);
+		});
+	});
+</script>
+</html>
