@@ -2,51 +2,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 상세보기</title>
+<title>공지사항게시판 상세보기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/productmain.css" />
+<link rel="stylesheet" href="../assets/css/productmain.css" />
+<style type="text/css">
+td {
+	background-color: white;
+}
+#bg {
+	background-color: #F2F2F2;
+}
+</style>
 </head>
 <body>
 <!-- Header -->
-	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
 		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="Productnav.html"></nav>
+	<nav id="Productnav" data-include="../Productnav.html"></nav>
 	
 <!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-						<h2 class="align-center">상세보기</h2>
+						<h2 class="align-center">공지사항게시판 상세보기</h2>
 						
 						<div class="table-wrapper">
 						<table cellpadding="0" cellspacing="0">
+						<tr>
+								<td>
+									<div align="center">공지번호</div>
+								</td>
+								<td>146574</td>
+							</tr>
+							
 							<tr>
-								<td bgcolor = "white" >
+								<td>
 									<div align="center">작성자</div>
 								</td>
-								<td bgcolor = "white">여기 th로 해서 따란</td>
+								<td>146574</td>
 							</tr>
 							
 							<tr>
-								<td bgcolor = "white">
-									<div align="center">비밀번호</div>
+								<td>
+									<div align="center">작성일</div>
 								</td>
-								<td><input type = "password" id = "ntpassword" maxlength="10"/></td>
+								<td>2020-09-21</td>
 							</tr>
 							
-
 							<tr>
-								<td  bgcolor = "white">
+								<td>
 									<div align="center">제 목</div>
 								</td>
-								<td bgcolor = "white">아무리생각해도 쩐주당이 넘모 먹고싶은걸</td>
+								<td>아무리생각해도 쩐주당이 넘모 먹고싶은걸</td>
 							</tr>
 
 							<tr>
-								<td bgcolor = "white">
+								<td>
 									<div align="center">내 용</div>
 								</td>
 								<td>한국전통공예품 오예 가지고싶어요 ㅠㅠㅠㅠ 넘모 넘모 가지고 싶어요 재고가 왜 없나요 <br/>
@@ -54,22 +68,12 @@
 								</td>
 							</tr>
 
-							<tr>
-								<td bgcolor = "white">
-									<div align="center">파일첨부</div>
-								</td>
-			<td bgcolor = "white">
-				파일명 :) th 따란
-				<input type="button" id="btn" value="삭제"/><br/>
-			</td>	
-	</tr>
 
 							<tr align="center" >
-									<td colspan="5">
-			<a href="#"><input type = "button" value="답변" id = "ans" /></a>
-			<a href="noticeModify.html"><input type = "button" value="수정" id = "modify" /></a>
-			<a href="noticeDelete.html"><input type = "button" value="삭제" id = "del" /></a>
-			<a href="notice_board.html"><input type = "button" value="목록" id = "home" /></a>
+									<td colspan="2">
+			<a href="noticeModify.html"><input type = "button" value="수정" id = "ntmodify" /></a>
+			<a href="noticeDelete.html"><input type = "button" value="삭제" id = "ntdel" /></a>
+			<a href="noticeList.html"><input type = "button" value="목록" id = "nthome" /></a>
 		                   </td>
 								</tr>
 						</table>
@@ -81,7 +85,7 @@
 	
 	
 <!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>

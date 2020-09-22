@@ -2,88 +2,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
-<meta charset="utf-8" />
+<title>공지사항게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/productmain.css" />
+<link rel="stylesheet" href="../assets/css/productmain.css" />
 </head>
+
 <body>
-<!-- Header -->
-	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+    
+	<!-- Header -->
+	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
 		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="Productnav.html"></nav>
-  
-  	
-<table align = "center">
-	<tr align="center">
-		<td colspan="4"><font size = 6>공지사항</font><font size=4>notice</font></td>
-		<td align=right>
-			<font size=2>글 개수 </font>
-		</td>
-	</tr>
-	<tr align="center">
-		<td width="20%" height="26">글번호</td>
-		<td width="36%">제목</td>
-		<td  width="14%">글쓴이</td>
-		<td  width="17%">작성일</td>
-		<td width="11%">조회수</td>
-	</tr>
-	<tr align="center">
-		<td height="25" >1</td>
-		<td ><a href="#">작성자 글이 짜란</a></td>
-		<td>souvenior shop관리자</td>
-		<td>2020.09.03</td>	
-		<td >13</td>
-	</tr>
-	<tr align=center height="25">
-		<td colspan=7 style=font-family:Tahoma;font-size:10pt;>
-		</td>
-	</tr>
-
-	<tr align="center" valign="middle">
-		<td colspan="4"></td>
-		<td align=right>
-			
-		</td>
-	</tr>
-
-	<tr align="right">
-		<td colspan="5">
-	   		<a href="#"><input type = "button" name = "NoticeWrite" value = "글쓰기 "  id = "NoticeWrite"></a>
-	   		<a href="Support.html"><input type = "button" name = "NoticeList" value = "목록"  id = "NoticeList"> </a>
-		</td>
-	</tr>
-</table>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<section id="one" class="wrapper style2">
+	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
 		<div class="inner">
-			<div>
-				<div class="box">
-
-					<div class="content">
-						<header class="align-left">
-							<a href = "Support.html">고객센터</a>
-							<h2>02-1234-5678</h2>
-							<p>
-								업무시간 AM. 09:00 ~ PM. 06:00<br /> 
-								점심시간 AM. 12:00 ~ PM. 01:00<br />
-								(토 · 일요일, 공휴일 휴무)
-							</p>
-						</header>
-						
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">공지사항게시판</h2>
+					
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>공지번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1357</td>
+									<td><a href = "noticeView.html">손거울 재고가 없나요?</a></td>
+									<td>계란후라이</td>
+									<td>2020-09-02</td>
+									<td>12</td>
+									
+								</tr>
+								<tr>
+									<td>1357</td>
+									<td><a href = "#">전통문양노트 다른 디자인은 없나요?</a></td>
+									<td>공주</td>
+									<td>2020-09-02</td>
+									<td>25</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr align="center">
+									<td colspan="5"><a>1</a></td>
+								</tr>
+								<tr align="center">
+									<td colspan="5"><a href="Support.html" class="button alt">목록으로</a>
+									<a href="noticeWrtie.html" class="button alt">글작성하기</a></td>
+								</tr>
+							</tfoot>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -92,6 +77,7 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/product.js"></script>
 </body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
 <script>
 	$(function() {
 		includeLayout();
@@ -109,4 +95,5 @@
 		});
 	}
 </script>
+
 </html>
