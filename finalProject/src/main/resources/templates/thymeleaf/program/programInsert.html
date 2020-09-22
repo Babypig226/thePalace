@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>프로그램 등록 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/program.css" />
+<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
 </head>
+
 <body>
 <!-- Header -->
-		<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="Productnav.html"></nav>
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
 	
 	
 	<!-- Registration Form -->
@@ -20,7 +25,7 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form action="#" method="post" name="noticeform"
+					<form th:action="programInsert" method="post" name="noticeform"
 						enctype="multipart/form-data">
 						<h2 class="align-center">프로그램 등록하기 </h2>
 						<p>
@@ -147,7 +152,7 @@
 	
 	
 <!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>

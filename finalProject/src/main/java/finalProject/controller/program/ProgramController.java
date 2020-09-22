@@ -32,8 +32,18 @@ public class ProgramController {
 		return "thymeleaf/program/programList";
 	}
 	
+	@RequestMapping("programForm")
+	public String programForm() {
+		return "thymeleaf/program/programInsert"; 
+	}
+	
 	@RequestMapping("programInsert")
 	public String programInsert() {
-		return "thymeleaf/program/programInsert"; 
+		return "redirect:/program/programInsert"; 
+	}
+	
+	@RequestMapping("programDetail")
+	public String programDetail() {
+		return "redirect:/program/programDetail"; 
 	}
 }
