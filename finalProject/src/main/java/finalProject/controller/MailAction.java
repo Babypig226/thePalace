@@ -21,7 +21,7 @@ public class MailAction {
 		String content = "<html><body>"
 				       + "안녕하세요 '" + userId +"'님 가입을 환영합니다.<br />"
 				       + "아래 링크를 눌러야 가입이 완료가 됩니다. <br />"
-				       + "<a href='http://localhost:9090/register/"
+				       + "<a href='http://192.168.35.166:8088/sign-up/"
 				       + "memberMail?num="+num+"&reciver="+reciver+"&userId="+userId+"'>"
 				       + "<strong><b>"
 				       + "가입을 완료하시려면 여기를 눌러주세요.</a>"

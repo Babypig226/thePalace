@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.MemberMapper">
+	<sql id = "basecolumn">
+		USER_ID, USER_PW, USER_NAME, USER_PH, USER_EMAIL, USER_ADDR,
+		USER_GENDER, USER_AGE, USER_BIRTH, USER_REGIST, JOIN_OK
+	</sql>
+	
+	<insert id="insertMember" parameterType="finalProject.domain.MemberDTO">
+		insert into member (<include refid="basecolumn" />)
+		values (#{userId, jdbcType = VARCHAR}, #{userPw, jdbcType = VARCHAR},
+			  	#{userName, jdbcType = VARCHAR}, #{userPh, jdbcType = VARCHAR},
+			  	#{userEmail, jdbcType = VARCHAR}, #{userAddr, jdbcType = VARCHAR},
+			    #{userGender, jdbcType = VARCHAR}, #{userAge, jdbcType = BIGINT},
+			    #{userBirth, jdbcType = TIMESTAMP}, sysdate, null)
+	</insert>
+	
+	<resultMap type="finalProject.domain.MemberDTO" id="baseMember">
+		<id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+		<result column="USER_PW" jdbcType="VARCHAR" property="userPw"/>
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+		<result column="USER_PH" jdbcType="VARCHAR" property="userPh"/>
+		<result column="USER_EMAIL" jdbcType="VARCHAR" property="userEmail"/>
+		<result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr"/>
+		<result column="USER_GENDER" jdbcType="VARCHAR" property="userGender"/>
+		<result column="USER_AGE" jdbcType="BIGINT" property="userAge"/>
+		<result column="USER_BIRTH" jdbcType="TIMESTAMP" property="userBirth"/>
+		<result column="USER_REGIST" jdbcType="TIMESTAMP" property="userRegist"/>
+		<result column="JOIN_OK" jdbcType="VARCHAR" property="joinOk"/> 
+	</resultMap>
+	
+	<select id="selectByMember" parameterType="finalProject.domain.MemberDTO" resultMap="baseMember">
+		select * 
+		from (select rownum rn, <include refid="basecolumn" />
+			from (select <include refid="basecolumn" /> 
+				from member
+				<where>
+					<if test="userId != null and joinOk != null ">
+						user_id = #{userId} 
+					</if>
+					<if test="userId != null and joinOk == null">
+						user_id = #{userId} and join_ok is not null
+					</if>
+				</where>
+				order by user_regist desc))
+			<where>
+				<if test="startEndPageDTO != null">
+						rn between #{startEndPageDTO.startPage} 
+					and #{startEndPageDTO.endPage}
+				</if>
+			</where>
+	</select>
+	
+	<update id="joinOkUpdate" parameterType="finalProject.domain.MemberDTO">
+		update member
+		set join_ok = #{joinOk}
+		where user_id = #{userId} and user_email = #{userEmail}
+		and join_ok is null
+	</update>
+	
+</mapper>

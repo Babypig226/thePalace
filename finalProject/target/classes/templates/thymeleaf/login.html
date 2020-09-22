@@ -1,37 +1,41 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 	<head>
 		<title>the Palace</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" th:href=@{/static/assets/css/main.css} />
     </head>
 	<body class="subpage">
 
 		<!-- Header -->
-		<header id="header" data-include="header.html"></header>
+		<header id="header" th:include="thymeleaf/header"></header>
 
         <!-- Nav -->
-        <nav id="menu" data-include="nav.html"></nav>
+        <nav id="menu" th:include="thymeleaf/nav"></nav>
 		<!-- One -->
 			<section id="one" class="wrapper style2">
 			    <div class="inner">
 			        <div class="box">
 						<div class="image fit">
-							<img src="images/image01.jpg" alt="" />
+							<img th:src=@{/static/images/image01.jpg} alt="" />
 						</div>
 			            <div class="content">
-			                <form method="post" action="#">
+			                <form method="post" th:action="@{/login}" name="frm" id="frm" th:object="${loginCommand}">
 
 			                    <head>
 			                        <h2>회원로그인</h2>
 			                    </head>
 			                    <div class="row uniform">
 			                        <div class="6u$ 12u$(xsmall)">
-			                            <input type="text" name="demo-name" id="demo-name" placeholder="ID" />
+			                            <input type="text" name="userId" id="userId" placeholder="ID" th:value="${isId}"/>
+			                            <span th:text="${valid_user}" th:classappend="${valid_user != null}? 'has-error'"></span>
 			                        </div>
 			                        <div class="6u$ 12u$(xsmall)">
-			                            <input type="password" name="demo-password" id="demo-password" placeholder="password" />
+			                            <input type="password" name="userPw" id="userPw" placeholder="password" />
+			                            <span th:text="${valid_pw}" th:classappend="${valid_pw != null}? 'has-error'"></span>
 			                        </div>
 			                        <div class="6u$ 12u$(xsmall)">
 			                            <input type="submit" value="로그인" class="alt" />
@@ -45,25 +49,25 @@
 			</section>
 
 		<!-- Footer -->	
-		<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
 
-    </body>
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
 	<script>
 		$(function () {
 			includeLayout();
 		});
 		$(function(){
 				$("#regist").click(function(){
-				location.href = "sign-up/member-agree.html"
+				location.href = "/sign-up/member-agree"
 			});
 			});	
 		function includeLayout() {

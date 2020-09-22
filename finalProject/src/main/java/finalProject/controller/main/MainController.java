@@ -16,5 +16,4 @@ public class MainController {
 		action.execute(request, response);
 		return "thymeleaf/index";	
 	}
-
 }
