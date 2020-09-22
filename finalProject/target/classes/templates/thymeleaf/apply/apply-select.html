@@ -6,7 +6,7 @@
 		<title>the Palace</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" th:href="@{static/assets/css/main.css}" />
+		<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
 	</head>
 	<body>
 
@@ -16,7 +16,7 @@
 		</header>
 
         <!-- Nav -->
-        <nav id="menu" th:include="thymeleaf/nav.html"></nav>
+        <nav id="menu" th:include="thymeleaf/nav.html" ></nav>
 
 		<!-- Three -->
 			<section id="three" class="wrapper style2">
@@ -26,7 +26,7 @@
 						<div>
 							<div class="box">
 								<div class="image fit">
-									<img th:src="@{/static/images/applynow.jpg}" alt="" />
+									<img th:src="@{/static/images/applynow.jpg}" width = "300" height = "350"  alt="" />
 								</div>
 								<div class="content">
 									<header class="align-center">
@@ -45,7 +45,7 @@
 						<div>
 							<div class="box">
 								<div class="image fit">
-									<img th:src="@{/static/images/lecture.jpg}" alt="" />
+									<img th:src="@{/static/images/lecture.jpg}" width = "300" height = "350"  alt="" />
 								</div>
 								<div class="content">
 									<header class="align-center">
@@ -55,7 +55,7 @@
 									<hr />
 									<p>전통문화에 조예가 깊으시거나 직원 역량 강화에 관심이 많으신 강사를 모집합니다.</p>
 									<div class="align-center">
-										<a href="#" class="button alt">강사모집</a>
+										<a th:href="@{/hr/tutorSel}" class="button alt">강사모집</a>
                                     </div>
 								</div>
 							</div>
