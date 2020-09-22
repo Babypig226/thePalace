@@ -23,27 +23,31 @@
 							<img th:src=@{/static/images/image01.jpg} alt="" />
 						</div>
 			            <div class="content">
-			                <form method="post" action="#">
-
+			                <form method="post" th:action="@{/login}" name="frm" id="frm" th:object="${loginCommand}">
 			                    <head>
 			                        <h2>회원로그인</h2>
 			                    </head>
 			                    <div class="row uniform">
 			                    <div>
-									<input type="checkbox" id="demo-copy" name="saveID">
-									<label for="demo-copy">ID저장</label>
+									<input type="checkbox" id="saveID" name="saveID" 
+											th:attr="checked = ${isId != null} ? 'true': 'false'">
+									<label for="saveID">ID저장</label>
 								</div>
 								<div>
-									<input type="checkbox" id="demo-human" name="authLogin">
-									<label for="demo-human">자동로그인</label>
+									<input type="checkbox" id="autologin" name="autologin">
+									<label for="autologin">자동로그인</label>
 								</div>
 								</div>
 			                    <div class="row uniform">
 			                        <div class="6u$ 12u$(xsmall)">
-			                            <input type="text" name="demo-name" id="demo-name" placeholder="ID" />
+			                            <input type="text" name="userId" id="userId" placeholder="ID" th:value="${isId}"/>
+			                            
+			                            <span th:text="${valid_user}" th:classappend="${valid_user != null}? 'has-error'"></span>
 			                        </div>
 			                        <div class="6u$ 12u$(xsmall)">
-			                            <input type="password" name="demo-password" id="demo-password" placeholder="password" />
+			                            <input type="password" name="userPw" id="userPw" placeholder="password" />
+			                            
+			                            <span th:text="${valid_pw}" th:classappend="${valid_pw != null}? 'has-error'"></span>
 			                        </div>
 			                        <div class="6u$ 12u$(xsmall)">
 			                            <input type="submit" value="로그인" class="alt" />
@@ -75,7 +79,7 @@
 		});
 		$(function(){
 				$("#regist").click(function(){
-				location.href = "sign-up/member-agree.html"
+				location.href = "/sign-up/member-agree"
 			});
 			});	
 		function includeLayout() {

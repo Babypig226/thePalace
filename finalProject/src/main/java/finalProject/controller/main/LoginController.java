@@ -1,5 +1,6 @@
 package finalProject.controller.main;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -33,5 +34,15 @@ public class LoginController {
 		}
 		String location = loginService.execute(loginCommand, session, response, model);
 		return location;
+	}
+	
+	@RequestMapping(value = "logout")
+	public String logout(HttpSession session, HttpServletResponse response) {
+		Cookie autoLoginCookie = new Cookie("autologin", "");
+		autoLoginCookie.setPath("/");
+		autoLoginCookie.setMaxAge(0);
+		response.addCookie(autoLoginCookie);
+		session.invalidate();
+		return "thymeleaf/index";
 	}
 }

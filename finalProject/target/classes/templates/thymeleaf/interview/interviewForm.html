@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-     layout:decorator="layout">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<link rel="stylesheet" href="../assets/css/program.css" />
 <title>강사모집공고작성</title>
 <style type="text/css">
 td {
@@ -15,11 +13,11 @@ td {
 </head>
 <body>
 	<!-- Header -->
-	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
@@ -31,59 +29,88 @@ td {
 						<p>▶내용을 입력하신 다음 "등록하기" 버튼을 눌러주세요</p>
 						<div class="table-wrapper">
 							<table cellpadding="0" cellspacing="0">
-							
 
 								<tr>
 									<td>
-										<div align="left">공고명</div>
+										<div align="center">면접번호</div>
 									</td>
-									<td><input name="col" type="text"maxlength="10" /></td>
+									<td><input name="col" type="text"
+										maxlength="10" /></td>
 								</tr>
 								
 								<tr>
 									<td>
-										<div align="left">모집기간 </div>
+										<div align="center">직원번호 </div>
 									</td>
 									<td><input name="employee_no" type="text"
 										maxlength="10" /></td>
 								</tr>
-								</table>
-							        <h3>모집상세내용</h3>
-        								<div class="field">
-											<textarea rows="20"></textarea>
-										</div>
-								<table>	
+								
 								<tr>
 									<td>
-									<div align="left">서류합격자 발표일</div>
+										<div align="center">등록희망서번호  </div>
 									</td>
-									<td>
-										<input type="date" id="retireddate" >
-									</td>
-									<td>
-									<div align="left">면접일</div>
-									</td>
-									<td> 
-										<input type="date" id="retireddate" >
-									</td>
+									<td><input name="register_no" type="text"
+										maxlength="10" /></td>
 								</tr>
 								
 								<tr>
 									<td>
-										<div align="center">면접장소</div>
+										<div align="center">서류점수</div>
 									</td>
-									<td><input name="col" type="text"maxlength="10" /></td>
-									<td>
-										<div align="center">모집분야</div>
-									</td>
-									<td><select name='tinterview_score' width='150px'>
-								<option value=0>select</option>
-								<option>공예</option>
-								<option>다도</option>
-								<option>동양자수</option>
+									<td><select name='tdoc_score' width='150px'>
+								<option value=0>A+</option>
+								<option>A</option>
+								<option>B+</option>
+								<option>B</option>
+								<option>C-</option>
+								<option>D</option>
 
 							</select></td>
 								</tr>
+								
+								<tr>
+									<td>
+										<div align="center">면접점수</div>
+									</td>
+									<td><select name='tinterview_score' width='150px'>
+								<option value=0>A+</option>
+								<option>A</option>
+								<option>B+</option>
+								<option>B</option>
+								<option>C-</option>
+								<option>D</option>
+
+							</select></td>
+								</tr>
+								
+								<tr>
+									<td>
+										<div align="center">심사기준</div>
+									</td>
+									<td><textarea rows="10" cols="90" name = "pro_guide">
+									</textarea> </td>
+								</tr>
+								
+								
+								<tr>
+									<td>
+										<div align="center">종합점수</div>
+									</td>
+									<td><select name='tinterview_score' width='150px'>
+								<option value=0>A+</option>
+								<option>A</option>
+								<option>B+</option>
+								<option>B</option>
+								<option>C-</option>
+								<option>D</option>
+
+							</select></td>
+								</tr>
+								
+								
+
+								
 								<tr align="right">
 									<td colspan="5"><a href="interviewList.html"><input
 											type="button" value="목록" /></a> <input value="등록" class="button"
@@ -99,14 +126,14 @@ td {
 	</section>
 
 	<!-- Footer -->
-	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
 	<!-- Scripts -->
-	<script th:src=@{/static/assets/js/jquery.min.js}></script>
-	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
-	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
-	<script th:src=@{/static/assets/js/skel.min.js}></script>
-	<script th:src=@{/static/assets/js/util.js}></script>
-	<script th:src=@{/static/assets/js/main.js}></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
 </body>
 <script>
 	$(function() {

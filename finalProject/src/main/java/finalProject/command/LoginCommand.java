@@ -12,4 +12,6 @@ public class LoginCommand {
 	String userId;
 	@NotEmpty
 	String userPw;
+	Boolean saveID;
+	Boolean autologin;
 }

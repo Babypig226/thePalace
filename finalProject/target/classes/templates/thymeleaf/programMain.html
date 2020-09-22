@@ -36,9 +36,9 @@
       <div id="menu" class="container">
          <ul>
             <li><a href="../program/Made"><font size="4">공예체험프로그램</font></a></li>
-            <li><a href="program/traditional_culture.html"><font size="4">전통문화프로그램</font></a></li>
-            <li><a href="#"><font size="4">투어프로그램</font></a></li>
-            <li><a href="#"><font size="4">피트니스프로그램</font></a></li>
+            <li><a href="../program/culture"><font size="4">전통문화프로그램</font></a></li>
+            <li><a href="../program/tour"><font size="4">투어프로그램</font></a></li>
+            <li><a href="../program/fitness"><font size="4">피트니스프로그램</font></a></li>
          </ul>
       </div>
    </div>
@@ -169,7 +169,7 @@
 
    </form>
    <!-- Footer -->
-   <footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
    	<!-- Scripts -->
    	<script th:src=@{/static/assets/js/jquery.min.js}></script>
 	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>

@@ -2,6 +2,7 @@ package finalProject.service.login;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -41,7 +42,27 @@ public class LoginService {
 				authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
 										member.getUserName(), member.getUserPw());
 				session.setAttribute("authInfo", authInfo);
-				//자동로그인이랑 아이디 저장을 안했음	
+				//자동로그인이랑 아이디 저장을 안했음
+				Boolean saveID = loginCommand.getSaveID();
+				Boolean autologin = loginCommand.getAutologin();
+				System.out.println("autologin : "+autologin);
+				if(autologin != null && autologin == true) {
+					System.out.println("자동로그인 중입니다.");
+					Cookie cookie = new Cookie("autologin", authInfo.getId());
+					cookie.setMaxAge(60*60*24*30);
+					response.addCookie(cookie);
+				}
+				if(saveID != null && saveID == true) {
+					Cookie cookie = new Cookie("saveID", authInfo.getId());
+					cookie.setPath("/");
+					cookie.setMaxAge(60*60*24*30);
+					response.addCookie(cookie);
+				}else {
+					Cookie cookie = new Cookie("saveID", authInfo.getId());
+					cookie.setPath("/");
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+				}
 				location = "redirect:/";
 			}else {
 				model.addAttribute("valid_pw", "비밀번호가 틀립니다.");

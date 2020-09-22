@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-     layout:decorator="layout">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<link rel="stylesheet" href="../assets/css/program.css" />
 <title>강사고용</title>
 <style type="text/css">
 td {
@@ -15,11 +13,11 @@ td {
 </head>
 <body>
 	<!-- Header -->
-	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+	<nav id="Programnav" data-include="../Programnav.html"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
@@ -111,14 +109,14 @@ td {
 	</section>
 
 	<!-- Footer -->
-	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
 	<!-- Scripts -->
-	<script th:src=@{/static/assets/js/jquery.min.js}></script>
-	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
-	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
-	<script th:src=@{/static/assets/js/skel.min.js}></script>
-	<script th:src=@{/static/assets/js/util.js}></script>
-	<script th:src=@{/static/assets/js/main.js}></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
 </body>
 <script>
 	$(function() {
