@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import finalProject.command.ProgramListCommand;
 import finalProject.domain.ProgramDTO;
 import finalProject.mapper.ProgramMapper;
-
+@Component
+@Service
 public class ProgramService {
 	@Autowired
 	ProgramMapper programMapper;
