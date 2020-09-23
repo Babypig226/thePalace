@@ -1,10 +1,11 @@
     <div class="logo"><a th:href="@{/}">the Palace <span>by 팀이름</span></a></div>
 	<span th:if="${session.authInfo == null}">
-    <a href = "/login">로그인</a>
+    <a th:href = "@{/login}">로그인</a>
     <a href ="sign-up/member-agree">회원가입</a>
     </span>
     <span th:if="${session.authInfo}">
     <a th:href = "@{/sign/out}">로그아웃</a>
+    <a th:href = "@{/admin/view}">관리자페이지</a>
     <a href ="mypage/Mypage">마이페이지</a>	
     </span>
     <a href="#menu" class="toggle"><span>메뉴</span></a>

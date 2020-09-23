@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.DepMapper">
+	<sql id = "columns">
+		DEPARTMENT_NO, DEPARTMENT_NAME, DEPARTMENT_PH, DEPARTMENT_ADDR
+	</sql>
+	<sql id="dNo">
+		select nvl(max(department_no),0)+1
+		from department
+	</sql>
+	<insert id="depInsert" parameterType="finalProject.domain.DepDTO">
+		insert into department (<include refid = "columns"/>)
+		values((<include refid = "dNo"/>),#{departmentName}, #{departmentPh}, #{departmentAddr}) 		
+	</insert>
+</mapper>

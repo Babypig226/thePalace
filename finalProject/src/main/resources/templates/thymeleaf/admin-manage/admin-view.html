@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="utf-8">
+<title>the PALACE | Admin Main</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+
+</head>
+<body>
+	<!-- Header -->
+	<header role="header" th:include="thymeleaf/header" id="header">
+			    <a href="#menu" class="toggle"><span>메뉴</span></a>
+		</header>
+	<!-- Nav -->
+	<nav id="menu" th:include="thymeleaf/nav"></nav>
+
+	<section id="one" class="wrapper style2">
+				<div class="inner">
+					<div>
+						<div class="box">
+							<div class="image fit">
+								<img th:src=@{/static/images/image01.jpg} alt="" />
+							</div>
+							<div class="content">
+								<header class="align-center">
+									<h2>관리자페이지</h2>
+								</header>
+								<hr />
+								<a th:href = "@{/dep/list}">부서</a>
+								<a>직원</a>
+								<a>강사</a>
+								<a>임대</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{/static/assets/js/jquery.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{/static/assets/js/skel.min.js}></script>
+	<script th:src=@{/static/assets/js/util.js}></script>
+	<script th:src=@{/static/assets/js/main.js}></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>
