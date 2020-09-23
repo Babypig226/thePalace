@@ -1,12 +1,22 @@
 package finalProject.controller.program;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import finalProject.command.ProgramListCommand;
+import finalProject.service.program.ProgramService;
 
 @Controller
 @RequestMapping("program")
 public class ProgramController {
-
+	@Autowired
+	ProgramService programService;
+	
 	@RequestMapping("Made")
 	public String made() {
 		return "thymeleaf/program/traditional_craft";
@@ -38,12 +48,18 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("programInsert")
-	public String programInsert() {
+	public String programInsert(@Validated ProgramListCommand programListCommand,
+							BindingResult result, HttpServletRequest request) throws Exception {
+		if (result.hasErrors()) {
+			System.out.println("programInsert");
+			return "thymeleaf/program/programInsert";
+		}
+		programService.programInsert(programListCommand, request);
 		return "redirect:/program/programInsert"; 
 	}
 	
 	@RequestMapping("programDetail")
 	public String programDetail() {
-		return "redirect:/program/programDetail"; 
+		return "thymeleaf/program/programDetail"; 
 	}
 }
