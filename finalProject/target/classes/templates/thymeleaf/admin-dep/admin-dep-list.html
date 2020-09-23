@@ -35,30 +35,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Item 1</td>
-                                    <td><a>pangzzu</a></td>
-                                    <td>010-1234-1234</td>
-                                    <td>2020-08-31</td>
-                                </tr>
-                                <tr>
-                                    <td>Item 2</td>
-                                    <td><a>chickenprincess</a></td>
-                                    <td>010-1212-1212</td>
-                                    <td>2020-08-31</td>
-                                </tr>
-                                <tr>
-                                    <td>Item 3</td>
-                                    <td><a>shineeys</a></td>
-                                    <td>010-2424-2424</td>
-                                    <td>2020-08-31</td>
-                                </tr>
-                                <tr>
-                                    <td>Item 4</td>
-                                    <td><a>babypig</a></td>
-                                    <td>010-5757-5757</td>
-                                    <td>2020-08-31</td>
-                                </tr>
+                            	<div th:each = "d:${list}">
+                            		<tr>
+                            			<td>[[${d.departmentNo}]]</td>
+                            			<td><a th:href = "@{/dep/view(dpNo=${d.departmentNo})}">[[${d.departmentName}]]</a></td>
+                            			<td>[[${d.departmentAddr}]]</td>
+                            			<td>[[${d.departmentPh}]]</td>
+                            		</tr>
+                            	</div>                            
                             </tbody>
                             <tfoot>
                                 <tr>

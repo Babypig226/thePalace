@@ -4,11 +4,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import finalProject.command.DepCommand;
+import finalProject.service.dep.DepListService;
 import finalProject.service.dep.DepService;
 
 @Controller
@@ -16,6 +18,8 @@ import finalProject.service.dep.DepService;
 public class DepController {
 	@Autowired
 	DepService depService;
+	@Autowired
+	DepListService depListService;
 	
 	@ModelAttribute
 	DepCommand setDepCommand() {
@@ -23,7 +27,8 @@ public class DepController {
 	};
 	
 	@RequestMapping("list")
-	public String depList() {
+	public String depList(Model model) {
+		depListService.getDepList(model);
 		return "thymeleaf/admin-dep/admin-dep-list";
 	}
 	

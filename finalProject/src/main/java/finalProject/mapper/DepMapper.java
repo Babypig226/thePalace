@@ -1,5 +1,7 @@
 package finalProject.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +12,6 @@ import finalProject.domain.DepDTO;
 public interface DepMapper {
 
 	public void depInsert(DepDTO dto);
+	public List<DepDTO> getDepList();
 
 }

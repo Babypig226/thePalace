@@ -13,4 +13,14 @@
 		insert into department (<include refid = "columns"/>)
 		values((<include refid = "dNo"/>),#{departmentName}, #{departmentPh}, #{departmentAddr}) 		
 	</insert>
+	<resultMap type="finalProject.domain.DepDTO" id="DepList">
+		<id column = "DEPARTMENT_NO" jdbcType = "VARCHAR" property = "departmentNo"/>
+		<result column = "DEPARTMENT_NAME" jdbcType = "VARCHAR" property = "departmentName"/>
+		<result column = "DEPARTMENT_ADDR" jdbcType = "VARCHAR" property = "departmentAddr"/>
+		<result column = "DEPARTMENT_PH" jdbcType = "VARCHAR" property = "departmentPh"/>
+	</resultMap>
+	<select id="getDepList" resultMap = "DepList">
+		select <include refid="columns"/>
+		from department
+	</select>
 </mapper>
