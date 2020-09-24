@@ -1,21 +1,22 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="../assets/css/program.css" rel="stylesheet" type="text/css"
+<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
 	media="all" />
-<link rel="stylesheet" href="./assets/css/program.css" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
 </head>
 <body>
 <!-- Header -->
-	<header role="pgHeader" data-include="../pgheader.html" id="pgHeader">
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Programnav" data-include="../Programnav.html"></nav>
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
 		<!-- Banner -->
 	
 <section id="three" class="wrapper style2">
@@ -25,15 +26,14 @@
 						<div class="content">
 							
 							<header class="align-center">
-								<h2>다도체험</h2>
+								<h2>[[${prodto.programName}]]</h2>
 							</header>
 							<hr />
 							<p align="left">
-							<b>√ 기간 : 2020.09.16 ~ 2020.10.22</b><br/>
-							<b>√ 강사명 : 진팡쭈</b><br/> 
-							<b>√ 소요시간: 2시간내외</b><br/>
-							<b>√ 프로그램주소 : the palace 궁</b><br/>
-							<b>√ 이용요금 : 30,000원</b><br/>
+							<b>√ 기간 : [[${prodto.programDate}]]</b><br/>
+							<b>√ 강사명 : [[${prodto.teacherNo}]]</b><br/> 
+							<b>√ 프로그램주소 : [[${prodto.programAddr}]]</b><br/>
+							<b>√ 이용요금 : [[${prodto.programPrice}]]</b><br/>
 							
 							</p>
 							
@@ -53,7 +53,7 @@
 										<br />
 										
 							<div class="align-center">
-								<a href="programCart.html" class="button alt">장바구니담기</a>&nbsp; <a
+								<a th:href="@{../prcart/programCartAdd(programName=${prodto.programName})}" class="button alt">장바구니담기</a>&nbsp; <a
 									href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
 									href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
 			
@@ -68,7 +68,7 @@
 				<div>
 						<div class="content">
 						<div class="image fit">
-								<img src="../images/program/dado1.jpg" alt="" />
+								<img th:src="@{/static/programImage/upload/} + ${prodto.programImage}">
 							</div>
 				</div>
 			
@@ -80,7 +80,7 @@
 
 	
 <!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>

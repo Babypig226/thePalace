@@ -39,19 +39,21 @@
 								</tr>
 							</thead>
 							<tbody>
+							<div th:each = "pro:${prolists}">
 								<tr>
-									<td>1</td>
-									<td><a href = "programView.html">한지부채 만들기 체험</a></td>
-									<td>2020-09-02</td>
-									<td>진팡쭈 </td>	
+									<td>[[${pro.programNo}]]<</td>
+									<td><a th:href = "@{/program/programDetail(programName=${pro.programName})}">[[${pro.programName}]]</a></td>
+									<td>[[${pro.programReg}]]<</td>
+									<td>[[${pro.teacherNo}]]<</td>	
 								</tr>
+							</div>
 							</tbody>
 							<tfoot>
 								<tr align="center">
 									<td colspan="5"><a>1</a></td>
 								</tr>
 								<tr align="center">
-									<td colspan="5"><a href="houseSupport.html" class="button">목록으로</a>
+									<td colspan="5"><a href="javascript:history.go(-1)" class="button">목록으로</a>
 									<input value="프로그램 등록하기 " class="button" type="submit"></td>
 								</tr>
 							</tfoot>

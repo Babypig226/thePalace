@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import finalProject.command.ProgramListCommand;
+import finalProject.service.program.ProgramDetailService;
 import finalProject.service.program.ProgramListService;
 import finalProject.service.program.ProgramService;
 
@@ -21,6 +22,8 @@ public class ProgramController {
 	ProgramService programService;
 	@Autowired
 	ProgramListService programListService;
+	@Autowired
+	ProgramDetailService programDetailService;
 	
 	@RequestMapping("Made")
 	public String made() {
@@ -66,7 +69,10 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("programDetail")
-	public String programDetail() {
+	public String programDetail(@RequestParam(value = "programName") String programName, 
+							Model model) throws Exception{
+		programDetailService.programDetail(programName, model);
 		return "thymeleaf/program/programDetail"; 
 	}
+	
 }

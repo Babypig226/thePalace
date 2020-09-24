@@ -36,7 +36,7 @@ public class ProgramService {
 		programDTO.setPOption(programListCommand.getPOption());
 		programDTO.setPOptionPrice(programListCommand.getPOptionPrice());
 		
-		String path = "WEB-INF/programImage/upload";
+		String path = "webapp/programImage/upload";
 		String filePath = session.getServletContext().getRealPath(path);
 		String programImage = "";
 		

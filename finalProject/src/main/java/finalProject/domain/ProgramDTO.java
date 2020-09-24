@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProgramDTO {  
-	String prograNo;
+	String programNo;
 	String teacherNo;
 	String programCategory;
 	String programName;
