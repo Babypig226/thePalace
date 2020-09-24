@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class StartEndPageDTO {
 	Long startPage;
 	Long endPage;
-	String userId;
+	String userId; 
 	String num;
 	public StartEndPageDTO(Long startPage, Long endPage) {
 		super();

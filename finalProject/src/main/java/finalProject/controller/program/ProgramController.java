@@ -4,11 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import finalProject.command.ProgramListCommand;
+import finalProject.service.program.ProgramListService;
 import finalProject.service.program.ProgramService;
 
 @Controller
@@ -16,6 +19,8 @@ import finalProject.service.program.ProgramService;
 public class ProgramController {
 	@Autowired
 	ProgramService programService;
+	@Autowired
+	ProgramListService programListService;
 	
 	@RequestMapping("Made")
 	public String made() {
@@ -38,7 +43,9 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("programList")
-	public String programList() {
+	public String programList(@RequestParam(value = "page", defaultValue = "1") Integer page,
+							Model model) throws Exception{
+		programListService.programList(model, page);
 		return "thymeleaf/program/programList";
 	}
 	
@@ -55,7 +62,7 @@ public class ProgramController {
 			return "thymeleaf/program/programInsert";
 		}
 		programService.programInsert(programListCommand, request);
-		return "redirect:/program/programInsert"; 
+		return "redirect:/program/programList"; 
 	}
 	
 	@RequestMapping("programDetail")

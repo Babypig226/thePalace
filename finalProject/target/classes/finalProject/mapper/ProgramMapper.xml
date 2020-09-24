@@ -3,5 +3,40 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="finalProject.mapper.ProgramMapper">
-
+	<sql id="basecolumn">
+		PROGRAM_NO, PROGERAM_CATEGORY, PROGRAM_NAME, MAX_COUNT, PROGRAM_CONTENT, PROGRAM_IMAGE, PROGRAM_PRICE,
+		P_OPTION, P_OPTION_PRICE, PROGRAM_ADDR, PROGRMAM_DATE, PROGRAM_REG, TEACHER_NO
+	</sql>
+	
+	<insert id="programInsert"  parameterType="finalProject.domain.ProgramDTO">
+		insert into program(<include refid="basecolumn" />)
+		values(pro_seq.nextval, #{programCategory}, #{programName}, #{maxCount}, #{programContent},
+				#{programImage}, #{programPrice}, #{pOption},#{pOptionPrice}, #{programAddr},
+				sysdate, sysdate, #{teacherNo})
+	</insert>
+	
+	<resultMap type="finalProject.domain.ProgramDTO" id="baseProgram">
+		<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo" />
+		<result column="PROGERAM_CATEGORY" jdbcType="VARCHAR" property="programCategory"/>
+		<result column="PROGRAM_NAME" jdbcType="VARCHAR" property="programName"/>
+		<result column="MAX_COUNT" jdbcType="BIGINT" property="maxCount"/>
+		<result column="PROGRAM_CONTENT" jdbcType="VARCHAR" property="programContent"/>
+		<result column="PROGRAM_IMAGE" jdbcType="VARCHAR" property="programImage"/>
+		<result column="PROGRAM_PRICE" jdbcType="BIGINT" property="programPrice"/>
+		<result column="P_OPTION" jdbcType="VARCHAR" property="pOption"/>
+		<result column="P_OPTION_PRICE" jdbcType="BIGINT" property="pOptionPrice"/>
+		<result column="PROGRAM_ADDR" jdbcType="VARCHAR" property="programAddr"/>
+		<result column="PROGRMAM_DATE" jdbcType="TIMESTAMP" property="programDate"/>
+		<result column="PROGRAM_REG" jdbcType="TIMESTAMP" property="programReg"/>
+		<result column="TEACHER_NO" jdbcType="VARCHAR" property="teacherNo"/>
+	</resultMap>
+	
+	<select id="getProgramList" resultMap="baseProgram">
+		select * 
+		from (select rownum rn, <include refid="basecolumn" />
+				from (select <include refid="basecolumn" />
+					from program
+					order by program_no desc))
+		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
+	</select>
 </mapper>

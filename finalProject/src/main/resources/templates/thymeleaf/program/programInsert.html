@@ -25,7 +25,7 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form th:action="programInsert" method="post" name="noticeform"
+					<form th:action="programInsert" method="post" name="programInsert"
 						enctype="multipart/form-data">
 						<h2 class="align-center">프로그램 등록하기 </h2>
 						<p>
@@ -38,15 +38,15 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>프로그램명 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proName" type="text" size="10"
+								<td bgcolor = "white"><input name="programName" type="text" size="10"
 									maxlength="10" /></td>
 							</tr>
 							
 							<tr>
 								<td bgcolor = "white" >
-									<div align="center"><b>강사명 </b></div>
+									<div align="center"><b>강사번호 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="teacherName" type="text" size="10"
+								<td bgcolor = "white"><input name="teacherNo" type="text" size="10"
 									maxlength="10" /></td>
 							</tr>
 							
@@ -55,7 +55,7 @@
 								<td  bgcolor = "white">
 									<div align="center"><b>카테고리</b> </div>
 								</td>
-								<td bgcolor = "white"><input name="proCategory" type="text" maxlength="70" /></td>
+								<td bgcolor = "white"><input name="programCategory" type="text" maxlength="70" /></td>
 							</tr>
 
 							<tr>
@@ -63,15 +63,7 @@
 									<div align="center"><b>최대수강인원</b> </div>
 								</td>
 								<td> 	
-									<select name="dept" id="dept">
-										<option value="">선택</option>
-										<option value="1">5명 </option>
-										<option value="1">10명 </option>
-										<option value="1">20명 </option>
-										<option value="1">25명 </option>
-										<option value="1">30명 </option>
-										<option value="1">35명 </option>
-									</select>
+									<input type="text" name="maxCount" size="10"/>
 								</td>
 							</tr>
 	
@@ -79,7 +71,7 @@
 								<td bgcolor = "white">
 									<div align="center"><b>프로그램 설명</b> </div>
 								</td>
-								<td><textarea name="proContent" cols="50" rows="10"></textarea>
+								<td><textarea name="programContent" cols="50" rows="10"></textarea>
 								</td>
 							</tr>
 								
@@ -88,16 +80,7 @@
 								<td bgcolor = "white">
 									<div align="center"><b>프로그램 사진 </b></div>
 								</td>
-								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
-									type="file" name="fileUp" /></td>
-							</tr>
-						
-						
-							<tr>
-								<td bgcolor = "white">
-									<div align="center"><b>사진 첨부</b></div>
-								</td>
-								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
+								<td bgcolor = "white"> <input type="file" name="programImage" /><br /> <input
 									type="file" name="fileUp" /></td>
 							</tr>
 							
@@ -105,7 +88,7 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>프로그램 주소 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proAddr" type="text" size="10"
+								<td bgcolor = "white"><input name="programAddr" type="text" size="10"
 									maxlength="10" /></td>
 							</tr>
 							
@@ -113,7 +96,7 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>이용요금 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proMoney" type="text" size="10"
+								<td bgcolor = "white"><input name="programPrice" type="text" size="10"
 									maxlength="10" /></td>
 							</tr>
 							
@@ -122,7 +105,7 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>추가옵션 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proOption" type="text" size="10"
+								<td bgcolor = "white"><input name="pOption" type="text" size="10"
 									maxlength="10" /></td>
 							</tr>
 							
@@ -132,7 +115,7 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>추가 이용요금</b></div>
 								</td>
-								<td bgcolor = "white"><input name="proPlusMoney" type="text" size="10"
+								<td bgcolor = "white"><input name="pOptionPrice" type="text" size="10"
 									maxlength="10" /></td>
 							</tr>
 							
