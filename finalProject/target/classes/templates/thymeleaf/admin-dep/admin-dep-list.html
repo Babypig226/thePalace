@@ -28,7 +28,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>번호</th>
+                                    <th>부서번호</th>
                                     <th>부서명</th>
                                     <th>주소</th>
                                     <th>대표연락처</th>
@@ -37,7 +37,7 @@
                             <tbody>
                             	<div th:each = "d:${list}">
                             		<tr>
-                            			<td>[[${d.departmentNo}]]</td>
+                            			<td align = "center">[[${d.departmentNo}]]</td>
                             			<td><a th:href = "@{/dep/view(dpNo=${d.departmentNo})}">[[${d.departmentName}]]</a></td>
                             			<td>[[${d.departmentAddr}]]</td>
                             			<td>[[${d.departmentPh}]]</td>

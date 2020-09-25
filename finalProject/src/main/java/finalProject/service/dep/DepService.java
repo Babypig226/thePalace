@@ -9,22 +9,18 @@ import org.springframework.stereotype.Service;
 import finalProject.command.DepCommand;
 import finalProject.domain.DepDTO;
 import finalProject.mapper.DepMapper;
+import finalProject.service.addr.AddressService;
 
 @Component
 @Service
 public class DepService {
 	@Autowired
 	DepMapper depMapper;
-	
+	@Autowired
+	AddressService addressService;
 	public void depInsert(DepCommand depCommand, HttpSession session) {
-		DepDTO dto = new DepDTO();
-		dto.setDepartmentName(depCommand.getDepartmentName());
-		dto.setDepartmentPh(depCommand.getDepartmentPh());
-		String departmentAddr = "";
-		for (int i = 0; i < depCommand.getDepartmentAddr().length; i++) {
-			departmentAddr += depCommand.getDepartmentAddr()[i]+"`";
-		}
-		dto.setDepartmentAddr(departmentAddr);
+		String departmentAddr = addressService.updateAddress(depCommand.getDepartmentAddr());
+		DepDTO dto = new DepDTO("", depCommand.getDepartmentName(), depCommand.getDepartmentPh(), departmentAddr);
 		depMapper.depInsert(dto);
 	}
 	

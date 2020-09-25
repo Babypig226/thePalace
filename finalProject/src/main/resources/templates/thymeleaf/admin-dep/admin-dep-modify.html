@@ -81,35 +81,35 @@
 				<div class="content">
 					<h2 class="align-center">새 부서등록</h2>
 					<hr />
-					<form th:action="@{/dep/regist}" method="post" name = "depform" th:object = "${depCommand}">
-						<!-- 인적사항 -->
+					<form th:action="@{/dep/modify}" method="post" name = "depModify" th:object = "${depCommand}">
+						<input type = "hidden" name = "departmentNo" th:value = "${detail.departmentNo}">
+						
 						<table>
 							<tbody>
 								<tr>
 
 									<td  valign="top"><label for="departmentName">부서명</label>
-										<input name="departmentName" id="name" type="text"
-										placeholder="Department Name"></td>								
+										<input name="departmentName" id="name" type="text" th:value = "${detail.departmentName}"
+										></td>								
 									<td valign="top" ><label for="departmentPh">대표연락처</label>
-										<input type="text" id="demo-priority-low" name="departmentPh"
-										placeholder="010-0000-0000"></td>
+										<input type="text" id="demo-priority-low" name="departmentPh" th:value = "${detail.departmentPh}"
+										></td>
 									<td></td>
 								<tr>
 									<td colspan="5"><label for="departmentAddr">주소</label>
 										<ul class="actions align-left" style="margin-bottom: 1mm">
 											<li><input type="text" id="postcode" placeholder="우편번호"
-												maxlength="20" name = "departmentAddr"></li>
+												maxlength="20" name = "departmentAddr" th:value = "${addr.postcode}"></li>
 											<li><input type="button" class="button"
 												onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></li>
 											
 										</ul></td>
 								<tr style="background-color: rgba(0, 0, 0, 0.075)">
-									<td><input type="text" id="roadAddress" name = "departmentAddr"
-										placeholder="도로명주소"></td>
-									<td><input type="text" id="detailAddress" name = "departmentAddr"
-										placeholder="상세주소"></td>
-									<td colspan="2"><input type="text" id="extraAddress" name = "departmentAddr"
-										placeholder="참고항목"></td>
+									<td><input type="text" id="roadAddress" name = "departmentAddr" th:value = "${addr.roadAddress}"
+										></td>
+									<td><input type="text" id="detailAddress" name = "departmentAddr" th:value = "${addr.detailAddress}"
+										></td>
+									<td colspan="2"><input type="text" id="extraAddress" name = "departmentAddr" th:value = "${addr.extraAddress}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -117,7 +117,7 @@
 						<ul class="actions align-right">
 							<li><input value="뒤로" onclick="javascript: history.back();"
 								class="button alt" type="button"></li>
-							<li><input value="작성완료" class="button" type="submit"></li>
+							<li><input value="수정완료" class="button" type="submit"></li>
 						</ul>
 					</form>
 				</div>

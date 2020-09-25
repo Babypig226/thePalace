@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href=@{/static/assets/css/main.css} />
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header.html"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav.html"></nav>
+
+    <!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="image fit">
+					<img th:src=@{static/images/topbanner7.jpg} alt="" />
+				</div>
+				<div class="content">
+					<h2 class="align-center">부서정보</h2>
+					<h3 class="align-center">[[${detail.departmentName}]]</h3>
+					<hr />
+						<!-- 인적사항 -->
+						<table>
+							<thead>
+								<tr>
+									<th>
+										<label for="departmentNo">부서번호</label>
+										[[${detail.departmentNo}]]
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+
+									<td  valign="top"><label for="departmentName">부서명</label>
+										[[${detail.departmentName}]]</td>								
+									<td valign="top" colspan = "2"><label for="departmentPh">대표연락처</label>
+										[[${detail.departmentPh}]]</td>
+									<td></td>
+								</tr>
+								<tr style="background-color: rgba(0, 0, 0, 0.075)">
+									<td><label for="postcode">우편번호</label>[[${addr.postcode}]]</td>
+									<td><label for="roadAddress">도로명주소</label>[[${addr.roadAddress}]]</td>
+									<td><label for="detailAddress">상세주소</label>[[${addr.detailAddress}]]</td>
+									<td><label for="extraAddress">참고항목</label>[[${addr.extraAddress}]]</td>
+								</tr>
+							</tbody>
+						</table>
+						<hr />
+						<ul class="actions align-right">
+							<li><input value="뒤로" onclick="javascript: history.back();"
+								class="button alt" type="button"></li>
+							<li><a th:href="@{/dep/modify(dpNo=${detail.departmentNo})}" class="button">수정</a></li>
+							<li><a th:href="@{/dep/delete(dpNo=${detail.departmentNo})}" class="button">삭제</a></li>
+						</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+ 			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+    $(function () {
+        includeLayout();
+    });
+
+    function includeLayout() {
+        var includeArea = $('[data-include]');
+        var self, url;
+        $.each(includeArea, function () {
+            self = $(this);
+            url = self.data("include");
+            self.load(url, function () {
+                self.removeAttr("data-include");
+            });
+        });
+    }
+</script>
+
+</html>

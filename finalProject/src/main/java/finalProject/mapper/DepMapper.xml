@@ -19,8 +19,27 @@
 		<result column = "DEPARTMENT_ADDR" jdbcType = "VARCHAR" property = "departmentAddr"/>
 		<result column = "DEPARTMENT_PH" jdbcType = "VARCHAR" property = "departmentPh"/>
 	</resultMap>
-	<select id="getDepList" resultMap = "DepList">
-		select <include refid="columns"/>
-		from department
+	<select id="getDepList" resultMap = "DepList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from department
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								department_no = #{num}
+							</if>
+						</trim>
+						order by department_no))
+		where rn between #{startPage} and #{endPage}
 	</select>
+	<update id="depModify" parameterType = "finalProject.domain.DepDTO">
+		update department
+		set DEPARTMENT_NAME = #{departmentName}, DEPARTMENT_PH = #{departmentPh},
+			DEPARTMENT_ADDR = #{departmentAddr}
+		where DEPARTMENT_NO = #{departmentNo}
+	</update>
+	<delete id="deleteDep" parameterType = "string">
+		delete from department
+		where department_no = #{departmentNo}
+	</delete>
 </mapper>
