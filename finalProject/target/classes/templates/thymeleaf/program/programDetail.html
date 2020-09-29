@@ -38,22 +38,22 @@
 							</p>
 							
 								<p>
-									<label for="dept">신청인원 </label> <a href="#" id="increase">▲</a>&nbsp;<span
+									<label for="using_count">신청인원 </label> <a href="#" id="increase">▲</a>&nbsp;<span
 										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
 								</p>
 							<div class="field">
-										<label for="dept">추가옵션 </label>
-										<div class="field first">
-											<select name="dept" id="dept">
-												<option value="">선택</option>
-												<option value="1">진흙 400g 추가[+3,000원] </option>
-												<option value="1">고급 선물 포장[+2,000원] </option>
-											</select>
-										</div>	
-										<br />
+								<label for="pOption">추가옵션 </label>
+									<div class="field first">
+										<select th:name="option">
+											<option th:value="pOption">선택안함</option>
+											<option th:value="pOption">통역사</option>
+										</select>
+									</div>	
+									<br />
+								
 										
 							<div class="align-center">
-								<a th:href="@{../prcart/programCartAdd(programName=${prodto.programName})}" class="button alt">장바구니담기</a>&nbsp; <a
+								<a th:href="@{../prcart/programCartAdd(programNo=${prodto.programNo})}" class="button alt">장바구니담기</a>&nbsp; <a
 									href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
 									href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
 			
@@ -68,9 +68,9 @@
 				<div>
 						<div class="content">
 						<div class="image fit">
-								<img th:src="@{/static/programImage/upload/} + ${prodto.programImage}">
+								<!-- <img th:src="@{/static/programImage/upload/} + "> -->
 							</div>
-				</div>
+				</div>${prodto.programImage}
 			
 			</div>
 			</div>
@@ -91,23 +91,6 @@
 </body>
 
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
 <script type="text/javascript">
 	$(function() {
 		$('#decrease').click(function(e) {

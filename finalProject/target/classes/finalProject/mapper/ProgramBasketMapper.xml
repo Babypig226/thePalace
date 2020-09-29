@@ -2,19 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="finalProject.mapper.ProgramMapper">
+<mapper namespace="finalProject.mapper.ProgramBasketMapper">
+
 	<sql id="basecolumn">
-		PROGRAM_NO, PROGERAM_CATEGORY, PROGRAM_NAME, MAX_COUNT, PROGRAM_CONTENT, PROGRAM_IMAGE, PROGRAM_PRICE,
-		P_OPTION, P_OPTION_PRICE, PROGRAM_ADDR, PROGRMAM_DATE, PROGRAM_REG, TEACHER_NO
+		user_id, program_no
 	</sql>
 	
-	<insert id="programInsert"  parameterType="finalProject.domain.ProgramDTO">
-		insert into program(<include refid="basecolumn" />)
-		values(pro_seq.nextval, #{programCategory}, #{programName}, #{maxCount}, #{programContent},
-				#{programImage}, #{programPrice}, #{pOption},#{pOptionPrice}, #{programAddr},
-				sysdate, sysdate, #{teacherNo})
+	<insert id="cartInsert" parameterType="finalProject.domain.StartEndPageDTO">
+		insert into program_basket (<include refid="basecolumn"/>)
+		values(#{userId}, #{num})
 	</insert>
-	
+
 	<resultMap type="finalProject.domain.ProgramDTO" id="baseProgram">
 		<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo" />
 		<result column="PROGERAM_CATEGORY" jdbcType="VARCHAR" property="programCategory"/>
@@ -30,19 +28,27 @@
 		<result column="PROGRAM_REG" jdbcType="TIMESTAMP" property="programReg"/>
 		<result column="TEACHER_NO" jdbcType="VARCHAR" property="teacherNo"/>
 	</resultMap>
+
+	<resultMap type="finalProject.domain.PgbasketDTO" id="pgbasketMap">
+		<association property="cart" javaType="finalProject.domain.PgbasketDTO">
+			<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo"/>
+			<id column="USER_ID" jdbcType="VARCHAR" property="userId"/> 
+		</association>
+		<collection property="pro" ofType="finalProject.domain.ProgramDTO" resultMap="baseProgram">
+			<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo" />
+			<result column="PROGRAM_NAME" jdbcType="VARCHAR" property="programName"/>
+			<result column="PROGRAM_PRICE" jdbcType="BIGINT" property="programPrice"/>
+			<result column="TEACHER_NO" jdbcType="VARCHAR" property="teacherNo"/>
+		</collection>
+	</resultMap>
 	
-	<select id="getProgramList" resultMap="baseProgram">
-		select * 
-		from (select rownum rn, <include refid="basecolumn" />
-				from (select <include refid="basecolumn" />
-					from program
-					<trim prefix="where" prefixOverrides="AND | OR">
-						<if test="num != null">
-							and program_no = #{num}
-						</if>
-					</trim>
-					order by program_reg desc))
-		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
+	
+	<select id="pgbasketlist" resultMap="pgbasketMap">
+		select pb.program_no, p.program_name, p.program_price
+		from program_basket pb
+		left outer join program  p
+		on pb.program_no = p.program_no
+		and pb.user_id = '1111'
 	</select>
 	
 </mapper>

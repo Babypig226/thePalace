@@ -33,6 +33,13 @@ public class ProgramService {
 		programDTO.setProgramPrice(programListCommand.getProgramPrice());
 		programDTO.setProgramContent(programListCommand.getProgramContent());
 		programDTO.setProgramAddr(programListCommand.getProgramAddr());
+		/*
+		String pOptions [] = null;
+		if(programListCommand.getPOption() != null) {
+			pOptions = programListCommand.getPOption().split("`");
+			//programDTO.setPOption(pOptions);
+		}
+		*/
 		programDTO.setPOption(programListCommand.getPOption());
 		programDTO.setPOptionPrice(programListCommand.getPOptionPrice());
 		

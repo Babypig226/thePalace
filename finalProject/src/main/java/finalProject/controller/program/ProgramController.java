@@ -69,9 +69,9 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("programDetail")
-	public String programDetail(@RequestParam(value = "programName") String programName, 
+	public String programDetail(@RequestParam(value = "programNo") String programNo, 
 							Model model) throws Exception{
-		programDetailService.programDetail(programName, model);
+		programDetailService.programDetail(programNo, model);
 		return "thymeleaf/program/programDetail"; 
 	}
 	

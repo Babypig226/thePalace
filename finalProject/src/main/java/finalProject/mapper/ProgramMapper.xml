@@ -36,7 +36,13 @@
 		from (select rownum rn, <include refid="basecolumn" />
 				from (select <include refid="basecolumn" />
 					from program
-					order by program_no desc))
+					<trim prefix="where" prefixOverrides="AND | OR">
+						<if test="num != null">
+							and program_no = #{num}
+						</if>
+					</trim>
+					order by program_reg desc))
 		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
 	</select>
+	
 </mapper>

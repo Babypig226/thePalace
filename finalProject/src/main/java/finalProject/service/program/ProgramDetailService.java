@@ -15,10 +15,11 @@ public class ProgramDetailService {
 	@Autowired
 	ProgramMapper programMapper;
 
-	public void programDetail(String programName, Model model) throws Exception{
-		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, null, programName);
+	public void programDetail(String programNo, Model model) throws Exception{
+		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, "1111", programNo);
 		
 		ProgramDTO prodto = programMapper.getProgramList(startEndPageDTO).get(0);
+		System.out.println(prodto.getProgramNo());
 		model.addAttribute("prodto", prodto);	
 	}
 

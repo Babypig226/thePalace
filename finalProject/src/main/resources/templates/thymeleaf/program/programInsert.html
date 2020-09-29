@@ -55,7 +55,15 @@
 								<td  bgcolor = "white">
 									<div align="center"><b>카테고리</b> </div>
 								</td>
-								<td bgcolor = "white"><input name="programCategory" type="text" maxlength="70" /></td>
+								<td bgcolor = "white"><input name="programCategory" type="text" maxlength="70" />
+									</td>
+									<!-- 
+									<select th:name = "category">
+										<option th:value="programCateogry">공예</option>
+										<option th:value="programCateogry">전통문화</option>
+										<option th:value="programCateogry">피트니스</option>
+										<option th:value="programCateogry">기타</option>
+									</select> -->
 							</tr>
 
 							<tr>
@@ -111,8 +119,9 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>추가옵션 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="pOption" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white">
+									
+								<input type="text" size="100" name="pOption"/></td>
 							</tr>
 							
 							
@@ -128,7 +137,7 @@
 								
 
 							<tr align="center" >
-									<td colspan="5" bgcolor = "white"><a href="programList.html" class="button">목록으로</a>
+									<td colspan="5" bgcolor = "white"><a href="programList" class="button">목록으로</a>
 									<input value="등록완료 " class="button" type="submit"></td>
 								</tr>
 						</table>
@@ -151,22 +160,4 @@
 	<script src="assets/js/program.js"></script>
 </body>
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
-
 </html>

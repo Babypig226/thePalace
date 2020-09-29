@@ -41,10 +41,10 @@
 							<tbody>
 							<div th:each = "pro:${prolists}">
 								<tr>
-									<td>[[${pro.programNo}]]<</td>
-									<td><a th:href = "@{/program/programDetail(programName=${pro.programName})}">[[${pro.programName}]]</a></td>
-									<td>[[${pro.programReg}]]<</td>
-									<td>[[${pro.teacherNo}]]<</td>	
+									<td>[[${pro.programNo}]]</td>
+									<td><a th:href = "@{/program/programDetail?(programNo=${pro.programNo})}">[[${pro.programName}]]</a></td>
+									<td>[[${pro.programReg}]]</td>
+									<td>[[${pro.teacherNo}]]</td>	
 								</tr>
 							</div>
 							</tbody>

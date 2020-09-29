@@ -18,6 +18,7 @@ public class ProgramDTO {
 	String programContent;
 	String programImage;
 	Integer programPrice;
+	// String [] pOption;
 	String pOption;
 	Integer pOptionPrice;
 	String programAddr;
