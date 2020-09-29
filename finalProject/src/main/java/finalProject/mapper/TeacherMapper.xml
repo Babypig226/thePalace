@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.TeacherMapper">
+	<sql id = "columns">
+		TEACHER_NO, TEACHER_ID, TEACHER_PW, TEACHER_TYPE, RESIDENT_NO, TEACHER_ADDR, TEACHER_EMAIL, TEACHER_PH, EMPLOYEE_NO, TEACHER_NAME
+	</sql>
+	<sql id="dNo">
+		select nvl(max(TEACHER_NO),0)+1
+		from TEACHER
+	</sql>
+	<insert id="registTeacher" parameterType="finalProject.domain.TeacherDTO">
+		insert into teacher (<include refid = "columns"/>)
+		values((<include refid = "dNo"/>),#{teacherId}, #{teacherPw}, #{teacherType}, #{residentNo}, #{teacherAddr}, #{teacherEmail}, #{teacherPh}, #{employeeNo}, #{teacherName}) 		
+	</insert>
+	<resultMap type="finalProject.domain.TeacherDTO" id="TchList">
+		<id column = "TEACHER_NO" jdbcType = "VARCHAR" property = "teacherNo"/>
+		<result column = "EMPLOYEE_NO" jdbcType = "VARCHAR" property = "employeeNo"/>
+		<result column = "TEACHER_ID" jdbcType = "VARCHAR" property = "teacherId"/>
+		<result column = "TEACHER_PW" jdbcType = "VARCHAR" property = "teacherPw"/>
+		<result column = "TEACHER_TYPE" jdbcType = "VARCHAR" property = "teacherType"/>
+		<result column = "RESIDENT_NO" jdbcType = "VARCHAR" property = "residentNo"/>
+		<result column = "TEACHER_ADDR" jdbcType = "VARCHAR" property = "teacherAddr"/>
+		<result column = "TEACHER_EMAIL" jdbcType = "VARCHAR" property = "teacherEmail"/>
+		<result column = "TEACHER_PH" jdbcType = "VARCHAR" property = "teacherPh"/>
+		<result column = "TEACHER_NAME" jdbcType = "VARCHAR" property = "teacherName"/>
+	</resultMap>
+	<select id="getTeacherList" resultMap = "TchList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from teacher
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								teacher_no = #{num}
+							</if>
+						</trim>
+						order by teacher_no))
+		where rn between #{startPage} and #{endPage}
+	</select>
+	<update id="updateTeacher" parameterType = "finalProject.domain.TeacherDTO">
+		update teacher
+		set TEACHER_PH = #{teacherPh}, TEACHER_EMAIL = #{teacherEmail},
+			TEACHER_ADDR = #{teacherAddr}
+		where TEACHER_NO = #{teacherNo}
+	</update>
+	<delete id="deleteTeacher" parameterType = "string">
+		delete from teacher
+		where teacher_no = #{teacherNo}
+	</delete>
+</mapper>

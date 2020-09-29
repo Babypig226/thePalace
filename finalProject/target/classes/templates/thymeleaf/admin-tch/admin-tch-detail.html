@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href=@{/static/assets/css/main.css} />
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header.html"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav.html"></nav>
+
+    <!-- Registration Form -->
+    <section id="one" class="wrapper style2">
+        <div class="inner">
+            <div class="box">
+                <div class="image fit">
+                    <img th:src=@{static/images/topbanner7.jpg} alt="" />
+                </div>
+                <div class="content">
+                    <h2 class="align-center">강사상세보기</h2>
+                    <hr />
+                        <!-- 인적사항 -->
+                        <table>
+                            <thead>
+                                <th>
+                                    <h3>인적사항</h3>
+                                </th>
+                            </thead>
+                            <tbody>
+                            	<tr>
+                                    <td width="10%" valign="top" >
+                                        <label for="teacherType">분야</label>
+                                        [[${list.teacherType}]]
+                                    </td>
+                                    <td colspan = "2"></td>
+                            		
+                            	</tr>
+                                <tr>
+                                    <td width="10%" valign="top">
+                                        <label for="teacherId">아이디</label>
+                                        [[${list.teacherId}]]
+                                    </td>
+                                    <td width="10%" valign="top">
+                                        <label for="teacherName">이름</label>
+                                        [[${list.teacherName}]]
+                                    </td>
+                                    <td width="8%" valign="top">
+                                        <label for="residentNo">주민등록번호</label>
+                                        [[${list.residentNo}]]
+                                    </td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                        <label for="teacherPh">연락처</label>
+                                        [[${list.teacherPh}]]
+                                     </td>
+                                     <td>
+                                        <label for="teacherEmail">Email</label>
+                                        [[${list.teacherEmail}]]
+                                        
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <label for="teacherAddr">주소</label>
+                                        [[${list.teacherAddr}]]
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      
+                        <ul class="actions align-right">
+                            <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                            </li>
+                            <li><a th:href="@{/tch/modify(tchNo=${list.teacherNo})}" class="button">수정</a></li>
+							<li><a th:href="@{/tch/delete(tchNo=${list.teacherNo})}" class="button">삭제</a></li>
+                        </ul>                        
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+ 			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+    $(function () {
+        includeLayout();
+    });
+
+    function includeLayout() {
+        var includeArea = $('[data-include]');
+        var self, url;
+        $.each(includeArea, function () {
+            self = $(this);
+            url = self.data("include");
+            self.load(url, function () {
+                self.removeAttr("data-include");
+            });
+        });
+    }
+</script>
+
+</html>
