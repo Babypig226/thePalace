@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class ProgramListCommand {
+	String programNo;
 	@NotEmpty(message = "프로그램명을 입력해주세요.")
 	String programName;
 	String teacherNo;

@@ -33,8 +33,8 @@ public class ProgramCartService {
 			System.out.println(list.get(i));
 			model.addAttribute("prglist", list.get(i).getPro());
 		}
-		
-		//model.addAttribute("pgclist", list);
+
+		model.addAttribute("pgclist", list);
 	}
 
 }

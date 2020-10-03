@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>프로그램 수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/program.css" />
+<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
 </head>
 <body>
-<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+<<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
 	
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form action="#" method="post" name="noticeform"
-						enctype="multipart/form-data">
+					<form th:action="proModifyPro" method="post" name="proModify" enctype="multipart/form-data">
 						<h2 class="align-center">프로그램 글 수정</h2>
 						
 						<div class="table-wrapper">
@@ -29,16 +32,16 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>프로그램명 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proName" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white"><input name="programName" type="text" size="10"
+									maxlength="10" th:value="${prodto.programName}"/></td>
 							</tr>
 							
 							<tr>
 								<td bgcolor = "white" >
 									<div align="center"><b>강사명 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="teacherName" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white"><input name="teacherNo" type="text" size="10"
+									maxlength="10" th:value="${prodto.teacherNo}"/></td>
 							</tr>
 							
 							
@@ -47,7 +50,7 @@
 								<td  bgcolor = "white">
 									<div align="center"><b>카테고리</b> </div>
 								</td>
-								<td bgcolor = "white"><input name="proCategory" type="text" maxlength="70" /></td>
+								<td bgcolor = "white"><input name="programCategory" type="text" maxlength="70" th:value="${prodto.programCategory}"/></td>
 							</tr>
 
 							<tr>
@@ -55,15 +58,7 @@
 									<div align="center"><b>최대수강인원</b> </div>
 								</td>
 								<td> 	
-									<select name="dept" id="dept">
-										<option value="">선택</option>
-										<option value="1">5명 </option>
-										<option value="1">10명 </option>
-										<option value="1">20명 </option>
-										<option value="1">25명 </option>
-										<option value="1">30명 </option>
-										<option value="1">35명 </option>
-									</select>
+									<input name="maxCount" type="text" maxlength="70" th:value="${prodto.maxCount}"/>
 								</td>
 							</tr>
 	
@@ -71,20 +66,26 @@
 								<td bgcolor = "white">
 									<div align="center"><b>프로그램 설명</b> </div>
 								</td>
-								<td><textarea name="proContent" cols="50" rows="10"></textarea>
+								<td><textarea name="programContent" cols="50" rows="10">[[${prodto.programContent}]]</textarea>
 								</td>
 							</tr>
 								
 						
-						<tr>
+							<tr>
 								<td bgcolor = "white">
 									<div align="center"><b>프로그램 사진 </b></div>
 								</td>
-								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
-									type="file" name="fileUp" /></td>
+								<td bgcolor = "white"> <img th:src="@{/static/programImage/upload/} + ${image}"></br>
+													   <input type="button" id="btn" th:value="삭제"/></td>
+							</tr>
+							<tr>
+								<td bgcolor = "white">
+									<div align="center" id="newimg"><b>변경사진 </b>
+									<!-- <input type="text" name="fileDel" id = "fileDel" /> --></div>
+								</td>
 							</tr>
 						
-						
+						<!-- 
 							<tr>
 								<td bgcolor = "white">
 									<div align="center"><b>사진 첨부</b></div>
@@ -92,21 +93,21 @@
 								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
 									type="file" name="fileUp" /></td>
 							</tr>
-							
+						 -->
 							<tr>
 								<td bgcolor = "white" >
 									<div align="center"><b>프로그램 주소 </b></div>
 								</td>
 								<td bgcolor = "white"><input name="proAddr" type="text" size="10"
-									maxlength="10" /></td>
+									maxlength="10" th:value="${prodto.programAddr}"/></td>
 							</tr>
 							
 							<tr>
 								<td bgcolor = "white" >
 									<div align="center"><b>이용요금 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proMoney" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white"><input name="programPrice" type="text" size="10"
+									maxlength="10" th:value="${prodto.programPrice}"/></td>
 							</tr>
 							
 							
@@ -114,8 +115,8 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>추가옵션 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="proOption" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white"><input name="pOption" type="text" size="10"
+									maxlength="10" th:value="${prodto.pOption}"/></td>
 							</tr>
 							
 							
@@ -124,26 +125,24 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>추가 이용요금</b></div>
 								</td>
-								<td bgcolor = "white"><input name="proPlusMoney" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white"><input name="pOptionPrice" type="text" size="10"
+									maxlength="10" th:value="${prodto.pOptionPrice}"/></td>
 							</tr>
 							
 								
 							
 							<tr align="center">
 									<td colspan="5"> 
-									<a href="programModify.html">
-									<input type="button" value="수정완료 " id="modify" /></a> 
-									<a
-			href="programDelete.html"><input type="button" value="삭제하기 "
-											id="del" /></a> <a href="programList.html"><input
-											type="button" value="목록으로 " id="home" /></a>
+									<!-- <a href="proModifyPro"> -->
+									<input type="submit" value="수정완료 " id="modify" /></a> 
+									<a href="programDelete.html"><input type="button" value="삭제하기 " id="del" /></a> 
+									<a href="programList.html"><input type="button" value="목록으로 " id="home" /></a>
 									</td>
 								</tr>
 						</table>
-						
-						
+	
 						</div>
+						<input type="hidden" name="programNo" th:value="${prodto.programNo}"/>
 					</form>
 				</div>
 			</div>
@@ -152,7 +151,7 @@
 	
 	
 <!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -163,6 +162,7 @@
 </body>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script>
+	/*
 	$(function() {
 		includeLayout();
 	});
@@ -178,6 +178,23 @@
 			});
 		});
 	}
+	*/
+	
+	$(function(){
+		$("#btn").click(function(){
+			if($("#btn").attr("value") == "삭제"){
+				$("#btn").attr("value","삭제취소");
+				$("#fileDel").val("${prodto.programImage}");
+				$("#newimg").html(
+						"<input type='file' name='programImage' >");
+			}else{
+				$("#btn").attr("value","삭제");
+				$("#fileDel").val("");
+				$("#newimg").html("");
+			}
+		});
+	});
+	
 </script>
 
 </html>

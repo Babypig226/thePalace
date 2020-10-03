@@ -40,10 +40,21 @@ public class ProgramService {
 			//programDTO.setPOption(pOptions);
 		}
 		*/
-		programDTO.setPOption(programListCommand.getPOption());
+		
+		String pOptions [] = null;
+		if(programListCommand.getPOption() != null) {
+			pOptions = programListCommand.getPOption().split("`");
+		}
+		
+		if(pOptions != null && !pOptions.equals("")) {
+			for(String options : pOptions) {
+				programDTO.setPOption(options);
+			}
+		}
+		//programDTO.setPOption(programListCommand.getPOption());
 		programDTO.setPOptionPrice(programListCommand.getPOptionPrice());
 		
-		String path = "webapp/programImage/upload";
+		String path = "/static/programImage/upload";
 		String filePath = session.getServletContext().getRealPath(path);
 		String programImage = "";
 		

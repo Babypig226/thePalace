@@ -1,13 +1,16 @@
 package finalProject.controller.program;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import finalProject.command.ProgramListCommand;
@@ -52,16 +55,16 @@ public class ProgramController {
 		return "thymeleaf/program/programList";
 	}
 	
-	@RequestMapping("programForm")
+	@RequestMapping(value = "programForm", method = RequestMethod.GET)
 	public String programForm() {
 		return "thymeleaf/program/programInsert"; 
 	}
 	
-	@RequestMapping("programInsert")
+	@RequestMapping(value = "programInsert", method = RequestMethod.POST)
 	public String programInsert(@Validated ProgramListCommand programListCommand,
 							BindingResult result, HttpServletRequest request) throws Exception {
 		if (result.hasErrors()) {
-			System.out.println("programInsert");
+			System.out.println("programInsert오류");
 			return "thymeleaf/program/programInsert";
 		}
 		programService.programInsert(programListCommand, request);
@@ -70,9 +73,22 @@ public class ProgramController {
 	
 	@RequestMapping("programDetail")
 	public String programDetail(@RequestParam(value = "programNo") String programNo, 
-							Model model) throws Exception{
-		programDetailService.programDetail(programNo, model);
+							Model model, HttpSession session) throws Exception{
+		programDetailService.programDetail(programNo, session, model);
 		return "thymeleaf/program/programDetail"; 
 	}
 	
+//	@RequestMapping(value = "programModify")
+//	public String programModify(@RequestParam("programNo") String programNo,
+//							Model model) throws Exception{
+//		programDetailService.programDetail(programNo, model);
+//		return "thymeleaf/program/programModify";
+//	}
+//	
+//	@RequestMapping(value="programModifyPro", method = RequestMethod.POST)
+//	public String programModifyPro(ProgramListCommand programListCommand,
+//								Model model) throws Exception{
+//		programModifyService.programModify(programListCommand, model);
+//	}
+//	
 }

@@ -34,28 +34,36 @@
 							<b>√ 강사명 : [[${prodto.teacherNo}]]</b><br/> 
 							<b>√ 프로그램주소 : [[${prodto.programAddr}]]</b><br/>
 							<b>√ 이용요금 : [[${prodto.programPrice}]]</b><br/>
+							<b>√ 프로그램 설명 : [[${prodto.programContent}]]</b><br/>
 							
 							</p>
-							
 								<p>
+									<!-- 
+									<select name="usingCount" id="usingCount">
+										<option th:value="">선택</option>
+									</select>
 									<label for="using_count">신청인원 </label> <a href="#" id="increase">▲</a>&nbsp;<span
 										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
+									-->
 								</p>
 							<div class="field">
 								<label for="pOption">추가옵션 </label>
 									<div class="field first">
 										<select th:name="option">
-											<option th:value="pOption">선택안함</option>
-											<option th:value="pOption">통역사</option>
+											<option>--------선택----------</option>
+										<div th:each = "list : ${list}">
+											<option th:value="${list}">[[${list}]]</option>
+										</div>
 										</select>
 									</div>	
 									<br />
 								
 										
 							<div class="align-center">
-								<a th:href="@{../prcart/programCartAdd(programNo=${prodto.programNo})}" class="button alt">장바구니담기</a>&nbsp; <a
-									href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
-									href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
+								<a th:href="@{../prcart/programCartAdd(programNo=${prodto.programNo})}" class="button alt">장바구니담기</a>&nbsp; 
+								<a href="wishList.html" class="button alt">위시리스트</a>&nbsp; 
+								<a href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
+								<a th:href = "@{programModify(programNo=${prodto.programNo})}" class="button alt">프로그램 수정</a>
 			
 			</div>
 			
@@ -68,9 +76,9 @@
 				<div>
 						<div class="content">
 						<div class="image fit">
-								<!-- <img th:src="@{/static/programImage/upload/} + "> -->
+								 <img th:src="@{/static/programImage/upload/} + ${image}"> 
 							</div>
-				</div>${prodto.programImage}
+				</div>
 			
 			</div>
 			</div>

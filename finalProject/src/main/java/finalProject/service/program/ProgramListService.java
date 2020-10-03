@@ -26,7 +26,7 @@ public class ProgramListService {
 		
 		StartEndPageDTO startEndPageDTO = 
 				new StartEndPageDTO(startRow, endRow, null, null);
-		
+
 		List<ProgramDTO> prolists = programMapper.getProgramList(startEndPageDTO);
 		
 		model.addAttribute("prolists", prolists);
