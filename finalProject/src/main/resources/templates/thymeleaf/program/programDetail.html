@@ -4,7 +4,7 @@
      layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>장바구니</title>
+<title>프로그램</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
 	media="all" />
@@ -64,6 +64,7 @@
 								<a href="wishList.html" class="button alt">위시리스트</a>&nbsp; 
 								<a href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
 								<a th:href = "@{programModify(programNo=${prodto.programNo})}" class="button alt">프로그램 수정</a>
+								<a th:href = "@{programDel(programNo=${prodto.programNo})}" class="button alt">프로그램 삭제</a>
 			
 			</div>
 			
@@ -75,8 +76,8 @@
 	
 				<div>
 						<div class="content">
-						<div class="image fit">
-								 <img th:src="@{/static/programImage/upload/} + ${image}"> 
+						<div th:each="file : ${imglist}" class="image fit">
+								 <img th:src="@{/static/programImage/upload/} + ${file.programImage}"> 
 							</div>
 				</div>
 			

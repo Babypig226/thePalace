@@ -8,14 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import finalProject.ImageName;
 import finalProject.command.ProgramListCommand;
+import finalProject.service.file.FileDelService;
+import finalProject.service.program.ProgramDelService;
 import finalProject.service.program.ProgramDetailService;
 import finalProject.service.program.ProgramListService;
+import finalProject.service.program.ProgramModifyService;
 import finalProject.service.program.ProgramService;
 
 @Controller
@@ -27,6 +30,10 @@ public class ProgramController {
 	ProgramListService programListService;
 	@Autowired
 	ProgramDetailService programDetailService;
+	@Autowired
+	FileDelService fileDelService;
+	@Autowired
+	ProgramDelService programDelService;
 	
 	@RequestMapping("Made")
 	public String made() {
@@ -55,7 +62,7 @@ public class ProgramController {
 		return "thymeleaf/program/programList";
 	}
 	
-	@RequestMapping(value = "programForm", method = RequestMethod.GET)
+	@RequestMapping("programForm")
 	public String programForm() {
 		return "thymeleaf/program/programInsert"; 
 	}
@@ -67,8 +74,8 @@ public class ProgramController {
 			System.out.println("programInsert오류");
 			return "thymeleaf/program/programInsert";
 		}
-		programService.programInsert(programListCommand, request);
-		return "redirect:/program/programList"; 
+		String location = programService.programInsert(programListCommand, request);
+		return location;
 	}
 	
 	@RequestMapping("programDetail")
@@ -78,17 +85,40 @@ public class ProgramController {
 		return "thymeleaf/program/programDetail"; 
 	}
 	
-//	@RequestMapping(value = "programModify")
-//	public String programModify(@RequestParam("programNo") String programNo,
-//							Model model) throws Exception{
-//		programDetailService.programDetail(programNo, model);
-//		return "thymeleaf/program/programModify";
-//	}
-//	
-//	@RequestMapping(value="programModifyPro", method = RequestMethod.POST)
-//	public String programModifyPro(ProgramListCommand programListCommand,
-//								Model model) throws Exception{
-//		programModifyService.programModify(programListCommand, model);
-//	}
-//	
+	@Autowired
+	ProgramModifyService programModifyService;
+	@RequestMapping("programModify")
+	public String programModify(@RequestParam("programNo") String programNo,
+							Model model, HttpSession session) throws Exception{
+		programDetailService.programDetail(programNo, session, model);
+		return "thymeleaf/program/programModify";
+	}
+	
+	@RequestMapping("fileDel")
+	public String fileDel(ImageName imageName, HttpSession session, Model model) {
+		fileDelService.fileSessionAdd(imageName, session, model);
+		return "thymeleaf/program/delPage";
+	}
+	
+	@RequestMapping(value = "proModifyPro", method = RequestMethod.POST)
+	public String proModifyPro(ProgramListCommand programListCommand,
+							HttpSession session, Model model) throws Exception{
+		String path = programModifyService.programModify(programListCommand, session, model);
+		return path;
+	}
+	
+	@RequestMapping("programDel")
+	public String programDel(@RequestParam(value = "programNo") String programNo, 
+							Model model) throws Exception{
+		model.addAttribute("programNo", programNo);
+		return "thymeleaf/program/programDelete"; 
+	}
+	
+	@RequestMapping("programDelPro")
+	public String programDelPro(@RequestParam(value = "programNo") String programNo,
+								@RequestParam(value = "programName") String programName,
+								HttpSession session, Model model) throws Exception{
+		String path = programDelService.programDel(programNo, programName, session, model);
+		return path;
+	}
 }

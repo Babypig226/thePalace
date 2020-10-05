@@ -25,8 +25,7 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form th:action="programInsert" method="post" name="programInsert"
-						enctype="multipart/form-data">
+					<form th:action="@{/program/programInsert}" method="post" name="programInsert" enctype="multipart/form-data">
 						<h2 class="align-center">프로그램 등록하기 </h2>
 						<p>
 							▶프로그램 정보와 사진을 작성 후 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한
@@ -55,15 +54,15 @@
 								<td  bgcolor = "white">
 									<div align="center"><b>카테고리</b> </div>
 								</td>
-								<td bgcolor = "white"><input name="programCategory" type="text" maxlength="70" />
-									</td>
-									<!-- 
-									<select th:name = "category">
-										<option th:value="programCateogry">공예</option>
-										<option th:value="programCateogry">전통문화</option>
-										<option th:value="programCateogry">피트니스</option>
-										<option th:value="programCateogry">기타</option>
-									</select> -->
+								<td bgcolor = "white"><!-- <input name="programCategory" type="text" maxlength="70" /> -->
+									
+									<select th:name = "programCategory">
+										<option th:value="공예">공예</option>
+										<option th:value="전통문화">전통문화</option>
+										<option th:value="피트니스">피트니스</option>
+										<option th:value="기타">기타</option>
+									</select>
+								</td>
 							</tr>
 
 							<tr>
@@ -94,8 +93,8 @@
 								<td bgcolor = "white">
 									<div align="center"><b>프로그램 사진 </b></div>
 								</td>
-								<td bgcolor = "white"> <input type="file" name="programImage" /><br /> <input
-									type="file" name="fileUp" /></td>
+								<td bgcolor = "white"> <input type="file" name="Image" multiple="multiple" /><br /> 
+								</td>
 							</tr>
 							
 							<tr>

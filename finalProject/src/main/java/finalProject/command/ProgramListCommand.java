@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProgramListCommand {
 	String programNo;
 	@NotEmpty(message = "프로그램명을 입력해주세요.")
@@ -17,7 +19,8 @@ public class ProgramListCommand {
 	String teacherNo;
 	String programCategory;
 	Integer maxCount;
-	MultipartFile [] programImage;
+	//MultipartFile [] programImage;
+	MultipartFile [] Image;
 	@NotNull
 	Integer programPrice;
 	String programContent;

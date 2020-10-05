@@ -21,15 +21,15 @@ public class ProgramService {
 	@Autowired
 	ProgramMapper programMapper;
 
-	public void programInsert(ProgramListCommand programListCommand, 
+	public String programInsert(ProgramListCommand programListCommand, 
 			HttpServletRequest request) throws Exception {
+		String location = "";
 		HttpSession session = request.getSession();
 		ProgramDTO programDTO = new ProgramDTO();
 		programDTO.setProgramName(programListCommand.getProgramName());
 		programDTO.setTeacherNo(programListCommand.getTeacherNo());
 		programDTO.setProgramCategory(programListCommand.getProgramCategory());
 		programDTO.setMaxCount(programListCommand.getMaxCount());
-		
 		programDTO.setProgramPrice(programListCommand.getProgramPrice());
 		programDTO.setProgramContent(programListCommand.getProgramContent());
 		programDTO.setProgramAddr(programListCommand.getProgramAddr());
@@ -40,7 +40,7 @@ public class ProgramService {
 			//programDTO.setPOption(pOptions);
 		}
 		*/
-		
+		/*
 		String pOptions [] = null;
 		if(programListCommand.getPOption() != null) {
 			pOptions = programListCommand.getPOption().split("`");
@@ -49,37 +49,39 @@ public class ProgramService {
 		if(pOptions != null && !pOptions.equals("")) {
 			for(String options : pOptions) {
 				programDTO.setPOption(options);
+				System.out.println("options "+options);
 			}
 		}
-		//programDTO.setPOption(programListCommand.getPOption());
+ 		*/
+		programDTO.setPOption(programListCommand.getPOption());
 		programDTO.setPOptionPrice(programListCommand.getPOptionPrice());
 		
 		String path = "/static/programImage/upload";
 		String filePath = session.getServletContext().getRealPath(path);
-		String programImage = "";
+		String prImageTotal = "";
 		
-		for(MultipartFile mf : programListCommand.getProgramImage()) {
-			String original = mf.getOriginalFilename();
+		for(MultipartFile mf : programListCommand.getImage()) {
+			String original = mf.getOriginalFilename();	
 			String originalFileExtension = original.substring(original.lastIndexOf("."));
 			
 			String store = UUID.randomUUID().toString().replace("-", "")
 					+ originalFileExtension;
-			programImage += store + "`";
+			prImageTotal += store + "`";
 			
-			File file = new File(filePath + "\\" + store);
+			File file = new File(filePath + "/" + store);
 			
 			try {
 				mf.transferTo(file);
-			} catch (IllegalStateException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				location = "thymeleaf/program/programInsert";
 				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
 		}
-		programDTO.setProgramImage(programImage);
+		programDTO.setProgramImage(prImageTotal);
 		programMapper.programInsert(programDTO);
+		location = "redirect:/program/programList"; 
+		return location;
 	}
 
 }

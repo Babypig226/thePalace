@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import finalProject.ImageName;
+import finalProject.Option;
 import finalProject.domain.ProgramDTO;
 import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ProgramMapper;
@@ -38,11 +40,28 @@ public class ProgramDetailService {
 			model.addAttribute("list", list);
 		}
 		
-		for (int j = 0; j < img.length; j++) {
-			System.out.println(img[j]);
+		/*
+		List<Option> oplist = new ArrayList<Option>();
+		int i = 0;
+		for (String pop : options) {
+			System.out.println("optionlist "+ pop);
+			Option option = new Option(pop);
+			oplist.add(option);
+			i++;
 		}
+		model.addAttribute("oplist", oplist);
+		*/
+		List<ImageName> imglist = new ArrayList<ImageName>();
+		int j = 0;
+		for (String file : img) {
+			System.out.println("imgfile "+ file);
+			ImageName imageName = new ImageName(file);
+			imglist.add(imageName);
+			j++;
+		}
+		model.addAttribute("imglist", imglist);
 		//model.addAttribute("option", op);
-		model.addAttribute("image", img[0]);
+		//model.addAttribute("image", img[0]);
 		model.addAttribute("prodto", prodto);	
 	}
 

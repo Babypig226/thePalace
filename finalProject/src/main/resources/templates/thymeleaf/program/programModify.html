@@ -23,7 +23,7 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form th:action="proModifyPro" method="post" name="proModify" enctype="multipart/form-data">
+					<form action="proModifyPro" method="post" name="proModify" enctype="multipart/form-data">
 						<h2 class="align-center">프로그램 글 수정</h2>
 						
 						<div class="table-wrapper">
@@ -75,17 +75,25 @@
 								<td bgcolor = "white">
 									<div align="center"><b>프로그램 사진 </b></div>
 								</td>
-								<td bgcolor = "white"> <img th:src="@{/static/programImage/upload/} + ${image}"></br>
-													   <input type="button" id="btn" th:value="삭제"/></td>
-							</tr>
-							<tr>
-								<td bgcolor = "white">
-									<div align="center" id="newimg"><b>변경사진 </b>
-									<!-- <input type="text" name="fileDel" id = "fileDel" /> --></div>
+								<td bgcolor = "white" >
+									<div th:each="file, numStat : ${imglist}"> 
+									저장된 사진명 : <span th:text=${file.programImage}" id="oldImage">[[${file.programImage}]]</span></br>
+								<!-- <img th:src="@{/static/programImage/upload/} + ${file.programImage}"></br> -->
+									<input type="button" th:id="${'btn'+numStat.index}" value="삭제" 
+										th:onclick="'fileDel(\''+${file.programImage}+ '\',this)'"/>
+									</div>
 								</td>
 							</tr>
-						
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>변경 사진 </b></div>
+								</td>
+								<td bgcolor = "white"> <input type="file" name="Image" multiple="multiple" /><br /> 
+								</td>
+							</tr>
 						<!-- 
+						
 							<tr>
 								<td bgcolor = "white">
 									<div align="center"><b>사진 첨부</b></div>
@@ -163,23 +171,6 @@
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script>
 	/*
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-	*/
-	
 	$(function(){
 		$("#btn").click(function(){
 			if($("#btn").attr("value") == "삭제"){
@@ -194,7 +185,28 @@
 			}
 		});
 	});
-	
+	*/
+	function fileDel(programImage, btn){
+		$.ajax({
+			type : "get",
+			url : "fileDel",
+			dataType : "text",
+			data : {"programImage" : programImage},
+			success : function(result){
+				alert("#"+btn.id)
+				if(result.trim() == 1){
+					$(btn).val("삭제 취소")
+				}else{
+					$(btn).val("삭제")
+				}
+			},
+			error : function(){
+				$(btn).text("삭제 취소")
+				alert('에러발생...');
+				return;
+			}
+		});
+	}
 </script>
 
 </html>
