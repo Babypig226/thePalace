@@ -19,8 +19,12 @@ public class EnoticeListService {
 	EnoticeMapper enoticeMapper;
 	@Autowired
 	AddressService addressService;
-	public void getEnoticeList(Model model) {
-		StartEndPageDTO pdto = new StartEndPageDTO(1L, 1L, null, null);
+	public void getEnoticeList(Model model, Integer page) {
+		int limit = 10;
+		int limitPage = 10;
+		Long startRow = ((long)page -1 ) * 10 +1;
+		Long endRow = startRow + limit -1;
+		StartEndPageDTO pdto = new StartEndPageDTO(startRow, endRow, null, null);
 		List<EnoticeDTO> lists = enoticeMapper.getEnoticeList(pdto);
 		model.addAttribute("list", lists);
 		

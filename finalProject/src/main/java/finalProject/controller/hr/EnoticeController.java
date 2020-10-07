@@ -31,8 +31,8 @@ public class EnoticeController {
 	EnoticeModifyService enoticeModifyService;
 	
 	@RequestMapping("List")
-	public String recruitList(Model model) {
-		enoticeListService.getEnoticeList(model);
+	public String recruitList(Model model, @RequestParam(value = "page", defaultValue = "1")Integer page) {
+		enoticeListService.getEnoticeList(model, page);
 		return "v-hr-recruit/hr-enotice-list";
 	}
 	

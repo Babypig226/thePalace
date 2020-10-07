@@ -30,9 +30,9 @@ public class EnoticeInsertService {
 		EnoticeDTO dto = new EnoticeDTO();
 		dto.setDepartmentNo(enoticeCommand.getDepartmentNo());
 		dto.setEnoticeName(enoticeCommand.getEnoticeName());
-		String path = "/static/enotice/upload";
-		String realPath = request.getServletContext().getRealPath(path);
-		String enoticeContent = fileUploadService.fileUpload(enoticeCommand.getEnoticeContent(), realPath);
+		String path = "/statice/upload";
+		String filePath = "/Users/babypig/git/thePalace/finalProject/src/main/resources"+path;
+		String enoticeContent = fileUploadService.fileUpload(enoticeCommand.getEnoticeContent(), filePath);
 		dto.setEnoticeContent(enoticeContent);
 		dto.setFpassDate(dateFormatService.dateToTimestamp(enoticeCommand.getFpassDate()));
 		dto.setJoinDate(dateFormatService.dateToTimestamp(enoticeCommand.getJoinDate()));

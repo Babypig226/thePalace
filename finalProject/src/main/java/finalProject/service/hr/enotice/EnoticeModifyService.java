@@ -35,15 +35,16 @@ public class EnoticeModifyService {
 		EnoticeDTO olddto = enoticeMapper.getEnoticeList(dto).get(0);
 		HttpSession session = request.getSession();
 		List<FileName> list = (List<FileName>)session.getAttribute("fileList");
-		String path = "/static/enotice/upload";
-		String realPath = request.getServletContext().getRealPath(path);
+		String path = "/static/upload";
+		String filePath = "/Users/babypig/git/thePalace/finalProject/src/main/resources"+path;
+		//String realPath = request.getServletContext().getRealPath(path);
 		EnoticeDTO newdto = new EnoticeDTO();
 		if(list != null) {
 			for(FileName fi : list ) {
-				File file = new File(realPath + "/"	+ fi.getStoreFileName());
+				File file = new File(filePath + "/"	+ fi.getStoreFileName());
 				if(file.exists()) file.delete();
 			}
-			newdto.setEnoticeContent(fileUploadService.fileUpload(enoticeCommand.getUpdate(), realPath));
+			newdto.setEnoticeContent(fileUploadService.fileUpload(enoticeCommand.getUpdate(), filePath));
 			session.removeAttribute("fileList");
 		}else {
 			newdto.setEnoticeContent(olddto.getEnoticeContent());

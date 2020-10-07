@@ -16,6 +16,8 @@ import finalProject.controller.MailAction;
 import finalProject.controller.SmsSend;
 import finalProject.domain.MemberDTO;
 import finalProject.mapper.MemberMapper;
+import finalProject.service.addr.AddressService;
+import finalProject.service.dateFormat.DateFormatService;
 
 @Component
 @Service
@@ -29,6 +31,10 @@ public class MemberJoinService {
 	MailAction mailAction;
 	@Autowired
 	MemberMapper memberRepository;
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	DateFormatService dateFormatService;
 	
 	public Integer joinOkUpdate(String joinOk, String reciver, String userId) {
 		MemberDTO memberDTO = new MemberDTO();
@@ -45,10 +51,9 @@ public class MemberJoinService {
 		}
 		Integer result = null;
 		MemberDTO memberDTO = new MemberDTO();
-		Timestamp userBirth = Timestamp.valueOf(memberCommand.getUserBirth());
 		memberDTO.setUserPw(passwordEncoder.encode(memberCommand.getUserPw()));
-		memberDTO.setUserBirth(userBirth);
-		memberDTO.setUserAddr(memberCommand.getUserAddr());
+		memberDTO.setUserBirth(dateFormatService.dateToTimestamp(memberCommand.getUserBirth()));
+		memberDTO.setUserAddr(addressService.updateAddress(memberCommand.getUserAddr()));
 		memberDTO.setUserEmail(memberCommand.getUserEmail());
 		memberDTO.setUserGender(memberCommand.getUserGender());
 		memberDTO.setUserId(memberCommand.getUserId());
@@ -65,7 +70,7 @@ public class MemberJoinService {
 			SmsSend ss = new SmsSend();
 			try {
 				mailAction.sendMail(memberDTO.getUserEmail(), memberDTO.getUserId());
-				ss.smsSend(memberDTO.getUserPh(), memberDTO.getUserName()+"님 회원을 축하합니다.");
+				ss.smsSend(memberDTO.getUserPh(), memberDTO.getUserName()+"님 회원가입을 축하합니다.");
 			} catch (MessagingException e) {
 				ss.smsSend(memberDTO.getUserPh(), memberDTO.getUserName()+"님 1234-1234로 문의바랍니다.");
 				e.printStackTrace();

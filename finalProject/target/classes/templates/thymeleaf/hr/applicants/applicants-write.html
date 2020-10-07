@@ -112,15 +112,10 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td colspan = "3">
-                                		[[${list.userAddr}]]
-                                	</td>
-                                </tr>
-                                <tr>
                                     <td colspan="3">
                                         <label for="userAddr">주소</label>
                                         <ul class="actions align-left" style="margin-bottom:1mm">
-                                            <li><input type="text" id="postcode" placeholder="우편번호" maxlength="20" name = "applicantAddr">
+                                            <li><input type="text" id="postcode" placeholder="우편번호" maxlength="20" name = "applicantAddr" th:value = "${addr.postcode}">
                                             </li>
                                             <li><input type="button" class="button" onclick="sample4_execDaumPostcode()"
                                                     value="우편번호 찾기"></li>
@@ -129,13 +124,13 @@
                                 </tr>
                                 <tr style="background-color: rgba(0, 0, 0, 0.075)">
                                     <td>
-                                        <input type="text" id="roadAddress" placeholder="도로명주소" name = "applicantAddr">
+                                        <input type="text" id="roadAddress" placeholder="도로명주소" name = "applicantAddr" th:value = "${addr.roadAddress}">
                                     </td>
                                     <td>
-                                        <input type="text" id="detailAddress" placeholder="상세주소" name = "applicantAddr">
+                                        <input type="text" id="detailAddress" placeholder="상세주소" name = "applicantAddr" th:value = "${addr.detailAddress}">
                                     </td>
                                     <td colspan="2">
-                                        <input type="text" id="extraAddress" placeholder="참고항목" name = "applicantAddr">
+                                        <input type="text" id="extraAddress" placeholder="참고항목" name = "applicantAddr" th:value = "${addr.extraAddress}">
                                     </td>
                                 </tr>
                                 <tr>

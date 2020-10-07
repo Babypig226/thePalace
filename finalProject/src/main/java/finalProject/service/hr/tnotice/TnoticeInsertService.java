@@ -31,7 +31,7 @@ public class TnoticeInsertService {
 		dto.setTinterviewAddr(addressService.updateAddress(tnoticeCommand.getTinterviewAddr()));
 		dto.setTnoticeName(tnoticeCommand.getTnoticeName());
 		String path = "/statice/upload";
-		String filePath = "/Users/babypig/Documents/Soldesk/project/final/finalProject0928/src/main/resources"+path;
+		String filePath = "/Users/babypig/git/thePalace/finalProject/src/main/resources"+path;
 		dto.setTnoticeContent(fileUploadService.fileUpload(tnoticeCommand.getTnoticeContent(), filePath));
 		dto.setTinterviewDate(dateFormatService.dateToTimestamp(tnoticeCommand.getTinterviewDate()));
 		dto.setTpassDate(dateFormatService.dateToTimestamp(tnoticeCommand.getTpassDate()));

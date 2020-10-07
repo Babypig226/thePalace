@@ -36,7 +36,7 @@ public class TnoticeModifyService {
 		HttpSession session = request.getSession();
 		List<FileName> list = (List<FileName>)session.getAttribute("fileList");
 		String path = "/static/upload";
-		String filePath = "/Users/babypig/Documents/Soldesk/project/final/finalProject0928/src/main/resources"+path;
+		String filePath = "/Users/babypig/git/thePalace/finalProject/src/main/resources"+path;
 		//String realPath = request.getServletContext().getRealPath(filePath);
 		TnoticeDTO newdto = new TnoticeDTO();
 		if(list != null) {

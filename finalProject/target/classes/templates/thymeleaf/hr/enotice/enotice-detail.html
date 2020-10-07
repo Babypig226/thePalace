@@ -51,7 +51,7 @@
 								</tr>
 								<tr>
 									<td colspan = "3" align = "left"><label for="enoticeContent">상세요강</label> 
-                                        <img th:src = "@{${'/src/main/webapp/static/emp-notice/upload/'+list.enoticeContent}}">[[${list.enoticeContent}]]</a>
+                                        <img th:src = "@{'/static/upload/' + ${list.enoticeContent}}">
 								</tr>
 						</tbody>
 						</table>

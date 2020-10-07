@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import finalProject.command.ApplicantCommand;
 import finalProject.command.AuthInfo;
+import finalProject.domain.AddressDTO;
 import finalProject.domain.ApplicantDTO;
 import finalProject.domain.MemberDTO;
 import finalProject.mapper.ApplicantMapper;
@@ -40,8 +41,10 @@ public class ApplicantsWriteService {
 			MemberDTO dto = new MemberDTO();
 			dto.setUserId(authInfo.getId());
 			dto = memberMapper.selectByMember(dto).get(0);
+			AddressDTO addr = addressService.devideAddress(dto.getUserAddr());
 			model.addAttribute("list", dto);
 			model.addAttribute("enoticeNo", enoticeNo);
+			model.addAttribute("addr", addr);
 			return "thymeleaf/hr/applicants/applicants-write";
 		}
 		

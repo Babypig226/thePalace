@@ -39,7 +39,6 @@
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     document.getElementById('postcode').value = data.zonecode;
                     document.getElementById("roadAddress").value = roadAddr;
-                    document.getElementById("jibunAddress").value = data.jibunAddress;
 
                     // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                     if (roadAddr !== '') {
@@ -113,15 +112,15 @@
                         </div>
                         <div class="field half">
                             <label for="userBirth">생년월일</label>
-                            <input name="userBirth" id="birth" type="datetime-local" value="1999-01-01" />
+                            <input name="userBirth" id="birth" type="date" value="1999-01-01" />
                             <span th:if="${#fields.hasErrors('userBirth')}" th:errors="*{userBirth}" ></span>
                         </div>
                         <div class="field half">
                             <label for="userGender">성별</label>
                             <div class="4u 12u$(small)">
-                                <input type="radio" id="demo-priority-low" name="userGender" checked>
+                                <input type="radio" id="demo-priority-low" name="userGender" value = "M" checked>
                                 <label for="demo-priority-low">남</label>
-                                <input type="radio" id="demo-priority-normal" name="userGender">
+                                <input type="radio" id="demo-priority-normal" name="userGender" value = "F">
                                 <label for="demo-priority-normal">여</label>
                                 <span th:if="${#fields.hasErrors('userGender')}" th:errors="*{userGender}" ></span>
                             </div>
@@ -136,10 +135,10 @@
                             <input name="userEmail" id="userEmail" type="email" placeholder="Email">
                             <span th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" ></span>
                         </div><br />
-                        <div class="field" style="margin-bottom:1mm">
+                        <div class="field half" style="margin-bottom:1mm">
                             <label for="userAddr">주소</label>
                             <ul class="actions align-left" style="margin-bottom:1mm">
-                                <li><input type="text" id="postcode" placeholder="우편번호" maxlength="20">
+                                <li><input type="text" id="postcode" placeholder="우편번호" maxlength="20" name = "userAddr">
                                 </li>
                                 <li><input type="button" class="button" onclick="sample4_execDaumPostcode()"
                                         value="우편번호 찾기"></li>
@@ -147,16 +146,13 @@
                             <span th:if="${#fields.hasErrors('userAddr')}" th:errors="*{userAddr}" ></span>
                         </div>
                         <div class="field half" style="margin-bottom:1mm">
-                            <input type="text" id="roadAddress" placeholder="도로명주소">
-                        </div>
-                        <div class="field half" style="margin-bottom:1mm">
-                            <input type="text" id="jibunAddress" placeholder="지번주소">
+                            <input type="text" id="roadAddress" placeholder="도로명주소" name = "userAddr">
                         </div>
                         <div class="field half">
-                            <input type="text" id="extraAddress" placeholder="참고항목">
+                            <input type="text" id="extraAddress" placeholder="참고항목" name = "userAddr">
                         </div>
                         <div class="field half">
-                            <input type="text" id="detailAddress" placeholder="상세주소">
+                            <input type="text" id="detailAddress" placeholder="상세주소" name = "userAddr">
                         </div>
                         
                      <div class="field half">
