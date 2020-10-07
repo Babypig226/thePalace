@@ -27,5 +27,23 @@ public class FileUploadService {
 		}
 		return store;
 	}
+	
+	public String multipleFileUpload(MultipartFile[] arrmf, String filePath){
+		String totalStore = "";
+		for (MultipartFile mf : arrmf) {
+			String original = mf.getOriginalFilename();  
+			String originalFileExtension = 	original.substring(original.lastIndexOf("."));
+			String store = UUID.randomUUID().toString().replace("-", "")+ originalFileExtension; 
+			File file = new File(filePath + "/" + store);
+			totalStore += store+"`";
+			try {
+				mf.transferTo(file);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return totalStore;
+	}
+
 
 }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<title>강사모집공고작성</title>
+<style type="text/css">
+td {
+	background-color: white;
+}
+</style>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form action="#" method="post" name="interviewForm">
+						<h2 class="align-center">강사모집공고작성</h2>
+						<p>▶내용을 입력하신 다음 "등록하기" 버튼을 눌러주세요</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+							
+
+								<tr>
+									<td>
+										<div align="left">공고명</div>
+									</td>
+									<td><input name="col" type="text"maxlength="10" /></td>
+								</tr>
+								
+								<tr>
+									<td>
+										<div align="left">모집기간 </div>
+									</td>
+									<td><input name="employee_no" type="text"
+										maxlength="10" /></td>
+								</tr>
+								</table>
+							        <h3>모집상세내용</h3>
+        								<div class="field">
+											<textarea rows="20"></textarea>
+										</div>
+								<table>	
+								<tr>
+									<td>
+									<div align="left">서류합격자 발표일</div>
+									</td>
+									<td>
+										<input type="date" id="retireddate" >
+									</td>
+									<td>
+									<div align="left">면접일</div>
+									</td>
+									<td> 
+										<input type="date" id="retireddate" >
+									</td>
+								</tr>
+								
+								<tr>
+									<td>
+										<div align="center">면접장소</div>
+									</td>
+									<td><input name="col" type="text"maxlength="10" /></td>
+									<td>
+										<div align="center">모집분야</div>
+									</td>
+									<td><select name='tinterview_score' width='150px'>
+								<option value=0>select</option>
+								<option>공예</option>
+								<option>다도</option>
+								<option>동양자수</option>
+
+							</select></td>
+								</tr>
+								<tr align="right">
+									<td colspan="5"><a href="interviewList.html"><input
+											type="button" value="목록" /></a> <input value="등록" class="button"
+										type="submit"></td>
+								</tr>
+
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{/static/assets/js/jquery.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{/static/assets/js/skel.min.js}></script>
+	<script th:src=@{/static/assets/js/util.js}></script>
+	<script th:src=@{/static/assets/js/main.js}></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

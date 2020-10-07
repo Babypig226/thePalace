@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.EnoticeMapper">
+	<sql id = "columns">
+		ENOTICE_NO, DEPARTMENT_NO, DEADLINE, ENOTICE_NAME, ENOTICE_CONTENT, ENOTICE_DATE, 
+		FPASS_DATE, INTERVIEW_DATE, INTERVIEW_ADDR, JOIN_DATE
+	</sql>
+	<sql id="dNo">
+		select nvl(max(enotice_no),0)+1
+		from emp_notice
+	</sql>
+	<insert id="insertEnotice" parameterType="finalProject.domain.EnoticeDTO">
+		insert into emp_notice(<include refid = "columns"/>)
+		values((<include refid = "dNo"/>), #{departmentNo}, #{deadline}, #{enoticeName}, #{enoticeContent}, sysdate, 
+		#{fpassDate}, #{interviewDate}, #{interviewAddr}, #{joinDate}) 		
+	</insert>
+	<resultMap type="finalProject.domain.EnoticeDTO" id="EnoticeList">
+		<id column = "DEPARTMENT_NO" jdbcType = "VARCHAR" property = "departmentNo"/>
+		<id column = "ENOTICE_NO" jdbcType = "VARCHAR" property = "enoticeNo"/>
+		<result column = "DEADLINE" jdbcType = "TIMESTAMP" property = "deadline"/>
+		<result column = "ENOTICE_NAME" jdbcType = "VARCHAR" property = "enoticeName"/>
+		<result column = "ENOTICE_CONTENT" jdbcType = "VARCHAR" property = "enoticeContent"/>
+		<result column = "ENOTICE_DATE" jdbcType = "TIMESTAMP" property = "enoticeDate"/>
+		<result column = "FPASS_DATE" jdbcType = "TIMESTAMP" property = "fpassDate"/>
+		<result column = "INTERVIEW_DATE" jdbcType = "TIMESTAMP" property = "interviewDate"/>
+		<result column = "INTERVIEW_ADDR" jdbcType = "VARCHAR" property = "interviewAddr"/>
+		<result column = "JOIN_DATE" jdbcType = "TIMESTAMP" property = "joinDate"/>
+	</resultMap>
+	<select id="getEnoticeList" resultMap = "EnoticeList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from emp_notice
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								and enotice_no = #{num}
+							</if>
+						</trim>
+						order by deadline))
+		where rn between #{startPage} and #{endPage}
+	</select>
+	<update id="updateEnotice" parameterType = "finalProject.domain.EnoticeDTO">
+		update emp_notice
+		set ENOTICE_NAME = #{enoticeName}, DEADLINE = #{deadline},
+			ENOTICE_CONTENT = #{enoticeContent}, 
+			FPASS_DATE = #{fpassDate}, INTERVIEW_DATE = #{interviewDate}, ENOTICE_DATE = SYSDATE,
+			INTERVIEW_ADDR = #{interviewAddr}, JOIN_DATE = #{joinDate}
+		where ENOTICE_NO = #{enoticeNo}
+	</update>
+
+</mapper>

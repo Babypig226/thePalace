@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+
+<title>thePalace|직원채용공고</title>
+</head>
+<body class="subpage">
+	<!-- Header -->
+	<header id="header" th:include="thymeleaf/header"></header>
+
+	<!-- Nav -->
+	<nav id="menu" th:include="thymeleaf/nav"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="image fit">
+					<img th:src=@{static/images/topbanner7.jpg} alt="" />
+				</div>
+				<div class="content">
+					공고번호: [[${list.enoticeNo}]]&nbsp;&nbsp;업데이트일: <span th:text = "${#dates.format(list.enoticeDate, 'yyyy-MM-dd')}"></span>
+					<h2 class="align-center">[[${list.enoticeName}]]</h2> 
+					<hr />
+						<table>
+							<tbody>
+								<tr>
+								
+									<td><label>모집부서</label> 
+										[[${list.departmentNo}]]</td>
+									<td><label for="deadline">마감일</label> 
+										<div th:text ="${#dates.format(list.deadline, 'yyyy-MM-dd')}"></div></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td><label for="fpassDate">서류합격자 발표일</label> 
+										<div th:text ="${#dates.format(list.fpassDate, 'yyyy-MM-dd')}"></div></td>
+									<td><label for="interviewDate">면접전형일</label> 
+										<div th:text ="${#dates.format(list.interviewDate, 'yyyy-MM-dd')}"></div></td>
+									<td><label for="joinDate">입사예정일</label>
+										<div th:text ="${#dates.format(list.joinDate, 'yyyy-MM-dd')}"></div></td>
+								</tr>
+								<tr>
+									<td colspan="3"><label for="interviewAddr">면접장소</label>
+										[[${list.interviewAddr}]]</td>
+								</tr>
+								<tr>
+									<td colspan = "3" align = "left"><label for="enoticeContent">상세요강</label> 
+                                        <img th:src = "@{${'/src/main/webapp/static/emp-notice/upload/'+list.enoticeContent}}">[[${list.enoticeContent}]]</a>
+								</tr>
+						</tbody>
+						</table>
+				<ul class="actions align-right">
+                            <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                            </li>
+                            <li><a th:href="@{/apply/regist(enoticeNo=${list.enoticeNo})}" class="button alt">지원하기</a></li>
+                            <li><a th:href="@{/apply/list(enoticeNo=${list.enoticeNo})}" class="button alt">지원서보기</a></li>
+                            <li><a th:href="@{/enotice/Modify(enoticeNo=${list.enoticeNo})}" class="button">수정</a></li>
+                        </ul>  
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{/static/assets/js/jquery.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{/static/assets/js/skel.min.js}></script>
+	<script th:src=@{/static/assets/js/util.js}></script>
+	<script th:src=@{/static/assets/js/main.js}></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>

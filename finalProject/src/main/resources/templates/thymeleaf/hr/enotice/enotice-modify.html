@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+        //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+        function sample4_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data
+                            .buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("roadAddress").value = roadAddr;
+                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                    if (roadAddr !== '') {
+                        document.getElementById("extraAddress").value = extraRoadAddr;
+                    } else {
+                        document.getElementById("extraAddress").value = '';
+                    }
+                    var guideTextBox = document.getElementById("guide");
+                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                    if (data.autoRoadAddress) {
+                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else if (data.autoJibunAddress) {
+                        var expJibunAddr = data.autoJibunAddress;
+                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else {
+                        guideTextBox.innerHTML = '';
+                        guideTextBox.style.display = 'none';
+                    }
+                }
+            }).open();
+        }
+    </script>
+ <script type="text/javascript" 
+ 	src="http://code.jquery.com/jquery-1.8.1.js" ></script>
+<script>
+function fileDel(strFile, btn){
+	alert(strFile);
+	$.ajax({ 
+		type : "get",	
+		url : "fileDel",
+		dataType : "text",
+		data: {"storeFileName":strFile},
+		success : function(result){
+			alert("#"+btn)
+			if(result.trim() == 1){
+				$(btn).val("삭제취소")
+			}else{
+				$(btn).val("삭제")
+			}
+		},
+		error : function(){
+			$(btn).text("삭제취소")
+			alert('Oops! Error hh');
+			return;
+		}
+	});
+}
+</script>
+<title>thePalace|직원채용공고수정</title>
+</head>
+<body class="subpage">
+	<!-- Header -->
+	<header id="header" th:include="thymeleaf/header"></header>
+
+	<!-- Nav -->
+	<nav id="menu" th:include="thymeleaf/nav"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="image fit">
+					<img th:src=@{static/images/topbanner7.jpg} alt="" />
+				</div>
+				<div class="content">
+					<h2 class="align-center">직원채용공고 수정</h2>
+					<hr />
+					<form th:action="@{/enotice/Modify}" method="post" enctype = "multipart/form-data">
+					<input type = "hidden" th:value = "${list.enoticeNo}" name = "enoticeNo" />
+						<table>
+							<tbody>
+								<tr>
+									<td><label>모집부서</label> 
+										[[${list.departmentNo}]]
+									<td><label for="enoticeName">공고명</label> 
+									<input name="enoticeName" id="name" type="text" placeholder="Name" th:value = "${list.enoticeName}">
+									</td>
+									<td><label for="deadline">마감일</label> 
+									<input type = "date" name="deadline" th:value = "${deadline}"></td>
+								</tr>
+								<tr>
+									<td><label for="fpassDate">서류합격자 발표일</label> <input
+										name="fpassDate" id="name" type="date" th:value = "${fpassDate}"></td>
+									<td><label for="interviewDate">면접전형일</label> <input
+										name="interviewDate" id="name" type="date" th:value = "${interviewDate}"></td>
+									<td><label for="joinDate">입사예정일</label> <input
+										name="joinDate" id="name" type="date" th:value = "${joinDate}"></td>
+								</tr>
+								<tr>
+									<td colspan="3"><label for="interviewAddr">면접장소</label>
+										<ul class="actions align-left" style="margin-bottom: 1mm">
+											<li><input type="text" id="postcode" placeholder="우편번호"
+												maxlength="20" name = "interviewAddr" th:value = "${addr.postcode}"></li>
+											<li><input type="button" class="button"
+												onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></li>
+										</ul></td>
+								<tr style="background-color: rgba(0, 0, 0, 0.075)">
+									<td><input type="text" id="roadAddress"
+										placeholder="도로명주소" name = "interviewAddr" th:value = "${addr.roadAddress}"></td>
+									<td><input type="text" id="detailAddress" placeholder="상세주소" name = "interviewAddr" th:value = "${addr.detailAddress}"></td>
+									<td >
+									<input type="text" id="extraAddress" placeholder="참고항목" name = "interviewAddr" th:value = "${addr.extraAddress}"></td>
+								</tr>
+								<tr>
+									 <td colspan = "3"><label for="enoticeContent">상세요강</label>
+										저장된 파일 명 : <span	th:text="${list.enoticeContent}" id="oldStoreFileName"></span>
+										<input type="button" id="btn" value="삭제" th:onclick="'fileDel(\''+${list.enoticeContent}+'\',this)'" />
+									</td>
+							</tr>
+							<tr>
+								<td colspan = "3">
+									<input type="file" name="update"/>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+				<ul class="actions align-right">
+					<li><input value="뒤로" onclick="javascript: history.back();"
+						class="button alt" type="button"></li>
+					<li><input value="수정완료" class="button" type="submit"></li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{/static/assets/js/jquery.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{/static/assets/js/skel.min.js}></script>
+	<script th:src=@{/static/assets/js/util.js}></script>
+	<script th:src=@{/static/assets/js/main.js}></script>
+</body>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+</html>
