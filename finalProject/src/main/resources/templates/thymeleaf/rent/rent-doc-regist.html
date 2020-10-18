@@ -54,9 +54,9 @@
                         </div>
                        </div>
                     <hr />
-                    <form th:action="@{docRegist}" method="POST" name="frm" id="frm" enctype = "multipart/form-data">
-                    <input type = "hidden" name = "departmentNo" value = "2"/>
-                    <input type = "hidden" name = "spotNo" value = "1"/>
+                    <form th:action="@{regist}" method="POST" name="frm" id="frm" enctype = "multipart/form-data">
+                    <input type = "hidden" name = "departmentNo" th:value = "${depNo}"/>
+                    <input type = "hidden" name = "spotNo" th:value = "${spotNo}"/>
                     <input type = "hidden" name = "rentalNo" th:value = "${list.rentalNo}"/>
                         <div class="field half">
                             <label for="rentPlan">공간이용계획서</label>

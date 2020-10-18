@@ -17,11 +17,13 @@ import finalProject.mapper.RentCompanyMapper;
 public class RentCompanyDetailService {
 	@Autowired
 	RentCompanyMapper rentCompanyMapper;
-	public void getRentCompanyInfo(HttpSession session, Model model) {
+	public void getRentCompanyInfo(HttpSession session, Model model, String depNo, String spotNo) {
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, authInfo.getId(), null);
 		RentCompanyDTO rdto = rentCompanyMapper.getRentCompanyList(dto).get(0);
 		model.addAttribute("list", rdto);
+		model.addAttribute("depNo", depNo);
+		model.addAttribute("spotNo", spotNo);
 	}
 
 }

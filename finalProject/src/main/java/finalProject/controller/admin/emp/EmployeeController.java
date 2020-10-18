@@ -20,7 +20,9 @@ import finalProject.service.admin.emp.EmployeeDetailService;
 import finalProject.service.admin.emp.EmployeeListService;
 import finalProject.service.admin.emp.EmployeeModifyService;
 import finalProject.service.admin.emp.EmployeeRegistService;
+import finalProject.service.dep.DepListService;
 import finalProject.service.file.FileDown;
+import finalProject.service.hr.applicants.ApplicantDetailService;
 
 @Controller
 @RequestMapping("emp")
@@ -36,6 +38,10 @@ public class EmployeeController {
 	@Autowired
 	EmployeeModifyService employeeModifyService;
 	@Autowired
+	DepListService depListService;
+	@Autowired
+	ApplicantDetailService applicantDetailService;
+	@Autowired
 	FileDown fileDown;
 	
 	@ModelAttribute
@@ -50,7 +56,8 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "regist", method = RequestMethod.GET)
-	public String empRegist() {
+	public String empRegist(Model model) {
+		depListService.getDepList(model, 1);
 		return "thymeleaf/admin-emp/admin-emp-regform";
 	}
 	
@@ -61,6 +68,12 @@ public class EmployeeController {
 		}
 		employeeRegistService.registEmp(employeeCommand, request);
 		return "redirect:/emp/list";
+	}
+	
+	@RequestMapping(value = "searchId", method = RequestMethod.GET)
+	public String searchById(@RequestParam(value = "applicantId")String applicantId, Model model) {
+		applicantDetailService.searchById(applicantId, model);
+		return "thymeleaf/admin-emp/searchById";
 	}
 	
 	@RequestMapping("view")

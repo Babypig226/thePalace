@@ -31,9 +31,11 @@
 								document_no like concat(#{num},'%')
 							</if>
 							<if test="num != null">
-								or document_no =#{num}
+								or document_no = #{num}
 							</if>
-							<if test="num "></if>
+							<if test="num != null">
+								or document_no like '%'||#{num}||'%'
+							</if>
 						</trim>
 						order by document_no desc))
 		where rn between #{startPage} and #{endPage}

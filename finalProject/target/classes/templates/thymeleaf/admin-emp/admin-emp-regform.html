@@ -61,6 +61,27 @@
             }).open();
         }
     </script>
+   <script type="text/javascript" 
+ 	src="http://code.jquery.com/jquery-1.8.1.js" ></script>
+<script>
+function searchById(){
+	alert($('#employeeId').val());
+	$.ajax({ 
+		type : "get",	
+		url : "searchId",
+		dataType : "text",
+		data: {"applicantId":$('#employeeId').val()},
+		success : function(result){
+			alert("hope it works");
+			$('#employeeName').val("이름");
+		},
+		error : function(){
+			alert('Oops! Error hh');
+			return;
+		}
+	});
+}
+</script>
 </head>
 
 <body class="subpage">
@@ -93,7 +114,12 @@
                             	<tr>
                                     <td width="10%" valign="top" >
                                         <label for="departmentName">소속부서</label>
-                                        <input name="departmentName" id="name" type="text" placeholder="부서명">
+                                        <select th:name="departmentNo">
+											<option>선택</option>
+										<span th:each = "list : ${list}">
+											<option th:value="${list.departmentNo}">[[${list.departmentName}]]</option>
+										</span>
+										</select>
                                     </td>
                                     <td colspan = "2"></td>
                             		
@@ -102,6 +128,7 @@
                                     <td width="10%" valign="top">
                                         <label for="employeeId">아이디</label>
                                         <input name="employeeId" id="employeeId" type="text" placeholder="ID" th:field = "*{employeeId}" autofocus = "autofocus">
+                                        <input type = "button" class = "button" onclick = "javascript: searchById();" value = "검색"/>
                                         <span th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></span>
                                     </td>
                                     <td width="10%" valign="top">

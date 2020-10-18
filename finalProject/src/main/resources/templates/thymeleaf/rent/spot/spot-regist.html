@@ -28,6 +28,7 @@
 				<h2 class="align-center">임대공간등록</h2>
 				<div class="content">
 						<form th:action="@{regist}" method="POST" name="frm" id="frm">
+						<input type = "hidden" name = "spotNo" th:value = "${type}"/>
 					<div class="row 200%">
 							<div class="6u 12u$(medium)" style = "margin-bottom : 20px">
 								<label for="spotName">공간명</label> <input name="spotName"

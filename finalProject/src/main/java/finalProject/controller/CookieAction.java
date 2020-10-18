@@ -20,7 +20,7 @@ public class CookieAction {
 		if(cookies != null && cookies.length > 0) {
 			for(Cookie c: cookies) {
 				if(c.getName().equals("autoLogin")) {
-					AuthInfo authInfo =new AuthInfo(c.getValue(),null, null,null);
+					AuthInfo authInfo =new AuthInfo(c.getValue(),null, null,null, null);
 					session.setAttribute("authInfo",authInfo);
 				}
 				if(c.getName().startsWith("id")) {

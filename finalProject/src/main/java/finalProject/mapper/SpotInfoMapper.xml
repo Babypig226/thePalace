@@ -5,12 +5,9 @@
 	<sql id = "columns">
 		SPOT_NO, SPOT_NAME, SPOT_PURPOSE, SPOT_PRICE
 	</sql>
-	<sql id = "no">
-		select nvl(max(SPOT_NO),0)+1 from SPOT_INFO
-	</sql>
 	<insert id="insertSpot" parameterType="finalProject.domain.SpotInfoDTO">
 		insert into spot_info(<include refid = "columns"/>)
-		values((<include refid="no"/>), #{spotName}, #{spotPurpose}, #{spotPrice}) 		
+		values(#{spotNo}, #{spotName}, #{spotPurpose}, #{spotPrice}) 		
 	</insert>
 	<resultMap type="finalProject.domain.SpotInfoDTO" id="spotList">
 		<id column = "SPOT_NO" jdbcType = "VARCHAR" property = "spotNo"/>
@@ -25,7 +22,7 @@
 						from spot_info
 						<trim prefix="where" prefixOverrides="AND|OR">
 							<if test="num != null">
-								spot_no = #{num}
+								spot_no like concat(#{num},'%')
 							</if>
 						</trim>
 						order by spot_no desc))

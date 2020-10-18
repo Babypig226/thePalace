@@ -29,11 +29,9 @@ public class EmployeeRegistService {
 	EmployeeMapper employeeMapper;
 	
 	public void registEmp(EmployeeCommand employeeCommand, HttpServletRequest request) {
-		MultipartFile mf = employeeCommand.getCopyBankbook();
-		System.out.println("regist emp file"+mf.getOriginalFilename());
 		EmployeeDTO dto = new EmployeeDTO();
 		//인적사항
-		dto.setDepartmentNo("2");
+		dto.setDepartmentNo(employeeCommand.getDepartmentNo());
 		dto.setEmployeeId(employeeCommand.getEmployeeId());
 		dto.setEmployeePw("PW");
 		dto.setEmployeeName(employeeCommand.getEmployeeName());

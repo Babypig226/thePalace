@@ -3,7 +3,7 @@
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
      layout:decorator="layout">
 	<head>
-		<title>임대관리</title>
+		<title>임대공간</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
@@ -19,53 +19,32 @@
         <nav id="menu" th:include="thymeleaf/nav.html"></nav>
 
 		<!-- Three -->
-			<section id="three" class="wrapper style2">
-				<div class="inner">
-					<div class="grid-style">
-		<!-- 인사채용 -->
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img th:src="@{/static/images/gyeonghoiru.jpeg}" width = "300" height = "350" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>경회루</h2>
-										<p>임금과 신하가 덕으로 만나는 연회장</p>
-									</header>
-									<hr />
-									<p>이벤트, 촬영</p><br/>
-									<div class="align-center">
-										<a th:href="@{docList(spotNo=1)}" class="button alt">임대희망서보기</a>
-                                    </div>
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<div class="grid-style">
+				<span th:each="a:${list}">
+					<div>
+						<div class="box">
+							<div class="image fit">
+								<img th:src="@{/static/images/gyeonghoiru.jpeg}" width="300"
+									height="350" alt="" />
+							</div>
+							<div class="content">
+								<header class="align-center">
+									<h2>[[${a.spotName}]]</h2>
+								</header>
+								<hr />
+								<div class="align-center">
+									<a th:href="@{detail(spotNo=${a.spotNo})}" class="button alt">더보기</a>
 								</div>
 							</div>
 						</div>
-		<!-- 숙박운영부 -->
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img th:src="@{/static/images/concierge.jpg}" width = "300" height = "350" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>임대공간관리</h2>
-									</header>
-									<hr />
-									<p>임대공간</p>
-									<div class="align-center">
-										<a th:href="@{/spot/sel}" class="button alt">공간관리</a>
-                                    </div>
-								</div>
-							</div>
-						</div>
-						</div>
-
 					</div>
-				</div>
-			</section>
+				</span>
+			</div>
 		</div>
-		<!-- Footer -->	
+	</section>
+	<!-- Footer -->	
 		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 		<!-- Scripts -->
 			<script th:src=@{/static/assets/js/jquery.min.js}></script>

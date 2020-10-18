@@ -3,6 +3,14 @@
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
      layout:decorator="layout">
 	<head>
+	<script type="text/javascript" 
+ 	src="http://code.jquery.com/jquery-1.8.1.js" ></script>
+<script>
+function deleteAlert(){
+	alert("해당 공간정보를 삭제합니다.");
+	
+}
+</script>
 		<title>the Palace|[[${list.spotName}]]</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,7 +58,7 @@
 						<li><input value="뒤로" onclick="javascript: history.back();"
 							class="button alt" type="button"></li>
 						<li><a th:href="@{modify(spotNo=${list.spotNo})}" class="button">수정</a></li>
-						<li><a th:href="@{delete(spotNo=${list.spotNo})}" class="button">삭제</a></li>
+						<li><a th:href="@{delete(spotNo=${list.spotNo})}" class="button" onclick = "javascript: deleteAlert();">삭제</a></li>
 					</ul>
 				</div>
 			</div>
@@ -67,21 +75,4 @@
 			<script th:src=@{/static/assets/js/main.js}></script>
 
 	</body>
-	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
-	<script>
-		$(function() {
-			includeLayout();
-		});
-		function includeLayout() {
-			var includeArea = $('[data-include]');
-			var self, url;
-			$.each(includeArea, function() {
-				self = $(this);
-				url = self.data("include");
-				self.load(url, function() {
-					self.removeAttr("data-include");
-				});
-			});
-		}
-	</script>
 </html>

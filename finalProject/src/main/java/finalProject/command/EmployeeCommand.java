@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeCommand {
 	String employeeNo;
-	String departmentName;
+	String departmentNo;
 	@NotEmpty(message = "ID를 입력하세요")
 	String employeeId;
 	@NotEmpty(message = "직원명를 입력하세요")

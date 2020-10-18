@@ -24,7 +24,7 @@ public class RentDocInsertService {
 
 	public void insertRentDoc(RentDocCommand rentDocCommand, HttpServletRequest request) {
 		RentDocDTO dto = new RentDocDTO();
-		SimpleDateFormat dateForm = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateForm = new SimpleDateFormat("HHmmss");
 		String num = dateForm.format(new Date());
 		dto.setDocumentNo(rentDocCommand.getSpotNo()+"-"+ rentDocCommand.getRentalNo()+"-"+num);
 		dto.setDepartmentNo(rentDocCommand.getDepartmentNo());

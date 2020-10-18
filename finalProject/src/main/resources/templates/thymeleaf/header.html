@@ -4,6 +4,9 @@
     <a href ="sign-up/member-agree">회원가입</a>
     </span>
     <span th:if="${session.authInfo}">
+    <span th:if ="${session.authInfo.type eq 'rc'}">
+    	<a th:href = "@{/rentDoc/mylist}">임대희망서보기</a>
+    </span>
     <a th:href = "@{/sign/out}">로그아웃</a>
     <a th:href = "@{/admin/view}">관리자페이지</a>
     <a href ="mypage/Mypage">마이페이지</a>	

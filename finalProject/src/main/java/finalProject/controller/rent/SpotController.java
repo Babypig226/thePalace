@@ -27,19 +27,25 @@ public class SpotController {
 	SpotInfoModifyService spotInfoModifyService;
 	@Autowired
 	SpotInfoDeleteService spotInfoDeleteService;
+	@RequestMapping("sel")
+	public String SpotSel() {
+		return "thymeleaf/rent/spot/spot-sel";
+	}
+	
 	@RequestMapping("list")
-	public String SpotList(@RequestParam(value = "page", defaultValue = "1")Integer page, Model model) {
-		spotInfoListService.getSpotList(page, model);
+	public String SpotList(@RequestParam(value = "page", defaultValue = "1")Integer page, @RequestParam(value = "type")String type, Model model) {
+		spotInfoListService.getSpotList(page, type, model);
 		return "/v-admin-rent/admin-spot-list";
 	}
 	@RequestMapping(value = "regist", method = RequestMethod.GET)
-	public String SpotRegist() {
+	public String SpotRegist(Model model, @RequestParam(value = "type")String type) {
+		model.addAttribute("type", type);
 		return "thymeleaf/rent/spot/spot-regist";
 	}
 	@RequestMapping(value = "regist", method = RequestMethod.POST)
 	public String SpotRegistPro(SpotCommand spotCommand) {
 		spotInfoInsertService.insertSpot(spotCommand);
-		return "redirect:/spot/list";
+		return "redirect:/spot/list?type="+spotCommand.getSpotNo();
 	}
 	@RequestMapping("detail")
 	public String SpotDetail(@RequestParam(value = "spotNo")String spotNo, Model model) {
@@ -59,7 +65,7 @@ public class SpotController {
 	@RequestMapping("delete")
 	public String SpotDelete(@RequestParam(value = "spotNo")String spotNo) {
 		spotInfoDeleteService.deleteSpot(spotNo);
-		return "redirect:/spot/list";
+		return "redirect:/spot/list?type="+spotNo.split("-")[0];
 	}
 
 }

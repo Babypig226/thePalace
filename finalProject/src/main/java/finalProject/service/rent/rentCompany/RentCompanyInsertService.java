@@ -1,6 +1,7 @@
 package finalProject.service.rent.rentCompany;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import finalProject.mapper.RentCompanyMapper;
 public class RentCompanyInsertService {
 	@Autowired
 	RentCompanyMapper rentCompanyMapper;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	public void insertRentCompany(RentCompanyCommand rentCompanyCommand) {
 		RentCompanyDTO dto = new RentCompanyDTO();
@@ -25,7 +28,7 @@ public class RentCompanyInsertService {
 		dto.setRentalId(rentCompanyCommand.getRentalId());
 		dto.setRentalName(rentCompanyCommand.getRentalName());
 		dto.setRentalPh(rentCompanyCommand.getRentalPh());
-		dto.setRentalPw(rentCompanyCommand.getRentalPw());
+		dto.setRentalPw(passwordEncoder.encode(rentCompanyCommand.getRentalPw()));
 		rentCompanyMapper.insertRentCompany(dto);
 		
 	}
