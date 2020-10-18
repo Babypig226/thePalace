@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,10 +37,12 @@ public class EmployeeController {
 	EmployeeModifyService employeeModifyService;
 	@Autowired
 	FileDown fileDown;
+	
 	@ModelAttribute
 	EmployeeCommand setEmployeeCommand() {
 		return new EmployeeCommand();
 	}
+
 	@RequestMapping("list")
 	public String empList(Model model) {
 		employeeListService.getEmpList(model);
@@ -51,7 +55,10 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "regist", method = RequestMethod.POST)
-	public String empRegistPro(EmployeeCommand employeeCommand, HttpServletRequest request) {
+	public String empRegistPro(@Validated EmployeeCommand employeeCommand, HttpServletRequest request, BindingResult result) {
+		if(result.hasErrors()) {
+			return "thymeleaf/admin-emp/admin-emp-regform";
+		}
 		employeeRegistService.registEmp(employeeCommand, request);
 		return "redirect:/emp/list";
 	}

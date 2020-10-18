@@ -13,6 +13,7 @@ import finalProject.command.EmployeeCommand;
 import finalProject.domain.EmployeeDTO;
 import finalProject.mapper.EmployeeMapper;
 import finalProject.service.addr.AddressService;
+import finalProject.service.dateFormat.DateFormatService;
 import finalProject.service.file.FileUploadService;
 
 @Component
@@ -22,6 +23,8 @@ public class EmployeeRegistService {
 	AddressService addressService;
 	@Autowired
 	FileUploadService fileUploadService;
+	@Autowired
+	DateFormatService dateFormatService;
 	@Autowired
 	EmployeeMapper employeeMapper;
 	
@@ -34,18 +37,12 @@ public class EmployeeRegistService {
 		dto.setEmployeeId(employeeCommand.getEmployeeId());
 		dto.setEmployeePw("PW");
 		dto.setEmployeeName(employeeCommand.getEmployeeName());
-		String addr = addressService.updateAddress(employeeCommand.getEmployeeAddr());
-		dto.setEmployeeAddr(addr);
-		Timestamp employeeBirth = Timestamp.valueOf(employeeCommand.getEmployeeBirth());
-		dto.setEmployeeBirth(employeeBirth);
+		dto.setEmployeeAddr(addressService.updateAddress(employeeCommand.getEmployeeAddr()));
+		dto.setEmployeeBirth(dateFormatService.dateToTimestamp(employeeCommand.getEmployeeBirth()));
 		dto.setEmployeePh(employeeCommand.getEmployeePh());
 		dto.setEmployeeEmail(employeeCommand.getEmployeeEmail());
 		//고용정보
-		String employeeAccount = "";
-		for (String string : employeeCommand.getEmployeeAccount()) {
-			employeeAccount += string + "`";
-		} 
-		dto.setEmployeeAccount(employeeAccount);
+		dto.setEmployeeAccount(employeeCommand.getEmployeeAccount());
 		dto.setEmployeeType(employeeCommand.getEmployeeType());
 		dto.setEmployeeSal(employeeCommand.getEmployeeSal());
 		//증빙자료업로드

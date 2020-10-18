@@ -36,7 +36,6 @@
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     document.getElementById('postcode').value = data.zonecode;
                     document.getElementById("roadAddress").value = roadAddr;
-                    document.getElementById("jibunAddress").value = data.jibunAddress;
                     // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                     if (roadAddr !== '') {
                         document.getElementById("extraAddress").value = extraRoadAddr;
@@ -89,7 +88,9 @@
 
 									<td  valign="top"><label for="departmentName">부서명</label>
 										<input name="departmentName" id="name" type="text"
-										placeholder="Department Name"></td>								
+										placeholder="Department Name" th:field = "*{departmentName}" autofocus = "autofocus">
+										<span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></span>
+										</td>								
 									<td valign="top" ><label for="departmentPh">대표연락처</label>
 										<input type="text" id="demo-priority-low" name="departmentPh"
 										placeholder="010-0000-0000"></td>

@@ -23,12 +23,7 @@ public class EmployeeModifyService {
 		dto.setEmployeeEmail(employeeCommand.getEmployeeEmail());
 		dto.setEmployeeAddr(addressService.updateAddress(employeeCommand.getEmployeeAddr()));
 		dto.setEmployeeSal(employeeCommand.getEmployeeSal());
-		String[] account = employeeCommand.getEmployeeAccount();
-		String employeeAccount = "";
-		for (String string : account) {
-			 employeeAccount += string + "`";
-		}
-		dto.setEmployeeAccount(employeeAccount);
+		dto.setEmployeeAccount(employeeCommand.getEmployeeAccount());
 		employeeMapper.updateEmp(dto);
 	}
 
