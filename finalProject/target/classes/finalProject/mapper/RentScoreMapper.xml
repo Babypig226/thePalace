@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.RentScoreMapper">
+	<sql id = "columns">
+		RSCORE_NO, FAC_SCORE, PLAN_SCORE, CAP_SCORE, DEPARTMENT_NO
+	</sql>
+	<insert id="insertRentScore" parameterType="finalProject.domain.RentScoreDTO">
+		insert into RENTAL_SCORE (<include refid = "columns"/>)
+		values(#{rscoreNo}, #{facScore}, #{planScore}, #{capScore}, #{departmentNo}) 		
+	</insert>
+	<resultMap type="finalProject.domain.RentScoreDTO" id="scoreList">
+		<id column = "RSCORE_NO" jdbcType = "VARCHAR" property = "rscoreNo"/>
+		<result column = "FAC_SCORE" jdbcType = "BIGINT" property = "facScore"/>
+		<result column = "PLAN_SCORE" jdbcType = "BIGINT" property = "planScore"/>
+		<result column = "CAP_SCORE" jdbcType = "BIGINT" property = "capScore"/>
+		<result column = "DEPARTMENT_NO" jdbcType = "VARCHAR" property = "departmentNo"/>
+	</resultMap>
+	<select id="getScore" resultMap = "scoreList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from rental_score
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								and rscore_no = #{num}
+							</if>
+						</trim>
+						order by rscore_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+
+</mapper>

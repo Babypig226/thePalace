@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+	<head>
+		<title>단기임대</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+	</head>
+	<body>
+
+		<!-- Header -->
+		<header role="header" th:include="thymeleaf/header" id="header">
+			    <a href="#menu" class="toggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="menu" th:include="thymeleaf/nav.html"></nav>
+
+		<!-- Three -->
+			<section id="three" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
+		<!-- 인사채용 -->
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/gyeonghoiru.jpeg}" width = "300" height = "350" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>경회루</h2>
+										<p>임금과 신하가 덕으로 만나는 연회장</p>
+									</header>
+									<hr />
+									<p>이벤트, 촬영</p><br/>
+									<div class="align-center">
+										<a th:href="@{detail(spotNo=1)}" class="button alt">더보기</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+		<!-- 숙박운영부 -->
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/concierge.jpg}" width = "300" height = "350" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>Accommodation</h2>
+										<p>숙박운영부 공지사항</p>
+									</header>
+									<hr />
+									<p>숙박운영부 공지사항</p>
+									<div class="align-center">
+										<a href="#" class="button alt">더보기</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+		<!-- 상품제작판매부 -->
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/goods.jpg}" width = "300" height = "350" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>Souvenior</h2>
+										<p>상품제작판매부 공지</p>
+									</header>
+									<hr />
+									<p>상품제작판매부 공지</p>
+									<div class="align-center">
+										<a href="#" class="button alt">더보기</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+		<!-- 콘텐츠기획운영부 -->
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/program.jpg}" width = "300" height = "350" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>Program</h2>
+										<p>콘텐츠기획운영부 공지</p>
+									</header>
+									<hr />
+									<p>콘텐츠기획운영부 공지</p>
+									<div class="align-center">
+										<a href="#" class="button alt">더보기</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- Footer -->	
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+	<script>
+		$(function () {
+			includeLayout();
+		});
+
+
+		function includeLayout() {
+			var includeArea = $('[data-include]');
+			var self, url;
+			$.each(includeArea, function () {
+				self = $(this);
+				url = self.data("include");
+				self.load(url, function () {
+					self.removeAttr("data-include");
+				});
+			});
+		}
+	</script>
+</html>

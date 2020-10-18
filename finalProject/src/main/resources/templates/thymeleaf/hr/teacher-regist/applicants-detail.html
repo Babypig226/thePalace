@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav"></nav>
+
+    <!-- Registration Form -->
+    <section id="one" class="wrapper style2">
+        <div class="inner">
+            <div class="box">
+                <div class="image fit">
+                    <img th:src="@{static/images/topbanner7.jpg}" alt="" />
+                </div>
+                <div class="content">
+                    <h2 class="align-center">지원자 심사</h2>
+                    <hr />
+                    <div class = "table-wrapper">
+                        <table>
+                                <tr>
+                                    <td >
+                                        <label for="userName">이름</label>
+                                        [[${list.applicantName}]]
+                                    </td>
+                                    <td >
+                                        <label for="userGender">영문이름</label>
+                                        [[${list.applicantEname}]]
+                                    </td>
+                                    <td >
+                                        <label for="userBirth">생년월일</label>
+                                        <span th:text = "${#dates.format(list.applicantBirth,'yyyy-MM-dd')}"></span>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: rgba(0, 0, 0, 0.075)">
+                                    <td>
+                                            <label for="applicantPh">연락처</label>
+                                                [[${list.applicantPh}]]
+                                    </td>
+                                    <td>
+                                            <label for="applicantEmail">Email</label>
+                                                [[${list.applicantEmail}]]
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <label for="userAddr">주소</label>
+                                        <ul class="actions align-left" style="margin-bottom:1mm">
+                                            <li>[[${list.applicantAddr}]]
+                                            </li>
+                                        </ul>
+                                </tr>
+                                <tr>
+									<td>
+									<label>지원서류</label>
+									<div th:each="file :  ${fileList}" >
+									<a th:href="@{/apply/fileDown(file=${file})}" >
+										[[${file}]]</a>
+									</div>
+									</td>
+									<td colspan = "2"></td>	
+								</tr>
+                        </table>
+                    </div>
+                        <form th:action = "@{/empIntv/regist(acceptNo=${list.acceptNo})}" method = "post">
+                        <div class = "row 200%">
+                        <div class = "6u$ 12u$(medium)">
+                        	<ul class="actions align-left">
+	                        	<li>
+		                        	<label>서류심사(10점만점)</label>
+		                        	<input type = "number" name = "paperScore" min="0" max="10">
+	                        	</li>
+	                        	<li>
+		                        	<label>면접심사(10점만점)</label>
+		                        	<input type = "number" name = "interviewScore" min="0" max="10">
+	                        	</li>
+                        	</ul>
+                        </div>
+                        <div class = "6u$ 12u$(medium)">
+                        	<label>심사기준</label>
+                        	<textarea name = "examGuide" cols = "30" rows = "5"></textarea>
+                        </div>
+                        </div>
+                        <ul class="actions align-right">
+                            <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                            </li>
+                            <li><input value="등록" class="button" type="submit"></li>
+                        </ul>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+ 			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+    $(function () {
+        includeLayout();
+    });
+
+    function includeLayout() {
+        var includeArea = $('[data-include]');
+        var self, url;
+        $.each(includeArea, function () {
+            self = $(this);
+            url = self.data("include");
+            self.load(url, function () {
+                self.removeAttr("data-include");
+            });
+        });
+    }
+</script>
+
+</html>

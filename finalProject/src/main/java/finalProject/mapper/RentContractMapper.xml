@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.RentContractMapper">
+	<sql id = "columns">
+		CONTRACT_NO, DOCUMENT_NO, RENTAL_TYPE, RENTAL_TERM, RENTAL_PAY, 
+		RENTAL_PURPOSE, RENTAL_DATA, RENTAL_ACC, RENTAL_DEADLINE, RENTAL_NO
+	</sql>
+	<sql id="num">
+		select nvl(max(contract_no),0)+1 from rental_contract
+	</sql>
+	<insert id="insertRentContract" parameterType="finalProject.domain.RentContractDTO">
+		insert into rental_contract (<include refid = "columns"/>)
+		values((<include refid="num"/>), #{documentNo}, #{rentalType}, #{rentalTerm}, #{rentalPay}, 
+		#{rentalPurpose}, #{rentalData}, #{rentalAcc}, #{rentalDeadline}, #{rentalNo}) 		
+	</insert>
+	<resultMap type="finalProject.domain.RentContractDTO" id="rentContractList">
+		<id column = "CONTRACT_NO" jdbcType = "VARCHAR" property = "contractNo"/>
+		<id column = "DOCUMENT_NO" jdbcType = "VARCHAR" property = "documentNo"/>
+		<result column = "RENTAL_TYPE" jdbcType = "VARCHAR" property = "rentalType"/>
+		<result column = "RENTAL_TERM" jdbcType = "VARCHAR" property = "rentalTerm"/>
+		<result column = "RENTAL_PAY" jdbcType = "VARCHAR" property = "rentalPay"/>
+		<result column = "RENTAL_PURPOSE" jdbcType = "VARCHAR" property = "rentalPurpose"/>
+		<result column = "RENTAL_DATA" jdbcType = "VARCHAR" property = "rentalData"/>
+		<result column = "RENTAL_ACC" jdbcType = "VARCHAR" property = "rentalAcc"/>
+		<result column = "RENTAL_DEADLINE" jdbcType = "VARCHAR" property = "rentalDeadline"/>
+		<result column = "RENTAL_NO" jdbcType = "VARCHAR" property = "rentalNo"/>
+	</resultMap>
+	<select id="getRentContractList" resultMap = "rentContractList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from rental_contract
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								document_no = #{num}
+							</if>
+							<if test="num != null">
+								or contract_no = #{num}
+							</if>
+						</trim>
+						order by contract_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+</mapper>

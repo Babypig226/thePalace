@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.TeacherRegistMapper">
+	<sql id = "columns">
+		REGISTER_NO, REGISTER_CONTENT, PROGRAM_REGIST, TEACHER_LEVEL, TEACHER_LICENSE
+	</sql>
+	<insert id="insertTchRegist" parameterType="finalProject.domain.TchRegistDTO">
+		insert into teacher_regist (<include refid = "columns"/>)
+		values(#{registerNo}, #{registerContent}, #{programRegist}, #{teacherLevel}, #{teacherLicense}) 		
+	</insert>
+	<resultMap type="finalProject.domain.TchRegistDTO" id="TchRegistList">
+		<id column = "REGISTER_NO" jdbcType = "VARCHAR" property = "registerNo"/>
+		<result column = "REGISTER_CONTENT" jdbcType = "VARCHAR" property = "registerContent"/>
+		<result column = "PROGRAM_REGIST" jdbcType = "VARCHAR" property = "programRegist"/>
+		<result column = "TEACHER_LEVEL" jdbcType = "VARCHAR" property = "teacherLevel"/>
+		<result column = "TEACHER_LICENSE" jdbcType = "VARCHAR" property = "teacherLicense"/>
+	</resultMap>
+	<select id="getTchRegistList" resultMap = "TchRegistList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from teacher_regist
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								register_no like concat(#{num},'%')
+							</if>
+						</trim>
+						order by register_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+	<update id="updateTeacher" parameterType = "finalProject.domain.TeacherDTO">
+		update teacher
+		set TEACHER_PH = #{teacherPh}, TEACHER_EMAIL = #{teacherEmail},
+			TEACHER_ADDR = #{teacherAddr}
+		where TEACHER_NO = #{teacherNo}
+	</update>
+	<delete id="deleteTeacher" parameterType = "string">
+		delete from teacher
+		where teacher_no = #{teacherNo}
+	</delete>
+</mapper>

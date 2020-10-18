@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.TeacherContractMapper">
+	<sql id = "columns">
+		TCONTRACT_NO, TCONTRACT_TERM, TCONTRACT_TYPE, TEACHER_SAL, TEACHER_ACCOUNT, CHECK_SAFE, TCOPY_BANKBOOK, TIDENTITI_CARD, EMP_NO, TEACHER_NO
+	</sql>
+	<insert id="insertTctrt" parameterType="finalProject.domain.TchContractDTO">
+		insert into teacher_contract (<include refid = "columns"/>)
+		values(#{tcontractNo}, #{tcontractTerm}, #{tcontractType}, #{teacherSal}, #{teacherAccount}, #{checkSafe}, #{tcopyBankbook}, #{tidentitiCard}, #{empNo}, #{teacherNo}) 		
+	</insert>
+	<resultMap type="finalProject.domain.TchContractDTO" id="TctrtList">
+		<id column = "TCONTRACT_NO" jdbcType = "VARCHAR" property = "tcontractNo"/>
+		<id column = "TEACHER_NO" jdbcType = "VARCHAR" property = "teacherNo"/>
+		<id column = "EMP_NO" jdbcType = "VARCHAR" property = "empNo"/>
+		<result column = "TCONTRACT_TERM" jdbcType = "VARCHAR" property = "tcontractTerm"/>
+		<result column = "TCONTRACT_TYPE" jdbcType = "VARCHAR" property = "tcontractType"/>
+		<result column = "TEACHER_SAL" jdbcType = "BIGINT" property = "teacherSal"/>
+		<result column = "TEACHER_ACCOUNT" jdbcType = "VARCHAR" property = "teacherAccount"/>
+		<result column = "CHECK_SAFE" jdbcType = "VARCHAR" property = "checkSafe"/>
+		<result column = "TCOPY_BANKBOOK" jdbcType = "VARCHAR" property = "tcopyBankbook"/>
+		<result column = "TIDENTITI_CARD" jdbcType = "VARCHAR" property = "tidentitiCard"/>
+	</resultMap>
+	<select id="getTcontractsList" resultMap = "TctrtList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from teacher_contract
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								teacher_no = #{num}
+							</if>
+							<if test="num "></if>
+						</trim>
+						order by tcontract_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+	<select id="getContractDetail" resultMap = "TctrtList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select TCONTRACT_NO, TCONTRACT_TERM, TCONTRACT_TYPE, TEACHER_SAL, TEACHER_ACCOUNT, CHECK_SAFE, TCOPY_BANKBOOK, 
+		TIDENTITI_CARD, (select employee_name from employee where employee_no in(select emp_no from teacher_contract 
+			<where>
+				<if test="num != null">
+					tcontract_no = #{num}
+				</if>
+			</where>))EMP_NO, TEACHER_NO
+			from teacher_contract
+				<trim prefix="where" prefixOverrides="AND|OR">
+					<if test="num != null">
+						tcontract_no = #{num}
+					</if>
+					<if test="num "></if>
+				</trim>
+	</select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.TinterviewMapper">
+	<sql id = "columns">
+		TINTERVIEW_NO, EMP_NO, REG_NO, TDOC_SCORE, TINTERVIEW_SCORE, PRO_GUIDE, TEACHER_TOTAL_SCORE
+	</sql>
+	<sql id = "no">
+		select nvl(max(tinterview_no),0)+1 from teacher_interview
+	</sql>
+	<insert id="insertTinterview" parameterType="finalProject.domain.TinterviewDTO">
+		insert into TEACHER_INTERVIEW (<include refid = "columns"/>)
+		values((<include refid="no"/>), #{empNo}, #{regNo}, #{tdocScore}, #{tinterviewScore}, #{proGuide}, #{teacherTotalScore}) 		
+	</insert>
+	<resultMap type="finalProject.domain.TinterviewDTO" id="tinterviewList">
+		<id column = "TINTERVIEW_NO" jdbcType = "VARCHAR" property = "tinterviewNo"/>
+		<id column = "EMP_NO" jdbcType = "VARCHAR" property = "empNo"/>
+		<id column = "REG_NO" jdbcType = "VARCHAR" property = "regNo"/>
+		<result column = "TDOC_SCORE" jdbcType = "BIGINT" property = "tdocScore"/>
+		<result column = "TINTERVIEW_SCORE" jdbcType = "BIGINT" property = "tinterviewScore"/>
+		<result column = "PRO_GUIDE" jdbcType = "VARCHAR" property = "proGuide"/>
+		<result column = "TEACHER_TOTAL_SCORE" jdbcType = "BIGINT" property = "teacherTotalScore"/>
+	</resultMap>
+	<select id="getTinterviewList" resultMap = "tinterviewList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from teacher_interview
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="userId != null">
+								reg_no = #{userId}
+							</if>
+							<if test="num != null">
+								and emp_no = #{num}
+							</if>
+						</trim>
+						order by tinterview_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+	<update id="updateTinterview" parameterType = "finalProject.domain.TinterviewDTO">
+		update teacher_interview
+		set TINTERVIEW_SCORE = #{tinterviewScore},
+			PRO_GUIDE = #{proGuide}, 
+			TEACHER_TOTAL_SCORE = #{tinterviewScore}+TDOC_SCORE
+		where TINTERVIEW_NO = #{tinterviewNo}
+	</update>
+	<delete id = "deleteEtraining" parameterType = "string">
+		delete from emp_training where training_no = #{trainingNo}
+	</delete>
+
+</mapper>

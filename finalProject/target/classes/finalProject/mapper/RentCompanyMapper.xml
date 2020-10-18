@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.RentCompanyMapper">
+	<sql id = "columns">
+		RENTAL_NO, RENTAL_ID, RENTAL_PW, RENTAL_NAME, LICENSEE_NO, LICENSEE_TYPE, LICENSEE_AREA, LICENSEE_CEO, 
+		RENTAL_PH, PRENTAL_NAME, PRENTAL_PH
+	</sql>
+	<sql id="rentalNo">
+		select nvl(max(rental_no),0)+1 from rental_company
+	</sql>
+	<insert id="insertRentCompany" parameterType="finalProject.domain.RentCompanyDTO">
+		insert into RENTAL_COMPANY (<include refid = "columns"/>)
+		values((<include refid = "rentalNo"/>), #{rentalId}, #{rentalPw}, #{rentalName}, #{licenseeNo}, #{licenseeType}, #{licenseeArea}, #{licenseeCeo}, 
+		#{rentalPh}, #{prentalName}, #{prentalPh}) 		
+	</insert>
+	<resultMap type="finalProject.domain.RentCompanyDTO" id="rentCompanyList">
+		<id column = "RENTAL_NO" jdbcType = "VARCHAR" property = "rentalNo"/>
+		<result column = "RENTAL_ID" jdbcType = "VARCHAR" property = "rentalId"/>
+		<result column = "RENTAL_PW" jdbcType = "VARCHAR" property = "rentalPw"/>
+		<result column = "RENTAL_NAME" jdbcType = "VARCHAR" property = "rentalName"/>
+		<result column = "LICENSEE_NO" jdbcType = "VARCHAR" property = "licenseeNo"/>
+		<result column = "LICENSEE_TYPE" jdbcType = "VARCHAR" property = "licenseeType"/>
+		<result column = "LICENSEE_AREA" jdbcType = "VARCHAR" property = "licenseeArea"/>
+		<result column = "LICENSEE_CEO" jdbcType = "VARCHAR" property = "licenseeCeo"/>
+		<result column = "RENTAL_PH" jdbcType = "VARCHAR" property = "rentalPh"/>
+		<result column = "PRENTAL_NAME" jdbcType = "VARCHAR" property = "prentalName"/>
+		<result column = "PRENTAL_PH" jdbcType = "VARCHAR" property = "prentalPh"/>
+	</resultMap>
+	<select id="getRentCompanyList" resultMap = "rentCompanyList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from rental_company
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								rental_no = #{num}
+							</if>
+							<if test="userId != null ">
+								and rental_id = #{userId}
+							</if>
+						</trim>
+						order by rental_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+</mapper>

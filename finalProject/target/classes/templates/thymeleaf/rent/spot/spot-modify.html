@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace|[[${list.spotName}]]정보수정</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav"></nav>
+
+    <!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="image fit">
+					<img th:src="@{/static/images/topbanner7.jpg}" alt="" />
+				</div>
+				<h2 class="align-center">[[${list.spotName}]]정보수정</h2>
+				<div class="content">
+						<form th:action="@{modify}" method="POST" name="frm" id="frm">
+						<input type = "hidden" name = "spotNo" th:value = "${list.spotNo}"/>
+					<div class="row 200%">
+							<div class="6u 12u$(medium)" style = "margin-bottom : 20px">
+								<label for="spotName">공간명</label> <input name="spotName"
+									type="text" th:value = "${list.spotName}">
+							</div>
+							<div class="6u 12u$(medium)" style = "margin-bottom : 20px">
+								<label for="spotPrice">임차료</label> <input
+									name="spotPrice" type="number" min = "500000" max = "10000000" step = "10000" th:value = "${list.spotPrice}">원&nbsp;(VAT별도)
+							</div>
+					</div>
+							<div class="field" style = "margin-bottom : 20px">
+								<label for="spotPurpose">용도</label> 
+								<textarea name="spotPurpose" cols = "10" rows = "5">[[${list.spotPurpose}]]</textarea>
+							</div>
+							<ul class="actions align-right">
+								<li><input value="뒤로" onclick="javascript: history.back();"
+									class="button alt" type="button"></li>
+								<li><input value="수정" class="button" type="submit"></li>
+							</ul>
+						</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+	$(function() {
+		includeLayout();
+	});
+
+	function includeLayout() {
+		var includeArea = $('[data-include]');
+		var self, url;
+		$.each(includeArea, function() {
+			self = $(this);
+			url = self.data("include");
+			self.load(url, function() {
+				self.removeAttr("data-include");
+			});
+		});
+	}
+</script>
+
+</html>

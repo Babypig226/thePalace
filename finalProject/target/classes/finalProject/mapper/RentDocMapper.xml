@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "finalProject.mapper.RentDocMapper">
+	<sql id = "columns">
+		DOCUMENT_NO, RENT_REASON, RENT_PLAN, SALES_PLAN, DISPLAY_PLAN, HR_PLAN, SUBMIT_DATE, RI_AGREE, FAC_PLEDGE, DEPARTMENT_NO
+	</sql>
+	<insert id="insertRentDoc" parameterType="finalProject.domain.RentDocDTO">
+		insert into RENT_DOCUMENT (<include refid = "columns"/>)
+		values(#{documentNo}, #{rentReason}, #{rentPlan}, #{salesPlan}, #{displayPlan}, #{hrPlan}, sysdate, #{riAgree}, #{facPledge}, #{departmentNo}) 		
+	</insert>
+	<resultMap type="finalProject.domain.RentDocDTO" id="rentDocList">
+		<id column = "DOCUMENT_NO" jdbcType = "VARCHAR" property = "documentNo"/>
+		<id column = "DEPARTMENT_NO" jdbcType = "VARCHAR" property = "departmentNo"/>
+		<result column = "RENT_REASON" jdbcType = "VARCHAR" property = "rentReason"/>
+		<result column = "RENT_PLAN" jdbcType = "VARCHAR" property = "rentPlan"/>
+		<result column = "SALES_PLAN" jdbcType = "VARCHAR" property = "salesPlan"/>
+		<result column = "DISPLAY_PLAN" jdbcType = "VARCHAR" property = "displayPlan"/>
+		<result column = "HR_PLAN" jdbcType = "VARCHAR" property = "hrPlan"/>
+		<result column = "SUBMIT_DATE" jdbcType = "TIMESTAMP" property = "submitDate"/>
+		<result column = "RI_AGREE" jdbcType = "VARCHAR" property = "riAgree"/>
+		<result column = "FAC_PLEDGE" jdbcType = "VARCHAR" property = "facPledge"/>
+	</resultMap>
+	<select id="getRentDocList" resultMap = "rentDocList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select rn, <include refid = "columns"/> 
+			from(select <include refid = "columns"/>, rownum rn 
+					from(select <include refid="columns"/>
+						from rent_document
+						<trim prefix="where" prefixOverrides="AND|OR">
+							<if test="num != null">
+								document_no like concat(#{num},'%')
+							</if>
+							<if test="num != null">
+								or document_no =#{num}
+							</if>
+							<if test="num "></if>
+						</trim>
+						order by document_no desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+</mapper>

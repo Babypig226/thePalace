@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+
+<head>
+    <title>the Palace|임대계약서작성</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header" th:include="thymeleaf/header"></header>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav"></nav>
+
+    <!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="image fit">
+					<img th:src="@{/static/images/topbanner7.jpg}" alt="" />
+				</div>
+				<h2 class="align-center">임대계약서 작성</h2>
+				<div class="content">
+					<form th:action="@{write}" method="POST" name="frm" id="frm" enctype = "multipart/form-data">
+						<input type="hidden" name="documentNo" th:value = "${docNo}"/> <input type="hidden"
+							name="rentalNo" th:value = "${rentNo}"/>
+							<div class="field half" style="margin-bottom: 20px">
+								<label for="rentalType">임대종류</label> <select name="rentalType">
+									<option value=null>select</option>
+									<option>장기</option>
+									<option>단기</option>
+								</select>
+							</div>
+							<div class="field half" style="margin-bottom: 20px">
+								<label for="rentalTerm">임대기간</label> <input type="text"
+									name="rentalTerm" placeholder="2020.01.01~2020.12.31" />
+							</div>
+							<div class="field half" style="margin-bottom: 20px">
+								<label for="rentalPay">임차료 납부일</label> <input type="text"
+									name="rentalPay" placeholder="매달 5일 또는 2020.05.10" />
+							</div>
+							<div class="field half" style="margin-bottom: 20px">
+								<label for="rentalAcc">임차료납입계좌</label> <input type="text"
+									name="rentalAcc" maxlength="15" placeholder="'-'를 제외한 계좌번호" />
+							</div>
+							<div class="field half" style="margin-bottom: 20px">
+								<label for="rentalDeadline">임차료 납입기한</label> <input name="rentalDeadline"
+									type="text" placeholder = "납부일 당월 말일">
+							</div>
+							<div class="field half" style="margin-bottom: 20px">
+								<label for="rentalData">자료보관</label> <input type="file"
+									name="rentalData" multiple="multiple" />
+							</div>
+							<div class="field" style="margin-bottom: 20px">
+								<label for="rentPlan">임대목적</label>
+								<textarea name="rentalPurpose"></textarea>
+							</div>
+						<hr />
+						<ul class="actions align-right">
+							<li><input value="뒤로" onclick="javascript: history.back();"
+								class="button alt" type="button"></li>
+							<li><input value="등록" class="button" type="submit"></li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+    <footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+    <!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+
+	</body>
+	<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+<script>
+    $(function () {
+        includeLayout();
+    });
+
+    function includeLayout() {
+        var includeArea = $('[data-include]');
+        var self, url;
+        $.each(includeArea, function () {
+            self = $(this);
+            url = self.data("include");
+            self.load(url, function () {
+                self.removeAttr("data-include");
+            });
+        });
+    }
+</script>
+
+</html>
