@@ -62,8 +62,10 @@
                                 </tr>
                                 <tr align = "right">
                                     <td colspan="6" align = "right">
-                                        <a href="/admin/view" class="button alt">관리자메인</a>
-                                        <a href="../enotice/Regist" class="button">채용공고등록</a>
+                                        <c:if test = "${session.authInfo.type eq 'adm'}"><a href="/admin/view" class="button alt">관리자메인</a>
+                                        <a href="../enotice/Regist" class="button">채용공고등록</a></c:if>
+                                        <input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
                                     </td>
                                 </tr>
                             </tfoot>

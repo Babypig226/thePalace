@@ -38,7 +38,7 @@ public class TeacherRegistController {
 	@RequestMapping("list")
 	public String teacherRegistList(@RequestParam(value = "tnoticeNo")String tnoticeNo, Model model, @RequestParam(value = "page", defaultValue = "1")Integer page) {
 		tchRegistListService.getTchRegistDetail(tnoticeNo, model, page);
-		return "/v-hr-recruit/hr-teacher-regist-list";
+		return "/v-hr-recruit/hr-tregist-list";
 		
 	}
 	

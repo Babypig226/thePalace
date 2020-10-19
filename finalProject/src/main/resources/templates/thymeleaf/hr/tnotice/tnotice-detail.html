@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
 <title>thePalace|강사채용공고</title>
 <style type="text/css">
 td {
@@ -15,11 +15,11 @@ td {
 </head>
 <body>
 	<!-- Header -->
-	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+	<header role="header" th:include="thymeleaf/header" id="header">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+	<nav id="menu" th:include="thymeleaf/nav"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
@@ -63,7 +63,9 @@ td {
                             <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
                                     type="button">
                             </li>
-                            <li><a th:href="@{/tnotice/Modify(tnoticeNo=${list.tnoticeNo})}" class="button">수정</a></li>
+                            <li><a th:href="@{/tregist/write(tnoticeNo=${list.tnoticeNo})}" class="button">강사지원하기</a></li>
+                            <li th:if = "${session.authInfo.type eq 'adm'}"><a th:href="@{/tregist/list(tnoticeNo=${list.tnoticeNo})}" class="button">지원서보기</a></li>
+                            <li  th:if = "${session.authInfo.type eq 'adm'}"><a th:href="@{/tnotice/Modify(tnoticeNo=${list.tnoticeNo})}" class="button">수정</a></li>
                         </ul>  
 						</div>
 				</div>

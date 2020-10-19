@@ -84,7 +84,7 @@ function fileDel(strFile, btn){
 	});
 }
 </script>
-<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
 <title>thePalace|강사모집공고수정</title>
 <style type="text/css">
 td {
@@ -94,11 +94,11 @@ td {
 </head>
 <body>
 	<!-- Header -->
-	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+	<header role="header" th:include="thymeleaf/header" id="header">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+	<nav id="menu" th:include="thymeleaf/nav"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">

@@ -13,5 +13,7 @@ public class TchRegistDTO {
 	String ProgramRegist;
 	String teacherLevel;
 	String teacherLicense;
+	String paperResult;
+	String finalResult;
 
 }

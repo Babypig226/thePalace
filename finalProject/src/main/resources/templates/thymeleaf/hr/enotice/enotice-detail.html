@@ -60,8 +60,8 @@
                                     type="button">
                             </li>
                             <li><a th:href="@{/apply/regist(enoticeNo=${list.enoticeNo})}" class="button alt">지원하기</a></li>
-                            <li><a th:href="@{/apply/list(enoticeNo=${list.enoticeNo})}" class="button alt">지원서보기</a></li>
-                            <li><a th:href="@{/enotice/Modify(enoticeNo=${list.enoticeNo})}" class="button">수정</a></li>
+                            <li th:if = "${session.authInfo.type eq 'adm'}"><a th:href="@{/apply/list(enoticeNo=${list.enoticeNo})}" class="button alt">지원서보기</a></li>
+                            <li  th:if = "${session.authInfo.type eq 'adm'}"><a th:href="@{/enotice/Modify(enoticeNo=${list.enoticeNo})}" class="button">수정</a></li>
                         </ul>  
 			</div>
 		</div>

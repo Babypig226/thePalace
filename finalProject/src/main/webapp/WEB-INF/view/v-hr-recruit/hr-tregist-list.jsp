@@ -31,41 +31,44 @@
         <div class="inner">
             <div class="box">
                 <div class="content">
-                    <h2 class="align-center">강사 채용공고 목록</h2>
+                    <h2 class="align-center">${tnoticeName}&nbsp;강사지원목록</h2>
                     <div class="table-wrapper">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>공고번호</th>
-                                    <th>모집분야</th>
-                                    <th>공고명</th>
-                                    <th>공고일</th>
-                                    <th>마감일</th>
+                                    <th>접수번호</th>
+                                    <th>등록요청서</th>
+                                    <th>프로그램개요</th>
+                                    <th>강사레벨</th>
+                                    <th>자격증</th>
+                                    <th>서류심사</th>
+                                    <th>최종결과</th>
                                 </tr>
                             </thead>
                             <tbody>
                             	<c:forEach items = "${list}" var = "t" >
                             		<tr>
-                            			<td align = "center">${t.tnoticeNo}</td>
-                            			<td>${t.proField}</td>
-                            			<td><a href = "/tnotice/Detail?tnoticeNo=${t.tnoticeNo}">${t.tnoticeName}</a></td>
-                            			<td><fmt:formatDate value="${t.tnoticeDate}" pattern="yyyy-MM-dd"/> </td>
-                            			<td><fmt:formatDate value = "${t.tnoticeDeadline}" pattern = "yyyy-MM-dd"/></td>
+                            			<td align = "center"><a href = "/titv/view?regNo=${t.registerNo}">${t.registerNo}</a></td>
+                            			<td><a href = "/tregist/fileDown?file=${t.programRegist}%60${t.registerNo}등록요청서">등록요청서&nbsp;다운</a></td>
+                            			<td><a href = "/tregist/fileDown?file=${t.registerContent}%60${t.registerNo}등록요청서">프로그램개요&nbsp;다운</a></td>
+                            			<td>${t.teacherLevel} </td>
+                            			<td><a href = "/tregist/fileDown?file=${t.teacherLicense}%60${t.registerNo}등록요청서">자격증&nbsp;다운</a></td>
+                            			<td>${t.paperResult}</td>
+                            			<td>${t.finalResult}</td>
                             		</tr>
                             	</c:forEach>
                                 
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5" align = "center">
+                                    <td colspan="7" align = "center">
                                        <%@include file = "../include/v-includePage.jsp" %>
                                     </td>
                                 </tr>
                                 <tr align = "right">
-                                    <td colspan="5">
+                                    <td colspan="7">
                                         <input value="뒤로" onclick="javascript: history.back();" class="button alt"
                                     type="button">
-                                        <c:if test = "${session.authInfo.type eq 'adm'}"><a href="Regist" class="button">공고작성</a></c:if>
                                     </td>
                                 </tr>
                             </tfoot>

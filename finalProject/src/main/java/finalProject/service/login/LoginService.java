@@ -15,10 +15,12 @@ import org.springframework.ui.Model;
 import finalProject.command.AuthInfo;
 import finalProject.command.LoginCommand;
 import finalProject.domain.ApplicantDTO;
+import finalProject.domain.EmployeeDTO;
 import finalProject.domain.MemberDTO;
 import finalProject.domain.RentCompanyDTO;
 import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ApplicantMapper;
+import finalProject.mapper.EmployeeMapper;
 import finalProject.mapper.MemberMapper;
 import finalProject.mapper.RentCompanyMapper;
 
@@ -32,6 +34,8 @@ public class LoginService {
 	@Autowired
 	ApplicantMapper applicantMapper;
 	@Autowired
+	EmployeeMapper employeeMapper;
+	@Autowired
 	PasswordEncoder passwordEncoder;
 	AuthInfo authInfo;
 	
@@ -42,6 +46,7 @@ public class LoginService {
 		StartEndPageDTO dto = new StartEndPageDTO(1l, 1l, loginCommand.getUserId(), null);
 		List<RentCompanyDTO> rclist = rentCompanyMapper.getRentCompanyList(dto);
 		List<ApplicantDTO> aplist = applicantMapper.getApplicantsList(dto);
+		List<EmployeeDTO> emplist = employeeMapper.getEmpList(dto);
 		MemberDTO member = new MemberDTO();
 		member.setUserId(loginCommand.getUserId());
 		List<MemberDTO> lists = memberMapper.selectByMember(member);
@@ -50,15 +55,17 @@ public class LoginService {
 			location = "thymeleaf/login";
 		}else if(lists.size()>0){
 			member = lists.get(0);
-			System.out.println("memberchecking statement : "+member.getUserPw());
 			if(passwordEncoder.matches(loginCommand.getUserPw(), member.getUserPw())) {
-				if(aplist.size()>0) {
-					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
-							member.getUserName(), member.getUserPw(), "app");
-					
-				}else {
+				if(aplist.size()==0 && emplist.size() == 0) {
 					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
 							member.getUserName(), member.getUserPw(), "mem");
+				}else if(aplist.size()>0){
+					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
+							member.getUserName(), member.getUserPw(), "app");
+				}else if(emplist.size()>0) {
+					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
+							member.getUserName(), member.getUserPw(), "adm");
+					
 				}
 				session.setAttribute("authInfo", authInfo);
 				//자동로그인이랑 아이디 저장을 안했음

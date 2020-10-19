@@ -27,11 +27,11 @@
 					from(select <include refid="columns"/>
 						from teacher_interview
 						<trim prefix="where" prefixOverrides="AND|OR">
-							<if test="userId != null">
-								reg_no = #{userId}
+							<if test="num != null">
+								reg_no = #{num}
 							</if>
 							<if test="num != null">
-								and emp_no = #{num}
+								or emp_no = #{num}
 							</if>
 						</trim>
 						order by tinterview_no desc))

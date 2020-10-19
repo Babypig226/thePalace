@@ -24,13 +24,19 @@ public class TinterviewRegistService {
 	public void insertTinterview(TinterviewCommand tinterviewCommand, HttpSession session) {
 		TinterviewDTO dto = new TinterviewDTO();
 		dto.setRegNo(tinterviewCommand.getRegNo());
-		dto.setTinterviewScore(tinterviewCommand.getTinterviewScore());
 		dto.setTdocScore(tinterviewCommand.getTdocScore());
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
 		StartEndPageDTO sdto = new StartEndPageDTO(1L, 1L, authInfo.getId(), null);
 		EmployeeDTO edto = employeeMapper.getEmpList(sdto).get(0);
 		dto.setEmpNo(edto.getEmployeeNo());
-		Integer teacherTotalScore = tinterviewCommand.getTdocScore()+tinterviewCommand.getTinterviewScore();
+		Integer teacherTotalScore = null;
+		if(tinterviewCommand.getTinterviewScore()!=null) {
+			dto.setTinterviewScore(tinterviewCommand.getTinterviewScore());
+			
+		}else {
+			dto.setTinterviewScore(0);
+		}
+		teacherTotalScore = dto.getTdocScore()+dto.getTinterviewScore();
 		dto.setTeacherTotalScore(teacherTotalScore);
 		dto.setProGuide(tinterviewCommand.getProGuide());
 		tinterviewMapper.insertTinterview(dto);
