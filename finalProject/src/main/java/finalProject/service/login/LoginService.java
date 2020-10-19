@@ -35,17 +35,17 @@ public class LoginService {
 						HttpServletResponse response, Model model) throws Exception{
 		String location = "";
 		StartEndPageDTO dto = new StartEndPageDTO(1l, 1l, loginCommand.getUserId(), null);
-		RentCompanyDTO rdto = rentCompanyMapper.getRentCompanyList(dto).get(0);
+		List<RentCompanyDTO> rclist = rentCompanyMapper.getRentCompanyList(dto);
 		MemberDTO member = new MemberDTO();
 		member.setUserId(loginCommand.getUserId());
 		List<MemberDTO> lists = memberMapper.selectByMember(member);
 		System.out.println("LoginService : " + member.getUserId());
-		if(lists.size() == 0 && rdto == null) {
+		if(lists.size() == 0 && rclist.size() == 0) {
 			model.addAttribute("valid_user", "아이디가 존재하지 않습니다.");
 			location = "thymeleaf/login";
-		}else if(rdto != null){
-			if(passwordEncoder.matches(loginCommand.getUserPw(), rdto.getRentalPw())) {
-				authInfo = new AuthInfo(rdto.getRentalId(), null, rdto.getRentalName(), rdto.getRentalPw(), "rc");
+		}else if(rclist.size() > 0){
+			if(passwordEncoder.matches(loginCommand.getUserPw(), rclist.get(0).getRentalPw())) {
+				authInfo = new AuthInfo(rclist.get(0).getRentalId(), null, rclist.get(0).getRentalName(), rclist.get(0).getRentalPw(), "rc");
 				session.setAttribute("authInfo", authInfo);
 				//자동로그인이랑 아이디 저장을 안했음
 				Boolean saveID = loginCommand.getSaveID();
