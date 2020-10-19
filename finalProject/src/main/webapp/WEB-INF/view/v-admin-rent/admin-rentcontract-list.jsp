@@ -31,22 +31,24 @@
         <div class="inner">
             <div class="box">
                 <div class="content">
-                    <h2 class="align-center">임대희망서 목록</h2>
+                    <h2 class="align-center">임대계약서 목록</h2>
                     <div class="table-wrapper">
                         <table>
                             <thead>
                                 <tr>
                                     <td align = "center">서류번호</td>
-                                    <td align = "center">심사결과</td>
+                                    <td align = "center">임대타입</td>
+                                    <td align = "center">입대기간</td>
+                                    <td align = "center">납기일</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                </tr>
                             	<c:forEach items = "${list}" var = "e" >
                             		<tr>
-                            			<td align = "center"><a href = "/rent/rate?docNo=${e.documentNo}" >${e.documentNo}</a></td>
-                            			<td align = "center">${e.result}</td>
+                            			<td align = "center"><a href = "/rent/contract/detail?contractNo=${e.contractNo}">${e.documentNo}</a></td>
+                            			<td align = "center">${e.rentalType}</td>
+                            			<td align = "center">${e.rentalTerm}</td>
+                            			<td align = "center">${e.rentalDeadline}</td>
                             		</tr>
                             	</c:forEach>
                             </tbody>
@@ -58,7 +60,7 @@
                                 </tr>
                                 <tr align = "right">
                                     <td colspan="6" align = "right">
-                                        <a href="/admin/view" class="button alt">관리자메인</a>
+                                        <a href="/" class="button alt">메인</a>
                                     </td>
                                 </tr>
                             </tfoot>

@@ -21,7 +21,7 @@ public class SpotInsertService {
 	public String insertSpot(RentContractCommand rentContractCommand) {
 		SpotDTO dto = new SpotDTO();
 		dto.setDocumentNo(rentContractCommand.getDocumentNo());
-		dto.setSpotNo(rentContractCommand.getDocumentNo().split("-")[0]);
+		dto.setSpotNo(rentContractCommand.getDocumentNo().split("-")[0]+"-"+rentContractCommand.getDocumentNo().split("-")[1]);
 		StartEndPageDTO sdto = new StartEndPageDTO(1L, 1L, null, rentContractCommand.getDocumentNo());
 		dto.setContractNo(rentContractMapper.getRentContractList(sdto).get(0).getContractNo());
 		spotMapper.insertSpot(dto);

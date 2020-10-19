@@ -37,12 +37,14 @@
                             <thead>
                                 <tr>
                                     <td align = "center">서류번호</td>
+                                    <td align = "center">심사</td>
                                 </tr>
                             </thead>
                             <tbody>
                             	<c:forEach items = "${list}" var = "e" >
                             		<tr>
                             			<td align = "center"><a href = "/rentDoc/detail?docNo=${e.documentNo}">${e.documentNo}</a></td>
+                            			<td align = "center">${e.result}</td>
                             		</tr>
                             	</c:forEach>
                             </tbody>

@@ -29,14 +29,15 @@ public class RentDocDetailService {
 	RentScoreMapper rentScoreMapper;
 	public String getRentDocDetail(String documentNo, Model model) {
 		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, null, documentNo);
-		RentScoreDTO sdto = rentScoreMapper.getScore(dto).get(0);
+		List<RentScoreDTO> scoreList = rentScoreMapper.getScore(dto);
 		RentDocDTO rdto = rentDocMapper.getRentDocList(dto).get(0);
-		dto.setNum(documentNo.split("-")[1]);
+		dto.setNum(documentNo.split("-")[2]);
+		System.out.println("rentalNo = "+dto.getNum());
 		RentCompanyDTO list = rentCompanyMapper.getRentCompanyList(dto).get(0);
 		model.addAttribute("list", list);
 		model.addAttribute("doc", rdto);
-		if(sdto != null) {
-			Integer total = sdto.getCapScore()+sdto.getPlanScore()+sdto.getFacScore();
+		if(scoreList.size() > 0) {
+			Integer total = scoreList.get(0).getCapScore()+scoreList.get(0).getPlanScore()+scoreList.get(0).getFacScore();
 			Integer average = total/3;
 			String result = "";
 			if(average >= 80) {
@@ -47,7 +48,7 @@ public class RentDocDetailService {
 			model.addAttribute("total", total);
 			model.addAttribute("average", average);
 			model.addAttribute("result", result);
-			model.addAttribute("rate", sdto);
+			model.addAttribute("rate", scoreList.get(0));
 			return "thymeleaf/rent/rent-doc-rate-view";
 		}else {
 			return "thymeleaf/rent/rent-doc-rate";

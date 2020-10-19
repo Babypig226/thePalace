@@ -20,5 +20,6 @@ public class RentDocDTO {
 	String riAgree;
 	String facPledge;
 	String departmentNo;
+	String result;
 
 }

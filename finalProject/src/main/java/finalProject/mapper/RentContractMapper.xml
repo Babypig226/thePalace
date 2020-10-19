@@ -38,6 +38,9 @@
 							<if test="num != null">
 								or contract_no = #{num}
 							</if>
+							<if test="num != null">
+								and rental_no = #{num}
+							</if>
 						</trim>
 						order by contract_no desc))
 		where rn between #{startPage} and #{endPage}

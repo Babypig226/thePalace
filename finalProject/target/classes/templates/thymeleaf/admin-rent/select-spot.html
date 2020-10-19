@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+₩<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
      layout:decorator="layout">
@@ -19,53 +19,74 @@
         <nav id="menu" th:include="thymeleaf/nav.html"></nav>
 
 		<!-- Three -->
-			<section id="three" class="wrapper style2">
-				<div class="inner">
-					<div class="grid-style">
-		<!-- 인사채용 -->
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img th:src="@{/static/images/gyeonghoiru.jpeg}" width = "300" height = "350" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>경회루</h2>
-										<p>임금과 신하가 덕으로 만나는 연회장</p>
-									</header>
-									<hr />
-									<p>이벤트, 촬영</p><br/>
-									<div class="align-center">
-										<a th:href="@{docList(spotNo=1)}" class="button alt">임대희망서보기</a>
-                                    </div>
-								</div>
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<div class="grid-style">
+				<!-- 공간관리 -->
+				<div>
+					<div class="box">
+						<div class="image fit">
+							<img th:src="@{/static/images/concierge.jpg}" width="300"
+								height="350" alt="" />
+						</div>
+						<div class="content">
+							<header class="align-center">
+								<h2>임대공간관리</h2>
+							</header>
+							<hr />
+							<p>임대공간</p>
+							<div class="align-center">
+								<a th:href="@{/spot/sel}" class="button alt">공간관리</a>
 							</div>
 						</div>
-		<!-- 숙박운영부 -->
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img th:src="@{/static/images/concierge.jpg}" width = "300" height = "350" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>임대공간관리</h2>
-									</header>
-									<hr />
-									<p>임대공간</p>
-									<div class="align-center">
-										<a th:href="@{/spot/sel}" class="button alt">공간관리</a>
-                                    </div>
-								</div>
-							</div>
-						</div>
-						</div>
-
 					</div>
 				</div>
-			</section>
+				<!-- 희망서관리 -->
+				<div>
+					<div class="box">
+						<div class="image fit">
+							<img th:src="@{/static/images/gyeonghoiru.jpeg}" width="300"
+								height="350" alt="" />
+						</div>
+						<div class="content">
+							<header class="align-center">
+								<h2>임대희망서관리</h2>
+							</header>
+							<hr />
+							<p>임대희망서, 심사</p>
+							<br />
+							<div class="align-center">
+								<a th:href="@{/rentDoc/list}" class="button alt">임대희망서보기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- 임대계약서관리 -->
+				<div>
+					<div class="box">
+						<div class="image fit">
+							<img th:src="@{/static/images/gyeonghoiru.jpeg}" width="300"
+								height="350" alt="" />
+						</div>
+						<div class="content">
+							<header class="align-center">
+								<h2>임대계약서관리</h2>
+							</header>
+							<hr />
+							<p>계약서</p>
+							<br />
+							<div class="align-center">
+								<a th:href="@{/rent/contract/list}" class="button alt">임대계약서보기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- Footer -->	
+
+	</section>
+	<!-- Footer -->	
 		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 		<!-- Scripts -->
 			<script th:src=@{/static/assets/js/jquery.min.js}></script>

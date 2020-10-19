@@ -30,8 +30,8 @@ public class RentDocumentController {
 	RentDocDetailService rentDocDetailService;
 	
 	@RequestMapping("list")
-	public String DocList(@RequestParam(value = "spotNo")String spotNo, @RequestParam(value = "page", defaultValue = "1")Integer page, Model model) {
-		rentDocListService.getRentDocList(spotNo, model, page);
+	public String DocList(@RequestParam(value = "page", defaultValue = "1")Integer page, Model model) {
+		rentDocListService.getRentDocList(model, page);
 		return "/v-admin-rent/admin-rentdoc-list";
 	}
 	@RequestMapping("mylist")
