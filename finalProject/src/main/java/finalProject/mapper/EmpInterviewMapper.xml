@@ -8,45 +8,33 @@
 	<sql id = "no">
 		select nvl(max(interview_no),0)+1 from emp_interview
 	</sql>
-	<insert id="insertScore" parameterType="finalProject.domain.EmpInterviewDTO">
-		insert into EMP_INTERVIEW (<include refid = "columns"/>)
-		values((<include refid="no"/>), #{departmentNo}, #{acceptNo}, #{paperScore}, #{interviewScore}, #{examGuide}, #{totScore}) 		
+	<insert id="insertPaperScore" parameterType="finalProject.domain.EmpInterviewDTO">
+		insert into EMP_INTERVIEW (INTERVIEW_NO, DEPARTMENT_NO, ACCEPT_NO, PAPER_SCORE, EXAM_GUIDE, TOT_SCORE)
+		values((<include refid="no"/>), #{departmentNo}, #{acceptNo}, #{paperScore}, #{examGuide}, #{paperScore}) 		
 	</insert>
-	<resultMap type="finalProject.domain.ApplicantDTO" id="ApplicantsList">
+	<resultMap type="finalProject.domain.EmpInterviewDTO" id="empScoreList">
+		<id column = "INTERVIEW_NO" jdbcType = "VARCHAR" property = "interviewNo"/>
+		<id column = "DEPARTMENT_NO" jdbcType = "VARCHAR" property = "departmentNo"/>
 		<id column = "ACCEPT_NO" jdbcType = "VARCHAR" property = "acceptNo"/>
-		<result column = "APPLICANT_ID" jdbcType = "VARCHAR" property = "applicantId"/>
-		<result column = "APPLICANT_PW" jdbcType = "VARCHAR" property = "applicantPw"/>
-		<result column = "APPLICANT_NAME" jdbcType = "BIGINT" property = "applicantName"/>
-		<result column = "APPLICANT_ENAME" jdbcType = "VARCHAR" property = "applicantEname"/>
-		<result column = "APPLICANT_BIRTH" jdbcType = "VARCHAR" property = "applicantBirth"/>
-		<result column = "APPLICANT_ADDR" jdbcType = "VARCHAR" property = "applicantAddr"/>
-		<result column = "APPLICANT_PH" jdbcType = "VARCHAR" property = "applicantPh"/>
-		<result column = "APPLICANT_EMAIL" jdbcType = "VARCHAR" property = "applicantEmail"/>
-		<result column = "APPLICANT_CONTENT" jdbcType = "VARCHAR" property = "applicantContent"/>
-		<result column = "PI_AGREE" jdbcType = "VARCHAR" property = "piAgree"/>
+		<result column = "PAPER_SCORE" jdbcType = "BIGINT" property = "paperScore"/>
+		<result column = "INTERVIEW_SCORE" jdbcType = "BIGINT" property = "interviewScore"/>
+		<result column = "EXAM_GUIDE" jdbcType = "VARCHAR" property = "examGuide"/>
+		<result column = "TOT_SCORE" jdbcType = "BIGINT" property = "totScore"/>
 	</resultMap>
-	<select id="getApplicantsList" resultMap = "ApplicantsList" parameterType = "finalProject.domain.StartEndPageDTO">
-		select rn, <include refid = "columns"/> 
-			from(select <include refid = "columns"/>, rownum rn 
-					from(select <include refid="columns"/>
-						from applicants
+	<select id="getScore" resultMap = "empScoreList" parameterType = "finalProject.domain.StartEndPageDTO">
+		select <include refid = "columns"/>
+				from emp_interview
 						<trim prefix="where" prefixOverrides="AND|OR">
 							<if test="num != null">
-								and accept_no like concat(#{num},'%')
+								and accept_no =#{num}
 							</if>
 						</trim>
-						order by accept_no desc))
-		where rn between #{startPage} and #{endPage}
 	</select>
-	<update id="updateEtraining" parameterType = "finalProject.domain.EtrainingDTO">
-		update emp_training
-		set DEPARTMENT_NO = #{departmentNo}, CURRICULUM_NAME = #{curriculumName},
-			TRAINING_TERM = #{trainingTerm}, 
-			TRAINEE_MAXNUM = #{traineeMaxnum}, NECESSITY = #{necessity}
-		where TRAINING_NO = #{trainingNo}
+	<update id="updateScore" parameterType = "finalProject.domain.EmpInterviewDTO">
+	update emp_interview
+	set interview_score = #{interviewScore}, exam_guide = #{examGuide}, tot_score = tot_score+#{interviewScore}
+	where accept_no = #{acceptNo}
+	
 	</update>
-	<delete id = "deleteEtraining" parameterType = "string">
-		delete from emp_training where training_no = #{trainingNo}
-	</delete>
 
 </mapper>

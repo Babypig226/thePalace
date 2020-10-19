@@ -31,7 +31,7 @@
         <div class="inner">
             <div class="box">
                 <div class="content">
-                    <h2 class="align-center">${enoticeName}</h2>
+                    <h2 class="align-center">지원서목록</h2>
                     <div class="table-wrapper">
                         <table>
                             <thead>
@@ -46,7 +46,7 @@
                             	<c:forEach items = "${list}" var = "a" >
                             		<tr>
                             			<td align = "center">${a.enoticeName}</td>
-                            			<td align = "center"><a href = "/apply/detail?acceptNo=${a.acceptNo}">${a.acceptNo}</a></td>
+                            			<td align = "center"><a href = "/apply/view?acceptNo=${a.acceptNo}">${a.acceptNo}</a></td>
                             			<td>${a.paperResult}</td>
                             			<td>${a.finalResult}</td>
                             		</tr>

@@ -42,13 +42,25 @@ public class ApplicantsController {
 	@RequestMapping("list")
 	public String applicantsList(@RequestParam(value = "enoticeNo")String enoticeNo, Model model) {
 		applicantsListService.getApplicantsList(enoticeNo, model);
-		return "/v-applicants/applicants-list";
+		return "/v-applicants/admin-applicants-list";
 	}
+	
+	@RequestMapping("mylist")
+	public String myApplyHistory(HttpSession session, Model model) {
+		applicantsListService.getMyList(session, model);
+		return "/v-applicants/applicants-list";
+		
+	}
+	@RequestMapping("detail")
+	public String myApplyDetail(@RequestParam(value = "acceptNo")String acceptNo, Model model) {
+		applicantDetailService.getMyApplicantDetail(acceptNo, model);
+		return "thymeleaf/hr/applicants/my-detail";
+	}
+	
 	
 	@RequestMapping("view")
 	public String applicantDetail(@RequestParam(value = "acceptNo")String acceptNo, Model model) {
-		applicantDetailService.getApplicantDetail(acceptNo, model);
-		return "thymeleaf/hr/applicants/applicants-detail";
+		return applicantDetailService.getApplicantDetail(acceptNo, model);
 	}
 	@Autowired
 	FileDown fileDown;

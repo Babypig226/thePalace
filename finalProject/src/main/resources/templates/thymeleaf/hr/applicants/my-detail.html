@@ -26,7 +26,7 @@
                     <img th:src="@{static/images/topbanner7.jpg}" alt="" />
                 </div>
                 <div class="content">
-                    <h2 class="align-center">지원자 심사</h2>
+                    <h2 class="align-center">[[${list.enoticeName}]]&nbsp;지원서보기</h2>
                     <hr />
                     <div class = "table-wrapper">
                         <table>
@@ -74,29 +74,11 @@
 									<td colspan = "2"></td>	
 								</tr>
                         </table>
-                    </div>
-                        <form th:action = "@{/empIntv/paperRate(acceptNo=${list.acceptNo})}" method = "post">
-                        <div class = "row 200%">
-                        <div class = "6u$ 12u$(medium)">
-                        	<ul class="actions align-left">
-	                        	<li>
-		                        	<label>서류심사(10점만점)</label>
-		                        	<input type = "number" name = "paperScore" min="0" max="10">
-	                        	</li>
-                        	</ul>
-                        </div>
-                        <div class = "6u$ 12u$(medium)">
-                        	<label>심사기준</label>
-                        	<textarea name = "examGuide" cols = "30" rows = "5"></textarea>
-                        </div>
-                        </div>
-                        <ul class="actions align-right">
-                            <li><input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                        <div align = "right">
+                        <input value="뒤로" onclick="javascript: history.back();" class="button alt"
                                     type="button">
-                            </li>
-                            <li><input value="등록" class="button" type="submit"></li>
-                        </ul>
-                        </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -18,18 +18,24 @@ public class EmpInterviewRegistService {
 	@Autowired
 	EmpInterviewMapper empInterviewMapper;
 
-	public void registScore(String acceptNo, EmpInterviewCommand empInterviewCommand) {
+	public void registPaperScore(String acceptNo, EmpInterviewCommand empInterviewCommand) {
 		EmpInterviewDTO dto = new EmpInterviewDTO();
 		dto.setAcceptNo(acceptNo);
 		dto.setExamGuide(empInterviewCommand.getExamGuide());
-		dto.setInterviewScore(empInterviewCommand.getInterviewScore());
 		dto.setPaperScore(empInterviewCommand.getPaperScore());
 		String[] num = acceptNo.split("-");
 		StartEndPageDTO sdto = new StartEndPageDTO(1L, 1L, null, num[0]);
 		dto.setDepartmentNo(enoticeMapper.getEnoticeList(sdto).get(0).getDepartmentNo());
-		Integer totScore = empInterviewCommand.getInterviewScore()+empInterviewCommand.getPaperScore();
-		dto.setTotScore(totScore);
-		empInterviewMapper.insertScore(dto);
+		empInterviewMapper.insertPaperScore(dto);
+		
+	}
+
+	public void updateScore(String acceptNo, EmpInterviewCommand empInterviewCommand) {
+		EmpInterviewDTO dto = new EmpInterviewDTO();
+		dto.setAcceptNo(acceptNo);
+		dto.setExamGuide(empInterviewCommand.getExamGuide());
+		dto.setInterviewScore(empInterviewCommand.getInterviewScore());
+		empInterviewMapper.updateScore(dto);
 		
 	}
 	

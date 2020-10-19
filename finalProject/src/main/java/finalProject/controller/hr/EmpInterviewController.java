@@ -13,10 +13,15 @@ import finalProject.service.hr.empInterview.EmpInterviewRegistService;
 public class EmpInterviewController {
 	@Autowired
 	EmpInterviewRegistService empInterviewRegistService;
-	@RequestMapping("regist")
+	@RequestMapping("paperRate")
 	public String empInterviewRegist(@RequestParam(value = "acceptNo")String acceptNo, EmpInterviewCommand empInterviewCommand) {
-		empInterviewRegistService.registScore(acceptNo, empInterviewCommand);
+		empInterviewRegistService.registPaperScore(acceptNo, empInterviewCommand);
 		return "redirect:/apply/view?acceptNo="+acceptNo;
+	}
+	@RequestMapping("interviewRate")
+	public String empInterviewUpdate(@RequestParam(value = "acceptNo")String acceptNo, EmpInterviewCommand empInterviewCommand) {
+		empInterviewRegistService.updateScore(acceptNo, empInterviewCommand);
+		return "redirect:/apply/list";
 	}
 	
 

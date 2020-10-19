@@ -20,5 +20,10 @@ public class ApplicantDTO {
 	String applicantEmail;
 	String applicantContent;
 	String piAgree;
+	
+	//view only
+	String enoticeName;
+	String paperResult;
+	String finalResult;
 
 }

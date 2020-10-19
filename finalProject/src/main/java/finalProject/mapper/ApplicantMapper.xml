@@ -31,7 +31,10 @@
 						from applicants
 						<trim prefix="where" prefixOverrides="AND|OR">
 							<if test="num != null">
-								and accept_no like concat(#{num},'%')
+								accept_no like concat(#{num},'%')
+							</if>
+							<if test="userId != null">
+								and applicant_id = #{userId}
 							</if>
 						</trim>
 						order by accept_no desc))
