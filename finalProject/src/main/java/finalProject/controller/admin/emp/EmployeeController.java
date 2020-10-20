@@ -59,8 +59,9 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "regist", method = RequestMethod.GET)
-	public String empRegist(Model model) {
+	public String empRegist(@RequestParam(value = "acceptNo")String acceptNo, Model model) {
 		depListService.getDepList(model, 1);
+		applicantDetailService.getDetailForRegist(acceptNo, model);
 		return "thymeleaf/admin-emp/admin-emp-regform";
 	}
 	
@@ -73,11 +74,6 @@ public class EmployeeController {
 		return "redirect:/emp/list";
 	}
 	
-	@RequestMapping(value = "searchId", method = RequestMethod.GET)
-	public String searchById(@RequestParam(value = "applicantId")String applicantId, Model model) {
-		applicantDetailService.searchById(applicantId, model);
-		return "thymeleaf/admin-emp/searchById";
-	}
 	
 	@RequestMapping("view")
 	public String empDetail(@RequestParam(value = "empNo")String employeeNo, Model model) {

@@ -59,13 +59,12 @@ public class LoginService {
 				if(aplist.size()==0 && emplist.size() == 0) {
 					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
 							member.getUserName(), member.getUserPw(), "mem");
-				}else if(aplist.size()>0){
-					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
-							member.getUserName(), member.getUserPw(), "app");
 				}else if(emplist.size()>0) {
 					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
 							member.getUserName(), member.getUserPw(), "adm");
-					
+				}else if(aplist.size()>0){
+					authInfo = new AuthInfo(member.getUserId(), member.getUserEmail(), 
+							member.getUserName(), member.getUserPw(), "app");
 				}
 				session.setAttribute("authInfo", authInfo);
 				//자동로그인이랑 아이디 저장을 안했음

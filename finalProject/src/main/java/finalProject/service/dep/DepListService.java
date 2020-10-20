@@ -18,6 +18,7 @@ public class DepListService {
 	
 	@Autowired
 	DepMapper depMapper;
+	
 	@Autowired
 	AddressService addressService;
 	public void getDepList(Model model, Integer page) {

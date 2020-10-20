@@ -60,7 +60,9 @@
                                 </tr>
                                 <tr align = "right">
                                     <td colspan="5" align = "right">
-                                        <a href="/admin/view" class="button alt">관리자메인</a>
+                                    <input value="뒤로" onclick="javascript: history.back();" class="button alt"
+                                    type="button">
+                                        <a href="/admin/view" class="button">관리자메인</a>
                                     </td>
                                 </tr>
                             </tfoot>

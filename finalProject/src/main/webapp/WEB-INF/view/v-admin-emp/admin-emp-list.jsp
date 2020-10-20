@@ -64,8 +64,8 @@
                                 </tr>
                                 <tr align = "right">
                                     <td colspan="6" align = "right">
-                                        <a href="/admin/view" class="button alt">관리자메인</a>
-                                        <a href="/emp/regist" class="button">직원등록</a>
+                                        <a href="/emp/category" class="button alt">직원관리</a>
+                                        <a href="/admin/view" class="button">관리자페이지</a>
                                     </td>
                                 </tr>
                             </tfoot>

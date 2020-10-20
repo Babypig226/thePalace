@@ -31,11 +31,12 @@
         <div class="inner">
             <div class="box">
                 <div class="content">
-                    <h2 class="align-center">최종합자목록</h2>
+                    <h2 class="align-center">최종합격자목록</h2>
                     <div class="table-wrapper">
                         <table>
                             <thead>
                                 <tr>
+                                    <th>공고명</th>
                                     <th>지원번호</th>
                                 	<th>지원자명</th>
                                     <th>이메일</th>
@@ -45,6 +46,7 @@
                             <tbody>
                             	<c:forEach items = "${list}" var = "a" >
                             		<tr>
+                            			<td align = "center">${a.enoticeName}</td>
                             			<td align = "center">${a.acceptNo}</td>
                             			<td align = "center"><a href = "/apply/view?acceptNo=${a.acceptNo}">${a.applicantName}</a></td>
                             			<td>${a.applicantEmail}</td>
@@ -60,7 +62,7 @@
                                 </tr>
                                 <tr align = "right">
                                     <td colspan="5" align = "right">
-                                        <a href="/emp/select" class="button alt">직원관리</a>
+                                        <a href="/emp/category" class="button alt">직원관리</a>
                                     </td>
                                 </tr>
                             </tfoot>

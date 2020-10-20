@@ -16,6 +16,11 @@ public class DateFormatService {
 		Timestamp storeDate = Timestamp.valueOf(modifiedDate);
 		return storeDate;
 	}
+	public Timestamp dateToTimestamp(String date) {
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+		Timestamp storeDate = Timestamp.valueOf(date);
+		return storeDate;
+	}
 	
 
 }

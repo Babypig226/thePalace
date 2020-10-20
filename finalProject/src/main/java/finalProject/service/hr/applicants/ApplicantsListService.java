@@ -15,6 +15,7 @@ import finalProject.domain.EmpInterviewDTO;
 import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ApplicantMapper;
 import finalProject.mapper.EmpInterviewMapper;
+import finalProject.mapper.EmployeeMapper;
 import finalProject.mapper.EnoticeMapper;
 
 @Component
@@ -26,6 +27,8 @@ public class ApplicantsListService {
 	EnoticeMapper enoticeMapper;
 	@Autowired
 	EmpInterviewMapper empInterviewMapper;
+	@Autowired
+	EmployeeMapper employeeMapper;
 
 	public void getApplicantsList(String enoticeNo, Model model) {
 		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, null, enoticeNo);
@@ -102,6 +105,18 @@ public class ApplicantsListService {
 
 	public void getFinalists(Model model) {
 		List<ApplicantDTO> finalists = applicantMapper.getFinalists();
+		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, null, null);
+		for (int i = 0; i < finalists.size(); i++) {
+			dto.setUserId(finalists.get(i).getApplicantId());
+			if(!employeeMapper.getEmpList(dto).isEmpty()) {
+				finalists.remove(i);
+			}else {
+				dto.setUserId(null);
+				dto.setNum(finalists.get(i).getAcceptNo().split("-")[0]);
+				finalists.get(i).setEnoticeName(enoticeMapper.getEnoticeList(dto).get(0).getEnoticeName());
+			}
+		}
+
 		model.addAttribute("list", finalists);
 		
 	}

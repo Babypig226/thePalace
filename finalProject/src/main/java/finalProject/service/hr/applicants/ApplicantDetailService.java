@@ -49,15 +49,6 @@ public class ApplicantDetailService {
 		
 	}
 
-	public void searchById(String applicantId, Model model) {
-		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, applicantId, null);
-		ApplicantDTO adto = applicantMapper.getApplicantsList(dto).get(0);
-		AddressDTO addr = addressService.devideAddress(adto.getApplicantAddr());
-		System.out.println("searchById"+adto.getApplicantPh());
-		model.addAttribute("list", adto);
-		model.addAttribute("addr", addr);
-		
-	}
 
 	public void getMyApplicantDetail(String acceptNo, Model model) {
 		String[] num = acceptNo.split("-");
@@ -68,6 +59,15 @@ public class ApplicantDetailService {
 		String[] fileList = adto.getApplicantContent().split("`");
 		model.addAttribute("list", adto);
 		model.addAttribute("fileList", fileList);
+		
+	}
+
+	public void getDetailForRegist(String acceptNo, Model model) {
+		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, null, acceptNo);
+		ApplicantDTO adto = applicantMapper.getApplicantsList(dto).get(0);
+		AddressDTO addr = addressService.devideAddress(adto.getApplicantAddr());
+		model.addAttribute("app", adto);
+		model.addAttribute("addr", addr);
 		
 	}
 	

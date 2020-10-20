@@ -1,13 +1,11 @@
 package finalProject.service.admin.emp;
 
-import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import finalProject.command.EmployeeCommand;
 import finalProject.domain.EmployeeDTO;
@@ -33,7 +31,7 @@ public class EmployeeRegistService {
 		//인적사항
 		dto.setDepartmentNo(employeeCommand.getDepartmentNo());
 		dto.setEmployeeId(employeeCommand.getEmployeeId());
-		dto.setEmployeePw("PW");
+		dto.setEmployeePw(employeeCommand.getEmployeePw());
 		dto.setEmployeeName(employeeCommand.getEmployeeName());
 		dto.setEmployeeAddr(addressService.updateAddress(employeeCommand.getEmployeeAddr()));
 		dto.setEmployeeBirth(dateFormatService.dateToTimestamp(employeeCommand.getEmployeeBirth()));

@@ -62,8 +62,7 @@
                                 </tr>
                                 <tr align = "right">
                                     <td colspan="6" align = "right">
-                                        <c:if test = "${session.authInfo.type eq 'adm'}"><a href="/admin/view" class="button alt">관리자메인</a>
-                                        <a href="../enotice/Regist" class="button">채용공고등록</a></c:if>
+                                        <a href="../enotice/Regist" class="button">채용공고등록</a>
                                         <input value="뒤로" onclick="javascript: history.back();" class="button alt"
                                     type="button">
                                     </td>
@@ -88,22 +87,4 @@
 			<script src="/static/assets/js/main.js"></script>
 
 	</body>
-	<script src=@{http://code.jquery.com/jquery.min.js}></script>
-<script>
-    $(function () {
-        includeLayout();
-    });
-
-    function includeLayout() {
-        var includeArea = $('[data-include]');
-        var self, url;
-        $.each(includeArea, function () {
-            self = $(this);
-            url = self.data("include");
-            self.load(url, function () {
-                self.removeAttr("data-include");
-            });
-        });
-    }
-</script>
 </html>
