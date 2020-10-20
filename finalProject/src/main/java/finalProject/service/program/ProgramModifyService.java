@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import finalProject.FileName;
+import finalProject.command.FileName;
 import finalProject.command.ProgramListCommand;
 import finalProject.domain.ProgramDTO;
 import finalProject.domain.StartEndPageDTO;
@@ -45,15 +45,17 @@ public class ProgramModifyService {
 		
 		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, "1111", dto.getProgramNo().toString());
 		ProgramDTO pro = programMapper.getProgramList(startEndPageDTO).get(0);
-		List<FileName> list = (List<FileName>) session.getAttribute("imglist");
+		List<FileName> list = (List<FileName>) session.getAttribute("filelist");
 
 		if (list != null) {
 			for (FileName in : list) {
-				pro.setProgramImage(pro.getProgramImage().replace(in.getFile() + "`", ""));
+				pro.setProgramImage(pro.getProgramImage().replace(in.getOriginalfileName() + "`", ""));
 			}
 		}
 
-		String prImageTotal = "";
+		String originalTotal = "";
+		String storeTotal = "";
+		String fileSizeTotal ="";
 		File file = null;
 		String path1 = "/static/programImage/upload";
 		String filePath = session.getServletContext().getRealPath(path1);
@@ -62,7 +64,7 @@ public class ProgramModifyService {
 			String original = mf.getOriginalFilename();
 			String originalFileExtension = original.substring(original.lastIndexOf("."));
 			String store = UUID.randomUUID().toString().replace("-", "") + originalFileExtension;
-			prImageTotal += store + "`";
+			originalTotal += store + "`";
 
 			file = new File(filePath + "/" + store);
 			try {
@@ -72,16 +74,16 @@ public class ProgramModifyService {
 			}
 		}
 
-		dto.setProgramImage(prImageTotal + pro.getProgramImage());
+		dto.setProgramImage(originalTotal + pro.getProgramImage());
 
 		programMapper.programUpdate(dto);
 		if (list != null) {
 			for (FileName in : list) {
-				file = new File(filePath + "/" + in.getFile().replace("`", ""));
+				file = new File(filePath + "/" + in.getOriginalfileName().replace("`", ""));
 				if (file.exists()) {
 					file.delete();
 				}
-				session.removeAttribute("imglist");
+				session.removeAttribute("filelist");
 			}
 		}
 		return "redirect:/program/programDetail?programNo=" + pro.getProgramNo();

@@ -41,30 +41,31 @@ public class ProgramLibService {
 		String path = "/static/programLib/upload";
 		//String filePath = session.getServletContext().getRealPath(path);
 		String filePath = "C:/Users/ho041/Desktop/EXPORT/thePalace/finalProject/src/main/resources"+path;
-		String prLibFile = "";
+		String originalTotal = "";
+		String storeTotal = "";
+		String fileSizeTotal ="";
 		
 		for (MultipartFile mf : programLibCommand.getFile()) {
-			String original = mf.getOriginalFilename();
-			String originalFileExtension = original.substring(original.lastIndexOf("."));
-			
+			String original = mf.getOriginalFilename(); // 전송된 파일명 
+			String originalFileExtension = // 전송된 파일명으로 부터 확장자만 자라옴   
+					original.substring(original.lastIndexOf("."));
 			String store = UUID.randomUUID().toString().replace("-", "")
-							+ originalFileExtension;
-			
-			prLibFile += store + "`";
-			
+					+ originalFileExtension; // 임의의 파일명 + 확장자 
+			String fileSize = Long.toString(mf.getSize());
+			originalTotal += original + "`";
+			storeTotal += store + "`";
+			fileSizeTotal += fileSize + "`";
+			// 파일을저장하기 위해서 파일 객체 생성 
 			File file = new File(filePath + "/" + store);
-			System.out.println(file.getPath());
-			
 			try {
 				mf.transferTo(file);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				location = "thymeleaf/programLib/one_to_one_write";
+			}catch(Exception e) {
+				location = "thymeleaf/lib_Board/lib_board_write";
 				e.printStackTrace();
 			}
 		}
 		
-		programLibDTO.setPlibFile(prLibFile);
+		programLibDTO.setPlibFile(originalTotal);
 		programLibMapper.programLibInsert(programLibDTO);
 		location = "redirect:/pgmypage/programLib";
 		

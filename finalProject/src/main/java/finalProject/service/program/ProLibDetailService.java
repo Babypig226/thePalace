@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import finalProject.FileName;
+import finalProject.command.FileName;
 import finalProject.domain.ProgramLibDTO;
 import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ProgramLibMapper;
@@ -29,7 +29,7 @@ public class ProLibDetailService {
 		int i = 0;
 		for (String file : files) {
 			System.out.println("files : " + file);
-			FileName fileName = new FileName(file);
+			FileName fileName = new FileName(file, null, null);
 			filelist.add(fileName);
 			i++;
 		}

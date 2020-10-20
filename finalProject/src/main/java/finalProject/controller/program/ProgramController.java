@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import finalProject.FileName;
+import finalProject.command.FileName;
 import finalProject.command.ProgramListCommand;
 import finalProject.service.file.FileDelService;
 import finalProject.service.program.ProgramDelService;
@@ -95,8 +95,8 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("fileDel")
-	public String fileDel(FileName imageName, HttpSession session, Model model) throws Exception{
-		fileDelService.fileDel(imageName, session, model);
+	public String fileDel(FileName fileName, HttpSession session, Model model) throws Exception{
+		fileDelService.fileSessionAdd(fileName, session, model);
 		return "thymeleaf/program/delPage";
 	}
 

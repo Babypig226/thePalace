@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import finalProject.FileName;
+import finalProject.command.FileName;
 import finalProject.command.ProgramLibCommand;
 import finalProject.domain.ProgramLibDTO;
 import finalProject.domain.StartEndPageDTO;
@@ -36,11 +36,13 @@ public class ProLibModifyService {
 		
 		if(list != null) {
 			for (FileName fi : list) {
-				plibdto.setPlibFile(plibdto.getPlibFile().replace(fi.getFile()+"`", "")); 
+				plibdto.setPlibFile(plibdto.getPlibFile().replace(fi.getOriginalfileName()+"`", "")); 
 			}
 		}
 		
-		String libImageTotal = "";
+		String originalTotal = "";
+		String storeTotal = "";
+		String fileSizeTotal ="";
 		File file = null;
 		String path1 = "/static/programLib/upload";
 		String filePath = "C:/Users/ho041/Desktop/EXPORT/thePalace/finalProject/src/main/resources"+path1;
@@ -49,7 +51,7 @@ public class ProLibModifyService {
 			String original = mf.getOriginalFilename();
 			String originalFileExtension = original.substring(original.lastIndexOf("."));
 			String store = UUID.randomUUID().toString().replace("-", "") + originalFileExtension;
-			libImageTotal += store + "`";
+			originalTotal += store + "`";
 			
 			file = new File(filePath + "/" + store);
 			try {
@@ -58,13 +60,13 @@ public class ProLibModifyService {
 				e.printStackTrace();
 			}
 		}
-		dto.setPlibFile(libImageTotal + plibdto.getPlibFile());
+		dto.setPlibFile(originalTotal + plibdto.getPlibFile());
 		
 		programLibMapper.proLibUpdate(dto);
 		
 		if(list != null) {
 			for (FileName in : list) {
-				file = new File(filePath + "/" + in.getFile().replace("`", ""));
+				file = new File(filePath + "/" + in.getOriginalfileName().replace("`", ""));
 				if(file.exists()) {
 					file.delete();
 				}
