@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="finalProject.mapper.ProgramLibMapper">
+	<sql id="basecolumn">
+		PLIB_NO, USER_ID, PLIB_SUBJECT, PLIB_CONTENT, PLIB_FILE, PLIB_DATE, PROGRAM_NO
+	</sql>
+	
+	<insert id="programLibInsert" parameterType="finalProject.domain.ProgramLibDTO">
+		insert into PROGRAMLIB(<include refid="basecolumn"/>)
+		values (lib_seq.nextval, #{userId}, #{plibSubject}, #{plibContent},
+				#{plibFile}, sysdate, #{programNo})
+	</insert>
+	
+	<resultMap type="finalProject.domain.ProgramLibDTO" id="ProLibList">
+		<id column="PLIB_NO" jdbcType="VARCHAR" property="plibNo"/>
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+		<result column="PLIB_SUBJECT" jdbcType="VARCHAR" property="plibSubject"/>
+		<result column="PLIB_CONTENT" jdbcType="VARCHAR" property="plibContent"/>
+		<result column="PLIB_FILE" jdbcType="VARCHAR" property="plibFile"/>
+		<result column="PLIB_DATE" jdbcType="TIMESTAMP" property="plibDate"/>
+		<result column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo"/>
+	</resultMap>
+	
+	<select id="getproLibList" resultMap="ProLibList">
+		select * 
+		from (select rownum rn, <include refid="basecolumn"/>
+			from(select <include refid="basecolumn"/> 
+				from programlib
+				<trim prefix="where" prefixOverrides="AND | OR">
+					<if test="num != null">
+						and plib_no = #{num}
+					</if>
+				</trim>
+				order by plib_date desc))
+		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
+	</select>
+	
+	<update id="proLibUpdate" parameterType="finalProject.domain.ProgramLibDTO">
+		update PROGRAMLIB
+		<trim prefix="set" suffixOverrides=",">
+			<if test="plibSubject != null">
+				plib_subject = #{plibSubject},
+			</if>
+			<if test="plibContent != null">
+				plib_content = #{plibContent},
+			</if>
+				PLIB_FILE = #{plibFile}
+		</trim>
+		where plib_no = #{plibNo}
+	</update>
+</mapper>

@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 public class PgbasketDTO {
 	String programNo;
 	String userId;
+	Integer amount;
+	String checkOp;
 	
-	PgbasketDTO cart;
-
+	//PgbasketDTO cart;
 	List<ProgramDTO> pro;
 }

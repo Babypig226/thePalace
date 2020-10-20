@@ -1,5 +1,7 @@
 package finalProject.command;
 
+import java.sql.Date;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -28,4 +30,5 @@ public class ProgramListCommand {
 	String pOption;
 	Integer pOptionPrice;
 	String programReg;
+	Date programDate;
 }

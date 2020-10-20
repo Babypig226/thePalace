@@ -1,95 +1,101 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-     layout:decorator="layout">
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>프로그램</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
-	media="all" />
-<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
 </head>
 <body>
-<!-- Header -->
+	<!-- Header -->
 	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
 	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
-		<!-- Banner -->
-	
-<section id="three" class="wrapper style2">
+	<!-- Banner -->
+
+	<section id="three" class="wrapper style2">
 		<div class="inner">
 			<div class="grid-style">
 				<div>
-						<div class="content">
-							
-							<header class="align-center">
-								<h2>[[${prodto.programName}]]</h2>
-							</header>
-							<hr />
-							<p align="left">
-							<b>√ 기간 : [[${prodto.programDate}]]</b><br/>
-							<b>√ 강사명 : [[${prodto.teacherNo}]]</b><br/> 
-							<b>√ 프로그램주소 : [[${prodto.programAddr}]]</b><br/>
-							<b>√ 이용요금 : [[${prodto.programPrice}]]</b><br/>
-							<b>√ 프로그램 설명 : [[${prodto.programContent}]]</b><br/>
-							
-							</p>
-								<p>
-									<!-- 
-									<select name="usingCount" id="usingCount">
-										<option th:value="">선택</option>
-									</select>
-									<label for="using_count">신청인원 </label> <a href="#" id="increase">▲</a>&nbsp;<span
-										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
-									-->
-								</p>
-							<div class="field">
-								<label for="pOption">추가옵션 </label>
-									<div class="field first">
-										<select th:name="option">
-											<option>--------선택----------</option>
-										<div th:each = "list : ${list}">
-											<option th:value="${list}">[[${list}]]</option>
-										</div>
-										</select>
-									</div>	
-									<br />
-								
-										
+					<div class="content">
+						<header class="align-center">
+							<h2>[[${prodto.programName}]]</h2>
+						</header>
+						<hr />
+						<p align="left">
+							<b>√ 기간 : <span
+								th:text="${#dates.format(prodto.programReg, 'yyyy-MM-dd')}"></span>
+								~ <span
+								th:text="${#dates.format(prodto.programDate, 'yyyy-MM-dd')}"></span></b><br />
+							<b>√ 강사명 : [[${prodto.teacherNo}]]</b><br /> <b>√ 프로그램주소 :
+								[[${prodto.programAddr}]]</b><br /> <b>√ 이용요금 :
+								[[${prodto.programPrice}]]</b><br /> <b>√ 프로그램 설명 :
+								[[${prodto.programContent}]]</b><br />
+						</p>
+						<form th:action="@{/prcart/programCartAdd(programNo=${prodto.programNo})}"
+							 method = "post" name="programCartAdd">
+						<p>
+							<label for="using_count">신청인원 </label>
+							<select name = "amount">
+								<option>--------선택----------</option>
+								<div th:each="amount : ${amount}">
+									<option th:value="${amount}">[[${amount}]]명</option>
+								</div>
+							</select>
+							<!-- 
+							</select>  <a href="#" id="increase">▲</a>&nbsp;<span
+								id="UpDown">1</span> <a href="#" id="decrease">▼</a> -->
+						</p>
+						<div class="field">
+							<label for="pOption">추가옵션 </label>
+							<div class="field first">
+								<select name = "checkOp">
+									<option>--------선택----------</option>
+									<div th:each="checkOp : ${checkOp}">
+										<option th:value="${checkOp}">[[${checkOp}]]</option>
+									</div>
+								</select>
+							</div><br />
 							<div class="align-center">
-								<a th:href="@{../prcart/programCartAdd(programNo=${prodto.programNo})}" class="button alt">장바구니담기</a>&nbsp; 
-								<a href="wishList.html" class="button alt">위시리스트</a>&nbsp; 
-								<a href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
-								<a th:href = "@{programModify(programNo=${prodto.programNo})}" class="button alt">프로그램 수정</a>
-								<a th:href = "@{programDel(programNo=${prodto.programNo})}" class="button alt">프로그램 삭제</a>
-			
-			</div>
-			
-			</div>
-			
-						</div>
-	
-				</div>
-	
-				<div>
-						<div class="content">
-						<div th:each="file : ${imglist}" class="image fit">
-								 <img th:src="@{/static/programImage/upload/} + ${file.programImage}"> 
+								<input type="submit" class="button alt" value="장바구니담기" />
+								<!-- 
+								<a th:href="@{../prcart/programCartAdd(programNo=${prodto.programNo})}"
+									class="button alt">장바구니담기</a>&nbsp;  -->
+								<a th:href="@{../prwish/programWishAdd(programNo=${prodto.programNo})}" class="button alt">위시리스트</a>&nbsp; 
+								<a th:href="@{programModify(programNo=${prodto.programNo})}"
+									class="button alt">프로그램 수정</a> 
+								<a th:href="@{programDel(programNo=${prodto.programNo})}"
+									class="button alt">프로그램 삭제</a>
 							</div>
-				</div>
-			
-			</div>
-			</div>
-			</div>
-			</section>
-			
+						</form>
 
-	
-<!-- Footer -->
-		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div>
+					<div class="content">
+						<div th:each="file : ${imglist}" class="image fit">
+							<img
+								th:src="@{/static/programImage/upload/} + ${file.file}" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -100,30 +106,5 @@
 </body>
 
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$('#decrease').click(function(e) {
-			e.preventDefault();
-			var stat = $('#UpDown').text();
-			var num = parseInt(stat, 10);
-			num--;
-			if (num <= 0) {
-				num = 1;
-			}
-			$('#UpDown').text(num);
-		});
-		$('#increase').click(function(e) {
-			e.preventDefault();
-			var stat = $('#UpDown').text();
-			var num = parseInt(stat, 10);
-			num++;
 
-			if (num > 10) {
-				num = 10;
-			}
-			$('#UpDown').text(num);
-		});
-	});
-</script>
 </html>
-	

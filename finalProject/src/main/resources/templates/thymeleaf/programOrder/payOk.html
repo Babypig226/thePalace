@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+[[${num}]]
+결제가 완료 되었습니다.
+<a th:href="@{/programPay/finalInfo}">주문내역 확인</a>
+</body>
+</html>

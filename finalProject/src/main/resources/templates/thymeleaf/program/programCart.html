@@ -23,50 +23,58 @@
 		<div class="inner">
 			<div class="box">
 				<div class="content">
+				<form th:action="@{cartDelete}" method="post" name="cartdelete">
 					<h2 class="align-center">장바구니</h2>
 					<div class="table-wrapper">
 						<table>
 							<thead>
 								<tr>
 									<th>프로그램 번호</th>
-									<th>프로그램 정보</th>
+									<th>프로그램 이름</th>
 									<th>가격</th>
 									<th>신청인원 </th>
-									
+									<th>추가옵션 </th>
+									<th>선택</th>
 								</tr>
 							</thead>
 							<tbody>
-								<div th:each = "prg:${prglist}">
+								<div th:each = "prg : ${pglist}">
 									<tr>
-										<td>[[${prg.programNo}]]</td>
-										<td>[[${prg.programName}]]</td>
-										<td>[[${prg.programPrice}]]</td>
-										<td>[[${prg.pOption}]]</td>								
+										<td>[[${prg.programNo}]]</td>	
+										<div th:each ="pro : ${prg.pro}">
+										<td><a th:href = "@{../program/programDetail?(programNo=${pro.programNo})}">[[${pro.programName}]]</a></td>
+										<td>[[${pro.programPrice}]]</td>
+										</div>
+										<td>[[${prg.amount}]]</td>						
+										<td>[[${prg.checkOp}]]</td>
+										<td>
+											<div class="6u 12u$(small)">
+												<input type="checkbox" id="delete" name="delete" th:value="${prg.programNo}">
+												<label for="delete"></label>
+											</div>
+										</td>
 									</tr>
-								</div>
-							</tbody>
-						</table>
+								</div>	
+							</tbody>                                                                                                                                                                                                                                                                                                                                 
+						</table>                             
 
 						<table>
 							<tr align="center">
-								<td> 총 결제금액 : <b>원</b></td>
+								<td> 총 결제금액 : <b>[[${totPrice}]]원</b></td>
 								<td align="right"></td>
-							</tr>
+							</tr>           
 
-
-							<tr align="center">
-								<td colspan="5"><a>1</a></td>
-								<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
-								<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
-								</header>
-								<td colspan="5"><a href="Mypage.html" class="button alt">목록으로</a></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                                                                                                                                                                  
+							<tr align="center">								
+								<td><a href="../pgmypage/programMypage" class="button alt">목록으로</a></td>
+								<td><a th:href="@{../programPay/directPay}" class="button alt">바로결제</a></td>
+								<td><input type="submit" value="삭제" /></td>
+							</tr>  
+						</table>                                                                                                                                        
+     					</div>                                                    
+					</form>
+				</div>                                                                                                                                                
+	</section>                                       
 	<!-- Footer -->
 	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->

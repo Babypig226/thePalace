@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import finalProject.ImageName;
+import finalProject.FileName;
 import finalProject.command.ProgramListCommand;
 import finalProject.service.file.FileDelService;
 import finalProject.service.program.ProgramDelService;
@@ -34,6 +34,8 @@ public class ProgramController {
 	FileDelService fileDelService;
 	@Autowired
 	ProgramDelService programDelService;
+	@Autowired
+	ProgramModifyService programModifyService;
 	
 	@RequestMapping("Made")
 	public String made() {
@@ -85,8 +87,6 @@ public class ProgramController {
 		return "thymeleaf/program/programDetail"; 
 	}
 	
-	@Autowired
-	ProgramModifyService programModifyService;
 	@RequestMapping("programModify")
 	public String programModify(@RequestParam("programNo") String programNo,
 							Model model, HttpSession session) throws Exception{
@@ -95,18 +95,18 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("fileDel")
-	public String fileDel(ImageName imageName, HttpSession session, Model model) {
-		fileDelService.fileSessionAdd(imageName, session, model);
+	public String fileDel(FileName imageName, HttpSession session, Model model) throws Exception{
+		fileDelService.fileDel(imageName, session, model);
 		return "thymeleaf/program/delPage";
 	}
-	
+
 	@RequestMapping(value = "proModifyPro", method = RequestMethod.POST)
 	public String proModifyPro(ProgramListCommand programListCommand,
 							HttpSession session, Model model) throws Exception{
 		String path = programModifyService.programModify(programListCommand, session, model);
 		return path;
 	}
-	
+
 	@RequestMapping("programDel")
 	public String programDel(@RequestParam(value = "programNo") String programNo, 
 							Model model) throws Exception{

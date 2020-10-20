@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>주문결제</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<style type="text/css">
+td {
+	background-color: white;
+}
+
+#orid {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body class="subpage">
+	<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+				<form th:action="@{/programPay/payInfoWrite}" method="post" name="payInfoWrite">
+					<img alt="" src="../images/order3.png" width="1080" height="200">
+					<h2 class="align-center">결제정보 입력</h2>
+					<!-- Registration Form -->
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<div align="center">결제수단</div>
+								</td>
+								<td>
+									<select th:name="payOption">
+										<option th:value="카드결제">카드결제</option>
+										<option th:value="무통장입금">무통장입금</option>
+									</select>
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									<div align="center">쿠폰번호</div>
+								</td>
+								<td>
+									<select th:name="couponNo">
+										<option th:value="1000">1000원 할인</option>
+										<option th:value="5000">5000원 할인</option>
+										<option th:value="10000">10000원 할인</option>
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">총 결제 금액</div>
+								</td>
+								<td><font color="red">[[${totPrice}]]원</font> + <font color="red">456,430</font>
+									=<font color="red"> [[${totPrice}]]원</font></td>
+							</tr>
+						</table>
+					</div>
+					<br />
+					
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td colspan="5" bgcolor="white" align="center">
+									<a href="orderForm.html" class="button alt">이전</a>
+									<input type="submit" class="button alt" th:value = "다음" />
+									<!-- <a href="oderOk.html" class="button alt">다음</a> -->
+								</td>
+							</tr>
+						</table>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+</html>

@@ -5,14 +5,20 @@
 <mapper namespace="finalProject.mapper.ProgramBasketMapper">
 
 	<sql id="basecolumn">
-		user_id, program_no
+		user_id, program_no, amount, check_op
 	</sql>
-	
-	<insert id="cartInsert" parameterType="finalProject.domain.StartEndPageDTO">
-		insert into program_basket (<include refid="basecolumn"/>)
-		values(#{userId}, #{num})
-	</insert>
 
+	 <insert id="cartInsert" parameterType="finalProject.domain.PgbasketDTO">
+	 	MERGE into program_basket pg 
+	 	USING (select program_no, p_option from program where program_no = #{programNo}) pr
+	 	ON (pg.program_no = pr.program_no and pg.user_id = #{userId})
+	 	WHEN MATCHED THEN 
+	 		update set pg.amount = pg.amount + 1
+	 	WHEN NOT MATCHED THEN 
+	 		insert (pg.program_no, pg.user_id, pg.check_op, pg.amount)
+	 		values (pr.program_no, #{userId}, #{checkOp}, #{amount})
+	 </insert>
+	 
 	<resultMap type="finalProject.domain.ProgramDTO" id="baseProgram">
 		<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo" />
 		<result column="PROGERAM_CATEGORY" jdbcType="VARCHAR" property="programCategory"/>
@@ -24,31 +30,75 @@
 		<result column="P_OPTION" jdbcType="VARCHAR" property="pOption"/>
 		<result column="P_OPTION_PRICE" jdbcType="BIGINT" property="pOptionPrice"/>
 		<result column="PROGRAM_ADDR" jdbcType="VARCHAR" property="programAddr"/>
-		<result column="PROGRMAM_DATE" jdbcType="TIMESTAMP" property="programDate"/>
+		<result column="PROGRAM_DATE" jdbcType="TIMESTAMP" property="programDate"/>
 		<result column="PROGRAM_REG" jdbcType="TIMESTAMP" property="programReg"/>
 		<result column="TEACHER_NO" jdbcType="VARCHAR" property="teacherNo"/>
+		<result column="USING_COUNT" jdbcType="BIGINT" property="usingCount"/>
 	</resultMap>
 
-	<resultMap type="finalProject.domain.PgbasketDTO" id="pgbasketMap">
+	 <!-- 
+	<resultMap type="finalProject.domain.CartDTO" id="cartMap">
 		<association property="cart" javaType="finalProject.domain.PgbasketDTO">
 			<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo"/>
-			<id column="USER_ID" jdbcType="VARCHAR" property="userId"/> 
+			<id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+			<result column="amount" jdbcType="BIGINT" property="amount"/>
+	 		<result column="check_op" jdbcType="VARCHAR" property="checkOp"/> 
 		</association>
 		<collection property="pro" ofType="finalProject.domain.ProgramDTO" resultMap="baseProgram">
 			<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo" />
+			<result column="PROGERAM_CATEGORY" jdbcType="VARCHAR" property="programCategory"/>
 			<result column="PROGRAM_NAME" jdbcType="VARCHAR" property="programName"/>
+			<result column="MAX_COUNT" jdbcType="BIGINT" property="maxCount"/>
+			<result column="PROGRAM_CONTENT" jdbcType="VARCHAR" property="programContent"/>
+			<result column="PROGRAM_IMAGE" jdbcType="VARCHAR" property="programImage"/>
 			<result column="PROGRAM_PRICE" jdbcType="BIGINT" property="programPrice"/>
+			<result column="P_OPTION" jdbcType="VARCHAR" property="pOption"/>
+			<result column="P_OPTION_PRICE" jdbcType="BIGINT" property="pOptionPrice"/>
+			<result column="PROGRAM_ADDR" jdbcType="VARCHAR" property="programAddr"/>
+			<result column="PROGRAM_DATE" jdbcType="TIMESTAMP" property="programDate"/>
+			<result column="PROGRAM_REG" jdbcType="TIMESTAMP" property="programReg"/>
 			<result column="TEACHER_NO" jdbcType="VARCHAR" property="teacherNo"/>
+			<result column="USING_COUNT" jdbcType="BIGINT" property="usingCount"/>
 		</collection>
 	</resultMap>
-	
-	
-	<select id="pgbasketlist" resultMap="pgbasketMap">
-		select pb.program_no, p.program_name, p.program_price
-		from program_basket pb
-		left outer join program  p
-		on pb.program_no = p.program_no
-		and pb.user_id = '1111'
-	</select>
-	
+
+	 
+
+	 <resultMap type="finalProject.domain.PgbasketDTO" id="cartlistMap">
+	 	<id column="user_id" jdbcType="VARCHAR" property="userId"/>
+	 	<id column="program_no" jdbcType="VARCHAR" property="programNo"/>
+	 	<result column="amount" jdbcType="BIGINT" property="amount"/>
+	 	<result column="check_op" jdbcType="VARCHAR" property="checkOp"/>
+	 </resultMap>
+	 <select id="pgbasketlist" resultMap="cartlistMap">
+	 	select program_no, amount, check_op
+	 	from program_basket
+	 </select>
+	 -->
+	 <resultMap type="finalProject.domain.PgbasketDTO" id="pgBasket">
+	 	<id column="user_id" jdbcType="VARCHAR" property="userId"/>
+	 	<id column="program_no" jdbcType="VARCHAR" property="programNo"/>
+	 	<result column="amount" jdbcType="BIGINT" property="amount"/>
+	 	<result column="check_op" jdbcType="VARCHAR" property="checkOp"/>
+	 </resultMap>
+	 <!-- 
+	 <resultMap type="finalProject.domain.CartDTO" id="cartList">
+	 	<association property="cart" javaType="finalProject.domain.PgbasketDTO" resultMap="pgBasket" />
+	 	<collection property="pro" javaType="finalProject.domain.ProgramDTO" resultMap="baseProgram" />
+	 </resultMap>
+	  -->
+	 <resultMap type="finalProject.domain.PgbasketDTO" id="cartlist">
+	 	<id column="user_id" jdbcType="VARCHAR" property="userId"/>
+	 	<id column="program_no" jdbcType="VARCHAR" property="programNo"/>
+	 	<result column="amount" jdbcType="BIGINT" property="amount"/>
+	 	<result column="check_op" jdbcType="VARCHAR" property="checkOp"/>
+	 	<collection property="pro" ofType="finalProject.domain.ProgramDTO" resultMap="baseProgram"/>
+	 </resultMap>
+	 
+	 <select id="pgbasketlist" parameterType="finalProject.domain.PgbasketDTO" resultMap="cartlist">
+	 	select pr.program_no, pr.program_name, pg.amount, pg.check_op, pr.program_price
+		from program_basket pg
+		join program pr
+		on pr.program_no = pg.program_no
+	 </select>
 </mapper>

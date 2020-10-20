@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import finalProject.controller.PageAction;
 import finalProject.domain.ProgramDTO;
 import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ProgramMapper;
@@ -28,9 +29,8 @@ public class ProgramListService {
 				new StartEndPageDTO(startRow, endRow, null, null);
 
 		List<ProgramDTO> prolists = programMapper.getProgramList(startEndPageDTO);
-		
-		model.addAttribute("prolists", prolists);
-		
+		System.out.println("prolist : "+ prolists);
+		model.addAttribute("prolists", prolists);	
 		
 	}
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="finalProject.mapper.ProPayMapper">
+
+	<sql id="basecolumn">
+		PAY_NO, PAY_DATE, PAY_OPTION, TOTAL_PAY, COUPON_NO
+	</sql>
+	
+	<insert id="payInfoInsert" parameterType="finalProject.domain.ProPayDTO">
+		insert into payment (<include refid="basecolumn" />)
+		values (pay_seq.nextval, sysdate, #{payOption, jdbcType = VARCHAR}, 
+				#{totalPay, jdbcType = BIGINT}, #{couponNo, jdbcType = VARCHAR})
+	</insert>
+	
+	<resultMap type="finalProject.domain.ProPayDTO" id="payListMap">
+		<id column="PAY_NO" jdbcType="VARCHAR" property="payNo" />
+		<result column="PAY_DATE" jdbcType="TIMESTAMP" property="payDate"/>
+		<result column="PAY_OPTION" jdbcType="VARCHAR" property="payOption"/>
+		<result column="TOTAL_PAY" jdbcType="BIGINT" property="totalPay"/>
+		<result column="COUPON_NO" jdbcType="VARCHAR" property="couponNo"/>
+	</resultMap>
+	
+	<select id="payInfolist" parameterType="finalProject.domain.ProPayDTO">
+		select * from payment
+		where pay_no = #{payNo}
+	</select>
+</mapper>

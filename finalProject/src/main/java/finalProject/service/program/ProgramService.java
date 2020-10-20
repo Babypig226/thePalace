@@ -2,6 +2,8 @@ package finalProject.service.program;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,31 +35,18 @@ public class ProgramService {
 		programDTO.setProgramPrice(programListCommand.getProgramPrice());
 		programDTO.setProgramContent(programListCommand.getProgramContent());
 		programDTO.setProgramAddr(programListCommand.getProgramAddr());
-		/*
-		String pOptions [] = null;
-		if(programListCommand.getPOption() != null) {
-			pOptions = programListCommand.getPOption().split("`");
-			//programDTO.setPOption(pOptions);
-		}
-		*/
-		/*
-		String pOptions [] = null;
-		if(programListCommand.getPOption() != null) {
-			pOptions = programListCommand.getPOption().split("`");
-		}
-		
-		if(pOptions != null && !pOptions.equals("")) {
-			for(String options : pOptions) {
-				programDTO.setPOption(options);
-				System.out.println("options "+options);
-			}
-		}
- 		*/
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String modifiedDate = fm.format(programListCommand.getProgramDate());
+		Timestamp programDate = Timestamp.valueOf(modifiedDate);
+		programDTO.setProgramDate(programDate);
+
 		programDTO.setPOption(programListCommand.getPOption());
 		programDTO.setPOptionPrice(programListCommand.getPOptionPrice());
+		programDTO.setUsingCount(0);
 		
 		String path = "/static/programImage/upload";
-		String filePath = session.getServletContext().getRealPath(path);
+		String filePath = "C:/Users/ho041/Desktop/EXPORT/thePalace/finalProject/src/main/resources"+path;
+		//String filePath = session.getServletContext().getRealPath(path);
 		String prImageTotal = "";
 		
 		for(MultipartFile mf : programListCommand.getImage()) {

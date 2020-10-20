@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>1:1문의 신청</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form th:action="@{proLibModifyPro}" method="post" name="proLibModifyPro"
+						enctype="multipart/form-data">
+						<h2 class="align-center">1:1문의 신청 수정</h2>
+						
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">														
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center">게시판 번호</div>
+								</td>
+								<td bgcolor = "white">
+									<input name="programNo" type="text" size="10" maxlength="10" 
+											th:value="${plibdto.plibNo}"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">게시판 제목</div>
+								</td>
+								<td>
+									<input name="plibSubject" type="text" maxlength="70" th:value="${plibdto.plibSubject}"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center">게시판 내용</div>
+								</td>
+								<td bgcolor = "white">
+									<textarea name="plibContent" cols="50" rows="10">[[${plibdto.plibContent}]]</textarea>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">첨부파일/사진</div>
+								</td>
+								<td>
+									<div th:each="file, numstat: ${filelist}" class="image fit">
+										<img th:src="@{/static/programLib/upload/} + ${file.file}" width="5" height="5" id="imagefile">
+										<input type = "button" value = "삭제" th:id="${'btn'+numstat.index}"
+											th:onclick="'fileDel(\''+${file.file}+'\',this)'" />
+									</div>
+								<input type="file" name="file" multiple="multiple" />
+							</tr>
+
+							<tr align="right" >
+								<td colspan="5" bgcolor = "white">
+									<a href="programMypage" class="button alt">목록으로</a>
+									<input type="submit" value = "수정완료" class="button alt" />
+								<td>
+							</tr>
+						</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+	</form>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	function fileDel(file, btn){
+		$.ajax({
+			type : "get",
+			url : "fileDel",
+			dataType : "text",
+			data : {"imagefile":file},
+			success : function(result){
+				alert("#"+btn.id)
+				if(result.trim() == 1){
+					$(btn).val("삭제취소")
+				}else{
+					$(btn).val("삭제")
+				}
+			},
+			error : function(){
+				$(btn).text("삭제취소")
+				alert('에러에러에러에러');
+				return;
+			}
+		});	
+	}
+</script>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="finalProject.mapper.ProPayResMapper">
+	
+	<sql id="basecolumn">
+		RS_NO, PROGRAM_NO, PAY_NO
+	</sql>
+
+	<insert id="payresInsert" parameterType="finalProject.domain.ProPayResDTO">
+		insert into program_res (<include refid="basecolumn" />)
+		values (#{rsNo}, #{programNo}, #{payNo})
+	</insert>
+
+</mapper>

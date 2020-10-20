@@ -1,165 +1,215 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-     layout:decorator="layout">
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>프로그램 수정</title>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	function fileDel(programImage, btn) {
+
+		$.ajax({
+			type : "get",
+			url : "fileDel",
+			dataType : "file",
+			data : {
+				"programImage" : programImage
+			},
+			sucess : function(result) {
+				alert("#" + btn.id)
+				if (result.trim() == 1) {
+					$(btn).val("삭제취소")
+				} else {
+					$(btn).val("삭제")
+				}
+			},
+			error : function() {
+				$(btn).text("삭제취소")
+				alert('에러에러에러');
+				return;
+			}
+		})
+	}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
-	media="all" />
-<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
 </head>
 <body>
-<<!-- Header -->
+	<!-- Header -->
 	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
 		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
 	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
-	
+
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form action="proModifyPro" method="post" name="proModify" enctype="multipart/form-data">
+					<form action="proModifyPro" method="post" name="proModifypro"
+						enctype="multipart/form-data">
 						<h2 class="align-center">프로그램 글 수정</h2>
-						
-						<div class="table-wrapper">
-						<table cellpadding="0" cellspacing="0">
-							<tr>
-								<td bgcolor = "white" >
-									<div align="center"><b>프로그램명 </b></div>
-								</td>
-								<td bgcolor = "white"><input name="programName" type="text" size="10"
-									maxlength="10" th:value="${prodto.programName}"/></td>
-							</tr>
-							
-							<tr>
-								<td bgcolor = "white" >
-									<div align="center"><b>강사명 </b></div>
-								</td>
-								<td bgcolor = "white"><input name="teacherNo" type="text" size="10"
-									maxlength="10" th:value="${prodto.teacherNo}"/></td>
-							</tr>
-							
-							
-							
-							<tr>
-								<td  bgcolor = "white">
-									<div align="center"><b>카테고리</b> </div>
-								</td>
-								<td bgcolor = "white"><input name="programCategory" type="text" maxlength="70" th:value="${prodto.programCategory}"/></td>
-							</tr>
 
-							<tr>
-								<td bgcolor = "white">
-									<div align="center"><b>최대수강인원</b> </div>
-								</td>
-								<td> 	
-									<input name="maxCount" type="text" maxlength="70" th:value="${prodto.maxCount}"/>
-								</td>
-							</tr>
-	
-							<tr>
-								<td bgcolor = "white">
-									<div align="center"><b>프로그램 설명</b> </div>
-								</td>
-								<td><textarea name="programContent" cols="50" rows="10">[[${prodto.programContent}]]</textarea>
-								</td>
-							</tr>
-								
-						
-							<tr>
-								<td bgcolor = "white">
-									<div align="center"><b>프로그램 사진 </b></div>
-								</td>
-								<td bgcolor = "white" >
-									<div th:each="file, numStat : ${imglist}"> 
-									저장된 사진명 : <span th:text=${file.programImage}" id="oldImage">[[${file.programImage}]]</span></br>
-								<!-- <img th:src="@{/static/programImage/upload/} + ${file.programImage}"></br> -->
-									<input type="button" th:id="${'btn'+numStat.index}" value="삭제" 
-										th:onclick="'fileDel(\''+${file.programImage}+ '\',this)'"/>
-									</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<td bgcolor = "white">
-									<div align="center"><b>변경 사진 </b></div>
-								</td>
-								<td bgcolor = "white"> <input type="file" name="Image" multiple="multiple" /><br /> 
-								</td>
-							</tr>
-						<!-- 
-						
-							<tr>
-								<td bgcolor = "white">
-									<div align="center"><b>사진 첨부</b></div>
-								</td>
-								<td bgcolor = "white"> <input type="file" name="fileUp" /><br /> <input
-									type="file" name="fileUp" /></td>
-							</tr>
-						 -->
-							<tr>
-								<td bgcolor = "white" >
-									<div align="center"><b>프로그램 주소 </b></div>
-								</td>
-								<td bgcolor = "white"><input name="proAddr" type="text" size="10"
-									maxlength="10" th:value="${prodto.programAddr}"/></td>
-							</tr>
-							
-							<tr>
-								<td bgcolor = "white" >
-									<div align="center"><b>이용요금 </b></div>
-								</td>
-								<td bgcolor = "white"><input name="programPrice" type="text" size="10"
-									maxlength="10" th:value="${prodto.programPrice}"/></td>
-							</tr>
-							
-							
-							<tr>
-								<td bgcolor = "white" >
-									<div align="center"><b>추가옵션 </b></div>
-								</td>
-								<td bgcolor = "white"><input name="pOption" type="text" size="10"
-									maxlength="10" th:value="${prodto.pOption}"/></td>
-							</tr>
-							
-							
-							
-							<tr>
-								<td bgcolor = "white" >
-									<div align="center"><b>추가 이용요금</b></div>
-								</td>
-								<td bgcolor = "white"><input name="pOptionPrice" type="text" size="10"
-									maxlength="10" th:value="${prodto.pOptionPrice}"/></td>
-							</tr>
-							
-								
-							
-							<tr align="center">
-									<td colspan="5"> 
-									<!-- <a href="proModifyPro"> -->
-									<input type="submit" value="수정완료 " id="modify" /></a> 
-									<a href="programDelete.html"><input type="button" value="삭제하기 " id="del" /></a> 
-									<a href="programList.html"><input type="button" value="목록으로 " id="home" /></a>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>프로그램명 </b>
+										</div>
+									</td>
+									<td bgcolor="white">
+										<input name="programName" type="text"
+												size="10" th:value="${prodto.programName}"/></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>강사명 </b>
+										</div>
+									</td>
+									<td bgcolor="white">
+									<input name="teacherNo" type="text"
+											size="10" maxlength="10" th:value="${prodto.teacherNo}" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>카테고리</b>
+										</div>
+									</td>
+									<td bgcolor="white">
+										<input name="programCategory" type="text" maxlength="70"
+												th:value="${prodto.programCategory}" /></td>
+								</tr>
+								 
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>프로그램 마감일</b>
+										</div>
+									</td>
+									<td bgcolor="white">
+										<input name="programDate" type="date" maxlength="70" 
+												th:value="${prodto.programDate}"/>[[${prodto.programDate}]]
 									</td>
 								</tr>
-						</table>
-	
+								 
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>최대수강인원</b>
+										</div>
+									</td>
+									<td><input name="maxCount" type="text" maxlength="70"
+												th:value="${prodto.maxCount}" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>프로그램 설명</b>
+										</div>
+									</td>
+									<td><textarea name="programContent" cols="50" rows="10">[[${prodto.programContent}]]</textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>프로그램 사진 </b>
+										</div>
+									</td>
+									<td bgcolor="white">
+										<div th:each="file, numStat : ${imglist}">
+											<!-- 저장된 사진명 : <span th:text=${file.programImage} " id="oldImage">[[${file.file}]]</span></br> -->
+											<img
+												th:src="@{/static/programImage/upload/} + ${file.file}"></br>
+											<input type="button" value="삭제"
+												th:id="${'btn'+numStat.index}"
+												th:onclick="'fileDel(\''+${file.file}+'\',this)'" />
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>변경할 사진</b>
+										</div>
+									</td>
+									<td bgcolor="white"><input type="file" name="image"
+										multiple="multiple" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>프로그램 주소 </b>
+										</div>
+									</td>
+									<td bgcolor="white"><input name="proAddr" type="text"
+										size="10" maxlength="10" th:value="${prodto.programAddr}" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>이용요금 </b>
+										</div>
+									</td>
+									<td bgcolor="white"><input name="programPrice" type="text"
+										size="10" maxlength="10" th:value="${prodto.programPrice}" /></td>
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>추가옵션 </b>
+										</div>
+									</td>
+									<td bgcolor="white"><input name="pOption" type="text" th:value="${prodto.pOption}" /></td>
+								</tr>
+								
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>추가 이용요금</b>
+										</div>
+									</td>
+									<td bgcolor="white"><input name="pOptionPrice" type="text"
+										size="10" maxlength="10" th:value="${prodto.pOptionPrice}" /></td>
+								</tr>
+
+								<tr align="center">
+									<td colspan="5">
+										<!-- <a href="proModifyPro"> --> 
+										<input type="submit" value="수정완료 " id="modify" /></a> 
+										<a href="programDel">
+											<input type="button" value="삭제하기 " id="del" /></a> 
+										<a href="programList"> 
+											<input type="button" value="목록으로 " id="home" /></a>
+									</td>
+								</tr>
+							</table>
+
 						</div>
-						<input type="hidden" name="programNo" th:value="${prodto.programNo}"/>
+						<input type="hidden" name="programNo" th:value="${prodto.programNo}" />
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
-	
-	
-<!-- Footer -->
-		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -168,45 +218,4 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/program.js"></script>
 </body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	/*
-	$(function(){
-		$("#btn").click(function(){
-			if($("#btn").attr("value") == "삭제"){
-				$("#btn").attr("value","삭제취소");
-				$("#fileDel").val("${prodto.programImage}");
-				$("#newimg").html(
-						"<input type='file' name='programImage' >");
-			}else{
-				$("#btn").attr("value","삭제");
-				$("#fileDel").val("");
-				$("#newimg").html("");
-			}
-		});
-	});
-	*/
-	function fileDel(programImage, btn){
-		$.ajax({
-			type : "get",
-			url : "fileDel",
-			dataType : "text",
-			data : {"programImage" : programImage},
-			success : function(result){
-				alert("#"+btn.id)
-				if(result.trim() == 1){
-					$(btn).val("삭제 취소")
-				}else{
-					$(btn).val("삭제")
-				}
-			},
-			error : function(){
-				$(btn).text("삭제 취소")
-				alert('에러발생...');
-				return;
-			}
-		});
-	}
-</script>
-
 </html>

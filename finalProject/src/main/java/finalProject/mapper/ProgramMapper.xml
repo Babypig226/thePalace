@@ -5,14 +5,14 @@
 <mapper namespace="finalProject.mapper.ProgramMapper">
 	<sql id="basecolumn">
 		PROGRAM_NO, PROGERAM_CATEGORY, PROGRAM_NAME, MAX_COUNT, PROGRAM_CONTENT, PROGRAM_IMAGE, PROGRAM_PRICE,
-		P_OPTION, P_OPTION_PRICE, PROGRAM_ADDR, PROGRMAM_DATE, PROGRAM_REG, TEACHER_NO
+		P_OPTION, P_OPTION_PRICE, PROGRAM_ADDR, PROGRAM_DATE, PROGRAM_REG, TEACHER_NO, USING_COUNT
 	</sql>
 	
 	<insert id="programInsert"  parameterType="finalProject.domain.ProgramDTO">
 		insert into program(<include refid="basecolumn" />)
 		values(pro_seq.nextval, #{programCategory}, #{programName}, #{maxCount}, #{programContent},
 				#{programImage}, #{programPrice}, #{pOption},#{pOptionPrice}, #{programAddr},
-				sysdate, sysdate, #{teacherNo})
+				#{programDate}, sysdate, #{teacherNo}, #{usingCount})
 	</insert>
 	
 	<resultMap type="finalProject.domain.ProgramDTO" id="baseProgram">
@@ -26,9 +26,10 @@
 		<result column="P_OPTION" jdbcType="VARCHAR" property="pOption"/>
 		<result column="P_OPTION_PRICE" jdbcType="BIGINT" property="pOptionPrice"/>
 		<result column="PROGRAM_ADDR" jdbcType="VARCHAR" property="programAddr"/>
-		<result column="PROGRMAM_DATE" jdbcType="TIMESTAMP" property="programDate"/>
+		<result column="PROGRAM_DATE" jdbcType="TIMESTAMP" property="programDate"/>
 		<result column="PROGRAM_REG" jdbcType="TIMESTAMP" property="programReg"/>
 		<result column="TEACHER_NO" jdbcType="VARCHAR" property="teacherNo"/>
+		<result column="USING_COUNT" jdbcType="BIGINT" property="usingCount"/>
 	</resultMap>
 	
 	<select id="getProgramList" resultMap="baseProgram">
@@ -44,21 +45,27 @@
 					order by program_reg desc))
 		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
 	</select>
-	
+
 	<update id="programUpdate" parameterType="finalProject.domain.ProgramDTO">
 		update program
 		<trim prefix="set" suffixOverrides=",">
 			<if test="programName != null">
-				program_name = #{programName},
+				PROGRAM_NAME = #{programName},
 			</if>
 			<if test="programContent != null">
-				program_content = #{programContent},
+				PROGRAM_CONTENT = #{programContent},
 			</if>
-			program_Image = #{programImage}
+			<if test="programDate != null">
+				PROGRAM_DATE = #{programDate},
+			</if>
+			<if test="pOption != null">
+				P_OPTION = #{pOption},
+			</if>
+				PROGRAM_IMAGE = #{programImage}
 		</trim>
-		where program_no = #{programNo}
+		where PROGRAM_NO = #{programNo}
 	</update>
-	
+
 	<delete id="programDelete" parameterType="string">
 		delete from program
 		where program_no = #{programNo}

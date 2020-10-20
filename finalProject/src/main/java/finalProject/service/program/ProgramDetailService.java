@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import finalProject.ImageName;
+import finalProject.FileName;
 import finalProject.Option;
 import finalProject.domain.ProgramDTO;
 import finalProject.domain.StartEndPageDTO;
@@ -37,9 +37,9 @@ public class ProgramDetailService {
 			System.out.println(op);
 			list.add(op);
 			System.out.println(list);
-			model.addAttribute("list", list);
+			model.addAttribute("checkOp", list);
 		}
-		
+		System.out.println(prodto.getProgramName());
 		/*
 		List<Option> oplist = new ArrayList<Option>();
 		int i = 0;
@@ -51,13 +51,22 @@ public class ProgramDetailService {
 		}
 		model.addAttribute("oplist", oplist);
 		*/
-		List<ImageName> imglist = new ArrayList<ImageName>();
+		List<FileName> imglist = new ArrayList<FileName>();
 		int j = 0;
 		for (String file : img) {
 			System.out.println("imgfile "+ file);
-			ImageName imageName = new ImageName(file);
+			FileName imageName = new FileName(file);
 			imglist.add(imageName);
 			j++;
+		}
+		
+		ArrayList<Integer> countlist = new ArrayList<Integer>();
+		int count = 0;
+		for (count = 1; count <= prodto.getMaxCount(); count++) {
+			System.out.println(count);
+			countlist.add(count);
+			System.out.println(countlist);
+			model.addAttribute("amount", countlist);
 		}
 		model.addAttribute("imglist", imglist);
 		//model.addAttribute("option", op);

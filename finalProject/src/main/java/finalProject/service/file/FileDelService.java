@@ -71,5 +71,34 @@ public class FileDelService {
 		model.addAttribute("val", num);
 		session.setAttribute("fileList", list);
 	}
+	
+	public void fileDel(FileName imageName, HttpSession session, Model model) {
+		List<FileName> list = (List<FileName>) session.getAttribute("imglist");
+		
+		if(list == null) {
+			list = new ArrayList<FileName>();
+		}
+		
+		int num = 0;
+		
+		Boolean newImg = true;
+		for (int i = 0; i < list.size(); i++) {
+			FileName in = list.get(i);
+			if(in.getFile().equals(imageName.getFile())) {
+				list.remove(i);
+				newImg = false;
+				num = 0;
+			}
+		}
+		
+		if(newImg) {
+			list.add(imageName);
+			num = 1;
+		}
+		
+		model.addAttribute("val", num);
+		session.setAttribute("imglist", list);
+		
+	}
 
 }

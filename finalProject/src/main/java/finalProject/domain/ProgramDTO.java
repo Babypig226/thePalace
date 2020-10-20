@@ -24,4 +24,5 @@ public class ProgramDTO {
 	String programAddr;
 	Timestamp programDate;
 	Timestamp programReg;
+	Integer usingCount;
 }

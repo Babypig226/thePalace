@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>주문완료</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{/static/assets/css/program.css}" />
+<style type="text/css">
+td {
+	background-color: white;
+}
+
+#orid {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body class="subpage">
+	<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+				<form th:action="@{/programPay/payInfoInsert}" method="post" name="payInfoInsert"
+						th:object="${ProResCommand}">
+					<img alt="" src="../images/order4.png" width="1080" height="200">
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>프로그램 번호</th>
+									<th>프로그램 명</th>
+									<th>가격</th>
+									<th>수량</th>
+									<th>신청옵션</th>
+								</tr>
+							</thead>
+							<tbody>
+							<div th:each = "prg : ${pglist}">
+								<tr>
+									<td>[[${prg.programNo}]]</td>
+									<div th:each ="pro : ${prg.pro}">
+										<td>[[${pro.programName}]]</td>
+										<td>[[${pro.programPrice}]]</td>
+									</div>
+									<td>[[${prg.amount}]]</td>
+									<td>[[${prg.checkOp}]]</td>
+								</tr>
+							</div>
+							</tbody>
+						</table>
+
+						<table>
+							<tr>
+								<td align="center" colspan="5"><font color="gray" size="5">
+								총 결제금액 : [[${totPrice}]]</font> <font color="black" size="5">원</font></td>
+								<td align="right">적립 마일리지 5point</td>
+							</tr>
+
+
+						</table>
+					</div>
+					<br />
+					<!----------------------------------------------------------->
+					<h2 class="align-center">예약정보</h2>
+					<!-- Registration Form -->
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<div align="center">연락처</div>
+								</td>
+								<td><input type="text" name="rsPh" size="10"/></td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">사용일</div>
+								</td>
+								<td><input type="date" name="usingDate" /></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">예약수</div>
+								</td>
+								<td><input type="text" name="reservationCount" /></td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">남기실 말씀</div>
+								</td>
+								<td><textarea name="rsContent" col="50" row="10"></textarea></td>
+							</tr>
+							
+
+						</table>
+					</div>
+					
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td colspan="5" bgcolor="white" align="center">
+								<a href="orderPayment.html" class="button alt">이전</a> 
+								<input type = "submit" value = "결제" />
+							</tr>
+						</table>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+</body>
+</html>

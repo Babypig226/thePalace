@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="finalProject.mapper.ProResMapper">
+
+	<sql id="basecolumn">
+		RESERVATION_NO, RESERVATION_DATE, RESERVATION_COUNT, RS_CONTENT, RS_PH, USER_ID, USING_DATE
+	</sql>
+	
+	<insert id="resInfoInsert" parameterType="finalProject.domain.ProResDTO">
+		insert into reservation(<include refid="basecolumn" />)
+		values (rs_seq.nextval, sysdate, #{reservationCount, jdbcType = BIGINT},
+				 #{rsContent, jdbcType = VARCHAR}, #{rsPh, jdbcType = VARCHAR},
+				 #{userId, jdbcType = VARCHAR}, #{usingDate, jdbcType = TIMESTAMP})
+	</insert>
+	
+	<resultMap type="finalProject.domain.ProResDTO" id="rsListMap">
+		<id column="RESERVATION_NO" jdbcType="VARCHAR" property="reservationNo" />
+		<result column="RESERVATION_DATE" jdbcType="TIMESTAMP" property="reservationDate"/>
+		<result column="RESERVATION_COUNT" jdbcType="BIGINT" property="reservationCount"/>
+		<result column="RS_CONTENT" jdbcType="VARCHAR" property="rsContent"/>
+		<result column="RS_PH" jdbcType="VARCHAR" property="rsPh"/>
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+		<result column="USING_DATE" jdbcType="TIMESTAMP" property="usingDate"/>
+	</resultMap>
+	
+	<select id="resInfoList" parameterType="finalProject.domain.ProResDTO">
+		select * from reservation
+		where reservation_no = #{reservationNo}
+	</select>
+</mapper>
