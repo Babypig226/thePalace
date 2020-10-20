@@ -38,13 +38,6 @@ public class ApplicantsController {
 		applicantsWriteService.registApplicant(applicantCommand, request);
 		return "redirect:/enotice/Detail?enoticeNo="+applicantCommand.getEnoticeNo();
 	}
-	
-	@RequestMapping("list")
-	public String applicantsList(@RequestParam(value = "enoticeNo")String enoticeNo, Model model) {
-		applicantsListService.getApplicantsList(enoticeNo, model);
-		return "/v-applicants/admin-applicants-list";
-	}
-	
 	@RequestMapping("mylist")
 	public String myApplyHistory(HttpSession session, Model model) {
 		applicantsListService.getMyList(session, model);
@@ -52,11 +45,22 @@ public class ApplicantsController {
 		
 	}
 	@RequestMapping("detail")
-	public String myApplyDetail(@RequestParam(value = "acceptNo")String acceptNo, Model model) {
+	public String myApplyDetail(@RequestParam(value = "acceptNo", defaultValue = "null")String acceptNo, Model model) {
 		applicantDetailService.getMyApplicantDetail(acceptNo, model);
 		return "thymeleaf/hr/applicants/my-detail";
 	}
 	
+	
+	@RequestMapping("list")
+	public String applicantsList(@RequestParam(value = "enoticeNo")String enoticeNo, Model model) {
+		applicantsListService.getApplicantsList(enoticeNo, model);
+		return "/v-applicants/admin-applicants-list";
+	}
+	@RequestMapping("finalists")
+	public String applicantsFinalists(Model model) {
+		applicantsListService.getFinalists(model);
+		return "/v-applicants/admin-applicants-finalists";
+	}
 	
 	@RequestMapping("view")
 	public String applicantDetail(@RequestParam(value = "acceptNo")String acceptNo, Model model) {

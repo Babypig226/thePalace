@@ -99,6 +99,12 @@ public class ApplicantsListService {
 		model.addAttribute("list", adto);
 		
 	}
+
+	public void getFinalists(Model model) {
+		List<ApplicantDTO> finalists = applicantMapper.getFinalists();
+		model.addAttribute("list", finalists);
+		
+	}
 	
 	
 

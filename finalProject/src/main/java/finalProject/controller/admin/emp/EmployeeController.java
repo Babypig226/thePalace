@@ -48,7 +48,10 @@ public class EmployeeController {
 	EmployeeCommand setEmployeeCommand() {
 		return new EmployeeCommand();
 	}
-
+	@RequestMapping("category")
+	public String empCategory() {
+		return "thymeleaf/admin-manage/admin-emp-category";
+	}
 	@RequestMapping("list")
 	public String empList(Model model) {
 		employeeListService.getEmpList(model);

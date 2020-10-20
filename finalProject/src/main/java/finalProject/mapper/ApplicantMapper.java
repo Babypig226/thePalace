@@ -11,5 +11,6 @@ import finalProject.domain.StartEndPageDTO;
 public interface ApplicantMapper {
 	public void registApplicant(ApplicantDTO applicantDTO);
 	public List<ApplicantDTO> getApplicantsList(StartEndPageDTO startEndPageDTO);
+	public List<ApplicantDTO> getFinalists();
 
 }
