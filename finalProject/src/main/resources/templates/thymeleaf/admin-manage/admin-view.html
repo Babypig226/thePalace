@@ -17,29 +17,110 @@
 	<!-- Nav -->
 	<nav id="menu" th:include="thymeleaf/nav"></nav>
 
-	<section id="one" class="wrapper style2">
+<!-- Three -->
+			<section id="three" class="wrapper style2">
 				<div class="inner">
-					<div>
-						<div class="box">
-							<div class="image fit">
-								<img th:src=@{/static/images/image01.jpg} alt="" />
-							</div>
 							<div class="content">
 								<header class="align-center">
 									<h2>관리자페이지</h2>
 								</header>
-								<hr />
-								<a th:href = "@{/dep/list}">부서</a>
-								<a th:href = "@{/emp/list}">직원</a>
-								<a th:href = "@{/etrn/list}">직원교육</a>
-								<a th:href = "@{/tch/list}">강사</a>
-								<a th:href = "@{/rent/category}">임대</a>
+							</div>
+					<div class="grid-style">
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/applynow.jpg}" width = "300" height = "350"  alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>부서</h2>
+										<p>부서관리</p>
+									</header>
+									<hr />
+									<div class="align-center">
+								<a th:href = "@{/dep/list}">목록보기</a>
+                                    </div>
+								</div>
 							</div>
 						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/lecture.jpg}" width = "300" height = "350"  alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>직원교육</h2>
+										<p>직원교육관리</p>
+									</header>
+									<hr />
+									<div class="align-center">
+								<a th:href = "@{/etrn/list}">목록보기</a>
+								
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/lecture.jpg}" width = "300" height = "350"  alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>직원</h2>
+										<p>채용공고, 지원자, 직원</p>
+									</header>
+									<hr />
+									<div class="align-center">
+								<a th:href = "@{/emp/list}">더보기</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/lecture.jpg}" width = "300" height = "350"  alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>강사</h2>
+										<p>채용공고, 등록희망서, 강사</p>
+									</header>
+									<hr />
+									<div class="align-center">
+								<a th:href = "@{/tch/list}">더보기</a>
+								
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img th:src="@{/static/images/lecture.jpg}" width = "300" height = "350"  alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<h2>임대</h2>
+										<p>공간, 임대업체, 임대희망서, 임대계약서</p>
+									</header>
+									<hr />
+									<div class="align-center">
+								<a th:href = "@{/rent/category}">더보기</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						
+								
+
 					</div>
 				</div>
 			</section>
-
 	<!-- Footer -->
 	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
@@ -50,21 +131,4 @@
 	<script th:src=@{/static/assets/js/util.js}></script>
 	<script th:src=@{/static/assets/js/main.js}></script>
 </body>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
 </html>
