@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>상품 상세페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<title>상품상세페이지</title>
+
+<style type="text/css">
+#images {
+	padding: 20px;
+}
+</style>
 </head>
+
 <body>
+
 	<!-- Header -->
-	<header role="pdHeader" data-include="pdheader.html" id="pdHeader">
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
 		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="Productnav.html"></nav>
+	<nav id="Productnav" th:include="thymeleaf/Productnav"></nav>
 
 	<section id="three" class="wrapper style2">
 		<div class="inner">
@@ -20,10 +30,14 @@
 				<div>
 					<div class="content" align="left">
 						<header class="align-left">
-							<h2>민화공책</h2>
+						<form th:action="@{/pdcart/pdcartadd(goodsNo = ${gdto.goodsNo})}" method = "post" name="pdcartadd">
+							<h2>[[${gdto.goodsName}]]</h2>
 							<hr />
 							<p>
-							<p>가격 :) 6000원</p>
+							<p>카테고리:) [[${gdto.goodsCategory}]]</p>
+							<p>상품번호 :) [[${gdto.goodsNo}]]</p>
+							<p>가격 :) [[${gdto.goodsPrice}]]원</p>
+
 							<select name='orderNum' width='150px'>
 								<option value=0>디자인 선택</option>
 								<option>디자인선택</option>
@@ -33,84 +47,104 @@
 
 							</select><br />
 
-							<div class="number">
-								<p>
-									※주문수량은 최대 10개까지 가능합니다<br /> 주문수량:) <a href="#" id="increase">▲</a>&nbsp;<span
-										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
-								</p>
-							</div>
-							</p>
-							&nbsp;
+
 							<div class="align-center">
-								<a href="userorder/cart.html" class="button alt">장바구니담기</a>&nbsp; <a
-									href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
+								<input type="submit" class="button alt" value="장바구니담기" />&nbsp;
+								<a href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
 									href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
 							</div>
+							</form>
 						</header>
 					</div>
 				</div>
 				<div align="center">
-					<img alt="" src="images/office/note5.PNG" width="500" height="450">
+					<img alt=""
+						th:src="@{'/static/goods/upload/' + ${gdto.goodsImage}}"
+						width="350" height="450">
 				</div>
-			</div>
-		</div>
 
+				<section id="one" class="wrapper style2">
+					<div class="inner">
+						<div>
+							<div class="box">
+
+								<div class="content">
+									<header class="align-center">
+										<h2>상품상세</h2>
+										<hr />
+									</header>
+									<div align="center">
+										<img alt=""
+											th:src="@{'/static/goods/upload/' + ${gdto.goodsImage}}"
+											width="350" height="450"> <br />
+										<p>설명 :) [[${gdto.goodsContent}]]</p>
+										<p>
+											품질보증기준:) 상품 수령 후 7일 이내에 교환, 반품 및 환불신청 가능 <br />
+											<font color="#ed7e7e">＊반품시 제품이 파손되어 배송될 경우, 교환/환불처리가
+												어려우니<br /> 제품파손이 없도록 안전하게 재포장해주시기 바랍니다.<br /> ＊제품의 색감 또는
+												사이즈의 오차는 발생 할 수 있습니다.
+											</font>
+										</p>
+										<p>
+											교환 및 반품안내:) 불량으로 인한 교환/반품은 무료, 변심반품 및 맞교환시 왕복 배송료 발생<br />
+											(변심반품 및 교환배송료는 고객센터로 문의주시기 바랍니다)
+										</p>
+										<P>A/S문의 :) sovenior shop / <a th:href = "@{/Support}">고객센터</a> 02-123-456 (오전9시 ~ 오후
+											6시까지)</P>
+
+								</div>
+							
+				
+					<h2><font color = "#696969">주문시 주의사항:)</font></h2><br/>
+						<header class="align-left">
+							<h1>회원적립제도</h1>
+
+							<p>
+								회원 등급에 따라 단계별로 혜택을 받을 수 있습니다.<br /> 회원은 가입 시 3,000원 지급됩니다.<br />
+								회원적립제도는 일정액 이상 구매 시 구매총액의 5%를 마일리지로 적립됩니다.<br /> 1000점 이상부터
+								현금처럼 사용할 수 있습니다.
+							</p>
+						</header>
+						<br />
+						<header class="align-left">
+							<h1>환불 및 반품</h1>
+
+							<p>
+								상품 구매 후 본인의 변심 또는 상품불량이 있을 경우 전화 또는 고객센터에서 상담할 수 있습니다.<br />
+								환불의 경우 구매일로부터 일주일 이내에 영수증을 지참하여 본 매장을 방문해야합니다.<br /> 단, 일주일이
+								경과하면 제품의 상품상태 관계없이 환불 할 수 없으며<br /> 일주일이 경과하지 않더라도 고객님의 부주의로 인한
+								상품 파손이나 포장이 벗겨진 경우 환불이 불가능합니다.
+							</p>
+						</header>
+						<br />
+						<header class="align-left">
+							<h1>주문확인</h1>
+
+							<p>
+								souvenior shop에서 주문을 하셨을 경우 주문 확인을 통해서 실제 주문이 어떻게 처리되고 있는지 확인 하실
+								수 있습니다.<br /> 주문 확인은 회원페이지내에서 확인 하실 수 있습니다.<br /> 회원일 경우 ID와
+								비밀번호를 입력하시고 비회원으로 주문하셨을 경우, 주문하셨을때 입력했던 메일을 입력하시면 됩니다. <br />
+								(주문시 입력했던 이름을 정확하게 입력하셔야 합니다. 주문자의 이름을 입력하는 것은 본인 확인을 위해서 입니다.)
+							</p>
+						</header>
+						</div>
+						</div>
+						</div>
+					</div>
+				</section>
+
+			</div>
 	</section>
 
-
-
-
-
 	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+	<footer id="footer" class="wrapper" data-include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
 </body>
-<script>
-	$(function() {
-		includeLayout();
-	});
 
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
-<script type="text/javascript">
-	$(function() {
-		$('#decrease').click(function(e) {
-			e.preventDefault();
-			var stat = $('#UpDown').text();
-			var num = parseInt(stat, 10);
-			num--;
-			if (num <= 0) {
-				num = 1;
-			}
-			$('#UpDown').text(num);
-		});
-		$('#increase').click(function(e) {
-			e.preventDefault();
-			var stat = $('#UpDown').text();
-			var num = parseInt(stat, 10);
-			num++;
-
-			if (num > 10) {
-				num = 10;
-			}
-			$('#UpDown').text(num);
-		});
-	});
-</script>
 </html>

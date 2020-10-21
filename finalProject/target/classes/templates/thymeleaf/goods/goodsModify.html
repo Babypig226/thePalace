@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>상품수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
 <style type="text/css">
 td {
 	background-color: white;
@@ -13,19 +15,20 @@ td {
 </head>
 <body>
 	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
 		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	<nav id="Productnav" th:include="thymeleaf/Productnav"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form action="#" method="post" name="goodsForm">
+					<form th:action="@{/goods/goodsModifyPro}" method="post" name="goodsForm">
 						<h2 class="align-center">상품수정</h2>
+						<input type = "hidden" name = "goodsNo" th:value = "${gdto.goodsNo}" />
 
 						<div class="table-wrapper">
 							<table cellpadding="0" cellspacing="0">
@@ -33,52 +36,47 @@ td {
 									<td>
 										<div align="center">상품분류</div>
 									</td>
-									<td><input name="goods_type" type="text" size="10"
-										maxlength="10" /></td>
+									<td><input name="goodsType" type="text" size="10"
+										maxlength="10" th:value = "${gdto.goodsType}" /></td>
 								</tr>
 
 								<tr>
 									<td>
 										<div align="center">카테고리</div>
 									</td>
-									<td><input name="goods_category" type="text" maxlength="10" /></td>
+									<td><input name="goodsCategory" type="text" maxlength="10" 
+									th:value = "${gdto.goodsCategory}"/></td>
 								</tr>
 
 								<tr>
 									<td>
 										<div align="center">상품가격</div>
 									</td>
-									<td><input name="goods_price" type="text"
-										maxlength="10" /></td>
+									<td><input name="goodsPrice" type="text"
+										maxlength="10" th:value = "${gdto.goodsPrice}"/></td>
 								</tr>
 								
 								<tr>
 									<td>
 										<div align="center">상품상세설명</div>
 									</td>
-									<td><textarea rows="10" cols="50" name="goods_content"></textarea></td>
+									<td><textarea rows="10" cols="50" name="goodsContent"
+									th:value = "${gdto.goodsContent}" ></textarea></td>
 								</tr>
 								
 								<tr>
 									<td>
 										<div align="center">상품재고량</div>
 									</td>
-									<td><input name="goods_qty" type="text"
-										maxlength="10" /></td>
+									<td><input name="goodsQty" type="text"
+										maxlength="10" th:value = "${gdto.goodsQty}"/></td>
 								</tr>
 								
-								<tr>
-									<td>
-										<div align="center">상품이미지</div>
-									</td>
-									<td><input type="file" name="fileUp" /><br />
-										<input type="file" name="fileUp" /></td>
-								</tr>
 								
 								<tr align="right">
-									<td colspan="8"><a
-										href="goodsList.html"><input type="button" value="목록"/></a> 
-										<input value="상품등록" class="button" type="submit"></td>
+									<td colspan="2"><a
+										th:href="@{/goods/goodsList}"><input type="button" value="목록"/></a> 
+										<input value="등록" class="button" type="submit"></td>
 								</tr>
 							</table>
 						</div>
@@ -89,32 +87,15 @@ td {
 	</section>
 
 	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+		<script th:src=@{assets/js/jquery.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+		<script th:src=@{assets/js/skel.min.js}></script>
+		<script th:src=@{assets/js/util.js}></script>
+		<script th:src=@{assets/js/product.js}></script>
 </body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
-
+<script th:src=@{http://code.jquery.com/jquery.min.js}></script>
+ 
 </html>

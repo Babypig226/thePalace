@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>1:1문의 신청 답변</title>
+<title>1:1문의 답변</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
 <style type="text/css">
 td{background-color : white;}
 </style>
 </head>
+
 <body>
 	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
 		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	<nav id="Productnav" th:include="thymeleaf/Productnav"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
@@ -34,42 +37,35 @@ td{background-color : white;}
 								<td>
 									<div align="center">작성자</div>
 								</td>
-								<td><input name="employee_no" type="text" maxlength="40" /></td>
+								<td><input name="employeeNo" type="text" maxlength="40" /></td>
 							</tr>
 							
 							<tr>
 								<td>
 									<div align="center">답변변호</div>
 								</td>
-								<td><input name="greply_no" type="text" maxlength="20" /></td>
+								<td><input name="greplyNo" type="text" maxlength="20" /></td>
 							</tr>
 							
 							<tr>
 								<td>
 									<div align="center">게시판 번호</div>
 								</td>
-								<td><input name="glib_no" type="text" maxlength="20" /></td>
+								<td><input name="glibNo" type="text" maxlength="20" /></td>
 							</tr>
 							
 							<tr>
 								<td>
 									<div align="center">고객ID</div>
 								</td>
-								<td>치킨공주</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">답변일</div>
-								</td>
-								<td><input type = "date" name = "greply_date"/></td>
+								<td><input name="userId" type="text" maxlength="20" /></td>
 							</tr>
 
 							<tr>
 								<td>
 									<div align="center">답변내용</div>
 								</td>
-								<td><textarea name="greply_content" cols="50" rows="10"></textarea>
+								<td><textarea name="greplyContent" cols="50" rows="10"></textarea>
 								</td>
 							</tr>
 
@@ -84,34 +80,16 @@ td{background-color : white;}
 			</div>
 		</div>
 	</section>
+	
 	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
-	</form>
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
 </body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
 
 </html>

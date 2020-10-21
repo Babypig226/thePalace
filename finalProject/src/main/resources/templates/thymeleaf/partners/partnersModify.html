@@ -1,73 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>협력업체 수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
 <style type="text/css">
-td {background-color : white;}
+td {
+	background-color: white;
+}
 </style>
 </head>
 <body>
-	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
-	</header>
-	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	< <!-- Header -->
+	    <header id="pdHeader">
+	    </header>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form action="#" method="post" name="partnersModify">
+					<form th:action="@{partners/partnersModifyPro}" method="post" name="partnersModify">
 						<h2 class="align-center">협력업체 수정</h2>
+						<input type = "hidden" name="gcompanyNo" th:value = "${pdto.gcompanyNo}" />
 						
 						<div class="table-wrapper">
 							<table cellpadding="0" cellspacing="0">
-								
+						
+							
 								<tr>
 									<td>
 										<div align="center">담당자명</div>
 									</td>
 
-									<td><input name="partner_name" type="text"
-										size="10" maxlength="10" /></td>
+									<td><input name="partnerName" type="text" size="10"
+										maxlength="10" th:value="${pdto.partnerName}" /></td>
 								</tr>
-								
+
 								<tr>
 									<td>
 										<div align="center">사업체전화번호</div>
 									</td>
 
-									<td><input name="gcompany_ph" type="text"
-										size="10" maxlength="10" /></td>
+									<td><input name="gcompanyPh" type="text" size="20"
+										maxlength="20" th:value="${pdto.gcompanyPh}" /></td>
 								</tr>
-								
+
 								<tr>
 									<td>
 										<div align="center">사업체주소</div>
 									</td>
 
-									<td><input name="gcompany_addr" type="text"
-										size="10" maxlength="10" /></td>
+									<td><input name="gcompanyAddr" type="text" size="10"
+										maxlength="10" th:value="${pdto.gcompanyAddr}" /></td>
 								</tr>
-								
+
 								<tr>
 									<td>
 										<div align="center">사업체 이메일</div>
 									</td>
 
-									<td><input name="gcompany_email" type="email"
-										size="10" maxlength="10" /></td>
+									<td><input name="gcompanyEmail" type="email" size="10"
+										maxlength="10" th:value="${pdto.gcompanyEmail}" /></td>
 								</tr>
- 
+
 								<tr align="right">
-									<td colspan="4"><a href="partnersList.html"><input type = "button" value="목록" id = "home" /></a>
-									 <input
-										value="등록" class="button" type="submit"></td>
+									<td colspan="4"><a th:href="@{partnersList}"><input
+											type="button" value="목록" id="home" /></a> <input value="등록"
+										class="button" type="submit"></td>
 								</tr>
 							</table>
 						</div>
@@ -76,34 +79,16 @@ td {background-color : white;}
 			</div>
 		</div>
 	</section>
-	
-	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
-</body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
 
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
+</body>
 
 </html>

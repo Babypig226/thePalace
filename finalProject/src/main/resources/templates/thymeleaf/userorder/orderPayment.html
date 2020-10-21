@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>주문결제</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<title>주문서</title>
 <style type="text/css">
 td {
 	background-color: white;
@@ -17,47 +19,42 @@ td {
 </head>
 <body class="subpage">
 	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
 		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
+	<nav id="Productnav" th:include="thymeleaf/Productnav"></nav>
 
 	<!-- Table -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<img alt="" src="../images/order3.png" width="1080" height="200">
+					<img alt="" th:src="@{/static/images/product/order3.png}" width="1080" height="200">
 					<div class="table-wrapper">
 						<table>
 							<thead>
 								<tr>
-									<th>상품코드</th>
-									<th>상품정보</th>
-									<th>가격</th>
-									<th>수량</th>
-									<th>마일리지</th>
+									<th>고객ID</th>
+									<th>상품번호</th>
+									<th>상품명</th>
+									<th>상품가격</th>
+									<th>상품이미지</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1357</td>
-									<td>연다인진혜주</td>
-									<td>₩123,456</td>
-									<td>2</td>
-									<td>5point</td>
-								</tr>
-								<tr>
-									<td>2468</td>
-									<td>최윤선함성애</td>
-									<td>₩789,101</td>
-									<td>2</td>
-									<td>5point</td>
-								</tr>
+							<div th:each = "g:${glists}">
+							 <tr>
+							 <td></td>
+							 <th>[[${g.goodsNo}]]</th>
+							 <th>[[${g.goodsName}]]</th>
+							 <th>[[${g.goodsPrice}]]</th>
+							 <td><img th:src="@{'/static/goods/upload/' + ${g.goodsImage}}" height = "100" width = "80"/></td>
+							 </tr>
+							</div>
 							</tbody>
 						</table>
-
+						
 						<table>
 							<tr>
 								<td align="center" colspan="5"><font color="gray" size="5">총
@@ -113,38 +110,38 @@ td {
 						<table cellpadding="0" cellspacing="0">
 							<tr>
 								<td id="orid">
-									<div align="center">아이디</div>
+									<div align="center">배송번호</div>
 								</td>
-								<td id="orid">치킨공주</td>
+								<td id="orid">[[${dvdto.deliveryNo}]]</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">배송접수일</div>
+								</td>
+							 <td th:text = "${#dates.format(dvdto.deliveryDate,'yyyy-MM-dd')}" ></td> 
+							</tr>
+
+
+							<tr>
+								<td>
+									<div align="center">배송주소</div>
+								</td>
+								<td>[[${dvdto.deliveryAddr}]]</td>
 							</tr>
 
 							<tr>
 								<td>
-									<div align="center">주소</div>
+									<div align="center">수취인</div>
 								</td>
-								<td>서울시 성북구 273-13</td>
-							</tr>
-
-
-							<tr>
-								<td>
-									<div align="center">이메일</div>
-								</td>
-								<td>cksek27@daum.net</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">연락처</div>
-								</td>
-								<td>010-2258-5353</td>
+								<td>[[${dvdto.receiverName}]]</td>
 							</tr>
 
 							<tr>
 								<td>
 									<div align="center">배송요청사항</div>
 								</td>
-								<td>배송전 연락 바랍니다</td>
+								<td>[[${dvdto.deliveryNote}]]</td>
 							</tr>
 						</table>
 					</div>
@@ -231,33 +228,15 @@ td {
 		</div>
 	</section>
 
-	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
 </body>
 
-
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
 </html>

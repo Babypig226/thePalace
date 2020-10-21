@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>1:1문의</title>
+<title>1:1문의 게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
 </head>
+
 <body>
-	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+<!-- Header -->
+	<header id="pdHeader">
 	</header>
-	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
-	
 	
 	<!-- Table -->
 	<section id="one" class="wrapper style2">
@@ -21,37 +20,35 @@
 			<div class="box">
 				<div class="content">
 					<h2 class="align-center">1:1문의</h2>
-					<p>▶등록한 상담내용은 수정을 원하시는 경우 작성하신 제목을 누르신 후, 수정을 선택하시길 바랍니다.<br/>
-					▶1:1 상담은 24시간 신청가능하며 접수된 내용은 빠른 시간내에 답변을 드리도록 하겠습니다.</p>
+					<p><font size = "2">▶등록한 상담내용은 수정을 원하시는 경우 작성하신 제목을 누르신 후, 수정을 선택하시길 바랍니다.<br/>
+					▶1:1 상담은 24시간 신청가능하며 접수된 내용은 빠른 시간내에 답변을 드리도록 하겠습니다.</font></p>
 					<div class="table-wrapper">
 						<table>
 							<thead>
 								<tr>
 									<th>게시판번호</th>
 									<th>아이디</th>
+									<th>등록일</th>
 									<th>게시판제목</th>
 								</tr>
 							</thead>
 							<tbody>
+							<th:block th:each = "o:${polists}">
 								<tr>
-									<td>1357</td>
-									<td>치킨공주</td>
-									<td><a href = "pdone_to_one_detail.html">훈민정음펜이 불량이에요ㅠㅠ</a></td>
-									
+								<td><a th:href = "@{/pdone/pdoneDetail(glibNo = ${o.glibNo})}">[[${o.glibNo}]]</a></td>
+								<td>[[${o.userId}]]</td>
+								<td>[[${o.glibDate}]]</td>
+								<td>[[${o.glibSubject}]]</td>
 								</tr>
-								<tr>
-									<td>1235</td>
-									<td>오소녀</td>
-									<td><a href = "#">훈민정음펜이 불량이에요ㅠㅠ</a></td>
-								</tr>
+								</th:block>
 							</tbody>
 							<tfoot>
 								<tr align="center">
-									<td colspan="3"><a>1</a></td>
+									<td colspan="4"><a>1</a></td>
 								</tr>
 								<tr align="right">
-									<td colspan="3"><a href="pgSupport.html" class="button alt">목록으로</a>
-									<a href="pgone_to_one_write.html" class="button alt">신청하기</a></td>
+									<td colspan="4"><font size = "2">
+									<a th:href="@{pdonewrite}" class="button alt">신청하기</a></font></td>
 								</tr>
 							</tfoot>
 						</table>
@@ -61,32 +58,14 @@
 		</div>
 	</section>
 	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+		<script th:src=@{assets/js/jquery.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+		<script th:src=@{assets/js/skel.min.js}></script>
+		<script th:src=@{assets/js/util.js}></script>
+		<script th:src=@{assets/js/product.js}></script>
 </body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
-
+ 
 </html>

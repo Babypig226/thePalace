@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>협력업체 상세보기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<style type="text/css">
+td{background-color : white;}
+</style>
 </head>
 <body>
-<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
-	</header>
-	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
-	
+	 <!-- Header -->
+	    <header id="pdHeader">
+	    </header>
+
 <!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
@@ -25,23 +27,45 @@
 						<table cellpadding="0" cellspacing="0">
 							<tr>
 								<td>
-									<div align="center">사업체명</div>
+									<div align="center">사업자번호</div>
 								</td>
-								<td>박씨공방</td>
+								<td>[[${pdto.gcompanyNo}]]</td>
 							</tr>
 							
 							<tr>
 								<td>
+									<div align="center">사업자ID</div>
+								</td>
+								<td>[[${pdto.gcompanyId}]]</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">사업체명</div>
+								</td>
+								<td>[[${pdto.gcompanyName}]]</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">담당자명</div>
+								</td>
+								<td>[[${pdto.partnerName}]]</td>
+							</tr>
+							
+								
+							<tr>
+								<td>
 									<div align="center">사업체주소</div>
 								</td>
-								<td>서울 종로구 종로12길 15 코아빌딩1</td>
+								<td>[[${pdto.gcompanyAddr}]]</td>
 							</tr>
 							
 							<tr>
 								<td>
 									<div align="center">사업체이메일</div>
 								</td>
-								<td>elgk12@daum.net</td>
+								<td>[[${pdto.gcompanyEmail}]]</td>
 							</tr>
 							
 
@@ -49,14 +73,14 @@
 								<td>
 									<div align="center">사업체전화번호</div>
 								</td>
-								<td>02-324-564</td>
+								<td>[[${pdto.gcompanyPh}]]</td>
 							</tr>
 
-							<tr align="center" >
-									<td colspan="5" bgcolor = "white">
-			<a href="partnersModify.html"><input type = "button" value="수정" id = "del" /></a>
-			<a href="partnersDelete.html"><input type = "button" value="삭제" id = "del" /></a>
-			<a href="partnersList.html"><input type = "button" value="목록" id = "home" /></a>
+							<tr align="center">
+									<td colspan="2">
+			<a th:href="@{/partners/partnersModify(gcompanyNo = ${pdto.gcompanyNo})}"><input type = "button" value="수정" id = "del" /></a>
+			<a th:href="@{/partners/partnerDelete(gcompanyNo = ${pdto.gcompanyNo})}"><input type = "button" value="삭제" id = "del" /></a>
+			<a th:href="@{partnersList}"><input type = "button" value="목록" id = "home" /></a>
 		                   </td>
 								</tr>
 						</table>
@@ -68,32 +92,14 @@
 	
 	
 <!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+		<script th:src=@{assets/js/jquery.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+		<script th:src=@{assets/js/skel.min.js}></script>
+		<script th:src=@{assets/js/util.js}></script>
+		<script th:src=@{assets/js/product.js}></script>
 </body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
-
+ 
 </html>

@@ -1,72 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>입고대장</title>
+<title>입고관리</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
 </head>
 
 <body>
-    
-	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
-	</header>
-	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
-	
-	<form action="ipgoForm.html" method="post" enctype="multipart/form-data">
-	
+	    <!-- Header -->
+	    <header id="pdHeader">
+	    </header>
+
 	<!-- Table -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
 					<h2 class="align-center">입고 대장</h2>
-					
+
 					<div class="table-wrapper">
 						<table>
 							<thead>
 								<tr>
-									<th>업체명</th>
-									<th>상품분류코드</th>
-									<th>입고예정일</th>									
-									<th>상품명</th>
-									<th>상품단가</th>
-									<th>상품재고수량</th>
-									<th>상품등록일 </th>
+									<th>지점번호</th>
+									<th>상품번호</th>
+									<th>입고번호</th>
+									<th>입고수량</th>
+									<th>검수여부</th>
+									<th>입고일</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>공주공장</td>
-									<td>ABC67</td>
-									<td>2020-09-11</td>
-									<td><a href = "ipgoView.html">민화공책</a></td>
-									<td>2000</td>
-									<td>3</td>
-									<td>2020-09-13</td>
-									
-									
-								</tr>
-								<tr>
-									<td>공주공장</td>
-									<td>ABC89</td>
-									<td>2020-09-11</td>
-									<td>전통문양메모지</td>
-									<td>2000</td>
-									<td>7</td>
-									<td>2020-09-13</td>
-								</tr>
+							<div th:each = "i:${iplists}">
+							<tr>
+							<td>[[${i.shopNo}]]</td>
+							<td>[[${i.goodsNo}]]</td>
+							<td><a th:href = "@{/ipgo/ipgoView(ipgoNo = ${i.ipgoNo})}">[[${i.ipgoNo}]]</a></td>
+							<td>[[${i.ipgoQty}]]</td>
+							<td>[[${i.checkOk}]]</td>
+							<td>[[${i.ipgoDate}]]</td>
+							</tr>
+							</div>
+								 
 							</tbody>
 							<tfoot>
 								<tr align="center">
-									<td colspan="7"><a>1</a></td>
+									<td colspan="6"><a>1</a></td>
 								</tr>
 								<tr align="right">
-									<td colspan="7"><a href="ipgoForm.html" class="button alt">목록으로</a>
-									<input value="입고등록" class="button" type="submit"></td>
+									<td colspan="6"><a th:href="@{/pdAdmin}" class="button alt">목록으로</a>
+									<a th:href="@{ipgoForm}" class="button alt">입고등록</a></td>
 								</tr>
 							</tfoot>
 						</table>
@@ -75,35 +61,16 @@
 			</div>
 		</div>
 	</section>
-	
-	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
-</form>
-</body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
 
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
+</body>
 
 </html>

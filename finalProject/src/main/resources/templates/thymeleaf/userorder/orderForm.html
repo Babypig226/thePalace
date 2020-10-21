@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>주문서작성</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<title>주문서작성</title>
+
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -71,19 +74,16 @@
 </script>
 </head>
 <body class="subpage">
-	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+    <!-- Header -->
+	<header id="pdHeader">
 	</header>
-	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
 
 	<!-- Table -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-				<img alt="" src="../images/order2.png" width="1080" height = "200">
+				<img alt="" th:src="@{/static/images/product/order2.png}" width="650" height = "150">
 					<div class="table-wrapper">
 						<table>
 							<thead>
@@ -222,7 +222,7 @@
 							</select>
 							<p>※주문시 요청사항은 배송기사가 배송시 참고하는 사항으로써, 사전에 협의되지 않은 지정일 배송 등의 요청사항은 반영되지 않을 수 있습니다.</p>
 					</div>
-					<!----------------------------------------------------------->
+					 
 					<h2 class="align-center">결제수단</h2>
 						
 						<div class="table-wrapper">
@@ -251,36 +251,15 @@
 		</div>
 	</section>
 						
-	
-
-
-	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
 </body>
 
-
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
 </html>
