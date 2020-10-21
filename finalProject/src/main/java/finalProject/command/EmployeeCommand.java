@@ -40,5 +40,6 @@ public class EmployeeCommand {
 	MultipartFile academicAbility;
 	@NotEmpty(message = "경력증빙자료를 등록하세요")
 	MultipartFile careerCertificate;
+	String employeePw;
 
 }
