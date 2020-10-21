@@ -37,9 +37,9 @@ public class ApplicantDetailService {
 		model.addAttribute("list", adto);
 		model.addAttribute("fileList", fileList);
 		EmpInterviewDTO empdto = empInterviewMapper.getScore(dto);
-		if(empdto != null && empdto.getInterviewScore() == null) {
+		if(empdto != null && empdto.getPaperScore() < 6) {
 			model.addAttribute("score", empdto);
-			return "thymeleaf/hr/applicants/admin-applicants-paperscored";
+			return "thymeleaf/hr/applicants/admin-applicants-paperscored-failed";
 		}else if(empdto != null && empdto.getInterviewScore() > 0){
 			model.addAttribute("score", empdto);
 			return "thymeleaf/hr/applicants/admin-applicants-scored";

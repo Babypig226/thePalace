@@ -38,7 +38,7 @@
                                 <tr>
                                     <td align = "center">서류번호</td>
                                     <td align = "center">임대타입</td>
-                                    <td align = "center">입대기간</td>
+                                    <td align = "center">임대기간</td>
                                     <td align = "center">납기일</td>
                                 </tr>
                             </thead>

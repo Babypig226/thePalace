@@ -43,7 +43,6 @@
                                 <ul class="actions align-right">
                                     <li><input value="뒤로" onclick="javascript: history.back();" class="button alt" type="button">
                                     </li>
-                                    <li><a th:href = "@{schedule(spotNo=1)}" class = "button">임대가능 날짜확인</a></li>
                                     <li th:if = "${session.authInfo.type != 'rc'}"><a th:href = "@{/rentCompany/regist}" class = "button">임대업체 등록</a></li>
                                     <li th:if = "${session.authInfo.type eq 'rc'}"><a th:href = "@{/rentDoc/regist(depNo=2,spotNo=${list.spotNo})}" class = "button">임대희망서 작성</a></li>
                                 </ul>

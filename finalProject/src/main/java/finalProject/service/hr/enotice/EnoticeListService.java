@@ -26,6 +26,9 @@ public class EnoticeListService {
 		Long endRow = startRow + limit -1;
 		StartEndPageDTO pdto = new StartEndPageDTO(startRow, endRow, null, null);
 		List<EnoticeDTO> lists = enoticeMapper.getEnoticeList(pdto);
+		for (int i = 0; i < lists.size(); i++) {
+			System.out.println("enotice list service "+lists.get(i).getEnoticeDate());
+		}
 		model.addAttribute("list", lists);
 		
 	}

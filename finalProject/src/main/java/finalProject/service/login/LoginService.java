@@ -96,6 +96,7 @@ public class LoginService {
 			
 		}else if(rclist.size() > 0){
 		if(passwordEncoder.matches(loginCommand.getUserPw(), rclist.get(0).getRentalPw())) {
+			System.out.println("RENTAL COMPANY LOGINSERVICE : "+rclist.get(0).getRentalId());
 		authInfo = new AuthInfo(rclist.get(0).getRentalId(), null, rclist.get(0).getRentalName(), rclist.get(0).getRentalPw(), "rc");
 		session.setAttribute("authInfo", authInfo);
 		//자동로그인이랑 아이디 저장을 안했음
@@ -121,6 +122,7 @@ public class LoginService {
 		}
 		location = "redirect:/";
 	}else {
+		System.out.println("RENTAL COMPANY LOGINSERVICE failed : "+rclist.get(0).getRentalId());
 		model.addAttribute("valid_pw", "비밀번호가 틀립니다.");
 		location = "thymeleaf/login";
 	}

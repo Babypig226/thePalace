@@ -10,14 +10,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnoticeDTO {
-	String enoticeName;
+	String departmentNo;
+	String enoticeNo;
 	Timestamp deadline;
+	String enoticeName;
+	String enoticeContent;
+	Timestamp enoticeDate;
 	Timestamp fpassDate;
 	Timestamp interviewDate;
-	Timestamp joinDate;
 	String interviewAddr;
-	String enoticeContent;
-	String enoticeNo;
-	String departmentNo;
-	Timestamp enoticeDate;
+	Timestamp joinDate;
+
 }

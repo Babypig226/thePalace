@@ -65,7 +65,7 @@
                                     <td colspan="5">
                                         <input value="뒤로" onclick="javascript: history.back();" class="button alt"
                                     type="button">
-                                        <c:if test = "${session.authInfo.type eq 'adm'}"><a href="Regist" class="button">공고작성</a></c:if>
+                                       <a href="Regist" class="button">공고작성</a>
                                     </td>
                                 </tr>
                             </tfoot>

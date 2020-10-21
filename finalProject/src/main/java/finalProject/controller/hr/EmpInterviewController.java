@@ -16,12 +16,12 @@ public class EmpInterviewController {
 	@RequestMapping("paperRate")
 	public String empInterviewRegist(@RequestParam(value = "acceptNo")String acceptNo, EmpInterviewCommand empInterviewCommand) {
 		empInterviewRegistService.registPaperScore(acceptNo, empInterviewCommand);
-		return "redirect:/apply/view?acceptNo="+acceptNo;
+		return "redirect:/apply/list?enoticeNo="+acceptNo.split("-")[0];
 	}
 	@RequestMapping("interviewRate")
 	public String empInterviewUpdate(@RequestParam(value = "acceptNo")String acceptNo, EmpInterviewCommand empInterviewCommand) {
 		empInterviewRegistService.updateScore(acceptNo, empInterviewCommand);
-		return "redirect:/apply/list";
+		return "redirect:/apply/list?enoticeNo="+acceptNo.split("-")[0];
 	}
 	
 
