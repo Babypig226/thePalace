@@ -9,7 +9,7 @@ import finalProject.domain.StartEndPageDTO;
 
 @Repository("finalProject.mapper.ApplicantMapper")
 public interface ApplicantMapper {
-	public void registApplicant(ApplicantDTO applicantDTO);
-	public List<ApplicantDTO> getApplicantsList(StartEndPageDTO startEndPageDTO);
-
+   public void registApplicant(ApplicantDTO applicantDTO);
+   public List<ApplicantDTO> getApplicantsList(StartEndPageDTO startEndPageDTO);
+   public List<ApplicantDTO> getFinalists();
 }

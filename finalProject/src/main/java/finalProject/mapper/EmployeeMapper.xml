@@ -1,61 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "finalProject.mapper.EmployeeMapper">
-	<sql id = "columns">
-		EMPLOYEE_NO, EMPLOYEE_ID, EMPLOYEE_PW, EMPLOYEE_NAME, EMPLOYEE_ADDR, EMPLOYEE_BIRTH, EMPLOYEE_ACCOUNT,
-		EMPLOYEE_CONTRACT, EMPLOYEE_TYPE, EMPLOYEE_SAL, IDENTITY_CARD, ACADEMIC_ABILITY, CAREER_CERTIFICATE,
-		COPY_BANKBOOK, DEPARTMENT_NO, EMPLOYEE_PH, EMPLOYEE_EMAIL
-	</sql>
-	<sql id="dNo">
-		select nvl(max(EMPLOYEE_NO),0)+1
-		from employee
-	</sql>
-	<insert id="registEmployee" parameterType="finalProject.domain.EmployeeDTO">
-		insert into employee (<include refid = "columns"/>)
-		values((<include refid = "dNo"/>),#{employeeId}, #{employeePw}, #{employeeName}, #{employeeAddr}, #{employeeBirth},#{employeeAccount},
-		#{employeeContract}, #{employeeType}, #{employeeSal}, #{identityCard}, #{academicAbility}, #{careerCertificate}, 
-		#{copyBankbook}, #{departmentNo}, #{employeePh}, #{employeeEmail}) 		
-	</insert>
-	<resultMap type="finalProject.domain.EmployeeDTO" id="EmpList">
-		<id column = "employee_no" jdbcType="VARCHAR" property = "employeeNo"/>
-		<id column = "department_no" jdbcType="VARCHAR" property = "departmentNo"/>
-		<result column = "employee_id" jdbcType = "VARCHAR" property = "employeeId"/>
-		<result column = "employee_pw" jdbcType = "VARCHAR" property = "employeePw"/>
-		<result column = "employee_name" jdbcType = "VARCHAR" property = "employeeName"/>
-		<result column = "employee_addr" jdbcType = "VARCHAR" property = "employeeAddr"/>
-		<result column = "employee_birth" jdbcType = "TIMESTAMP" property = "employeeBirth"/>
-		<result column = "employee_account" jdbcType = "VARCHAR" property = "employeeAccount"/>
-		<result column = "employee_contract" jdbcType = "VARCHAR" property = "employeeContract"/>
-		<result column = "employee_type" jdbcType = "VARCHAR" property = "employeeType"/>
-		<result column = "employee_sal" jdbcType = "BIGINT" property = "employeeSal"/>
-		<result column = "identity_card" jdbcType = "VARCHAR" property = "identityCard"/>
-		<result column = "academic_ability" jdbcType = "VARCHAR" property = "academicAbility"/>
-		<result column = "career_certificate" jdbcType = "VARCHAR" property = "careerCertificate"/>
-		<result column = "copy_bankbook" jdbcType = "VARCHAR" property = "copyBankbook"/>
-		<result column = "employee_ph" jdbcType = "VARCHAR" property = "employeePh"/>
-		<result column = "employee_email" jdbcType = "VARCHAR" property = "employeeEmail"/>
-	</resultMap>
-	<select id="getEmpList" parameterType = "finalProject.domain.StartEndPageDTO" resultMap = "EmpList">
-		select <include refid = "columns"/>
-		from employee
-		<where>
-			<if test="num != null">
-				employee_no  = #{num}
-			</if>
-		</where>
-		order by employee_no
-		
-	</select>
-	<delete id="deleteEmployee" parameterType = "string">
-		delete from employee
-		where employee_no = #{employeeNo}
-	</delete>
-	<update id="updateEmp" parameterType = "finalProject.domain.EmployeeDTO">
-		update employee
-		set employee_ph = #{employeePh}, employee_email = #{employeeEmail}, employee_addr = #{employeeAddr}, employee_sal = #{employeeSal},
-			employee_account = #{employeeAccount}
-		where employee_no = #{employeeNo}
-	</update>
-	
+   <sql id = "columns">
+      EMPLOYEE_NO, EMPLOYEE_ID, EMPLOYEE_PW, EMPLOYEE_NAME, EMPLOYEE_ADDR, EMPLOYEE_BIRTH, EMPLOYEE_ACCOUNT,
+      EMPLOYEE_CONTRACT, EMPLOYEE_TYPE, EMPLOYEE_SAL, IDENTITY_CARD, ACADEMIC_ABILITY, CAREER_CERTIFICATE,
+      COPY_BANKBOOK, DEPARTMENT_NO, EMPLOYEE_PH, EMPLOYEE_EMAIL
+   </sql>
+   <sql id="dNo">
+      select nvl(max(EMPLOYEE_NO),0)+1
+      from employee
+   </sql>
+   <insert id="registEmployee" parameterType="finalProject.domain.EmployeeDTO">
+      insert into employee (<include refid = "columns"/>)
+      values((<include refid = "dNo"/>),#{employeeId}, #{employeePw}, #{employeeName}, #{employeeAddr}, #{employeeBirth},#{employeeAccount},
+      #{employeeContract}, #{employeeType}, #{employeeSal}, #{identityCard}, #{academicAbility}, #{careerCertificate}, 
+      #{copyBankbook}, #{departmentNo}, #{employeePh}, #{employeeEmail})       
+   </insert>
+   <resultMap type="finalProject.domain.EmployeeDTO" id="EmpList">
+      <id column = "employee_no" jdbcType="VARCHAR" property = "employeeNo"/>
+      <id column = "department_no" jdbcType="VARCHAR" property = "departmentNo"/>
+      <result column = "employee_id" jdbcType = "VARCHAR" property = "employeeId"/>
+      <result column = "employee_pw" jdbcType = "VARCHAR" property = "employeePw"/>
+      <result column = "employee_name" jdbcType = "VARCHAR" property = "employeeName"/>
+      <result column = "employee_addr" jdbcType = "VARCHAR" property = "employeeAddr"/>
+      <result column = "employee_birth" jdbcType = "TIMESTAMP" property = "employeeBirth"/>
+      <result column = "employee_account" jdbcType = "VARCHAR" property = "employeeAccount"/>
+      <result column = "employee_contract" jdbcType = "VARCHAR" property = "employeeContract"/>
+      <result column = "employee_type" jdbcType = "VARCHAR" property = "employeeType"/>
+      <result column = "employee_sal" jdbcType = "BIGINT" property = "employeeSal"/>
+      <result column = "identity_card" jdbcType = "VARCHAR" property = "identityCard"/>
+      <result column = "academic_ability" jdbcType = "VARCHAR" property = "academicAbility"/>
+      <result column = "career_certificate" jdbcType = "VARCHAR" property = "careerCertificate"/>
+      <result column = "copy_bankbook" jdbcType = "VARCHAR" property = "copyBankbook"/>
+      <result column = "employee_ph" jdbcType = "VARCHAR" property = "employeePh"/>
+      <result column = "employee_email" jdbcType = "VARCHAR" property = "employeeEmail"/>
+   </resultMap>
+   <select id="getEmpList" parameterType = "finalProject.domain.StartEndPageDTO" resultMap = "EmpList">
+      select <include refid = "columns"/>
+      from employee
+      <trim prefix="where" prefixOverrides="AND|OR">
+         <if test="num != null">
+            employee_no  = #{num}
+         </if>
+         <if test="userId != null">
+            and employee_id  = #{userId}
+         </if>
+      </trim>
+      order by employee_no
+      
+   </select>
+   <delete id="deleteEmployee" parameterType = "string">
+      delete from employee
+      where employee_no = #{employeeNo}
+   </delete>
+   <update id="updateEmp" parameterType = "finalProject.domain.EmployeeDTO">
+      update employee
+      set employee_ph = #{employeePh}, employee_email = #{employeeEmail}, employee_addr = #{employeeAddr}, employee_sal = #{employeeSal},
+         employee_account = #{employeeAccount}
+      where employee_no = #{employeeNo}
+   </update>
+   
 </mapper>
