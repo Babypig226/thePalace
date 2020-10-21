@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.GoodsMapper">
+<sql id="gbasecolumn">
+GOODS_NO, GOODS_TYPE, GOODS_CATEGORY, GOODS_NAME, GOODS_IMAGE, GOODS_CONTENT, 
+GOODS_REG, GOODS_QTY, GOODS_PRICE, GOODS_COUNT
+</sql>
+
+<insert id="gdInsert" parameterType="finalProject.domain.GoodsDTO">
+insert into GOODS(<include refid = "gbasecolumn"/>)
+values(#{goodsNo},#{goodsType},#{goodsCategory},#{goodsName},#{goodsImage},#{goodsContent},sysdate,#{goodsQty},#{goodsPrice},0)
+</insert>
+
+<resultMap type="finalProject.domain.GoodsDTO" id="gdbaselist">
+<id column = "GOODS_NO" jdbcType = "VARCHAR" property = "goodsNo" />
+<result column = "GOODS_TYPE" jdbcType = "VARCHAR" property = "goodsType" />
+<result column = "GOODS_CATEGORY" jdbcType = "VARCHAR" property = "goodsCategory" />
+<result column = "GOODS_NAME" jdbcType = "VARCHAR" property = "goodsName" />
+<result column = "GOODS_IMAGE" jdbcType = "VARCHAR" property = "goodsImage" />
+<result column = "GOODS_CONTENT" jdbcType = "VARCHAR" property = "goodsContent" />
+<result column = "GOODS_REG" jdbcType = "TIMESTAMP" property = "goodsReg" />
+<result column = "GOODS_COUNT" jdbcType = "BIGINT" property = "goodsCount" />
+<result column = "GOODS_QTY" jdbcType = "BIGINT" property = "goodsQty" />
+<result column = "GOODS_PRICE" jdbcType = "BIGINT" property = "goodsPrice" />
+</resultMap>
+
+<select id="gdList" resultMap="gdbaselist" parameterType="string">
+select <include refid = "gbasecolumn" />
+from GOODS
+<where>
+<if test="value != null">
+goods_no = #{goodsNo}
+</if>
+</where>
+</select>
+
+<select id="gdpopular" resultMap="gdbaselist" parameterType="string">
+select <include refid = "gbasecolumn" />
+from GOODS
+order by goods_count asc
+</select>
+
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ productList애들 띄우기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<select id="officesupplies" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Category = 'officeSupplies'
+</select>
+
+<select id="kitchenware" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Category = 'kitchenWare'
+</select>
+
+<select id="interiorsupplies" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Category = 'interiorSupplies'
+</select>
+
+<select id="dailysupplies" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Category = 'dailysupplies'
+</select>
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ officeSupplies ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<select id="card" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'OFFC'
+</select>
+
+<select id="note" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'OFFB'
+</select>
+
+<select id="pen" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'OFFP'
+</select>
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ kitchenWare ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<select id="dish" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'KCND'
+</select>
+
+<select id="cup" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'KCNC'
+</select>
+
+<select id="spoon" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'KCNS'
+</select>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ interiorSupplies ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<select id="frame" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'INRF'
+</select>
+
+<select id="lighting" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'INRL'
+</select>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ dailySupplies ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<select id="mirror" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'DAIM'
+</select>
+
+<select id="box" resultMap="gdbaselist">
+select <include refid = "gbasecolumn" />
+from GOODS
+where goods_Type = 'DAIB'
+</select>
+
+
+ <update id="updateReadCount" parameterType = "string">
+update GOODS
+set goods_count = nvl(goods_count,0) + 1
+where goods_no = #{goodsNo}
+</update> 
+
+<update id="gdModify" parameterType="finalProject.domain.GoodsDTO">
+update GOODS
+set 
+goods_Type = #{goodsType}, goods_Category = #{goodsCategory}, goods_Price = #{goodsPrice}, goods_Content = #{goodsContent},goods_Qty = #{goodsQty}
+where goods_no = #{goodsNo}
+</update>
+
+<delete id="gdDel">
+delete from Goods
+where goods_no = #{goodsNo}
+</delete>
+
+
+</mapper>

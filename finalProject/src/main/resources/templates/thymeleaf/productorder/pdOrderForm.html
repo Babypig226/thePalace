@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>발주리스트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<style type="text/css">
+td {
+	background-color: white;
+}
+
+#pdfoot {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body>
+    <!-- Header -->
+	    <header id="pdHeader">
+	    </header>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form th:action="@{/pdorder/pdorderFormPro}" method="post" name="pdOrderform" th:value = "${pdorderCommand}">
+						<h2 class="align-center">발주서</h2>
+						<p align  = "center">아래의 품목을 발주하오니 기일 내 필히 납품하여 주시기 바랍니다.</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td>
+										<div align="center">발주번호</div>
+									</td>
+									<td><input name="orderNo" type="text"
+										maxlength="13" /></td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">사업자번호</div>
+									</td>
+									<td><input name="gcompanyNo" type="text"
+										maxlength="10" /></td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center">상품번호</div>
+									</td>
+									<td><input name="goodsNo" type="text"
+										maxlength="10" /></td>
+								</tr>
+
+
+								<tr align="right">
+									<td colspan="2"><input type="submit"
+										value="발주등록"  /> <a th:href="@{pdorderList}"><input type="button"
+											value="목록가기" /></a></td>
+								</tr>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- Footer -->
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+		<script th:src=@{assets/js/jquery.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+		<script th:src=@{assets/js/skel.min.js}></script>
+		<script th:src=@{assets/js/util.js}></script>
+		<script th:src=@{assets/js/product.js}></script>
+</body>
+ 
+</html>

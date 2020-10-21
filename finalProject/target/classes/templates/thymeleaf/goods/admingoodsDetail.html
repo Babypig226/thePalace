@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>상품상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<style type="text/css">
+td{background-color : white;}
+</style>
+
+</head>
+
+<body>
+
+	<!-- Header -->
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" th:include="thymeleaf/Productnav"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<h2 class="align-center">상품상세보기</h2>
+
+					<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<div align="center">상품분류</div>
+								</td>
+								<td>[[${gdto.goodsType}]]</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">카테고리</div>
+								</td>
+								<td>[[${gdto.goodsCategory}]]</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품명</div>
+								</td>
+								<td>[[${gdto.goodsName}]]</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품가격</div>
+								</td>
+								<td>[[${gdto.goodsPrice}]]</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품상세설명</div>
+								</td>
+								<td>[[${gdto.goodsContent}]]</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품재고량</div>
+								</td>
+								<td>[[${gdto.goodsQty}]]</td>
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">상품이미지</div>
+								</td>
+								<td>
+									<img th:src="@{'/static/goods/upload/' + ${gdto.goodsImage}}" height = "350" width = "250"/>
+								</td>
+							</tr>
+
+							<tr align="center">
+								<td colspan="2" >
+								<a th:href="@{/goods/goodsModify(goodsNo = ${gdto.goodsNo})}"><input type="button" value="수정" id="del" /></a> 
+								<a th:href = "@{/goods/goodsDel(goodsNo = ${gdto.goodsNo})}"><input type="button" value="삭제" id="del" /></a> 
+								<a th:href = "@{/goods/goodsuserDetail(goodsNo = ${gdto.goodsNo})}"><input type="button" value="이용자꺼 띠용" id="del" /></a> 
+								<a th:href="@{/goods/goodsList}"><input type="button" value="목록" id="home" /></a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
+</body>
+
+</html>

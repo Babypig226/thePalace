@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.PaymentMapper">
+<sql id="paybaseColumn">
+PAY_NO, PAY_DATE, PAY_OPTION,TOTAL_PAY, COUPON_NO
+</sql>
+
+<insert id="paymentInsert" parameterType="finalProject.domain.PaymentDTO">
+insert into PAYMENT 
+(<include refid="paybaseColumn" />)
+values(ROUND(DBMS_RANDOM.VALUE(100, 1000000),0), to_char(sysdate ,'yyyy-mm-dd'), #{payOption},'1111',null)
+</insert>
+
+</mapper>

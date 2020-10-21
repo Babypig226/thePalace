@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.PartnerMapper">
+<sql id="baseColumn">
+GCOMPANY_NO, GCOMPANY_ID, GCOMPANY_PW, GCOMPANY_NAME,PARTNER_NAME, GCOMPANY_PH,  GCOMPANY_ADDR, GCOMPANY_EMAIL
+</sql>
+
+<insert id="ptInsert" parameterType="finalProject.domain.PartnerDTO">
+insert into GCOMPANY (<include refid = "baseColumn"/>) 
+values(#{gcompanyNo},#{gcompanyId},#{gcompanyPw},#{gcompanyName},#{partnerName},#{gcompanyPh},#{gcompanyAddr},#{gcompanyEmail})
+</insert>
+
+<resultMap type="finalProject.domain.PartnerDTO" id="ptlist">
+<id column = "GCOMPANY_NO" jdbcType = "VARCHAR" property = "gcompanyNo"/>
+<result column = "GCOMPANY_ID" jdbcType = "VARCHAR" property = "gcompanyId"/>
+<result column = "GCOMPANY_PW" jdbcType = "VARCHAR" property = "gcompanyPw"/>
+<result column = "GCOMPANY_NAME" jdbcType = "VARCHAR" property = "gcompanyName"/>
+<result column = "PARTNER_NAME" jdbcType = "VARCHAR" property = "partnerName"/>
+<result column = "GCOMPANY_PH" jdbcType = "VARCHAR" property = "gcompanyPh"/>
+<result column = "GCOMPANY_ADDR" jdbcType = "VARCHAR" property = "gcompanyAddr"/>
+<result column = "GCOMPANY_EMAIL" jdbcType = "VARCHAR" property = "gcompanyEmail"/>
+</resultMap>
+
+<select id="ptlist" resultMap="ptlist" parameterType="string">
+select
+<include refid = "baseColumn" />
+from GCOMPANY
+<where>
+<if test="value != null">
+gcompany_No = #{gcompanyNo}
+</if>
+</where>
+</select>
+
+<update id="ptmodify" parameterType="finalProject.domain.PartnerDTO">
+update GCOMPANY
+set
+partner_Name = #{partnerName}, gcompany_Ph = #{gcompanyPh}, gcompany_Addr = #{gcompanyAddr}, gcompany_Email = #{gcompanyEmail}
+where gcompany_No = #{gcompanyNo}
+</update>
+
+<delete id="ptdel" parameterType="string">
+delete from gcompany
+where gcompany_No = #{gcompanyNo}
+
+</delete>
+
+</mapper>

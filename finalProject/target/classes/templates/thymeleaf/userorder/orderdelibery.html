@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<title>주문서작성</title>
+
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+	function sample4_execDaumPostcode() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+						// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var roadAddr = data.roadAddress; // 도로명 주소 변수
+						var extraRoadAddr = ''; // 참고 항목 변수
+
+						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
+						}
+						// 건물명이 있고, 공동주택일 경우 추가한다.
+						if (data.buildingName !== '' && data.apartment === 'Y') {
+							extraRoadAddr += (extraRoadAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						if (extraRoadAddr !== '') {
+							extraRoadAddr = ' (' + extraRoadAddr + ')';
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('postcode').value = data.zonecode;
+						document.getElementById("roadAddress").value = roadAddr;
+						document.getElementById("jibunAddress").value = data.jibunAddress;
+
+						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+						if (roadAddr !== '') {
+							document.getElementById("extraAddress").value = extraRoadAddr;
+						} else {
+							document.getElementById("extraAddress").value = '';
+						}
+
+						var guideTextBox = document.getElementById("guide");
+						// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+						if (data.autoRoadAddress) {
+							var expRoadAddr = data.autoRoadAddress
+									+ extraRoadAddr;
+							guideTextBox.innerHTML = '(예상 도로명 주소 : '
+									+ expRoadAddr + ')';
+							guideTextBox.style.display = 'block';
+
+						} else if (data.autoJibunAddress) {
+							var expJibunAddr = data.autoJibunAddress;
+							guideTextBox.innerHTML = '(예상 지번 주소 : '
+									+ expJibunAddr + ')';
+							guideTextBox.style.display = 'block';
+						} else {
+							guideTextBox.innerHTML = '';
+							guideTextBox.style.display = 'none';
+						}
+					}
+				}).open();
+	}
+</script>
+</head>
+<body class="subpage">
+		<!-- Header -->
+	<header id="pdHeader">
+	</header>
+
+	<!-- Table -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+						<form th:action  = "@{/userorder/orderdeliberyPro}" method="post" name="goodsForm" th:object = "${deliveryCommand}" >
+				<img alt="" th:src="@{/static/images/product/order2.png}" width="650" height = "150">
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>고객ID</th>
+									<th>상품번호</th>
+									<th>상품명</th>
+									<th>상품가격</th>
+									<th>상품이미지</th>
+								</tr>
+							</thead>
+							<tbody>
+							<div th:each = "g:${glists}">
+							 <tr>
+							 <td></td>
+							 <th>[[${g.goodsNo}]]</th>
+							 <th>[[${g.goodsName}]]</th>
+							 <th>[[${g.goodsPrice}]]</th>
+							 <td><img th:src="@{'/static/goods/upload/' + ${g.goodsImage}}" height = "100" width = "80"/></td>
+							 </tr>
+							</div>
+							</tbody>
+						</table>
+
+						<table>
+							<tr>
+								<td align="center" colspan="5"><font color="gray" size="5">총
+										결제금액 : </font> <font color="black" size="5">원</font></td>
+								<td align="right">적립 마일리지 5point</td>
+							</tr>
+
+
+						</table>
+					</div>
+					<!----------------------------------------------------------->
+						<br />
+					<h2 class="align-center">배송지정보</h2>
+					<hr/>
+					<br/>
+					<div>
+						<label for="receiverName">수취인</label><input name="receiverName"
+							id="contact" type="text">
+					</div>
+					<br/>
+					<div class="field" style="margin-bottom: 1mm">
+						<label for="deliveryAddr">주소</label>
+						<ul class="actions align-left" style="margin-bottom: 1mm">
+							<li><input type="text" id="postcode" name = "deliveryAddr" placeholder="우편번호"
+								maxlength="20"></li>
+							<li><input type="button" class="button" name = "deliveryAddr"
+								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></li>
+						</ul>
+					</div>
+					<div class="field half" style="margin-bottom: 1mm">
+						<input type="text" id="roadAddress" name = "deliveryAddr" placeholder="도로명주소">
+					</div>
+					<div class="field half" style="margin-bottom: 1mm">
+						<input type="text" id="jibunAddress" name = "deliveryAddr"  placeholder="지번주소">
+					</div>
+					<br/>
+					<div><label for="deliveryNote">배송요청사항</label>
+							<select name='deliveryNote' width='150px'>
+								<option value=0>배송요청사항없음</option>
+								<option>배송전 연락 바랍니다</option>
+								<option>부재 시 휴대폰 연락 바랍니다 </option>
+								<option>부재 시 경비실에 맡겨주세요</option>
+							</select>
+							<p><font size = "2">※주문시 요청사항은 배송기사가 배송시 참고하는 사항으로써,<br/> 사전에 협의되지 않은 지정일 배송 등의 요청사항은 반영되지 않을 수 있습니다.</font></p>
+					</div>
+					<div class="table-wrapper">
+						<table>
+							<tr>
+									<td colspan="5" bgcolor="white" align = "center"><a
+										th:href="@{cartList}" class="button alt">이전으로</a>&nbsp;&nbsp;&nbsp; <input
+										type = "submit" class="button alt" value = "다음으로" /></td>
+								</tr>
+						</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+						
+<!-- Footer -->
+	<footer id="footer" class="wrapper" data-include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
+</body>
+
+</html>

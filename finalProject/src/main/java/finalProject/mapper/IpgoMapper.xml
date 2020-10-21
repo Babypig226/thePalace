@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.IpgoMapper">
+<sql id="ipbaseColumn">
+IPGO_NO,SHOP_NO, GOODS_NO,IPGO_QTY, CHECK_OK,CHECK_DATE,IPGO_DATE 
+</sql>
+
+<insert id="ipgoInsert" parameterType="finalProject.domain.IpgoDTO">
+insert into GOODS_IPGO(<include refid="ipbaseColumn"/>)
+values(#{ipgoNo},#{shopNo},#{goodsNo},#{ipgoQty},#{checkOk},#{checkDate},sysdate)
+</insert>
+
+<resultMap type="finalProject.domain.IpgoDTO" id="ipgolistbase">
+<id  column = "IPGO_NO" jdbcType = "VARCHAR" property = "ipgoNo"/>
+<result  column = "SHOP_NO" jdbcType = "VARCHAR" property = "shopNo"/>
+<result  column = "GOODS_NO" jdbcType = "VARCHAR" property = "goodsNo"/>
+<result  column = "IPGO_QTY" jdbcType = "BIGINT" property = "ipgoQty"/>
+<result  column = "CHECK_OK" jdbcType = "VARCHAR" property = "checkOk"/>
+<result  column = "CHECK_DATE" jdbcType = "TIMESTAMP" property = "checkDate"/>
+<result  column = "IPGO_DATE" jdbcType = "TIMESTAMP" property = "ipgoDate"/>
+</resultMap>
+
+<select id="ipgoList" resultMap="ipgolistbase" parameterType="string">
+select <include refid = "ipbaseColumn" /> 
+from 
+GOODS_IPGO
+<where>
+<if test="value != null">
+ipgo_No = #{ipgoNo}
+</if>
+</where>
+</select>
+
+<update id="ipgoUpdate" parameterType="finalProject.domain.IpgoDTO">
+update GOODS_IPGO
+set
+check_Date = #{checkDate}, goods_No = #{goodsNo}, ipgo_Qty = #{ipgoQty}
+where ipgo_No = #{ipgoNo}
+</update>
+
+<delete id="ipgoDel">
+delete from GOODS_IPGO
+where ipgo_No = #{ipgoNo}
+</delete>
+</mapper>

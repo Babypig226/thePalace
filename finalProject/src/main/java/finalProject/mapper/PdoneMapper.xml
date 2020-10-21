@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.PdoneMapper">
+
+<sql id="pobaseColumn">
+GLIB_NO, USER_ID, GLIB_SUBJECT, GLIB_CONTENT, GLIB_FILE, GLIB_DATE, GOODS_NO 
+</sql>
+
+<insert id="pdoneInsert" parameterType="finalProject.domain.PdoneDTO">
+insert into GOODSLIB
+(<include refid = "pobaseColumn"/>)
+values (#{glibNo},'1111',#{glibSubject},#{glibContent},#{glibFile},sysdate,null)
+</insert>
+
+<resultMap type="finalProject.domain.PdoneDTO" id="polist">
+<id column = "GLIB_NO" jdbcType = "VARCHAR" property = "glibNo" />
+<result column = "USER_ID" jdbcType = "VARCHAR" property = "userId" />
+<result column = "GLIB_SUBJECT" jdbcType = "VARCHAR" property = "glibSubject" />
+<result column = "GLIB_CONTENT" jdbcType = "VARCHAR" property = "glibContent" />
+<result column = "GLIB_FILE" jdbcType = "VARCHAR" property = "glibFile" />
+<result column = "GLIB_DATE" jdbcType = "TIMESTAMP" property = "glibDate" />
+<result column = "GOODS_NO" jdbcType = "VARCHAR" property = "goodsNo" />
+
+</resultMap>
+
+<select id="poList" resultMap="polist" parameterType="string">
+select
+<include refid = "pobaseColumn"/>
+from GOODSLIB
+<where>
+<if test="value != null">
+glib_no = #{glibNo}
+</if>
+</where>
+</select>
+
+<update id="poneUpdate" parameterType="finalProject.domain.PdoneDTO">
+update GOODSLIB
+set
+glib_Subject = #{glibSubject}, glib_Content = #{glibContent},goods_no = #{goodsNo}
+where glib_no = #{glibNo}
+</update>
+
+<delete id="pdoneDel">
+delete from GOODSLIB
+where glib_no = #{glibNo}
+</delete>
+</mapper>

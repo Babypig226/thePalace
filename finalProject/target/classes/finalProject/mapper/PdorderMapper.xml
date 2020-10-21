@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.PdorderMapper">
+<sql id="poColumn">
+ORDER_NO,  ORDER_DATE,  GCOMPANY_NO, GOODS_NO 
+</sql>
+
+<insert id="pdorderInsert" parameterType="finalProject.domain.PdorderDTO">
+insert into GOODS_ORDER
+(<include refid="poColumn"/>)
+values (#{orderNo},sysdate,#{gcompanyNo},#{goodsNo})
+</insert>
+
+<resultMap type="finalProject.domain.PdorderDTO" id="pdorderlistbase">
+<id column = "ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+<result column = "ORDER_DATE" jdbcType="TIMESTAMP" property="orderDate" />
+<result column = "GCOMPANY_NO" jdbcType="VARCHAR" property="gcompanyNo" />
+<result column = "GOODS_NO" jdbcType="VARCHAR" property="goodsNo" />
+</resultMap>
+
+<select id="pdorderList" resultMap="pdorderlistbase" parameterType="string">
+select
+<include refid = "poColumn" />
+from GOODS_ORDER
+<where>
+<if test="value != null">
+order_No = #{orderNo}
+</if>
+</where>
+</select>
+
+<update id="pdorderUpdate" parameterType="finalProject.domain.PdorderDTO">
+update GOODS_ORDER
+set
+goods_No = #{goodsNo}
+where order_No = #{orderNo}
+</update>
+
+<delete id = "pdorderDel">
+delete from GOODS_ORDER
+where order_No = #{orderNo}
+</delete>
+
+</mapper>

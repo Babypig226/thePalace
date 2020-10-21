@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>고객센터</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" th:include="thymeleaf/Productnav"></nav>
+	
+	
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<div class="grid-style">
+
+				<div>
+					<div class="box">
+						
+						<div class="content">
+							<header class="align-center">
+								<h2>공지사항</h2>
+							
+							<hr />
+							<p>상품문의 및 매장문의 등 고객님께<br/>
+							공지사항을 알려드립니다</p>
+							<div class="align-center">
+								<a href="notice/noticeList.html" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<div class="box">
+						
+						<div class="content">
+							<header class="align-center">
+								<h2>1:1게시판</h2>
+							
+							<hr />
+							<p>궁금하신점이나 요청하실내용 있으시면 언제든지 문의해 주십시오.<br/>
+							빠르고 정확하게 답변해 드리겠습니다</p>
+							<div class="align-center">
+								<a th:href="@{pdone/pdoneList}" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+						</div>
+						</div>
+						
+						
+						<div>
+					<div class="box">
+						
+						<div class="content">
+							<header class="align-center">
+								<h2>오시는길</h2>
+							
+							<hr />
+							<p>souvenior shop<br/>오시는길 안내드립니다
+							</p>
+							<div class="align-center">
+								<a th:href="@{Way_to_Come}" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+						</div>
+						</div>
+						
+						<div>
+					<div class="box">
+						<div class="content">
+							<header class="align-center">
+								<h2>이용안내</h2>
+							<hr />
+							<p>저의 sovenior shop에 대한 전반적이 이용안내입니다<br/>
+							souvenior shop을 이용해주셔서 감사합니다</p>
+							<div class="align-center">
+								<a th:href="@{/Information_guide}" class="button alt">더보기</a>
+							</div>
+							</header>
+						</div>
+						</div>
+						</div>
+					
+		
+		
+		
+			</div>
+		</div>
+	</section>
+
+
+<!-- Footer -->
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		<!-- Scripts -->
+		<script th:src=@{assets/js/jquery.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+		<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+		<script th:src=@{assets/js/skel.min.js}></script>
+		<script th:src=@{assets/js/util.js}></script>
+		<script th:src=@{assets/js/product.js}></script>
+</body>
+ 
+</html>

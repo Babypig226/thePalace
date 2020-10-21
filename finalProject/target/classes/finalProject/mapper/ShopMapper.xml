@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "finalProject.mapper.ShopMapper">
+<sql id="baseSColumn">
+SHOP_NO, SHOP_NAME, SHOP_PH, SHOP_ADDR 
+</sql>
+
+<insert id="spInsert" parameterType="finalProject.domain.ShopDTO">
+insert into SHOP (<include refid = "baseSColumn"/>)
+values(#{shopNo},#{shopName},#{shopPh},#{shopAddr})
+</insert>
+
+<resultMap type="finalProject.domain.ShopDTO" id="baseSplist">
+<id column = "SHOP_NO" jdbcType = "VARCHAR" property = "shopNo" />
+<result column = "SHOP_NAME" jdbcType = "VARCHAR" property = "shopName" />
+<result column = "SHOP_PH" jdbcType = "VARCHAR" property = "shopPh" />
+<result column = "SHOP_ADDR" jdbcType = "VARCHAR" property = "shopAddr" />
+</resultMap>
+
+<select id="spList" resultMap="baseSplist" parameterType="string">
+select <include refid = "baseSColumn"/>
+from SHOP
+<where>
+<if test="value  != null">
+shop_No = #{shopNo}
+</if>
+</where>
+</select>
+
+<update id="spModify" parameterType="finalProject.domain.ShopDTO">
+update SHOP 
+set
+shop_Ph = #{shopPh}, shop_Addr = #{shopAddr}
+where shop_No = #{shopNo}
+</update>
+</mapper>
