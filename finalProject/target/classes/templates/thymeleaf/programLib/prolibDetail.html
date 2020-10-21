@@ -43,15 +43,38 @@
 				<div>
 					<div class="content">
 						<div th:each="file : ${filelist}" class="image fit">
-							<img th:src="@{/static/programLib/upload/} + ${file.file}">
+							<img th:src="@{/static/programLib/upload/} + ${file.storeFileName}">
 						</div>
 					</div>
-					
-					<div class="content">
-						<a th:href="@{prolibModify(plibNo=${plibdto.plibNo})}">게시판 수정</a>
-					</div>
-
 				</div>
+				<div>		
+					<div class="content">
+						<a th:href="@{prolibModify(plibNo=${plibdto.plibNo})}" class="button alt" >게시판 수정</a>
+						<!-- <a th:href="@{replyInsertForm(plibNo=${plibdto.plibNo})}" class="button alt" >댓글 달기</a> -->
+					</div>
+				</div>
+
+				<div>
+				<form th:action ="@{/pgmypage/replyInsert}" method="post">
+					<div class="content">
+						<input type="hidden" name = "plibNo" th:value="${plibdto.plibNo}" />
+						<b>√ 댓글쓰기 : <input type = "text" name = "preplyContent"/></b>
+						<input type="submit" value = "댓글달기" class="button alt" />
+					</div>
+				</form>
+				</div>
+				
+				<div th:each = "reply : ${replies.replies}">
+					<span th:if="${reply.preplyNo != null}">
+					<p>
+						<b>√ 댓글번호 : <span th:text = "${reply.preplyNo}"></span></b><br>
+						<b>√ 작성자 : <span th:text = "${reply.employeeNo}"></span></b><br>
+						<b>√ 댓글내용 : <span th:text = "${reply.preplyContent}"></span></b><br>
+						<b>√ 댓글작성일 : <span th:text = "${#dates.format(reply.preplyDate, 'yyyy-MM-dd')}"></span></b><br>
+					</p>
+					</span>
+				</div>
+
 			</div>
 	</section>
 

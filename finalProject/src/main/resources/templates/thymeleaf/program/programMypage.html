@@ -54,16 +54,18 @@ a:hover {
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" th:href= "@{/static/assets/css/productmain.css}" />
+<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
 
 </head>
 <body>
-	<!-- Header -->
-	<header role="pdHeader" th:include="thymeleaf/pgheader" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
 	</header>
 	<!-- Nav -->
-	<nav id="Productnav" data-include="Productnav.html"></nav>
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
 
 	<section id="one" class="wrapper style2">
 		<div class="inner">

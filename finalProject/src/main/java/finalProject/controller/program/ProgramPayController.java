@@ -56,7 +56,10 @@ public class ProgramPayController {
 	
 	@RequestMapping("finalInfo")
 	public String finalInfo(Model model) throws Exception{
-		proPayResService.payresInsert();
+		//proPayResService.payresInsert();
+		programResService.resInfoList(model);
+		programPayService.payInfoList(model);
+		programCartService.programCartList(model);
 		return "thymeleaf/programOrder/finalInfo";
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import finalProject.command.FileName;
 import finalProject.domain.ProgramLibDTO;
 import finalProject.domain.StartEndPageDTO;
+import finalProject.domain.libCollectionDTO;
 import finalProject.mapper.ProgramLibMapper;
 
 @Component
@@ -29,11 +30,13 @@ public class ProLibDetailService {
 		int i = 0;
 		for (String file : files) {
 			System.out.println("files : " + file);
-			FileName fileName = new FileName(file, null, null);
+			FileName fileName = new FileName(null, file, null);
 			filelist.add(fileName);
 			i++;
 		}
 		
+		libCollectionDTO replies = programLibMapper.getreplies(plibNo);
+		model.addAttribute("replies", replies);
 		model.addAttribute("filelist", filelist);
 		model.addAttribute("plibdto", plibdto);
 	}

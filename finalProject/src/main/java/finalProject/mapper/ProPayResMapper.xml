@@ -10,7 +10,7 @@
 
 	<insert id="payresInsert" parameterType="finalProject.domain.ProPayResDTO">
 		insert into program_res (<include refid="basecolumn" />)
-		values (#{rsNo}, #{programNo}, #{payNo})
+		values (#{rsNo, jdbcType = VARCHAR}, #{programNo, jdbcType = VARCHAR}, #{payNo, jdbcType = VARCHAR})
 	</insert>
 
 </mapper>

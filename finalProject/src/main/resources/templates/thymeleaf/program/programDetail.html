@@ -85,7 +85,7 @@
 					<div class="content">
 						<div th:each="file : ${imglist}" class="image fit">
 							<img
-								th:src="@{/static/programImage/upload/} + ${file.file}" />
+								th:src="@{/static/programImage/upload/} + ${file.storeFileName}" />
 						</div>
 					</div>
 

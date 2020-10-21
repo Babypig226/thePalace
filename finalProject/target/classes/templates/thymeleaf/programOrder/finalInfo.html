@@ -33,199 +33,97 @@ td {
 			<div class="box">
 				<div class="content">
 					<img alt="" src="../images/order3.png" width="1080" height="200">
+					<h2 class="align-center">프로그램 정보</h2>
 					<div class="table-wrapper">
 						<table>
 							<thead>
 								<tr>
-									<th>상품코드</th>
-									<th>상품정보</th>
+									<th>프로그램 번호</th>
+									<th>프로그램 명</th>
 									<th>가격</th>
 									<th>수량</th>
 									<th>마일리지</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1357</td>
-									<td>연다인진혜주</td>
-									<td>₩123,456</td>
-									<td>2</td>
-									<td>5point</td>
-								</tr>
-								<tr>
-									<td>2468</td>
-									<td>최윤선함성애</td>
-									<td>₩789,101</td>
-									<td>2</td>
-									<td>5point</td>
-								</tr>
+								<div th:each="prg : ${pglist}">
+									<tr>
+										<td>[[${prg.programNo}]]</td>
+										<div th:each="pro : ${prg.pro}">
+											<td>[[${pro.programName}]]</td>
+											<td>[[${pro.programPrice}]]</td>
+										</div>
+										<td>[[${prg.amount}]]</td>
+										<td>5point</td>
+									</tr>
+								</div>
 							</tbody>
 						</table>
 
 						<table>
 							<tr>
-								<td align="center" colspan="5"><font color="gray" size="5">총
-										결제금액 : </font> <font color="black" size="5">원</font></td>
+								<td align="center" colspan="5"><font color="gray" size="5">
+										총 결제금액 :[[${totPrice}]] </font> <font color="black" size="5">원</font></td>
 								<td align="right">적립 마일리지 5point</td>
 							</tr>
-
-
 						</table>
 					</div>
 					<br />
 					<!----------------------------------------------------------->
-					<h2 class="align-center">주문고객 정보</h2>
+					<h2 class="align-center">예약정보</h2>
 					<!-- Registration Form -->
 					<div class="table-wrapper">
-						<table cellpadding="0" cellspacing="0">
-							<tr>
-								<td id="orid">
-									<div align="center">아이디</div>
-								</td>
-								<td id="orid">치킨공주</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">주소</div>
-								</td>
-								<td>서울시 성북구 273-13</td>
-							</tr>
-
-
-							<tr>
-								<td>
-									<div align="center">이메일</div>
-								</td>
-								<td>cksek27@daum.net</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">연락처</div>
-								</td>
-								<td>010-2258-5353</td>
-							</tr>
+						<table>
+							<thead>
+								<tr>
+									<th>예약번호</th>
+									<th>예약자명</th>
+									<th>사용일</th>
+									<th>연락처</th>
+								</tr>
+							</thead>
+							<tbody>
+								<div th:each="res : ${rslist}">
+									<tr>
+										<td>[[${res.reservationNo}]]</td>
+										<td>[[${res.userId}]]</td>
+										<td>[[${res.usingDate}]]</td>
+										<td>[[${res.rsPh}]]</td>
+									</tr>
+								</div>
+							</tbody>
 						</table>
 					</div>
 					<!----------------------------------------------------------->
 					<br />
-					<h2 class="align-center">배송지정보</h2>
-					<hr />
+					<h2 class="align-center">결제정보</h2>
 					<!-- Registration Form -->
 					<div class="table-wrapper">
-						<table cellpadding="0" cellspacing="0">
-							<tr>
-								<td id="orid">
-									<div align="center">아이디</div>
-								</td>
-								<td id="orid">치킨공주</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">주소</div>
-								</td>
-								<td>서울시 성북구 273-13</td>
-							</tr>
-
-
-							<tr>
-								<td>
-									<div align="center">이메일</div>
-								</td>
-								<td>cksek27@daum.net</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">연락처</div>
-								</td>
-								<td>010-2258-5353</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">배송요청사항</div>
-								</td>
-								<td>배송전 연락 바랍니다</td>
-							</tr>
+						<table>
+							<thead>
+								<tr>
+									<th>결제번호</th>
+									<th>결제일</th>
+									<th>결제수단</th>
+								</tr>
+							</thead>
+							<tbody>
+								<div th:each="pay : ${paylist}">
+									<tr>
+										<td>[[${pay.payNo}]]</td>
+										<td>[[${pay.payDate}]]</td>
+										<td>[[${pay.payOption}]]</td>
+									</tr>
+								</div>
+							</tbody>
 						</table>
 					</div>
 
-					<!----------------------------------------------------------->
-					<h2 class="align-center">결제금액 확인</h2>
-					<hr />
-					<!-- Registration Form -->
 					<div class="table-wrapper">
 						<table cellpadding="0" cellspacing="0">
 							<tr>
-								<td id="orid">
-									<div align="center">총 상품 금액</div>
-								</td>
-								<td id="orid">456,430원</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">배송비</div>
-								</td>
-								<td>2500원</td>
-							</tr>
-
-
-							<tr>
-								<td>
-									<div align="center">적립포인트</div>
-								</td>
-								<td><font color="red">5point</font></td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">총 결제 금액</div>
-								</td>
-								<td><font color="red">2500</font> + <font color="red">456,430</font>
-									=<font color="red"> 458,930원</font></td>
-							</tr>
-						</table>
-					</div>
-					<br />
-					<!----------------------------------------------------------->
-					<h2 class="align-center">결제 계좌</h2>
-					<hr />
-					<!-- Registration Form -->
-					<div class="table-wrapper">
-						<table cellpadding="0" cellspacing="0">
-							<tr>
-								<td id="orid">
-									<div align="center">입금계좌</div>
-								</td>
-								<td id="orid">신한은행 110-234-634930</td>
-							</tr>
-
-							<tr>
-								<td>
-									<div align="center">입금자명</div>
-								</td>
-								<td>sovenior shop</td>
-							</tr>
-
-
-							<tr>
-								<td>
-									<div align="center">입금할 금액</div>
-								</td>
-								<td><font color="red">458,930원</font></td>
-							</tr>
-						</table>
-					</div>
-					<div class="table-wrapper">
-						<table cellpadding="0" cellspacing="0">
-							<tr>
-								<td colspan="5" bgcolor="white" align="center"><a href="orderForm.html"
-									class="button alt">이전</a> <a href="oderOk.html"
-									class="button alt">다음</a></td>
+								<td colspan="5" bgcolor="white" align="center">
+								<a th:href="@{../prmain/programMain}" class="button alt">메인으로</a> 
 							</tr>
 						</table>
 					</div>
@@ -234,7 +132,7 @@ td {
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- Footer -->
 	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->

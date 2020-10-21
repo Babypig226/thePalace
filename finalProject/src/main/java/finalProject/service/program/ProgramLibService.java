@@ -65,7 +65,7 @@ public class ProgramLibService {
 			}
 		}
 		
-		programLibDTO.setPlibFile(originalTotal);
+		programLibDTO.setPlibFile(storeTotal);
 		programLibMapper.programLibInsert(programLibDTO);
 		location = "redirect:/pgmypage/programLib";
 		

@@ -56,7 +56,7 @@ public class ProgramDetailService {
 		int j = 0;
 		for (String file : img) {
 			System.out.println("imgfile "+ file);
-			FileName imageName = new FileName(file, null, null);
+			FileName imageName = new FileName(null, file, null);
 			filelist.add(imageName);
 			j++;
 		}

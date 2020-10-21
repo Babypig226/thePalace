@@ -40,14 +40,6 @@
 						order by accept_no desc))
 		where rn between #{startPage} and #{endPage}
 	</select>
-	<select id="getFinalists" resultMap = "ApplicantsList">
-		select a.ACCEPT_NO as ACCEPT_NO, APPLICANT_ID, APPLICANT_PW, APPLICANT_NAME, APPLICANT_ENAME, 
-		APPLICANT_BIRTH, APPLICANT_ADDR, APPLICANT_PH, APPLICANT_EMAIL, APPLICANT_CONTENT, PI_AGREE
-			from applicants a
-			join emp_interview e
-			on a.accept_no = e.accept_no
-			where tot_score > 12
-	</select>
 	<update id="updateEtraining" parameterType = "finalProject.domain.EtrainingDTO">
 		update emp_training
 		set DEPARTMENT_NO = #{departmentNo}, CURRICULUM_NAME = #{curriculumName},

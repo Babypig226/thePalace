@@ -25,8 +25,7 @@
 		<result column="USING_DATE" jdbcType="TIMESTAMP" property="usingDate"/>
 	</resultMap>
 	
-	<select id="resInfoList" parameterType="finalProject.domain.ProResDTO">
-		select * from reservation
-		where reservation_no = #{reservationNo}
+	<select id="resInfoList" parameterType="finalProject.domain.ProResDTO" resultMap="rsListMap">
+		select reservation_no, user_id, using_date, rs_ph from reservation
 	</select>
 </mapper>

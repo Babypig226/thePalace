@@ -44,6 +44,7 @@ public class ProgramResService {
 		System.out.println("resInfoListService");
 		List<ProResDTO> rslist = proResMapper.resInfoList();
 		
+		model.addAttribute("rslist", rslist);
 	}
 
 }

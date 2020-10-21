@@ -70,7 +70,7 @@ public class ProgramService {
 				e.printStackTrace();
 			}
 		}
-		programDTO.setProgramImage(originalTotal);
+		programDTO.setProgramImage(storeTotal);
 		programMapper.programInsert(programDTO);
 		location = "redirect:/program/programList"; 
 		return location;

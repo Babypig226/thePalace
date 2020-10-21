@@ -39,14 +39,11 @@
 	<select id="getEmpList" parameterType = "finalProject.domain.StartEndPageDTO" resultMap = "EmpList">
 		select <include refid = "columns"/>
 		from employee
-		<trim prefix="where" prefixOverrides="AND|OR">
+		<where>
 			<if test="num != null">
 				employee_no  = #{num}
 			</if>
-			<if test="userId != null">
-				and employee_id  = #{userId}
-			</if>
-		</trim>
+		</where>
 		order by employee_no
 		
 	</select>

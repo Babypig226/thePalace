@@ -50,4 +50,41 @@
 		</trim>
 		where plib_no = #{plibNo}
 	</update>
+	
+	<insert id="replyInsert" parameterType="finalProject.domain.PlibReplyDTO">
+		insert into program_reply (PLIB_NO, PREPLY_NO, PREPLY_CONTENT, PREPLY_DATE, EMPLOYEE_NO)
+		values (#{plibNo, jdbcType = VARCHAR}, reply_seq.nextval, #{preplyContent, jdbcType = VARCHAR}, 
+				sysdate, #{employeeNo, jdbcType = VARCHAR})
+	</insert>
+	
+	<resultMap type="finalProject.domain.PlibReplyDTO" id="replyMap">
+		<id column="PLIB_NO" jdbcType="VARCHAR" property="plibNo"/>
+		<id column="PREPLY_NO" jdbcType="VARCHAR" property="preplyNo"/>
+		<result column="PREPLY_CONTENT" jdbcType="VARCHAR" property="preplyContent"/>
+		<result column="PREPLY_DATE" jdbcType="TIMESTAMP" property="preplyDate"/>
+		<result column="EMPLOYEE_NO" jdbcType="VARCHAR" property="employeeNo"/>
+	</resultMap>
+	
+	<resultMap type="finalProject.domain.ProgramLibDTO" id="libReplyMap">
+		<id column="PLIB_NO" jdbcType="VARCHAR" property="plibNo"/>
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+		<result column="PLIB_SUBJECT" jdbcType="VARCHAR" property="plibSubject"/>
+		<result column="PLIB_CONTENT" jdbcType="VARCHAR" property="plibContent"/>
+		<result column="PLIB_FILE" jdbcType="VARCHAR" property="plibFile"/>
+		<result column="PLIB_DATE" jdbcType="TIMESTAMP" property="plibDate"/>
+		<result column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo"/>
+		<collection property="replies" ofType="finalProject.domain.PlibReplyDTO" resultMap="replyMap"/>
+	</resultMap>
+	
+	<resultMap type="finalProject.domain.libCollectionDTO" id="collectionlibMap">
+		<association property="programLibDTO" javaType="finalProject.domain.ProgramLibDTO" resultMap="libReplyMap" />
+		<collection property="replies" ofType="finalProject.domain.PlibReplyDTO" resultMap="replyMap"/>
+	</resultMap>
+	
+	<select id="getreplies" parameterType="string" resultMap="collectionlibMap">
+		select p.plib_no, r.preply_no, r.preply_content, r.preply_date, r.employee_no
+		from programlib p left outer join program_reply r
+		on p.plib_no = r.plib_no
+		where p.plib_no= #{plibNo}
+	</select>
 </mapper>

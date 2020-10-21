@@ -22,8 +22,7 @@
 		<result column="COUPON_NO" jdbcType="VARCHAR" property="couponNo"/>
 	</resultMap>
 	
-	<select id="payInfolist" parameterType="finalProject.domain.ProPayDTO">
-		select * from payment
-		where pay_no = #{payNo}
+	<select id="payInfolist" parameterType="finalProject.domain.ProPayDTO" resultMap="payListMap">
+		select pay_no, pay_date, pay_option from payment
 	</select>
 </mapper>

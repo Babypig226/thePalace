@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import finalProject.command.FileName;
 import finalProject.command.ProgramLibCommand;
+import finalProject.command.ProgramLibReplyCommand;
+import finalProject.service.file.FileDelService;
+import finalProject.service.program.PlibReplyService;
 import finalProject.service.program.ProLibDetailService;
 import finalProject.service.program.ProLibModifyService;
 import finalProject.service.program.ProgramLibService;
@@ -29,6 +33,10 @@ public class PgMypageController {
 	ProLibDetailService proLibDetailService;
 	@Autowired
 	ProLibModifyService proLibModifyService;
+	@Autowired
+	FileDelService fileDelService;
+	@Autowired
+	PlibReplyService plibReplyService;
 	
 	@RequestMapping("programMypage")
 	public String myPage() {
@@ -72,10 +80,23 @@ public class PgMypageController {
 		return "thymeleaf/programLib/prolibModify";
 	}
 	
+	@RequestMapping("fileDel")
+	public String fileDel(FileName fileName, HttpSession session, Model model) {
+		fileDelService.fileSessionAdd(fileName, session, model);
+		return "thymeleaf/programLib/delPage";
+	}
 	@RequestMapping(value = "proLibModifyPro", method = RequestMethod.POST)
 	public String proLibModifyPro(ProgramLibCommand programLibCommand,
 								HttpSession session, Model model) throws Exception{
 		String path = proLibModifyService.prolibModify(programLibCommand, model, session);
 		return path;
+	}
+
+	@RequestMapping(value = "replyInsert", method = RequestMethod.POST)
+	public String replyInsert(@RequestParam("plibNo") String plibNo,
+								ProgramLibReplyCommand programLibReplyCommand,
+								Model model, HttpSession session) throws Exception{
+		plibReplyService.replyInsert(plibNo, programLibReplyCommand, model, session);
+		return "redirect:/pgmypage/libDetail?plibNo="+plibNo;
 	}
 }

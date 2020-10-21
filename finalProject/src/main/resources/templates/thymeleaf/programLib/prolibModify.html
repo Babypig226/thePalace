@@ -5,6 +5,31 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1문의 신청</title>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	function fileDel(file, btn){
+		$.ajax({
+			type : "get",
+			url : "fileDel",
+			dataType : "text",
+			data: {"originalfileName":orgFile,"storeFileName":strFile,
+						"fileSize" : fileSize},
+			success : function(result){
+				alert("#"+btn.id)
+				if(result.trim() == 1){
+					$(btn).val("삭제취소")
+				}else{
+					$(btn).val("삭제")
+				}
+			},
+			error : function(){
+				$(btn).text("삭제취소")
+				alert('에러에러에러에러');
+				return;
+			}
+		});	
+	}
+</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
@@ -62,9 +87,9 @@
 								</td>
 								<td>
 									<div th:each="file, numstat: ${filelist}" class="image fit">
-										<img th:src="@{/static/programLib/upload/} + ${file.file}" width="5" height="5" id="imagefile">
+										<img th:src="@{/static/programLib/upload/} + ${file.storeFileName}" width="5" height="5" id="imagefile">
 										<input type = "button" value = "삭제" th:id="${'btn'+numstat.index}"
-											th:onclick="'fileDel(\''+${file.file}+'\',this)'" />
+											th:onclick="'fileDel(\''+${file.storeFileName}+'\',this)'" />
 									</div>
 								<input type="file" name="file" multiple="multiple" />
 							</tr>
@@ -93,28 +118,4 @@
 	<script src="assets/js/program.js"></script>
 	</form>
 </body>
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	function fileDel(file, btn){
-		$.ajax({
-			type : "get",
-			url : "fileDel",
-			dataType : "text",
-			data : {"imagefile":file},
-			success : function(result){
-				alert("#"+btn.id)
-				if(result.trim() == 1){
-					$(btn).val("삭제취소")
-				}else{
-					$(btn).val("삭제")
-				}
-			},
-			error : function(){
-				$(btn).text("삭제취소")
-				alert('에러에러에러에러');
-				return;
-			}
-		});	
-	}
-</script>
 </html>
