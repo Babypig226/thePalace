@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: finalProject Maven Webapp
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: babypig
+Built-By: soldesk
 Implementation-Vendor-Id: thePalace
 Build-Jdk: 1.8.0_251
 Implementation-URL: http://www.example.com
