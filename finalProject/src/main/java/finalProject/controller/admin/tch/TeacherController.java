@@ -38,8 +38,8 @@ public class TeacherController {
 	}
 	
 	@RequestMapping("list")
-	public String teacherList(Model model) {
-		teacherListService.getTeacherList(model);
+	public String teacherList(@RequestParam(value = "page", defaultValue = "1")Integer page, Model model) {
+		teacherListService.getTeacherList(model, page);
 		return "/v-admin-tch/admin-tch-list";
 	}
 	

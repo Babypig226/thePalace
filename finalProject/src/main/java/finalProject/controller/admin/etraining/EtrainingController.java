@@ -13,6 +13,7 @@ import finalProject.service.admin.etraining.EtrainingDetailService;
 import finalProject.service.admin.etraining.EtrainingListService;
 import finalProject.service.admin.etraining.EtrainingModifyService;
 import finalProject.service.admin.etraining.EtrainingRegistService;
+import finalProject.service.dep.DepListService;
 
 @Controller
 @RequestMapping("etrn")
@@ -27,6 +28,8 @@ public class EtrainingController {
 	EtrainingModifyService etrainingModifyService;
 	@Autowired
 	EtrainingDeleteService etrainingDeleteService;
+	@Autowired
+	DepListService depListService;
 	
 	@RequestMapping("list")
 	public String etrainingList(Model model, @RequestParam(value = "page", defaultValue = "1")String page) {
@@ -35,7 +38,8 @@ public class EtrainingController {
 	}
 	
 	@RequestMapping(value = "regist", method = RequestMethod.GET)
-	public String etrainingRegist() {
+	public String etrainingRegist(Model model) {
+		depListService.getDepList(model, 1);
 		return "thymeleaf/admin-etraining/admin-etraining-regist";
 	}
 	@RequestMapping(value = "regist", method = RequestMethod.POST)

@@ -21,9 +21,13 @@ public class TeacherListService {
 	@Autowired
 	AddressService addressService;
 	
-	public void getTeacherList(Model model) {
-		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, null, null);
-		List<TeacherDTO> lists = teacherMapper.getTeacherList(dto);
+	public void getTeacherList(Model model, Integer page) {
+		int limit = 10;
+		int limitPage = 10;
+		Long startRow = ((long)page -1 ) * 10 +1;
+		Long endRow = startRow + limit -1;
+		StartEndPageDTO pdto = new StartEndPageDTO(startRow, endRow, null, null);
+		List<TeacherDTO> lists = teacherMapper.getTeacherList(pdto);
 		for (int i = 0; i < lists.size(); i++) {
 			lists.get(i).setTeacherAddr(addressService.rebuildAddress(lists.get(i).getTeacherAddr()));
 		}
