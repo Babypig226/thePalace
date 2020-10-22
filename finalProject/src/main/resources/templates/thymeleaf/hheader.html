@@ -1,5 +1,10 @@
-    <div class="hlogo"><a href="houseMain.html">the Palace <span>스테이궁</span></a></div>
+   <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+    <div class="hlogo"><a th:href="@{/}">the Palace <span>플레이스궁</span></a></div>
     <a href = "login.html">로그인</a>
-    <a href = "houseMyPage.html">마이페이지</a>
-    <a href = "houseSupport.html">고객센터</a>
+    <a th:href = "@{/houseFixtures/fixturesList}">관리자</a>
+    <a th:href = "@{/houseSupport/houseSupport}">고객센터</a>
+    <a th:href = "@{/houseMyPage/houseMyPage}">마이페이지</a>
     <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+</html>

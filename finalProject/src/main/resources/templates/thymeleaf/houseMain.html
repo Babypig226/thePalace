@@ -1,10 +1,12 @@
 <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <!--
 	Transitive by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<html>
 	<head>
 		<title>궁 예약 </title>
 		<!-- <script language="javascript">
@@ -18,18 +20,19 @@
 </script> -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/hmain.css" />
+		<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
+		<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
 	</head>
 	
 	<body onload="javascript:pop()">
 
 		<!-- Header -->
-		<header role="header" data-include="hheader.html" id="hheader">
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
 			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
 		</header>
 
         <!-- Nav -->
-        <nav id="hmenu" data-include="hnav.html"></nav>
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
 
 		<!-- Banner -->
 			<section id="banner">
@@ -50,7 +53,7 @@
 					<div>
 						<div class="box">
 							<div class="image fit">
-								<img src="images/image01.jpg" alt="" />
+								<img th:src=@{/static/images/image01.jpg} alt="" />
 							</div>
 							<div class="content">
 								<header class="align-center">
@@ -112,7 +115,7 @@
 						<div>
 							<div class="box">
 								<div class="image fit">
-									<img src="images/movieset.jpg" alt="" />
+									<img th:src=@{static/images/movieset.jpg} alt="" />
 								</div>
 								<div class="content">
 									<header class="align-center">
@@ -131,7 +134,7 @@
 						<div>
 							<div class="box">
 								<div class="image fit">
-									<img src="images/suragan.png" alt="" />
+									<img th:src=@{/static/images/suragan.png} alt="" />
 								</div>
 								<div class="content">
 									<header class="align-center">
@@ -208,18 +211,18 @@
 			</section>
 		</div>
 		<!-- Footer -->	
-		<footer id="footer" class="wrapper" data-include="footer.html"></footer>
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="assets/js/house.js"></script>
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script>
 
 	</body>
-	<script src="http://code.jquery.com/jquery.min.js"></script>
+<!--  <script src="http://code.jquery.com/jquery.min.js"></script>
 	<script>
 		$(function () {
 			includeLayout();
@@ -237,5 +240,5 @@
 				});
 			});
 		}
-	</script>
+	</script> -->
 </html>
