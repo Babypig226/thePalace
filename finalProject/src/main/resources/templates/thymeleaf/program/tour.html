@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>전통문화프로그램</title>
+<title>한국전통공예프로그램</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
 	media="all" />
 <link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
+
 </head>
 <body>
 <!-- Header -->
@@ -15,13 +18,14 @@
 	</header>
 	<!-- Nav -->
 	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
-	
-<!-- Banner -->
+
+
+	<!-- Banner -->
 	<div id="header-wrapper">
 		<div id="header" class="container">
 			<div id="logo">
 				<h1>
-					<a href="interior_supplies.html">체험프로그램</a>
+					<a th:href="@{/prmain/programMain}">체험프로그램</a>
 				</h1>
 			</div>
 		</div>
@@ -29,10 +33,10 @@
 	<div id="menu-wrapper">
 		<div id="menu" class="container">
 			<ul>
-				<li><a href="../program/Made"><font size="4">공예체험프로그램</font></a></li>
-	            <li><a href="../program/culture"><font size="4">전통문화프로그램</font></a></li>
-	            <li><a href="../program/tour"><font size="4">투어프로그램</font></a></li>
-	            <li><a href="../program/fitness"><font size="4">피트니스프로그램</font></a></li>
+			<li><a th:href="@{/program/mainlist(programCategory=made)}"><font size="4">공예체험프로그램</font></a></li>
+            <li><a th:href="@{/program/culture(programCategory=culture)}"><font size="4">전통문화프로그램</font></a></li>
+            <li><a th:href="@{/program/tour(programCategory=tour)}"><font size="4">투어프로그램</font></a></li>
+            <li><a th:href="@{/program/fitness(programCategory=fitness)}"><font size="4">피트니스프로그램</font></a></li>
 			</ul>
 		</div>
 	</div>
@@ -42,87 +46,31 @@
 			<div class="grid-style">
 				<div>
 						<div class="content">
+						<div th:each = "p : ${list}">
 							<div class="image fit">
-								<img src="../images/program/dado1.jpg" alt="" />
+								<img th:src="@{/static/programImage/upload/} + ${p.programImage}" />
 							</div>
 							<header class="align-center">
-								<h2>다도체험</h2>
-							</header>
-							<hr />
-							<p align="left">
-							기간 : 2020.09.16 ~ 2020.10.22<br/>
-							강사명 : 진팡쭈<br/> 
-							소요시간: 2시간내외<br/>
-							프로그램주소 : the palace 궁<br/>
-							이용요금 : 30,000원<br/>
-							</p>
-							<div class="align-center">
-								<a href="programDetail.html" class="button alt">상세보기</a>
-							</div>
-						</div>
-				</div>
-
-				<div>
-						<div class="content">
-							<div class="image fit">
-								<img src="../images/program/craft1.PNG" alt="" />
-							</div>
-							<header class="align-center">
-								<h2>경복궁 투어</h2>
+								<h2>[[${p.programName}]]</h2>
 							</header>
 							<hr />
 							<p align="center">
-								우리나라의 전통공예품과 <br /> 현대가 어우러진 공예품을 구경하세요
+								강사번호 : [[${p.teacherNo}]] <br />
+								프로그램 가격 : [[${p.programPrice}]]
 							</p>
 							<div class="align-center">
-								<a href="" class="button alt">더보기</a>
+								<a th:href="@{/program/programDetail(programNo=${p.programNo})}" class="button alt">더보기</a>
 							</div>
 						</div>
-				</div>
-				
-				<div>
-						<div class="content">
-							<div class="image fit">
-								<img src="../images/program/line1.PNG" alt="" />
-							</div>
-							<header class="align-center">
-								<h2>한국민속촌 투어</h2>
-							</header>
-							<hr />
-							<p align="center">
-								우리나라의 고유의 빛깔 아름다운 <br /> 나전칠기를 구경해보세요
-							</p>
-							<div class="align-center">
-								<a href="ipgoList.html" class="button alt">더보기</a>
-							</div>
 						</div>
 				</div>
-				
-				<div>
-						<div class="content">
-							<div class="image fit">
-								<img src="../images/program/na1.PNG" alt="" />
-							</div>
-							<header class="align-center">
-								<h2>삼청동 투어</h2>
-							</header>
-							<hr />
-							<p align="center">
-								우리나라의 고유의 빛깔 아름다운 <br /> 나전칠기를 구경해보세요
-							</p>
-							<div class="align-center">
-								<a href="ipgoList.html" class="button alt">더보기</a>
-							</div>
-						</div>
-				</div>
-
 
 			</div>
 		</div>
 	</section>
 
 	
-<!-- Footer -->
+	<!-- Footer -->
 	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
@@ -132,6 +80,4 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/program.js"></script>
 </body>
-
 </html>
-	

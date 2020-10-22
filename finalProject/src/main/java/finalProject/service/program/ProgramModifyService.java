@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import finalProject.command.AuthInfo;
 import finalProject.command.FileName;
 import finalProject.command.ProgramListCommand;
 import finalProject.domain.ProgramDTO;
@@ -28,6 +29,7 @@ public class ProgramModifyService {
 
 	public String programModify(ProgramListCommand programListCommand, HttpSession session, Model model)
 			throws Exception {
+		System.out.println("programModify");
 		ProgramDTO dto = new ProgramDTO();
 		dto.setProgramNo(programListCommand.getProgramNo());
 		dto.setProgramName(programListCommand.getProgramName());
@@ -42,8 +44,10 @@ public class ProgramModifyService {
 		dto.setProgramDate(programDate);
 		dto.setPOption(programListCommand.getPOption());
 		System.out.println("programModify : " + dto.getProgramNo());
+		String userId = ((AuthInfo)session.getAttribute("authInfo")).getId();
+		System.out.println("userId : " + userId);
 		
-		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, "1111", dto.getProgramNo().toString());
+		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, userId, dto.getProgramNo().toString());
 		ProgramDTO pro = programMapper.getProgramList(startEndPageDTO).get(0);
 		List<FileName> list = (List<FileName>) session.getAttribute("filelist");
 
@@ -58,7 +62,7 @@ public class ProgramModifyService {
 		String fileSizeTotal ="";
 		File file = null;
 		String path1 = "/static/programImage/upload";
-		String filePath = session.getServletContext().getRealPath(path1);
+		String filePath = "E:/국비수업/git/thePalace/finalProject/src/main/resources"+path1;
 
 		for (MultipartFile mf : programListCommand.getImage()) {
 			String original = mf.getOriginalFilename();

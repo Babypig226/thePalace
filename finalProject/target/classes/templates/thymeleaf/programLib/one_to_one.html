@@ -45,7 +45,7 @@
 							<div th:each="lib : ${pliblist}">
 								<tr>
 									<td>[[${lib.plibNo}]]</td>
-									<td><a href = "#">[[${lib.plibSubject}]]</a></td>
+									<td><a th:href = "@{/pgmypage/libDetail(plibNo=${lib.plibNo})}">[[${lib.plibSubject}]]</a></td>
 									<td><span th:text = "${#dates.format(lib.plibDate, 'yyyy-MM-dd')}"></span></td>								
 									<td>[[${lib.programNo}]]</td>
 								</tr>

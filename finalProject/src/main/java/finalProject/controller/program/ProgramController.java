@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import finalProject.command.FileName;
 import finalProject.command.ProgramListCommand;
+import finalProject.service.admin.tch.TeacherListService;
 import finalProject.service.file.FileDelService;
+import finalProject.service.program.CultureService;
+import finalProject.service.program.FitnessService;
+import finalProject.service.program.MainListService;
 import finalProject.service.program.ProgramDelService;
 import finalProject.service.program.ProgramDetailService;
 import finalProject.service.program.ProgramListService;
 import finalProject.service.program.ProgramModifyService;
 import finalProject.service.program.ProgramService;
+import finalProject.service.program.TourService;
 
 @Controller
 @RequestMapping("program")
@@ -36,24 +41,38 @@ public class ProgramController {
 	ProgramDelService programDelService;
 	@Autowired
 	ProgramModifyService programModifyService;
+	@Autowired
+	TeacherListService teacherListService;
+	@Autowired
+	MainListService mainListService;
+	@Autowired
+	CultureService cultureService;
+	@Autowired
+	FitnessService fitnessService;
+	@Autowired
+	TourService tourService;
 	
-	@RequestMapping("Made")
-	public String made() {
+	@RequestMapping("mainlist")
+	public String mainlist(Model model) throws Exception{
+		mainListService.mainlist(model);
 		return "thymeleaf/program/traditional_craft";
 	}
 	
 	@RequestMapping("culture")
-	public String culture() {
+	public String culture(Model model) {
+		cultureService.culture(model);
 		return "thymeleaf/program/traditional_culture";
 	}
 	
 	@RequestMapping("tour")
-	public String tour() {
+	public String tour(Model model) {
+		tourService.tour(model);
 		return "thymeleaf/program/tour";
 	}
 	
 	@RequestMapping("fitness")
-	public String fitness() {
+	public String fitness(Model model) {
+		fitnessService.fitness(model);
 		return "thymeleaf/program/fitness";
 	}
 	
@@ -65,7 +84,9 @@ public class ProgramController {
 	}
 	
 	@RequestMapping("programForm")
-	public String programForm() {
+	public String programForm(@RequestParam(value = "page", defaultValue = "1")Integer page,
+							Model model) {
+		teacherListService.getTeacherList(model, page);
 		return "thymeleaf/program/programInsert"; 
 	}
 	

@@ -47,7 +47,7 @@ public class PgMypageController {
 	public String programLib(@RequestParam(value = "page", defaultValue = "1") Integer page,
 								Model model) throws Exception{
 		prolibListService.prolibList(model, page);
-		return "v-program/ProLibList";
+		return "thymeleaf/programLib/one_to_one";
 	}
 	
 	@RequestMapping(value="programLibWrite", method = RequestMethod.GET)

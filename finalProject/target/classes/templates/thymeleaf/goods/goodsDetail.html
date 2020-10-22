@@ -47,11 +47,10 @@
 
 							</select><br />
 
-
 							<div class="align-center">
-								<input type="submit" class="button alt" value="장바구니담기" />&nbsp;
-								<a href="wishList.html" class="button alt">위시리스트</a>&nbsp; <a
-									href="userorder/orderForm.html" class="button alt">바로결제</a>&nbsp;
+								<input type="submit" class="button alt" value="장바구니" />&nbsp;
+								<a th:href="@{/userorder/wishList(goodsNo = ${gdto.goodsNo})}" class="button alt">위시리스트</a>&nbsp; <a
+									th:href="@{/userorder/orderForm(goodsNo = ${gdto.goodsNo})}" class="button alt">바로결제</a>&nbsp;
 							</div>
 							</form>
 						</header>

@@ -32,7 +32,7 @@ public class EtrainingController {
 	DepListService depListService;
 	
 	@RequestMapping("list")
-	public String etrainingList(Model model, @RequestParam(value = "page", defaultValue = "1")String page) {
+	public String etrainingList(Model model, @RequestParam(value = "page", defaultValue = "1")Integer page) {
 		etrainingListService.getEtrainingList(model, page);
 		return "v-admin-etrn/admin-etraining-list";
 	}

@@ -101,4 +101,9 @@
 		join program pr
 		on pr.program_no = pg.program_no
 	 </select>
+	 
+	 <delete id="cartdelete" parameterType="string">
+	 	delete from program_basket
+	 	where user_id = #{userId}
+	 </delete>
 </mapper>

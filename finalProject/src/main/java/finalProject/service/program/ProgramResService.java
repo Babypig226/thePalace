@@ -11,26 +11,33 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import finalProject.command.AuthInfo;
 import finalProject.command.ProResCommand;
 import finalProject.domain.PgbasketDTO;
 import finalProject.domain.ProResDTO;
+import finalProject.domain.ProgramDTO;
+import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ProResMapper;
+import finalProject.mapper.ProgramMapper;
 
 @Component
 @Service
 public class ProgramResService {
 	@Autowired
 	ProResMapper proResMapper;
+	@Autowired
+	ProgramMapper programMapper;
 
 	public void resInfoInsert(ProResCommand proResCommand,
 								Model model, HttpSession session) throws Exception{
 		System.out.println("programResService");
-		PgbasketDTO cart = new PgbasketDTO();
+
 		ProResDTO prdto = new ProResDTO();
+		String userId = ((AuthInfo)session.getAttribute("authInfo")).getId();
+		prdto.setUserId(userId);
 		prdto.setRsContent(proResCommand.getRsContent());
 		prdto.setRsPh(proResCommand.getRsPh());
 		prdto.setReservationCount(proResCommand.getReservationCount());
-		prdto.setUserId("1111");
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String musingDate = fm.format(proResCommand.getUsingDate());
 		Timestamp usingDate = Timestamp.valueOf(musingDate);

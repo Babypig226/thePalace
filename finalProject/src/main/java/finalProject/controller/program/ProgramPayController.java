@@ -38,7 +38,7 @@ public class ProgramPayController {
 	public String payInfoInsert(@Validated ProResCommand proResCommand,
 							Model model, HttpSession session) throws Exception{
 		programResService.resInfoInsert(proResCommand, model, session);
-		return "thymeleaf/programOrder/orderOk";
+		return "redirect:/programPay/payInfo";
 	}
 	
 	@RequestMapping(value = "payInfo", method = RequestMethod.GET)
@@ -51,15 +51,16 @@ public class ProgramPayController {
 	public String payInfoWrite(@Validated ProgramPayCommand programPayCommand,
 							Model model, HttpSession session) throws Exception{
 		programPayService.payInfoInsert(programPayCommand, model, session);
-		return "thymeleaf/programOrder/payOk";
+		return "redirect:/programPay/finalInfo";
 	}
 	
 	@RequestMapping("finalInfo")
-	public String finalInfo(Model model) throws Exception{
+	public String finalInfo(Model model, HttpSession session, String userId) throws Exception{
 		//proPayResService.payresInsert();
 		programResService.resInfoList(model);
 		programPayService.payInfoList(model);
 		programCartService.programCartList(model);
+		programCartService.programCartDel(session, userId);
 		return "thymeleaf/programOrder/finalInfo";
 	}
 }

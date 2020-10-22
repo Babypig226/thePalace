@@ -4,7 +4,7 @@
 	
 <mapper namespace="finalProject.mapper.ProgramMapper">
 	<sql id="basecolumn">
-		PROGRAM_NO, PROGERAM_CATEGORY, PROGRAM_NAME, MAX_COUNT, PROGRAM_CONTENT, PROGRAM_IMAGE, PROGRAM_PRICE,
+		PROGRAM_NO, PROGRAM_CATEGORY, PROGRAM_NAME, MAX_COUNT, PROGRAM_CONTENT, PROGRAM_IMAGE, PROGRAM_PRICE,
 		P_OPTION, P_OPTION_PRICE, PROGRAM_ADDR, PROGRAM_DATE, PROGRAM_REG, TEACHER_NO, USING_COUNT
 	</sql>
 	
@@ -17,7 +17,7 @@
 	
 	<resultMap type="finalProject.domain.ProgramDTO" id="baseProgram">
 		<id column="PROGRAM_NO" jdbcType="VARCHAR" property="programNo" />
-		<result column="PROGERAM_CATEGORY" jdbcType="VARCHAR" property="programCategory"/>
+		<result column="PROGRAM_CATEGORY" jdbcType="VARCHAR" property="programCategory"/>
 		<result column="PROGRAM_NAME" jdbcType="VARCHAR" property="programName"/>
 		<result column="MAX_COUNT" jdbcType="BIGINT" property="maxCount"/>
 		<result column="PROGRAM_CONTENT" jdbcType="VARCHAR" property="programContent"/>
@@ -43,7 +43,7 @@
 						</if>
 					</trim>
 					order by program_reg desc))
-		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
+		where rn between #{startPage} and #{endPage}
 	</select>
 
 	<update id="programUpdate" parameterType="finalProject.domain.ProgramDTO">
@@ -71,4 +71,27 @@
 		where program_no = #{programNo}
 	</delete>
 	
+	<select id="mainlist" resultMap="baseProgram">
+		select <include refid="basecolumn" /> 
+		from program
+		where program_category = 'made'
+	</select>
+	
+	<select id="culture" resultMap="baseProgram">
+		select <include refid="basecolumn" /> 
+		from program
+		where program_category = 'culture'
+	</select>
+	
+	<select id="tour" resultMap="baseProgram">
+		select <include refid="basecolumn" /> 
+		from program
+		where program_category = 'tour'
+	</select>
+	
+	<select id="fitness" resultMap="baseProgram">
+		select <include refid="basecolumn" /> 
+		from program
+		where program_category = 'fitness'
+	</select>
 </mapper>

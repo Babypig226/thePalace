@@ -29,12 +29,13 @@
 					<input type="hidden" name="programNo" th:value="${programNo}"/>
 					<div class="table-wrapper">
 					<p>정말로 삭제 하시겠습니까?</p>
+					<p>삭제를 원하시다면 프로그램명을 입력해주세요</p>
 					<table cellpadding="0" cellspacing="0">
 						<tr>
 							<td colspan=2 align=center>
 							<input type="text" name="programName" th:value="${programName}"/>
 							<span th:text="${valid_name}"></span>
-							<a href="programlist" class="button">목록으로</a>
+							<a th:href="@{/program/programlist}" class="button">목록으로</a>
 							<input value="삭제하기 " class="button" type="submit"></td>
 						</tr>
 						</table>

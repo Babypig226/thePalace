@@ -129,12 +129,12 @@
 									</td>
 									<td bgcolor="white">
 										<div th:each="file, numStat : ${imglist}">
-											<!-- 저장된 사진명 : <span th:text=${file.programImage} " id="oldImage">[[${file.file}]]</span></br> -->
+											<!-- 저장된 사진명 : <span th:text=${file.programImage} " id="oldImage">[[${file.storeFileName}]]</span></br> -->
 											<img
-												th:src="@{/static/programImage/upload/} + ${file.file}"></br>
+												th:src="@{/static/programImage/upload/} + ${file.storeFileName}"></br>
 											<input type="button" value="삭제"
 												th:id="${'btn'+numStat.index}"
-												th:onclick="'fileDel(\''+${file.file}+'\',this)'" />
+												th:onclick="'fileDel(\''+${file.storeFileName}+'\',this)'" />
 										</div>
 									</td>
 								</tr>
@@ -191,9 +191,9 @@
 									<td colspan="5">
 										<!-- <a href="proModifyPro"> --> 
 										<input type="submit" value="수정완료 " id="modify" /></a> 
-										<a href="programDel">
+										<a th:href="@{/program/programDel}">
 											<input type="button" value="삭제하기 " id="del" /></a> 
-										<a href="programList"> 
+										<a th:href="@{/program/programList}"> 
 											<input type="button" value="목록으로 " id="home" /></a>
 									</td>
 								</tr>

@@ -35,10 +35,10 @@
    <div id="menu-wrapper">
       <div id="menu" class="container">
          <ul>
-            <li><a href="../program/Made"><font size="4">공예체험프로그램</font></a></li>
-            <li><a href="../program/culture"><font size="4">전통문화프로그램</font></a></li>
-            <li><a href="../program/tour"><font size="4">투어프로그램</font></a></li>
-            <li><a href="../program/fitness"><font size="4">피트니스프로그램</font></a></li>
+            <li><a th:href="@{/program/mainlist(programCategory=made)}"><font size="4">공예체험프로그램</font></a></li>
+            <li><a th:href="@{/program/culture(programCategory=culture)}"><font size="4">전통문화프로그램</font></a></li>
+            <li><a th:href="@{/program/tour(programCategory=tour)}"><font size="4">투어프로그램</font></a></li>
+            <li><a th:href="@{/program/fitness(programCategory=fitness)}"><font size="4">피트니스프로그램</font></a></li>
          </ul>
       </div>
    </div>

@@ -16,4 +16,5 @@ public interface ProgramBasketMapper {
 	public List<PgbasketDTO> pgbasketlist() throws Exception;
 	public void cartUpdate() throws Exception;
 	public Integer cartInsert(PgbasketDTO pgdto) throws Exception;
+	public void cartdelete(String userId);
 }

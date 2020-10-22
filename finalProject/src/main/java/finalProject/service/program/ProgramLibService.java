@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import finalProject.command.AuthInfo;
 import finalProject.command.ProgramLibCommand;
 import finalProject.domain.ProgramDTO;
 import finalProject.domain.ProgramLibDTO;
@@ -29,14 +30,15 @@ public class ProgramLibService {
 	public String writePro(ProgramLibCommand programLibCommand,
 							HttpServletRequest request) throws Exception{
 		String location = "";
-		HttpSession session = request.getSession();
 
 		ProgramLibDTO programLibDTO = new ProgramLibDTO();
 		
 		programLibDTO.setProgramNo(programLibCommand.getProgramNo());
 		programLibDTO.setPlibSubject(programLibCommand.getPlibSubject());
 		programLibDTO.setPlibContent(programLibCommand.getPlibContent());
-		programLibDTO.setUserId("1111");
+		HttpSession session = request.getSession();
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");		
+		programLibDTO.setUserId(authInfo.getId());
 		
 		String path = "/static/programLib/upload";
 		//String filePath = session.getServletContext().getRealPath(path);

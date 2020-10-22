@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import finalProject.command.AuthInfo;
 import finalProject.command.PgbasketCommand;
 import finalProject.domain.PgbasketDTO;
 import finalProject.domain.ProgramDTO;
@@ -60,5 +61,13 @@ public class ProgramCartService {
 			model.addAttribute("totPrice", totPrice);
 			
 		model.addAttribute("pglist", pglist);
+	}
+
+
+	public void programCartDel(HttpSession session, String userId) throws Exception{
+		System.out.println("programCartDel");
+		userId = ((AuthInfo)session.getAttribute("authInfo")).getId();
+		programBasketMapper.cartdelete(userId);	
+		
 	}
 }

@@ -17,8 +17,12 @@ public class EtrainingListService {
 	@Autowired
 	EtrainingMapper etrainingMapper;
 
-	public void getEtrainingList(Model model, String page) {
-		StartEndPageDTO dto = new StartEndPageDTO(1L, 1L, null, null);
+	public void getEtrainingList(Model model, Integer page) {
+		int limit = 10;
+		int limitPage = 10;
+		Long startRow = ((long)page -1 ) * 10 +1;
+		Long endRow = startRow + limit -1;
+		StartEndPageDTO dto = new StartEndPageDTO(startRow, endRow, null, null);
 		List<EtrainingDTO> lists = etrainingMapper.getEtrainingList(dto);
 		for (int i = 0; i < lists.size(); i++) {
 			if(lists.get(i).getNecessity().equals("O")) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import finalProject.command.AuthInfo;
 import finalProject.domain.ProgramDTO;
 import finalProject.domain.StartEndPageDTO;
 import finalProject.mapper.ProgramMapper;
@@ -21,7 +22,8 @@ public class ProgramDelService {
 
 	public String programDel(String programNo, String programName,
 							HttpSession session, Model model) throws Exception{
-		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, "1111", programNo);
+		String userId = ((AuthInfo)session.getAttribute("authInfo")).getId();
+		StartEndPageDTO startEndPageDTO = new StartEndPageDTO(1L, 1L, userId, programNo);
 		ProgramDTO dto = programMapper.getProgramList(startEndPageDTO).get(0);
 		
 		if(programName.equals(dto.getProgramName())) {
@@ -29,10 +31,12 @@ public class ProgramDelService {
 			
 			String [] images = dto.getProgramImage().split("`");
 			String path1 = "/staic/programImage/upload";
-			String filePath = session.getServletContext().getRealPath(path1);
+			String filePath = "E:/국비수업/git/thePalace/finalProject/src/main/resources"+path1;
 			File file = null;
 			for (String ImageName : images) {
+				System.out.println("ImageName : " + ImageName);
 				file = new File(filePath + "/" + ImageName);
+				System.out.println("file : "+file);
 				if(file.exists()) {
 					file.delete();
 				}

@@ -45,8 +45,15 @@
 								<td bgcolor = "white" >
 									<div align="center"><b>강사번호 </b></div>
 								</td>
-								<td bgcolor = "white"><input name="teacherNo" type="text" size="10"
-									maxlength="10" /></td>
+								<td bgcolor = "white">
+									<select name = "teacherNo">
+										<div th:each = "t :${list}">
+											<option th:value="${t.teacherNo}">[[${t.teacherName}]] / [[${t.teacherType}]]</option>
+										</div>
+									</select>
+									<!-- 
+									<input name="teacherNo" type="text" size="10"
+									 maxlength="10" /></td> -->
 							</tr>
 							
 							
@@ -57,10 +64,10 @@
 								<td bgcolor = "white"><!-- <input name="programCategory" type="text" maxlength="70" /> -->
 									
 									<select th:name = "programCategory" >
-										<option th:value="공예">공예</option>
-										<option th:value="전통문화">전통문화</option>
-										<option th:value="피트니스">피트니스</option>
-										<option th:value="기타">기타</option>
+										<option th:value="made">공예</option>
+										<option th:value="culture">전통문화</option>
+										<option th:value="fitness">피트니스</option>
+										<option th:value="tour">투어</option>
 									</select>
 								</td>
 							</tr>

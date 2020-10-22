@@ -17,5 +17,9 @@ public interface ProgramMapper {
 	public ProgramDTO programDetail(ProgramDTO pgdto) throws Exception;
 	public void programUpdate(ProgramDTO dto) throws Exception;
 	public void programDelete(String programNo) throws Exception;
+	public List<ProgramDTO> mainlist() throws Exception;
+	public List<ProgramDTO> culture();
+	public List<ProgramDTO> tour();
+	public List<ProgramDTO> fitness();
 
 }
