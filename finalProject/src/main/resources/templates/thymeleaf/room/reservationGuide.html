@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
 <title>실시간예약</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="assets/css/default.css" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="assets/css/hmain.css" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
 </head>
 <body>
 		<!-- Header -->
-		<header role="header" data-include="hheader.html" id="hheader">
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
 			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
 		</header>
 
         <!-- Nav -->
-        <nav id="hmenu" data-include="hnav.html"></nav>
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
 	
 	
 	
@@ -32,142 +34,77 @@
 		<div id="menu" class="container">
 			<ul>
 				<li><a href="reservationGuide.html"><font size = "4">실시간예약 </font></a></li>
-				<li><a href="guide.html"><font size = "4">예약안내 </font></a></li>
+				<li><a th:href="@{/reservation/guide}"><font size = "4">예약안내 </font></a></li>
 				<li><a href="structure.html"><font size = "4">객실배치도 </font></a></li>
-				<li><a href="room/roomList.html"><font size = "4">객실등록 -관리자만 보임 </font></a></li>
 			</ul>
 			
 		</div>
 	</div>
+	<!-- Table -->
+	
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-				
-					<h2 class="align-center">RESERVATION</h2>
-					<p class="align-center">실시간 예약  </p>
-					
-					
-					<div class="table-wrapper">
-					</div>
-					<section>
-						<div class="box">
-							<div class="content">
-								<p><b>선택한 객실</b> : [외송]</p>
-								<hr />
-								<form action="#" method="post">
-									
-										<div class="field">
-										<label for="dept">기간선택 </label>
-										<div class="field half first">
-											<select name="dept" id="dept">
-												<option value="">머무르실 기간 선택 </option>
-												<option value="1">1박 </option>
-											</select>
-										</div>	
-
-										
-										<div class="number">
-								<p>
-									<label for="dept">인원 </label> <a href="#" id="increase">▲</a>&nbsp;<span
-										id="UpDown">1</span> <a href="#" id="decrease">▼</a>
-								</p>
-						
-							</div>
-							
-							
-		
-					<label for="dept">금액 </label>
+					<h2 class="align-center">객실 예약하기 </h2>
 					
 					<div class="table-wrapper">
 						<table>
+						
+							<thead>
 								<tr>
-									<td>객실금액 </td>
-									<td>0원 </td>
-								</tr>	
-								<tr>
-									<td>인원추가금액 </td>
-									<td>0원 </td>
+									<th>객실명 </th>
+									<th>객실사진 </th>
+									<th>이용일 </th>
+									<th>인원  </th>
+									<th>이용금액  </th>
+									<th>실시간예약 </th>
 								</tr>
+							</thead>
+							<tbody>
+							<th:block th:each = " dto, cnt : ${lists}" >
 								<tr>
-									<td>옵션금액 </td>
-									<td>0원 </td>
+									<td>[[${dto.roomName}]]</td>
+									<td><img th:src="@{'/static/house/upload/' + ${dto.roomImage}}" height = "50" width = "50"></td>
+									<td th:text = "${#dates.format(dto.roomRegist,'yyyy-MM-dd')}" ></td>
+									<td>[[${dto.rMaxCount}]]</td>
+									<td>[[${dto.roomPrice}]]</td>
+									<td><a th:href="@{/reservation/reservationInfo(roomNo=${dto.roomNo})}">
+									<input type="button" value="예약하기" id="reservation" class="button" /></a></td> 
 								</tr>
+								
+								</th:block>
+							</tbody>
+							<tfoot>
+								<tr align="center">
+									<td colspan="5"><a>1</a></td>
+								</tr>
+								
+							</tfoot>
+					
 						</table>
-						<p><b><label for="dept">▶총 금액 : 0원  </label> </b></p>
+						
 					</div>
 				</div>
-	</form>
 			</div>
-	
 		</div>
-	
 	</section>
-					
-					
-					<p align="center">기간선택과 인원을 기입하시면 다음 단계로 넘어가실 수 있습니다.</p>
-					<ul class="actions align-center">
-										<li><input value="다음단계 " class="button" type="submit" onclick="location.href='reserve2.html'"></li>
-									</ul>
-					
-									</div>
-		
-							</div>
-						</div>
-					</section>
-					
+	
 				
+					
+</form>				
 <!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="footer.html"></footer>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/house.js"></script>
-</body>
+			<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script></body>
+			
+
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script>
-	$(function() {
-		includeLayout();
-	});
-
-	function includeLayout() {
-		var includeArea = $('[data-include]');
-		var self, url;
-		$.each(includeArea, function() {
-			self = $(this);
-			url = self.data("include");
-			self.load(url, function() {
-				self.removeAttr("data-include");
-			});
-		});
-	}
-</script>
-<script type="text/javascript">
-	$(function() {
-		$('#decrease').click(function(e) {
-			e.preventDefault();
-			var stat = $('#UpDown').text();
-			var num = parseInt(stat, 10);
-			num--;
-			if (num <= 0) {
-				num = 1;
-			}
-			$('#UpDown').text(num);
-		});
-		$('#increase').click(function(e) {
-			e.preventDefault();
-			var stat = $('#UpDown').text();
-			var num = parseInt(stat, 10);
-			num++;
-
-			if (num > 10) {
-				num = 10;
-			}
-			$('#UpDown').text(num);
-		});
-	});
-</script>
+	
 </html>

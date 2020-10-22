@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="finalProject.mapper.house.fixtures.FixturesMapper">
+
+<sql id="basic">
+	EQUIP_NO,EQUIP_NAME,EQUIP_QTY,EORDER_DATE,EORDER_QRY,
+	CLEAN_BED,STR_OK,CHANGE_BED,CHANGE_AMN,CHECK_TEMP,CLEAN_ROOM,CHECK_EQUIP,
+	CHECK_DATE,ROOM_NO
+</sql>
+
+<insert id="fixturesInsert" parameterType="finalProject.domain.house.FixturesDTO">
+	insert into management (<include refid="basic" />)
+	values (#{equipNo},#{equipName},#{equipQty},#{eOrderDate},#{eOrderQry},'1','1','1','1','1','1','1','1111-11-11',#{roomNo})
+</insert>
+
+<select id="getFixturesList" resultMap="FixturesList">
+	select EQUIP_NO,ROOM_NO,EQUIP_NAME,EQUIP_QTY,EORDER_DATE
+	from management
+</select>
+
+<select id="getFixturesView" resultMap="fixturesView" parameterType="string">
+	select EQUIP_NO,ROOM_NO,EQUIP_NAME,EQUIP_QTY,EORDER_DATE,EORDER_QRY
+	from management 
+	where equip_no = #{equipNo}
+</select>
+
+<update id="fixturesUpdate" parameterType="finalProject.domain.house.FixturesDTO">
+	update management
+	set ROOM_NO = #{roomNo}, EQUIP_NAME = #{equipName}, EQUIP_QTY = #{equipQty},
+	 EORDER_QRY = #{eOrderQry}
+	where equip_no = #{equipNo}
+</update>
+<delete id="fixturesDelete" parameterType="string">
+	delete from management
+	where equip_no = #{equipNo}
+</delete>
+
+<resultMap type="finalProject.domain.house.FixturesDTO" id="fixturesView">
+	<id column="EQUIP_NO" jdbcType="VARCHAR" property="equipNo"/>
+	<result column="ROOM_NO" jdbcType="VARCHAR" property="roomNo" />
+	<result column="EQUIP_NAME" jdbcType="VARCHAR" property="equipName" />
+	<result column="EQUIP_QTY" jdbcType="BIGINT" property="equipQty" />
+	<result column="EORDER_DATE" jdbcType="TIMESTAMP" property="eOrderDate" />
+	<result column="EORDER_QRY" jdbcType="BIGINT" property="eOrderQry" />
+</resultMap>
+
+<resultMap type="finalProject.domain.house.FixturesDTO" id="FixturesList">
+	<id column="EQUIP_NO" jdbcType="VARCHAR" property="equipNo"/>
+	<result column="ROOM_NO" jdbcType="VARCHAR" property="roomNo" />
+	<result column="EQUIP_NAME" jdbcType="VARCHAR" property="equipName" />
+	<result column="EQUIP_QTY" jdbcType="BIGINT" property="equipQty" />
+	<result column="EORDER_DATE" jdbcType="TIMESTAMP" property="eOrderDate" />
+</resultMap>
+
+</mapper>
+
+									
+									

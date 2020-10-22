@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>객실 상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
+</head>
+<body>
+	<!-- Header -->
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
+        
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					
+						<h2 class="align-center">객실 상세보기</h2>
+						<p>
+							▶객실 정보와 사진을 수정 후 "수정하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
+							가능합니다.
+						</p>
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+						<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>객실번호</b></div>
+								</td>
+								<td>[[${dto.roomNo}]]</td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>작성자</b></div>
+								</td>
+								<td>[[${dto.employeeNo}]]</td>
+							</tr>
+							
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>객실명</b> </div>
+								</td>
+								<td>[[${dto.roomName}]]</td>
+							</tr>
+
+
+						<tr>
+								<td bgcolor = "white">
+									 <div align="center"><b>최대 인원</b> </div>
+								</td>
+								<td>[[${dto.rMaxCount}]]</td>								
+						</tr>
+
+						
+						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>이용요금</b> </div>
+								</td>
+								<td>[[${dto.roomPrice}]]</td>
+						</tr>
+						
+						<!-- 
+						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>체크인 시간</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="roomCheckIn" type="time" maxlength="70" /></td>
+						</tr>
+						
+						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>체크아웃 시간</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="roomCheckOut" type="time" maxlength="70" /></td>
+						</tr>
+							
+					 -->
+							
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>상세설명</b> </div>
+								</td>
+								<td>
+								<span th:utext="${#strings.replace(dto.roomContent, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></span>
+								</td>
+							</tr>
+
+ 
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>객실 파일첨부</b></div>
+								</td>
+								  <td>
+                           <img th:src="@{'/static/house/upload/' + ${dto.roomImage}}" height = "350" width = "550"/>
+                        </td>
+							</tr>
+
+								<tr align="center">
+									<td colspan="5" bgcolor="white"> 
+									<a th:href="@{/roomMake/roomModify(roomNo=${dto.roomNo})}">
+									<input type="button" value="수정하기 " id="modify" /></a> 
+									<a th:href="@{/roomMake/roomDelete(roomNo=${dto.roomNo})}"><input type="button" value="삭제하기 "
+											id="del" /></a> <a th:href="@{/roomMake/roomList}"><input
+											type="button" value="목록으로 " id="home" /></a>
+									</td>
+								</tr>
+						</table>
+						</div>
+								
+
+						</div>
+
+				
+				</div>
+
+			</div>
+	
+	</section>
+
+
+			<!-- Footer -->
+			<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</html>

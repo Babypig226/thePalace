@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/static/assets/css/fullpage.min.css}" />
+    <link rel="stylesheet" th:href="@{/static/assets/css/houseFullPage1.css}" />
+    <script th:src="@{/static/assets/js/fullpage.min.js}"></script>
+</head>
+<body>
+<!-- 금송 -->
+    <div id="full-page">
+        
+            <div class="section s1">
+				               
+            </div>
+
+            <div class="section s2">
+                
+            </div>
+
+            <div class="section s3">
+                
+            </div>
+
+            <div class="section s4">
+                
+            </div>
+
+ 			<div class="section s5">
+               
+            </div>
+            
+            <div class="section s6">
+                
+            </div>
+            
+            <div class="section s7">
+                
+            </div>
+            
+            <div class="section s8">
+                
+            </div>
+            
+            <div class="section s9">
+                
+            </div>
+                      
+        </div>
+
+
+    <script>
+        new fullpage('#full-page', {
+        	licenseKey: '',
+        	//sectionsColor: ['#ff0000', '#aaaaaa', '#ooooff', '#00ff00', '#0000ff', '#aaaaaa'],
+        	navigation: true,
+        	navigationTooltips: ['','','','','','','','','',''],
+        	scrollingSpeed: 1000,
+        	onLeave: function(origin, destination, direction) {
+        		console.log('onLeave');
+        	},
+        	afterLoad: function(origin, destination, direction) {
+        		if(destination.index == 1) {
+        			
+        		}
+        	},
+        });
+    </script>
+    <!-- Footer -->
+			<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script>
+
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+    
+</body>
+</html>

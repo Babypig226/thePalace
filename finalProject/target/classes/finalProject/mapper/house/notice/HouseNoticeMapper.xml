@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="finalProject.mapper.house.notice.HouseNoticeMapper">
+	
+	<sql id="basic">
+		NOTICE_NO,NOTICE_SUB,NOTICE_CON,READ_COUNT,NOTICE_DATE,EMPLOYEE_NO
+	</sql>
+	
+	<insert id="noticeInsert" parameterType="finalProject.domain.house.HouseNoticeDTO">
+		insert into notice2 (<include refid="basic" />)
+		values (#{noticeNo},#{noticeSub},#{noticeCon},0,sysdate,#{employeeNo})
+	</insert>
+	
+	<select id="getNoticeList" resultMap="noticeList">
+		select 
+			NOTICE_NO,NOTICE_SUB,READ_COUNT,EMPLOYEE_NO
+		from notice2
+		
+	</select>
+	
+	<resultMap type="finalProject.domain.house.HouseNoticeDTO" id="noticeList">
+		<id column="NOTICE_NO" jdbcType="VARCHAR" property="noticeNo"/>
+		<result column="NOTICE_SUB" jdbcType="VARCHAR" property="noticeSub" />
+		<result column="READ_COUNT" jdbcType="BIGINT" property="readCount"/>
+		<result column="EMPLOYEE_NO" jdbcType="VARCHAR" property="employeeNo" />
+	</resultMap>
+	
+	<resultMap type="finalProject.domain.house.HouseNoticeDTO" id="noticeLisView">
+		<id column="NOTICE_NO" jdbcType="VARCHAR" property="noticeNo"/>
+		<result column="NOTICE_SUB" jdbcType="VARCHAR" property="noticeSub" />
+		<result column="NOTICE_CON" jdbcType="VARCHAR" property="noticeCon" />
+		<result column="READ_COUNT" jdbcType="BIGINT" property="readCount"/>
+		<result column="EMPLOYEE_NO" jdbcType="VARCHAR" property="employeeNo" />
+		
+	</resultMap>
+	
+	
+	<select id="getNoticeCount" resultType="int">
+		select count(*) from notice2
+	</select>
+	
+	<update id="updateReadCount" parameterType="string">
+		update notice2
+		set read_count = read_count +1
+		where notice_no = #{noticeNo}
+	</update>
+	
+	<select id="getNoticeListView" resultMap="noticeLisView" parameterType="string">
+		select NOTICE_NO,NOTICE_SUB,NOTICE_CON,READ_COUNT,EMPLOYEE_NO
+		from notice
+		where notice_no = #{noticeNo}
+	</select>
+	
+	
+</mapper>
+
+

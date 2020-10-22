@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
+
+<title>공지사항 글작성</title>
+<style type="text/css">
+td {
+	background-color: white;
+}
+</style>
+</head>
+<body>
+	<!-- Header -->
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
+
+	
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form th:action="@{/houseNotice/noticeInsertPro}" method="post" name="noticeform" th:object="${houseNoticeCommand}">
+						<h2 class="align-center">공지사항 글작성</h2>
+						<p>
+							▶내용을 입력하신 다음 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
+							가능합니다.
+						</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+							
+							<tr>
+									<td>
+										<div align="center"><b>공지번호</b></div>
+									</td>
+
+									<td><input name="noticeNo" type="text"
+										 maxlength="10" /></td>
+								</tr>
+							
+							
+								<tr>
+									<td>
+										<div align="center"><b>작성자</b></div>
+									</td>
+
+									<td><input name="employeeNo" type="text"
+										 maxlength="10" /></td>
+								</tr>
+								
+								
+								<tr>
+									<td>
+										<div align="center"><b>공지제목</b></div>
+									</td>
+									<td><input name="noticeSub" type="text"
+										maxlength="70" /></td>
+								</tr>
+
+								<tr>
+									<td>
+										<div align="center"><b>공지내용</b></div>
+									</td>
+									<td><textarea name="noticeCon" cols="50" rows="10"></textarea>
+									</td>
+								</tr>
+
+								<tr align="center">
+									<td colspan="2">
+									<a th:href="@{/houseNotice/houseNotice}" class="button">목록으로</a> 
+										<input value="등록하기" class="button" type="submit"></td>
+								</tr>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Footer -->
+			<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script></body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</html>

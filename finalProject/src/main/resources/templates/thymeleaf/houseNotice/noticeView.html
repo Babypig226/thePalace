@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>공지사항 상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
+
+<style type="text/css">
+td {
+	background-color: white;
+}
+#bg {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body>
+<!-- Header -->
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
+        
+<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+						<h2 class="align-center">공지사항 상세보기</h2>
+						
+						<p>
+							▶공지 정보를 수정 후 "수정하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
+							가능합니다.
+						</p>
+				
+						
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+						<tr>
+								<td>
+									<div align="center">공지번호</div>
+								</td>
+								<td>
+								
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div align="center">작성자</div>
+								</td>
+								<td>
+								
+								</td>
+							</tr>
+							
+						
+							<tr>
+								<td>
+									<div align="center">공지제목</div>
+								</td>
+								<td>
+								
+								</td>							
+							</tr>
+
+							<tr>
+								<td>
+									<div align="center">공지내용</div>
+								</td>
+								<td>
+								
+								</td>
+							</tr>
+
+
+							
+								<tr align="center">
+									<td colspan="5" bgcolor="white"> 
+									<a href="#">
+									<input type="button" value="수정하기 " id="modify" /></a> 
+									<a href="#"><input type="button" value="삭제하기 "
+											id="del" /></a> <a href="#"><input
+											type="button" value="목록으로 " id="home" /></a>
+									</td>
+								</tr>
+						</table>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+		<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script></body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>비품 재고 등록하기 </title>
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+</head>
+<body>
+		<!-- Header -->
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
+
+	
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form th:action="@{/houseFixtures/fixturesInsertPro}" method="post" name="noticeform">
+						<h2 class="align-center">비품 재고 등록하기 </h2>
+						<p>
+							▶비품 정보를 작성 후 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한
+							내용은 수정 또는 삭제가 가능합니다.
+						</p>
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+						
+						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>비품관리번호</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="equipNo" type="text" maxlength="70" placeholder="제001호"/></td>
+							</tr>
+						
+								
+									<tr>
+							
+                                    
+                            	<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>객실번호</b></div>
+								</td>
+								<td bgcolor = "white"> 	
+									<select th:name="roomNo" >
+											<option>선택</option>
+										<span th:each = "list: ${lists}"> 
+											<option th:value="${list.roomNo}">[[${list.roomNo}]]</option>
+										</span>
+								</td>
+								</tr>	     
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>비품명</b></div>
+								</td>
+								<td bgcolor = "white"><input name="equipName" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>재고량</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="equipQty" type="text" maxlength="70" /></td>
+							</tr>
+
+						
+						
+						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>발주요청일 </b> </div>
+								</td>
+								<td bgcolor = "white"><input name="eOrderDate" type="date" maxlength="70" /></td>
+						</tr>
+						
+						
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>발주요청수량</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="eOrderQry" type="text" maxlength="70" /></td>
+							</tr>
+					
+
+							<tr align="center" >
+									<td colspan="5" bgcolor = "white"><a th:href="@{/houseFixtures/fixturesList}" class="button">목록으로</a>
+									<input value="등록완료 " class="button" type="submit"></td>
+								</tr>
+								
+								
+								
+						</table>
+						</div>
+						
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+			<!-- Footer -->
+			<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script></body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</html>

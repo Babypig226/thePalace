@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="finalProject.mapper.house.reservation.ReservationMapper">
+
+<sql id="basic">
+ RESERVATION_NO, RESERVATION_DATE, RESERVATION_COUNT, RS_CONTENT, RS_PH, USER_ID, USING_DATE         
+</sql>
+
+<sql id="basic2">
+ 	select nvl(max(reservation_no), 0)+1
+ 	from reservation
+ 	         
+</sql>
+
+<insert id="reserverationInsert" parameterType="finalProject.domain.house.RoomMakeDTO">
+	insert into RESERVATION (<include refid="basic"/>)
+	values ((<include refid="basic2" />), sysdate, #{reservationCount}, #{rsContent}, 
+	#{rsPh}, #{userId}, #{usingDate})
+</insert>
+
+
+
+
+
+
+<resultMap type="finalProject.domain.house.ReservationDTO" id="s">
+	<id column="RESERVATION_NO" jdbcType="VARCHAR" property="reservationNo"/>
+	<result column="RESERVATION_DATE" jdbcType="TIMESTAMP" property="reservationDate" />
+	<result column="RESERVATION_COUNT" jdbcType="BIGINT" property="reservationCount" />
+	<result column="RS_CONTENT" jdbcType="VARCHAR" property="rsContent" />
+	<result column="RS_PH" jdbcType="VARCHAR" property="rsPh" />
+	<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+	<result column="USING_DATE" jdbcType="TIMESTAMP" property="usingDate" />
+</resultMap>
+<select id="getReservationView" parameterType = "finalProject.domain.house.ReservationDTO" resultMap = "s">
+	select <include refid = "basic"/>
+	from reservation
+	<trim prefix="where" prefixOverrides="AND|OR">
+	 <if test="userId != null">
+	  user_id = #{userId}
+	 </if>
+	 <if test="usingDate != null">
+	 	and using_date = #{usingDate}
+	 </if>
+	
+	</trim>
+</select>
+
+
+
+</mapper>

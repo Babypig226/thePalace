@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>비품 재고 등록하기 </title>
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
+<link rel="stylesheet" th:href="@{/static/assets/css/main.css}" />
+</head>
+<body>
+		<!-- Header -->
+		<header role="header" th:include="thymeleaf/hheader" id="hheader">
+			    <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+		</header>
+
+        <!-- Nav -->
+        <nav id="hmenu" th:include="thymeleaf/hnav"></nav>
+
+	
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form th:action="@{/houseFixtures/fixturesInsertPro}" method="post" name="noticeform">
+						<h2 class="align-center">비품 재고 등록하기 </h2>
+						<p>
+							▶비품 정보를 작성 후 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한
+							내용은 수정 또는 삭제가 가능합니다.
+						</p>
+						<div class="table-wrapper">
+						<table cellpadding="0" cellspacing="0">
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>객실번호</b></div>
+								</td>
+								<td bgcolor = "white"> 	
+									<select name="roomNo" id="roomNo" >
+										<option value="">선택</option>
+										<option value="1">102호 </option>
+										<option value="1">740호</option>
+										<option value="1">203호</option>
+										<option value="1">402호</option>
+									</select>
+								</td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white" >
+									<div align="center"><b>비품명</b></div>
+								</td>
+								<td bgcolor = "white"><input name="equipName" type="text" size="10"
+									maxlength="10" /></td>
+							</tr>
+							
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>재고량</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="equipQty" type="text" maxlength="70" /></td>
+							</tr>
+
+						
+						
+						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>발주요청일 </b> </div>
+								</td>
+								<td bgcolor = "white"><input name="eorderDate" type="datetime-local" maxlength="70" /></td>
+						</tr>
+						<!-- 						<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>체크아웃 시간</b> </div>
+								</td>
+								<td bgcolor = "white"><input name="roomCheckOut" type="time" maxlength="70" /></td>
+						</tr>
+							
+					 -->
+
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>침구류 세탁여부 </b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low1" name="cleanBed" checked>
+                                <label for="demo-priority-low1">네</label>
+                                <input type="radio" id="demo-priority-normal1" name="cleanBed">
+                                <label for="demo-priority-normal1">아니오</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>살균 여부 </b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low2" name="strOk" checked>
+                                <label for="demo-priority-low2">네</label>
+                                <input type="radio" id="demo-priority-normal2" name="strOk">
+                                <label for="demo-priority-normal2">아니오</label>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>침구류 교체여부</b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low3" name="changeBed" checked>
+                                <label for="demo-priority-low3">네</label>
+                                <input type="radio" id="demo-priority-normal3" name="changeBed">
+                                <label for="demo-priority-normal3">아니오</label>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>아메니티 교체여부</b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low4" name="changeAmn" checked>
+                                <label for="demo-priority-low4">네</label>
+                                <input type="radio" id="demo-priority-normal4" name="changeAmn">
+                                <label for="demo-priority-normal4">아니오</label>
+								</td>
+							</tr>
+							
+						
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>온도 체크여부 </b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low5" name="checkTemp" checked>
+                                <label for="demo-priority-low5">네</label>
+                                <input type="radio" id="demo-priority-normal5" name="checkTemp">
+                                <label for="demo-priority-normal5">아니오</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>청소 여부</b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low6" name="cleanRoom" checked>
+                                <label for="demo-priority-low6">네</label>
+                                <input type="radio" id="demo-priority-normal6" name="cleanRoom">
+                                <label for="demo-priority-normal6">아니오</label>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td bgcolor = "white">
+									<div align="center"><b>비품체크 여부</b> </div>
+								</td>
+								<td>
+                                <input type="radio" id="demo-priority-low7" name="checkEquip" checked>
+                                <label for="demo-priority-low7">네</label>
+                                <input type="radio" id="demo-priority-normal7" name="checkEquip">
+                                <label for="demo-priority-normal7">아니오</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<td  bgcolor = "white">
+									<div align="center"><b>점검일 </b> </div>
+								</td>
+								<td bgcolor = "white"><input name="checkDate" type="datetime-local" maxlength="70" /></td>
+							</tr>
+
+ 						
+							<tr align="center" >
+									<td colspan="5" bgcolor = "white"><a th:href="@{/houseFixtures/fixturesList}" class="button">목록으로</a>
+									<input value="등록완료 " class="button" type="submit"></td>
+								</tr>
+								
+								
+								
+						</table>
+						</div>
+						
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+			<!-- Footer -->
+			<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+			<!-- Scripts -->
+			<script th:src=@{/static/assets/js/jquery.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+			<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+			<script th:src=@{/static/assets/js/skel.min.js}></script>
+			<script th:src=@{/static/assets/js/util.js}></script>
+			<script th:src=@{/static/assets/js/main.js}></script>
+			<script th:src=@{/static/assets/js/house.js}></script></body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</html>

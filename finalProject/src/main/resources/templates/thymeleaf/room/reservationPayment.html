@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>예약확인 후 결제 하기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{/static/assets/css/hmain.css}" />
+</head>
+<body>
+	<!-- Header -->
+	<header role="header" th:include="thymeleaf/hheader" id="hheader">
+		<a href="#hmenu" class="htoggle"><span>메뉴</span></a>
+	</header>
+
+	<!-- Nav -->
+	<nav id="hmenu" th:include="thymeleaf/hnav"></nav>
+
+	<!-- Registration Form -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div class="box">
+				<div class="content">
+					<form th:action="@{/reservation/reservationInfoPro}" method="post"
+						name="noticeform">
+
+						<!--<input type="hidden" name = "roomNo" th:value="${dto.roomNo}">-->
+						<h2 class="align-center">예약정보 확인하기</h2>
+						<p>
+							▶예약정보를 확인해주세요.<br />
+						</p>
+						<div class="table-wrapper">
+							<table cellpadding="0" cellspacing="0">
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>객실명</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${roomName}]]</td>
+								</tr>
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>예약자 ID</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${dto.userId}]]</td>
+								</tr>
+
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>예약인원</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${dto.reservationCount}]]</td>
+
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>숙박일정</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${dto.usingDate}]]</td>
+
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>남기실 말씀</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${dto.rsContent}]]</td>
+								</tr>
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>비상연락처</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${dto.rsPh}]]</td>
+								</tr>
+
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>이용금액</b>
+										</div>
+									</td>
+									<td bgcolor="white">[[${roomPrice}]]</td>
+								</tr>
+
+
+							</table>
+
+
+
+							<table cellpadding="0" cellspacing="0">
+
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>입금자</b>
+										</div>
+									</td>
+									<td bgcolor="white"></td>
+
+								</tr>
+
+								<tr>
+									<td bgcolor="white">
+										<div align="center">
+											<b>입금은행</b>
+										</div>
+									</td>
+									<td bgcolor="white">신한은행 110459312777 진혜주</td>
+
+								</tr>
+
+
+
+
+
+								<tr align="center">
+									<td colspan="5" bgcolor="white"><a
+										th:href="@{/reservation/reservationGuide}" class="button">취소하기</a>
+										<input value="결제하기" class="button" type="submit"></td>
+								</tr>
+
+							</table>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{/static/assets/js/jquery.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{/static/assets/js/skel.min.js}></script>
+	<script th:src=@{/static/assets/js/util.js}></script>
+	<script th:src=@{/static/assets/js/main.js}></script>
+	<script th:src=@{/static/assets/js/house.js}></script>
+</body>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</html>
