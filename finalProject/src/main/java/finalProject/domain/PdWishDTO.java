@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PdCartDTO {
+public class PdWishDTO {
 	String userId;
 	String goodsNo;
-	List<GoodsDTO> goods;
+	List<GoodsDTO> gd;
 }

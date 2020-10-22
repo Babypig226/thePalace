@@ -7,4 +7,49 @@
 insert into goods_basket (USER_ID, GOODS_NO)
 values(#{userId}, #{goodsNo})  
 </insert>
+
+<insert id="gdwishInsert" parameterType="finalProject.domain.PdWishDTO">
+insert into goods_wish (USER_ID, GOODS_NO)
+values(#{userId}, #{goodsNo})  
+</insert>
+
+<resultMap type="finalProject.domain.PdCartDTO" id="pdcartbase">
+<id column = "USER_ID" jdbcType = "VARCHAR" property = "userId"/>
+<id column = "GOODS_NO" jdbcType = "VARCHAR" property = "goodsNo"/>
+<collection property="goods" ofType="finalProject.domain.GoodsDTO" resultMap="goodsbase"/>
+</resultMap>
+
+<resultMap type="finalProject.domain.PdWishDTO" id="pdwishbase">
+<id column = "USER_ID" jdbcType = "VARCHAR" property = "userId"/>
+<id column = "GOODS_NO" jdbcType = "VARCHAR" property = "goodsNo"/>
+<collection property="gd" ofType="finalProject.domain.GoodsDTO" resultMap="goodsbase"/>
+</resultMap>
+
+<resultMap type="finalProject.domain.GoodsDTO" id="goodsbase">
+<id column = "GOODS_NO" jdbcType = "VARCHAR" property = "goodsNo" />
+<result column = "GOODS_TYPE" jdbcType = "VARCHAR" property = "goodsType" />
+<result column = "GOODS_CATEGORY" jdbcType = "VARCHAR" property = "goodsCategory" />
+<result column = "GOODS_NAME" jdbcType = "VARCHAR" property = "goodsName" />
+<result column = "GOODS_IMAGE" jdbcType = "VARCHAR" property = "goodsImage" />
+<result column = "GOODS_CONTENT" jdbcType = "VARCHAR" property = "goodsContent" />
+<result column = "GOODS_REG" jdbcType = "TIMESTAMP" property = "goodsReg" />
+<result column = "GOODS_COUNT" jdbcType = "BIGINT" property = "goodsCount" />
+<result column = "GOODS_QTY" jdbcType = "BIGINT" property = "goodsQty" />
+<result column = "GOODS_PRICE" jdbcType = "BIGINT" property = "goodsPrice" />
+</resultMap>
+
+<select id="pdcartList" resultMap="pdcartbase">
+select g.goods_no, g.goods_name, g.goods_price, g.goods_Image, gb.user_Id
+from goods_basket gb
+join goods g
+on g.goods_no = gb.goods_no
+</select>
+
+<select id="pdwishList" resultMap="pdwishbase">
+select gd.goods_no, gd.goods_name, gd.goods_price, gd.goods_Image, gw.user_Id
+from goods_wish gw
+join goods gd
+on gw.goods_no = gd.goods_no
+</select>
+
 </mapper>

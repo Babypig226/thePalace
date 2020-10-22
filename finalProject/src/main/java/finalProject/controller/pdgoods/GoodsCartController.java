@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import finalProject.service.goods.GoodsCartListService;
 import finalProject.service.goods.GoodsCartService;
 
 @Controller
@@ -15,11 +16,20 @@ import finalProject.service.goods.GoodsCartService;
 public class GoodsCartController {
 	@Autowired
 	GoodsCartService goodsCartService;
+	@Autowired
+	GoodsCartListService goodsCartListService;
 	
 	@RequestMapping("pdcartadd")
 	public String pdcartadd(@RequestParam(value = "goodsNo")String goodsNo,Model model,HttpSession session) {
 		goodsCartService.pdcartadd(goodsNo,model,session);
 		return "thymeleaf/goods/goodsSuccess";
-	}		
-	//근데 저거 success는 장바구니에 담겠습니까? 그페이지인데 insert한거 안보이지 않을까? 부모키가 없뎅 
+	}
+	
+	@RequestMapping("pdcartList")
+	public String pdcartList(Model model) {
+		goodsCartListService.pdcartList(model);
+		return "thymeleaf/userorder/cart";
+	}
+	
+	
 }

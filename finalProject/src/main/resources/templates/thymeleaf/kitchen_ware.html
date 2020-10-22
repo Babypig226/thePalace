@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="UTF-8">
+<title>주방용품</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
+<link th:href="@{/static/assets/css/default.css}" rel="stylesheet"
+	type="text/css" media="all" />
+<style type="text/css">
+#list {
+	background-color: #F2F2F2;
+}
+</style>
+</head>
+<body>
+	<!-- Header -->
+	<header role="pdHeader" th:include="thymeleaf/pdheader" id="pdHeader">
+		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Productnav" th:include="/thymeleaf/Productnav"></nav>
+
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1>
+					<a th:href="@{kitchenWare}">Kitchen Ware</a>
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div id="menu-wrapper">
+		<div id="menu" class="container">
+			<ul>
+				<li><a th:href="@{/product/cup(goodsType = KCNC)}"><font
+						size="4">컵/컵받침/잔</font></a></li>
+				<li><a th:href="@{/product/dish(goodsType = KCND)}"><font
+						size="4">식기/접시</font></a></li>
+				<li><a th:href="@{/product/spoon(goodsType = KCNS)}"><font
+						size="4">차도구/자기세트</font></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<table>
+				<tr>
+					<th:block id="images" th:each="glist ,g:${glists}">
+						<td id="list"><a
+							th:href="@{/goods/goodsuserDetail(goodsNo = ${glist.goodsNo})}"><img
+								th:src="@{'/static/goods/upload/' + ${glist.goodsImage}}"
+								height="350" width="270" /> </a>
+							<p align="center">
+								[[${glist.goodsType}]]<br /> [[${glist.goodsName}]]<br />
+								[[${glist.goodsPrice}]]
+							</p></td>
+						<th:block th:if="${g.count % 4} == 0" th:utext="'</tr><tr>'" />
+					</th:block>
+				</tr>
+			</table>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+	<!-- Scripts -->
+	<script th:src=@{assets/js/jquery.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{assets/js/skel.min.js}></script>
+	<script th:src=@{assets/js/util.js}></script>
+	<script th:src=@{assets/js/product.js}></script>
+</body>
+
+</html>

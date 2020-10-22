@@ -4,7 +4,7 @@
      layout:decorator="layout">
 <head>
 <meta charset="UTF-8">
-<title>장바구니</title>
+<title>위시리스트</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" th:href="@{/static/assets/css/productmain.css}" />
 <style type="text/css">
@@ -31,12 +31,12 @@ td {
 					<a th:href = "@{/userorder/cartList}"><img alt="" th:src="@{/static/images/product/order1.png}" width="1080" height="230"></a>
 						<table cellpadding="0" cellspacing="0">
 							<tr>
-								<td align = "center"><font size = "4">해당상품을 장바구니에<br/>
+								<td align = "center"><font size = "4">해당상품을 위시리스트<br/>
 							        담으시겠습니까?</font></td>
 							</tr>
 							<tr>
-								<td colspan=2 align=center><a th:href="@{/pdcart/pdcartList}"
-									class="button alt">장바구니</a></td>
+								<td colspan=2 align=center><a th:href="@{/userorder/wishListPro}"
+									class="button alt">위시리스트</a></td>
 							</tr>
 						</table>
 					</div>

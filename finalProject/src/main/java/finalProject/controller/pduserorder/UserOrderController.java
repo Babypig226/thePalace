@@ -1,5 +1,7 @@
 package finalProject.controller.pduserorder;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import finalProject.service.delivery.DeliveryListService;
 import finalProject.service.delivery.DeliveryService;
 import finalProject.service.goods.GoodsDetailService;
 import finalProject.service.goods.GoodsListService;
+import finalProject.service.goods.WishService;
 import finalProject.service.payment.PaymentService;
 
 @Controller
@@ -30,6 +33,9 @@ public class UserOrderController {
 	DeliveryDetailService deliveryDetailService;
 	@Autowired
 	DeliveryListService deliveryListService;
+	@Autowired
+	WishService wishService;
+	
 	
 	@ModelAttribute
 	DeliveryCommand setDeliveryCommand() {
@@ -40,14 +46,15 @@ public class UserOrderController {
 		return new PaymentCommand();
 	}
 	
-	@RequestMapping("cartList") //장바구니
-	public String cartList(Model model) {
-		goodsListService.gdList(model);
-		return "thymeleaf/userorder/cart";
+	@RequestMapping("wishList")
+	public String wishList(@RequestParam(value = "goodsNo")String goodsNo, Model model, HttpSession session) {
+		wishService.wishadd(goodsNo,model,session);
+		return "thymeleaf/userorder/wishok";
 	}
 	
-	@RequestMapping("wishList")
-	public String wishList() {
+	@RequestMapping("wishListPro")
+	public String wishListPro(Model model) {
+		wishService.wishList(model);
 		return "thymeleaf/userorder/wishList";
 	}
 	

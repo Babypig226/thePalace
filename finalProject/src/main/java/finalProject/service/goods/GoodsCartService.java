@@ -26,8 +26,9 @@ public class GoodsCartService {
 		// 상품정보를 cartdto에 담아야지
 		PdCartDTO cartdto = new PdCartDTO();
 		cartdto.setGoodsNo(gdto.getGoodsNo());
-		cartdto.setUserId("1111"); // 이런식으로 장바구니에 상품정보를 담아야지용 아항
-		
+		System.out.println(cartdto.getGoodsNo());
+		cartdto.setUserId("2222"); // 이런식으로 장바구니에 상품정보를 담아야지용 아항
+		System.out.println(cartdto.getUserId());
 		// 이제 mapper에 니가 장바구니에 담음 값들을 insert해줘야 하지 않을까여??아하
 		
 		goodsCartMapper.gdcartInsert(cartdto); // 정답~~
