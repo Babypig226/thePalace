@@ -45,7 +45,7 @@ public class ProgramService {
 		programDTO.setUsingCount(0);
 		
 		String path = "/static/programImage/upload";
-		String filePath = "E:/국비수업/git/thePalace/finalProject/src/main/resources"+path;
+		String filePath = "E:/국비수업/workspace/thePalace/finalProject/src/main/resources"+path;
 		//String filePath = session.getServletContext().getRealPath(path);
 		String originalTotal = "";
 		String storeTotal = "";

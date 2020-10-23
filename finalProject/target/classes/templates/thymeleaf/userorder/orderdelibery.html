@@ -84,41 +84,9 @@
 			<div class="box">
 				<div class="content">
 						<form th:action  = "@{/userorder/orderdeliberyPro}" method="post" name="goodsForm" th:object = "${deliveryCommand}" >
-				<img alt="" th:src="@{/static/images/product/order2.png}" width="650" height = "150">
+				<img alt="" th:src="@{/static/images/product/order2.png}" width="1080" height = "230">
 					<div class="table-wrapper">
-						<table>
-							<thead>
-								<tr>
-									<th>고객ID</th>
-									<th>상품번호</th>
-									<th>상품명</th>
-									<th>상품가격</th>
-									<th>상품이미지</th>
-								</tr>
-							</thead>
-							<tbody>
-							<div th:each = "g:${glists}">
-							 <tr>
-							 <td></td>
-							 <th>[[${g.goodsNo}]]</th>
-							 <th>[[${g.goodsName}]]</th>
-							 <th>[[${g.goodsPrice}]]</th>
-							 <td><img th:src="@{'/static/goods/upload/' + ${g.goodsImage}}" height = "100" width = "80"/></td>
-							 </tr>
-							</div>
-							</tbody>
-						</table>
-
-						<table>
-							<tr>
-								<td align="center" colspan="5"><font color="gray" size="5">총
-										결제금액 : </font> <font color="black" size="5">원</font></td>
-								<td align="right">적립 마일리지 5point</td>
-							</tr>
-
-
-						</table>
-					</div>
+						 
 					<!----------------------------------------------------------->
 						<br />
 					<h2 class="align-center">배송지정보</h2>

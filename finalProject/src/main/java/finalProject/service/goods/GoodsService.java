@@ -37,7 +37,7 @@ public class GoodsService {
 			String PATH  = "/static/goods/upload";
 			//위에 경로 가져오는거
 			//String filePath = session.getServletContext().getRealPath(PATH);
-			String filePath = "C:/Users/연다인/workspace24/test5/src/main/resources"+PATH;
+			String filePath = "E:/국비수업/workspace/thePalace/finalProject/src/main/resources"+PATH;
 			MultipartFile mf = goodsCommand.getGoodsImage();
 			String original = mf.getOriginalFilename();
 			String originalFileExtension = original.substring(original.lastIndexOf("."));
@@ -47,6 +47,8 @@ public class GoodsService {
 			File file = new File(filePath + "/" + store);
 			//파일저장
 			mf.transferTo(file);
+			System.out.println(filePath);
+			System.out.println(file);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

@@ -9,14 +9,14 @@
 	</sql>
 	
 	<insert id="noticeInsert" parameterType="finalProject.domain.house.HouseNoticeDTO">
-		insert into notice2 (<include refid="basic" />)
+		insert into notice (<include refid="basic" />)
 		values (#{noticeNo},#{noticeSub},#{noticeCon},0,sysdate,#{employeeNo})
 	</insert>
 	
 	<select id="getNoticeList" resultMap="noticeList">
 		select 
 			NOTICE_NO,NOTICE_SUB,READ_COUNT,EMPLOYEE_NO
-		from notice2
+		from notice
 		
 	</select>
 	
@@ -38,11 +38,11 @@
 	
 	
 	<select id="getNoticeCount" resultType="int">
-		select count(*) from notice2
+		select count(*) from notice
 	</select>
 	
 	<update id="updateReadCount" parameterType="string">
-		update notice2
+		update notice
 		set read_count = read_count +1
 		where notice_no = #{noticeNo}
 	</update>

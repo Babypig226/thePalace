@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../assets/css/productmain.css" />
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+	<head>
+		<title>the Palace</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" th:href= "@{/static/assets/css/main.css}" />
 <title>공지사항 글작성</title>
 <style type="text/css">
 td {
@@ -13,75 +16,53 @@ td {
 </head>
 <body>
 	<!-- Header -->
-	<header role="pdHeader" data-include="../pdheader.html" id="pdHeader">
-		<a href="#Productnav" class="pdtoggle"><span>메뉴</span></a>
+	<header role="header" th:include="thymeleaf/header" id="header">
+		<a href="#menu" class="toggle"><span>메뉴</span></a>
 	</header>
-	<!-- Nav -->
-	<nav id="Productnav" data-include="../Productnav.html"></nav>
+
+    <!-- Nav -->
+    <nav id="menu" th:include="thymeleaf/nav"></nav>
 
 	<!-- Registration Form -->
 	<section id="one" class="wrapper style2">
 		<div class="inner">
 			<div class="box">
 				<div class="content">
-					<form action="#" method="post" name="noticeform">
+					<form th:action="@{/notice/noticeWritePro}" method="post" name="noticeform">
 						<h2 class="align-center">공지사항 글작성</h2>
 						<p>
 							▶내용을 입력하신 다음 "등록하기" 버튼을 눌러주세요.<br /> ▶한번 등록한 내용은 수정 또는 삭제가
 							가능합니다.
 						</p>
 						<div class="table-wrapper">
-							<table cellpadding="0" cellspacing="0">
-							
-							<tr>
-									<td>
-										<div align="center">공지번호</div>
-									</td>
-
-									<td><input name="notice_no" type="text"
-										 maxlength="10" /></td>
-								</tr>
-							
-							
+							<table cellpadding="0" cellspacing="0">							
 								<tr>
 									<td>
 										<div align="center">작성자</div>
 									</td>
 
-									<td><input name="employee_no" type="text"
-										 maxlength="10" /></td>
+									<td><input name="employeeNo" type="text" maxlength="10" /></td>
 								</tr>
-								
-								<tr>
-									<td>
-										<div align="center">작성일</div>
-									</td>
-
-									<td><input name="notice_date" type="date"
-										 maxlength="10" /></td>
-								</tr>
-
 
 								<tr>
 									<td>
 										<div align="center">제 목</div>
 									</td>
-									<td><input name="notice_sub" type="text"
-										maxlength="70" /></td>
+									<td><input name="noticeSub" type="text" maxlength="70"/></td>
 								</tr>
 
 								<tr>
 									<td>
 										<div align="center">내 용</div>
 									</td>
-									<td><textarea name="notice_con" cols="50" rows="10"></textarea>
+									<td><textarea name="noticeCon" cols="50" rows="10"></textarea>
 									</td>
 								</tr>
 
 								<tr align="right">
-									<td colspan="2"><a
-										href="noticeList.html" class="button alt">목록으로</a> <input
-										value="등록" class="button" type="submit"></td>
+									<td colspan="2">
+									<a href="noticeList.html" class="button alt">목록으로</a> 
+									<input value="등록" class="button" type="submit"></td>
 								</tr>
 							</table>
 						</div>
@@ -91,15 +72,16 @@ td {
 		</div>
 	</section>
 	
-	<!-- Footer -->
-	<footer id="footer" class="wrapper" data-include="../footer.html"></footer>
+	<!-- Footer -->	
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+		
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/product.js"></script>
+	<script th:src=@{/static/assets/js/jquery.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrolly.min.js}></script>
+	<script th:src=@{/static/assets/js/jquery.scrollex.min.js}></script>
+	<script th:src=@{/static/assets/js/skel.min.js}></script>
+	<script th:src=@{/static/assets/js/util.js}></script>
+	<script th:src=@{/static/assets/js/main.js}></script>
 </body>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script>

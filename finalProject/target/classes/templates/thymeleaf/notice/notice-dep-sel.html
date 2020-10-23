@@ -55,7 +55,7 @@
 									<hr />
 									<p>숙박운영부 공지사항</p>
 									<div class="align-center">
-										<a href="#" class="button alt">더보기</a>
+										<a href="noticeList?departmentNo=" class="button alt">더보기</a>
                                     </div>
 								</div>
 							</div>
@@ -98,7 +98,8 @@
 								</div>
 							</div>
 						</div>
-
+						<a th:href="@{/notice/noticeWrite}">공지사항 글쓰기</a>
+						<a th:href="@{/notice/noticeList}">공지사항 리스트</a>
 					</div>
 				</div>
 			</section>

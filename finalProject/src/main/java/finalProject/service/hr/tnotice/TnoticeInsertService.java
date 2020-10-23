@@ -30,8 +30,8 @@ public class TnoticeInsertService {
 		dto.setProField(tnoticeCommand.getProField());
 		dto.setTinterviewAddr(addressService.updateAddress(tnoticeCommand.getTinterviewAddr()));
 		dto.setTnoticeName(tnoticeCommand.getTnoticeName());
-		String path = "/statice/upload";
-		String filePath = "/Users/babypig/git/thePalace/finalProject/src/main/resources"+path;
+		String path = "/static/upload";
+		String filePath ="E:/국비수업/workspace/thePalace/finalProject/src/main/resources"+path;
 		dto.setTnoticeContent(fileUploadService.fileUpload(tnoticeCommand.getTnoticeContent(), filePath));
 		dto.setTinterviewDate(dateFormatService.dateToTimestamp(tnoticeCommand.getTinterviewDate()));
 		dto.setTpassDate(dateFormatService.dateToTimestamp(tnoticeCommand.getTpassDate()));

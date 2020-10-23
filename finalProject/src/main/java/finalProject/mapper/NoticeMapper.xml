@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="finalProject.mapper.NoticeMapper">
+
+	<sql id="basecolumn">
+		NOTICE_NO, NOTICE_SUB, NOTICE_CON, READ_COUNT, NOTICE_DATE, EMPLOYEE_NO
+	</sql>
+	
+	<insert id="noticeInsert" parameterType="finalProject.domain.NoticeDTO">
+		insert into notice (<include refid="basecolumn"/>)
+		values (notice_seq.nextval, #{noticeSub, jdbcType = VARCHAR}, 
+				#{noticeCon, jdbcType = VARCHAR}, 0, sysdate, #{employeeNo, jdbcType = VARCHAR})
+	</insert>
+	
+	<resultMap type="finalProject.domain.NoticeDTO" id="baseNotice">
+		<id column="NOTICE_NO" jdbcType="VARCHAR" property="noticeNo"/>
+		<result column="NOTICE_SUB" jdbcType="VARCHAR" property="noticeSub"/>
+		<result column="NOTICE_CON" jdbcType="VARCHAR" property="noticeCon"/>
+		<result column="READ_COUNT" jdbcType="BIGINT" property="readCount"/>
+		<result column="NOTICE_DATE" jdbcType="TIMESTAMP" property="noticeDate"/>
+		<result column="EMPLOYEE_NO" jdbcType="VARCHAR" property="employeeNo"/>
+	</resultMap>
+	
+	<select id="getNoticeList" resultMap="baseNotice">
+		select *
+		from (select rownum rn, <include refid="basecolumn"/> 
+				from (select <include refid="basecolumn"/>
+						from notice
+						<trim prefix="where" prefixOverrides="AND | OR">
+							<if test="num != null">
+								and notice_no = #{num}
+							</if>
+						</trim>
+						order by notice_date desc))
+		where rn between #{startPage} and #{endPage}
+	</select>
+	
+	<update id="updateNotice" parameterType="finalProject.domain.NoticeDTO">
+		update notice
+		set notice_sub = #{noticeSub, jdbcType = VARCHAR}, employee_no = #{employeeNo, jdbcType = VARCHAR}, notice_con = #{noticeCon, jdbcType = VARCHAR}
+		where notice_no = #{noticeNo, jdbcType = VARCHAR}
+	</update>
+	
+	<delete id="noticeDel" parameterType="string">
+		delete from notice
+		where notice_no = #{noticeNo}
+	</delete>
+</mapper>

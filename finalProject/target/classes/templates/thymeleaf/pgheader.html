@@ -7,10 +7,12 @@
     <span th:if="${session.authInfo}">
     [[${session.authInfo.id}]]님 환영합니다.
     <a th:href = "@{/sign/out}">로그아웃</a>
-    <a th:href = "@{/proAdmin/adminPage}">프로그램관리자</a>
     <a th:href="@{/pgmypage/programMypage}"><span>마이페이지</span></a>
     </span> 
-    <a href="Support.html"><span>고객센터</span></a>
+
+    <a th:href = "@{/proAdmin/adminPage}">프로그램관리자</a>
+
+    <a th:href = "@{/notice/noticeSel}">공지사항</a>
     <a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
     
     

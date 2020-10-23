@@ -42,7 +42,7 @@ public class ProgramLibService {
 		
 		String path = "/static/programLib/upload";
 		//String filePath = session.getServletContext().getRealPath(path);
-		String filePath = "C:/Users/ho041/Desktop/EXPORT/thePalace/finalProject/src/main/resources"+path;
+		String filePath = "E:/국비수업/workspace/thePalace/finalProject/src/main/resources"+path;
 		String originalTotal = "";
 		String storeTotal = "";
 		String fileSizeTotal ="";

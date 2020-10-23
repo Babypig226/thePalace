@@ -57,7 +57,16 @@ a:hover {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link th:href="@{/static/assets/css/default.css}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" th:href= "@{/static/assets/css/hmain.css}" />
-
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+$(document).ready(function(e) {
+/* a요소를 클릭 했을 시 */
+    $('a').click(function(){
+/* iframe 요소의 src 속성값을 a 요소의 data-url 속성값으로 변경 */ 
+        $('#iframe').attr('src',$(this).attr('data-url'));
+        })
+});
+</script>
 
 </head>
 <body>
@@ -77,19 +86,21 @@ a:hover {
 				</p>
 			</div>
 			<div id="mycontent">
-			</div>
+			<div>
+		 <iframe id="iframe" width="850" height="700" th:src="@{/houseNotice/houseNotice}"></iframe>
+  </div>
+  </div>
 			<div id="mysidebar">
 			   <p align = "center">안녕하세요, 팡쭈님<br/>
-			   <img alt="" src="images/logo.png" width = "220" height = "230">
+			   <img alt="" th:src="@{/static/images/house/acmypage.PNG}" width = "230" height = "270">
 			   팡쭈님의 <a href = "mileage.html">적립금</a></p>
 			   </div>
 			   <div id="mysidebar">
 				<p><a href="sign-up/member-detail.html">내정보관리</a></p>
-				<p><a href="couponInsert.html">할인쿠폰 등록</a></p>  
-				<p><a href="recent_order_list.html">최근결제내역</a></p>  
-				<p><a href="one_to_one.html">1:1문의</a></p> 
-				<p><a href="recent_view.html">최근본상품</a></p> 
-				<p><a href="refund.html">환불/반품</a></p>  
+				<p><a th:data-url="@{/prcart/programCart}">장바구니</a></p>
+				<p><a th:data-url="@{/prwish/programWish}">위시리스트</a></p>  
+				<p><a th:data-url="@{/pgmypage/programLib}">1:1문의</a></p>
+				<p><a th:data-url="@{/houseNotice/houseNotice}">공지사항</a></p>
 				<!-- <p><a href="cart.html">장바구니</a></p> 
 				<p><a href="wishList.html">위시리스트</a></p> -->
 			</div>

@@ -57,6 +57,16 @@ a:hover {
 <link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
 	media="all" />
 <link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+$(document).ready(function(e) {
+/* a요소를 클릭 했을 시 */
+    $('a').click(function(){
+/* iframe 요소의 src 속성값을 a 요소의 data-url 속성값으로 변경 */ 
+        $('#iframe').attr('src',$(this).attr('data-url'));
+        })
+});
+</script>
 
 </head>
 <body>
@@ -75,18 +85,22 @@ a:hover {
 					<font size="6">program mypage</font>
 				</p>
 			</div>
+			<br/><br/>
 			<div id="mycontent">
-			</div>
+			<div>
+		 <iframe id="iframe" width="850" height="700" th:src="@{/prcart/programCart}"></iframe>
+  </div>
+  </div>
 			<div id="mysidebar">
 			   <p align = "center">안녕하세요, 윤선띠님<br/>
-			   <img alt="" src="images/logo.png" width = "220" height = "230">
+			   <img alt="" th:src="@{/static/images/promypage.PNG}" width = "230" height = "270">
 			   윤선공주님의 <a href = "mileage.html">적립금</a> 및 <a href = "coupon.html">할인쿠폰 </a></p>
 			   </div>
 			   <div id="mysidebar">
 					<p><a href="sign-up/member-detail.html">내정보관리</a></p>  
-					<p><a th:href="@{/pgmypage/programLib}">1:1문의 리스트</a></p>
-					<p><a th:href="@{/prcart/programCart}">장바구니</a></p>
-					<p><a th:href="@{/prwish/programWish}">위시리스트</a></p>
+					<p><a th:data-url="@{/pgmypage/programLib}">1:1문의 리스트</a></p>
+					<p><a th:data-url="@{/prcart/programCart}">장바구니</a></p>
+					<p><a th:data-url="@{/prwish/programWish}">위시리스트</a></p>
 				</div>
 			<div id="myfooter">
 						<header class="align-left">

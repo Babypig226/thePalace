@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+     layout:decorator="layout">
+<head>
+<meta charset="utf-8">
+<title>CSS</title>
+<style type="text/css">
+#myheader {
+	padding: 20px;
+	margin-bottom: 20px;
+	border: none;
+	height : 80px;
+}
+
+#mycontent {
+	width: 900px;
+	height: 820px; padding : 20px;
+	margin-bottom: 20px;
+	float: right;
+	border: none;
+	padding: 20px;
+	border: 2px solid #bcbcbc;
+}
+
+#mysidebar {
+	width: 260px;
+	height: 400px; padding : 20px;
+	margin-bottom: 20px;
+	float: left;
+	border: 2px solid #bcbcbc;
+	padding: 20px;
+}
+
+#myfooter {
+	clear: both;
+	padding: 20px;
+	border: 2px solid #bcbcbc;
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href= "@{/static/assets/css/default.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href= "@{/static/assets/css/program.css}" />
+
+</head>
+<body>
+<!-- Header -->
+	<header role="pgHeader" th:include="thymeleaf/pgheader" id="pgHeader">
+		<a href="#Programnav" class="pgtoggle"><span>메뉴</span></a>
+	</header>
+	<!-- Nav -->
+	<nav id="Programnav" th:include="thymeleaf/Programnav"></nav>
+
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div id="myheader">
+				<p align = "center">
+					<font size="6">program Admin page</font>
+				</p>
+			</div>
+			<div id="mycontent">
+			</div>
+			<div id="mysidebar">
+			   <p align = "center">안녕하세요, 윤선띠님<br/>
+			   <img alt="" src="images/logo.png" width = "220" height = "230">
+			   윤선공주님의 <a href = "mileage.html">적립금</a> 및 <a href = "coupon.html">할인쿠폰 </a></p>
+			   </div>
+			   <div id="mysidebar">
+				<p><a th:href="@{/program/programForm}">프로그램 등록</a></p>
+				<p><a th:href="@{/program/programList}">프로그램 리스트</a></p>  
+				<p><a th:href="@{/pgmypage/programLib}">1:1문의 리스트</a></p>
+				 
+			</div>
+			<div id="myfooter">
+						<header class="align-left">
+							<a href="sgdfgdfg.html">고객센터</a>
+							<h2>02-1234-5678</h2>
+							<p>
+								업무시간 AM. 09:00 ~ PM. 06:00<br /> 점심시간 AM. 12:00 ~ PM. 01:00<br />
+								(토 · 일요일, 공휴일 휴무)
+							</p>
+						</header>
+
+					</div>
+				</div>
+			
+		
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper" th:include="thymeleaf/footer"></footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/program.js"></script>
+
+</body>
+
+</html>

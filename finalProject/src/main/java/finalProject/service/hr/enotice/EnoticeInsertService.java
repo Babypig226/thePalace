@@ -30,8 +30,8 @@ public class EnoticeInsertService {
 		EnoticeDTO dto = new EnoticeDTO();
 		dto.setDepartmentNo(enoticeCommand.getDepartmentNo());
 		dto.setEnoticeName(enoticeCommand.getEnoticeName());
-		String path = "/statice/upload";
-		String filePath = "/Users/babypig/git/thePalace/finalProject/src/main/resources"+path;
+		String path = "/static/upload";
+		String filePath =  "E:/국비수업/workspace/thePalace/finalProject/src/main/resources"+path;
 		String enoticeContent = fileUploadService.fileUpload(enoticeCommand.getEnoticeContent(), filePath);
 		dto.setEnoticeContent(enoticeContent);
 		dto.setFpassDate(dateFormatService.dateToTimestamp(enoticeCommand.getFpassDate()));

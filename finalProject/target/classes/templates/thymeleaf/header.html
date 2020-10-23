@@ -15,6 +15,7 @@
     <span th:if = "${session.authInfo.type eq 'adm'}">
     <a th:href = "@{/admin/view}">관리자페이지</a>
     </span>
+    <a th:href = "@{/notice/noticeSel}">공지사항</a>
     <a th:href = "@{/sign/out}">로그아웃</a>
     </span>
     <a href="#menu" class="toggle"><span>메뉴</span></a>
