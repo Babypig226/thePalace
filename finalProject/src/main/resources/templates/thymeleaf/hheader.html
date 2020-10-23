@@ -8,7 +8,9 @@
     [[${session.authInfo.id}]]님 환영합니다.
     <a th:href = "@{/houseMyPage/houseMyPage}">마이페이지</a>
     <a th:href = "@{/sign/out}">로그아웃</a>
-    </span>
+    <span th:if = "${session.authInfo.type eq 'adm'}">
     <a th:href = "@{/houseFixtures/fixturesList}">관리자</a>
+    </span>
+    </span>
     <a th:href = "@{/notice/noticeSel}">공지사항</a>
     <a href="#hmenu" class="htoggle"><span>메뉴</span></a>
